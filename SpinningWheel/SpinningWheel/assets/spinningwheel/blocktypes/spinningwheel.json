@@ -1,0 +1,32 @@
+﻿{
+  "code": "headpilgrim-spinningwheel",
+  "class": "BlockSpinningWheel",
+  "entityClass": "BlockEntitySpinningWheel",
+  "tags": ["inanimate", "vehicle"],
+  "shape": {"base": "spinningwheel" },
+  "blockmaterial": "wood",
+  "creativeinventory": { "general":  [ "*" ], "spinningwheel": ["*"] },
+  "textures": {
+    "linen": {"base": "game:block/linen"},
+    "oak": {"base": "game:block/wood/debarked/oak"},
+    "1": {"base": "game:block/wood/chair/normal/top"},
+    "cover": {"base": "game:block/cloth/linen/normal1"},
+    "oak2": {"base": "game:block/wood/crudechair/oak"}
+},
+  "entityBehaviors": [{ "name": "Animatable" }],
+  "attributes": {"spinnable": true},
+  "sideopaque": {
+    "all": false
+  },
+  "server": {
+    "behaviors": [
+      { "code": "creaturecarrier" }
+    ]
+  },
+  "selectionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 0.875, "y2": 1, "z2": 0.875 },
+  "collisionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 0.875, "y2": 1, "z2": 0.875 },
+  "guiTransform": {
+    "translation": { "x": 0, "y": 8, "z": 0 },
+    "scale": 0.57
+  }
+}

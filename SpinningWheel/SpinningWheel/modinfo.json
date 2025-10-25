@@ -1,0 +1,14 @@
+{
+    "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+    "type": "Code",
+    "modid": "headpilgrim-spinningwheel",
+    "name": "SpinningWheel",
+    "authors": [
+        "HeadPilgrim"
+    ],
+    "description": "Adds a spinning wheel process to make an increased amount of twine",
+    "version": "1.0.0",
+    "dependencies": {
+        "game": "1.21.0"
+    }
+}
