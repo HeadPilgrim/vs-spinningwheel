@@ -336,9 +336,7 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         if (inputSlot?.Itemstack == null) return false;
 
         // Check if this item can be spun
-        // TODO: Define spinning properties on items properly
-        if (inputSlot.Itemstack.Collectible.Code.Path.Contains("flaxfibers") || 
-            inputSlot.Itemstack.Collectible.Code.Path.Contains("flax-"))
+        if (inputSlot.Itemstack.ItemAttributes.KeyExists("spinningProps"))
         {
             ItemSlot outputSlot = OutputSlot;
         
@@ -358,16 +356,27 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
 
     private ItemStack GetSpinResult(ItemStack input)
     {
-        // Define your spinning recipes here
-        // Example: flax fibers -> linen thread
+        // Check if the input item has spinningProps
+        if (input.ItemAttributes.KeyExists("spinningProps"))
+        {
+            var spinningProps = input.ItemAttributes["spinningProps"];
+
+            // Get the outputType and outputQuantity from spinningProps
+            string outputType = spinningProps["outputType"].AsString();
+            int outputQuantity = spinningProps["outputQuantity"].AsInt(1); // Default to 1 if not specified
+
+            // Create and return the output ItemStack
+            ItemStack outputStack = new ItemStack(Api.World.GetItem(new AssetLocation(outputType)), outputQuantity);
+            return outputStack;
+        }
+
+        // Fallback for items without spinningProps (optional)
         if (input.Collectible.Code.Path.Contains("flaxfibers"))
         {
             return new ItemStack(Api.World.GetItem(new AssetLocation("game:flaxtwine")), 1);
         }
-        
-        // Add more recipes as needed
-        // Cotton fibers -> cotton thread, etc.
-        
+
+        // No valid recipe found
         return null;
     }
 
