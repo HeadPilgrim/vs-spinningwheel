@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
 using Vintagestory.API.Client;
@@ -13,10 +14,8 @@ using Vintagestory.GameContent;
 
 namespace SpinningWheel.BlockEntities;
 
-//Modify to be BlockEntityConatiner instead?
 public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableSeat, IMountable
 {
-    
     internal InventorySpinningWheel inventory;
     
     static Vec3f eyePos = new Vec3f(0, 0.3f, 0);
@@ -31,7 +30,14 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
     EntityPos mountPos = new EntityPos();
     public bool DoTeleportOnUnmount { get; set; } = true;
     
-    public EntityPos SeatPosition => Position; // Since we have only one seat, it can be the same as the base position
+    GuiDialogBlockEntitySpinningWheel clientDialog;
+    
+    // Animation metadata
+    AnimationMetaData meta = new AnimationMetaData() { Code = "hp-sitspinning", Animation = "HP-SitSpinning" }.Init();
+
+    #region IMountable/IMountableSeat Implementation
+    
+    public EntityPos SeatPosition => Position;
     public double StepPitch => 0;
 
     public EntityPos Position
@@ -68,9 +74,6 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         }
     }
     
-    //Starts seraph idle anim? 
-    AnimationMetaData meta = new AnimationMetaData() { Code = "hp-sitspinning", Animation = "HP-SitSpinning" }.Init();
-    
     public AnimationMetaData SuggestedAnimation => meta;
     public EntityControls Controls => controls;
     public IMountable MountSupplier => this;
@@ -81,33 +84,93 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
     public Entity Entity => null;
     public Matrixf RenderTransform => null;
     public IMountableSeat[] Seats => new IMountableSeat[] { this };
-    
     public bool SkipIdleAnimation => false;
     public float FpHandPitchFollow => 1;
     public string SeatId { get => "spinner-0"; set { } }
     public SeatConfig Config { get => null; set { } }
     public long PassengerEntityIdForInit { get => mountedByEntityId; set => mountedByEntityId = value; }
-    
     public Entity Controller => MountedBy;
-
     public Entity OnEntity => null;
-
     public EntityControls ControllingControls => null;
+    
+    #endregion
+
+    #region Config
+    
+    // For how long the item has been spinning
+    public float inputSpinTime;
+    public float prevInputSpinTime;
+    
+    public bool On { get; set; }
+    
+    public override string InventoryClassName => "spinningwheel";
+    
+    public override InventoryBase Inventory => inventory;
+    
+    public virtual string DialogTitle => Lang.Get("spinningwheel");
+    
+    // Seconds it requires to complete spinning
+    public virtual float maxSpinTime() => 4f;
+    
+    #endregion
+  
+    #region Helper Getters
+    
+    public ItemSlot InputSlot => inventory[0];
+    
+    public ItemSlot OutputSlot => inventory[1];
+    
+    public ItemStack InputStack
+    {
+        get => inventory[0]?.Itemstack;
+        set 
+        { 
+            if (inventory[0] != null)
+            {
+                inventory[0].Itemstack = value;
+                inventory[0].MarkDirty();
+            }
+        }
+    }
+    
+    public ItemStack OutputStack
+    {
+        get => inventory[1]?.Itemstack;
+        set 
+        { 
+            if (inventory[1] != null)
+            {
+                inventory[1].Itemstack = value;
+                inventory[1].MarkDirty();
+            }
+        }
+    }
+    
+    private BlockEntityAnimationUtil animUtil
+    {
+        get { return GetBehavior<BEBehaviorAnimatable>()?.animUtil; }
+    }
+    
+    #endregion
+
+    #region Initialization
+    
+    public BlockEntitySpinningWheel()
+    {
+        inventory = new InventorySpinningWheel(null, null);
+        inventory.SlotModified += OnSlotModified;
+    }
     
     public override void Initialize(ICoreAPI api)
     {
         base.Initialize(api);
     
-        // Initialize controls if you're using them (for GUI interaction)
+        // Initialize controls
         controls.OnAction = onControls;
     
-        // Get any custom attributes from your block JSON
-        // Example: spinSpeed, efficiency, etc.
-        if (Block.Attributes != null)
-        {
-            // spinSpeed = Block.Attributes["spinSpeed"].AsFloat(1.0f);
-            // Add any attributes you want to read from block JSON
-        }
+        // Register tick listeners
+        RegisterGameTickListener(OnSpinTick, 100);
+        RegisterGameTickListener(On500msTick, 500);
     
         // Get collision box height (useful for positioning the seated player)
         Cuboidf[] collboxes = Block.GetCollisionBoxes(api.World.BlockAccessor, Pos);
@@ -132,6 +195,11 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
             }
         }
     }
+    
+    #endregion
+    
+    #region Controls & Mounting
+    
     private void onControls(EnumEntityAction action, bool on, ref EnumHandling handled)
     {
         if (action == EnumEntityAction.Sneak && on)
@@ -142,56 +210,6 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         }
     }
     
-    public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
-    {
-        base.FromTreeAttributes(tree, worldForResolving);
-
-        mountedByEntityId = tree.GetLong("mountedByEntityId");
-        mountedByPlayerUid = tree.GetString("mountedByPlayerUid");
-    }
-    
-    public override void ToTreeAttributes(ITreeAttribute tree)
-    {
-        base.ToTreeAttributes(tree);
-
-        tree.SetLong("mountedByEntityId", mountedByEntityId);
-        tree.SetString("mountedByPlayerUid", mountedByPlayerUid);
-    }
-    public void MountableToTreeAttributes(TreeAttribute tree)
-    {
-        tree.SetString("className", "spinningWheel");
-        tree.SetInt("posx", Pos.X);
-        tree.SetInt("posy", Pos.InternalY);
-        tree.SetInt("posz", Pos.Z);
-    }
-    
-    public void DidUnmount(EntityAgent entityAgent)
-    {
-        MountedBy = null;
-        if (On)
-        {
-            Deactivate();
-            Console.WriteLine("Deactivating spinning wheel.");
-        }
-        if (!blockBroken)
-        {
-            // Try to place the player in a safe position around the spinning wheel
-            foreach (BlockFacing facing in BlockFacing.HORIZONTALS)
-            {
-                Vec3d placePos = Pos.ToVec3d().AddCopy(facing).Add(0.5, 0.001, 0.5);
-
-                // Check if this position is safe (not colliding with blocks)
-                if (!Api.World.CollisionTester.IsColliding(Api.World.BlockAccessor, entityAgent.SelectionBox, placePos, false))
-                {
-                    entityAgent.TeleportTo(placePos);
-                    break;
-                }
-            }
-        }
-
-        mountedByEntityId = 0;
-        mountedByPlayerUid = null;
-    }
     public void DidMount(EntityAgent entityAgent)
     {
         if (MountedBy != null && MountedBy != entityAgent)
@@ -210,17 +228,12 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         mountedByPlayerUid = (entityAgent as EntityPlayer)?.PlayerUID;
         mountedByEntityId = MountedBy.EntityId;
 
-        if (entityAgent.Api?.Side == EnumAppSide.Server)
-        {
-            Console.WriteLine("Spinning Wheel Mounted");
-        }
         if (!On)
         {
-            Console.WriteLine("Activating spinning wheel.");
             Activate();
         }
         
-        //Opens the GUI
+        // Open the GUI
         if (Api.Side == EnumAppSide.Client)
         {
             clientDialog = new GuiDialogBlockEntitySpinningWheel(
@@ -234,100 +247,225 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
 
         MarkDirty(false);
     }
+    
+    public void DidUnmount(EntityAgent entityAgent)
+    {
+        MountedBy = null;
+        if (On)
+        {
+            Deactivate();
+        }
+        
+        // Close the GUI when player dismounts
+        if (Api.Side == EnumAppSide.Client && clientDialog != null)
+        {
+            clientDialog.TryClose();
+        }
+        
+        if (!blockBroken)
+        {
+            // Try to place the player in a safe position around the spinning wheel
+            foreach (BlockFacing checkFacing in BlockFacing.HORIZONTALS)
+            {
+                Vec3d placePos = Pos.ToVec3d().AddCopy(checkFacing).Add(0.5, 0.001, 0.5);
+
+                // Check if this position is safe (not colliding with blocks)
+                if (!Api.World.CollisionTester.IsColliding(Api.World.BlockAccessor, entityAgent.SelectionBox, placePos, false))
+                {
+                    entityAgent.TeleportTo(placePos);
+                    break;
+                }
+            }
+        }
+
+        mountedByEntityId = 0;
+        mountedByPlayerUid = null;
+    }
+    
     public bool IsMountedBy(Entity entity) => this.MountedBy == entity;
     public bool IsBeingControlled() => false;
     public bool CanUnmount(EntityAgent entityAgent) => true;
     public bool CanMount(EntityAgent entityAgent) => !AnyMounted();
-
     public bool AnyMounted() => MountedBy != null;
-    public bool On { get; set; }
-    
-    #region Config
-    
-    // For how long the ore has been cooking
-    public float inputStackCookingTime;
-    // How much of the current fuel is consumed
-    public float fuelBurnTime;
-    // How much fuel is available
-    public float maxFuelBurnTime;
-    
-    public float cachedFuel;
-    
-    
-    public override string InventoryClassName
-    {
-        get { return "spinningwheel"; }
-    }
-    public override InventoryBase Inventory
-    {
-        get { return inventory; }
-    }
     
     #endregion
   
+    #region Spinning Logic
     
-    public BlockEntitySpinningWheel()
+    private void OnSpinTick(float dt)
     {
-        inventory = new InventorySpinningWheel(null, null);
-        inventory.SlotModified += OnSlotModified;
-    }
-    
-    private void OnSlotModified(int slotid)
-    {
-        Block = Api.World.BlockAccessor.GetBlock(Pos);
-
-        //This is probably useless??? TEST
-        MarkDirty(Api.Side == EnumAppSide.Server); // Save useless triple-remesh by only letting the server decide when to redraw
-
-        if (Api is ICoreClientAPI && clientDialog != null)
+        // Client-side: just update visuals
+        if (Api is ICoreClientAPI)
         {
-            //SetDialogValues(clientDialog.Attributes);
+            return;
         }
 
-        Api.World.BlockAccessor.GetChunkAtBlockPos(Pos)?.MarkModified();
+        // Server-side processing
+        if (!CanSpin())
+        {
+            inputSpinTime = 0;
+            return;
+        }
+
+        // Only process if player is mounted
+        if (MountedBy != null && On)
+        {
+            inputSpinTime += dt;
+
+            if (inputSpinTime >= maxSpinTime())
+            {
+                SpinInput();
+                inputSpinTime = 0;
+                MarkDirty(true);
+            }
+        }
+        else
+        {
+            // Not spinning, decay progress slowly
+            if (inputSpinTime > 0)
+            {
+                inputSpinTime -= dt * 0.5f;
+                if (inputSpinTime < 0) inputSpinTime = 0;
+            }
+        }
     }
+    
+    private bool CanSpin()
+    {
+        ItemSlot inputSlot = InputSlot;
+        if (inputSlot?.Itemstack == null) return false;
+
+        // Check if this item can be spun
+        // TODO: Define spinning properties on items properly
+        if (inputSlot.Itemstack.Collectible.Code.Path.Contains("flaxfibers") || 
+            inputSlot.Itemstack.Collectible.Code.Path.Contains("flax-"))
+        {
+            ItemSlot outputSlot = OutputSlot;
+        
+            // Check if output slot has room
+            if (outputSlot.Empty) return true;
+        
+            // Check if we can stack more
+            ItemStack resultStack = GetSpinResult(inputSlot.Itemstack);
+            if (resultStack != null && outputSlot.Itemstack.Collectible.Equals(outputSlot.Itemstack, resultStack, GlobalConstants.IgnoredStackAttributes))
+            {
+                return outputSlot.Itemstack.StackSize < outputSlot.Itemstack.Collectible.MaxStackSize;
+            }
+        }
+
+        return false;
+    }
+
+    private ItemStack GetSpinResult(ItemStack input)
+    {
+        // Define your spinning recipes here
+        // Example: flax fibers -> linen thread
+        if (input.Collectible.Code.Path.Contains("flaxfibers"))
+        {
+            return new ItemStack(Api.World.GetItem(new AssetLocation("game:flaxtwine")), 1);
+        }
+        
+        // Add more recipes as needed
+        // Cotton fibers -> cotton thread, etc.
+        
+        return null;
+    }
+
+    private void SpinInput()
+    {
+        ItemSlot inputSlot = InputSlot;
+        ItemSlot outputSlot = OutputSlot;
+
+        ItemStack resultStack = GetSpinResult(inputSlot.Itemstack);
+        if (resultStack == null) return;
+
+        if (outputSlot.Empty)
+        {
+            outputSlot.Itemstack = resultStack;
+        }
+        else
+        {
+            outputSlot.Itemstack.StackSize += resultStack.StackSize;
+        }
+
+        inputSlot.TakeOut(1);
+        inputSlot.MarkDirty();
+        outputSlot.MarkDirty();
+    }
+    
+    #endregion
+    
+    #region Slot Management
+
+    private void OnSlotModified(int slotid)
+    {
+        if (Api is ICoreClientAPI)
+        {
+            clientDialog?.Update(inputSpinTime, maxSpinTime());
+        }
+
+        if (slotid == 0)
+        {
+            if (InputSlot.Empty)
+            {
+                inputSpinTime = 0.0f; // reset the progress to 0 if the item is removed.
+            }
+            MarkDirty();
+
+            if (clientDialog != null && clientDialog.IsOpened())
+            {
+                clientDialog.SingleComposer.ReCompose();
+            }
+        }
+    }
+    
+    #endregion
+    
+    #region Sync & Updates
     
     // Sync to client every 500ms
     private void On500msTick(float dt)
     {
-        if (Api is ICoreServerAPI && (IsRidden))
+        // Server: Mark dirty if spinning
+        if (Api is ICoreServerAPI && (MountedBy != null || inputSpinTime > 0))
         {
             MarkDirty();
         }
-    }
-    public virtual string DialogTitle
-    {
-        get { return Lang.Get("spinningwheel"); }
-    }
     
-    GuiDialogBlockEntitySpinningWheel clientDialog;
-
-    private bool IsRidden;
-    
-    private BlockEntityAnimationUtil animUtil
-    {
-        get { return GetBehavior<BEBehaviorAnimatable>().animUtil; }
+        // Client: Update GUI
+        if (Api.Side == EnumAppSide.Client && clientDialog != null && clientDialog.IsOpened())
+        {
+            clientDialog.Update(inputSpinTime, maxSpinTime());
+        }
     }
     
+    #endregion
     
+    #region Animation
     
-    
-    //Starts animation
+    // Start animation
     public void Activate()
     {
         On = true;
-        animUtil.StartAnimation(new AnimationMetaData() { Animation = "wheelspin", Code = "wheelspin", AnimationSpeed = 1f});
+        animUtil?.StartAnimation(new AnimationMetaData() { 
+            Animation = "wheelspin", 
+            Code = "wheelspin", 
+            AnimationSpeed = 1f
+        });
         MarkDirty(true);
     }
     
-    //Stops animation
+    // Stop animation
     public void Deactivate()
     {
-        animUtil.StopAnimation("wheelspin");
+        animUtil?.StopAnimation("wheelspin");
         On = false;
         MarkDirty(true);
     }
-
+    
+    #endregion
+    
+    #region Player Interaction
     
     public bool OnPlayerInteract(IPlayer byPlayer)
     {
@@ -345,38 +483,55 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         return byPlayer.Entity.TryMount(this);
     }
     
-
-     public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
+    public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
     {
-        Console.WriteLine("OnPlayerRightClick happened");
-        // Should check if player hands empty?
-        //var slot = byPlayer.InventoryManager.ActiveHotbarSlot;
-        
-        
-        // CHECK BACK IF THIS FUNCTION EVEN FUCKING HAPPENS WTH ????
-        if (Api.Side == EnumAppSide.Client)
-        {
-            clientDialog = new GuiDialogBlockEntitySpinningWheel(
-                DialogTitle, 
-                Inventory, 
-                Pos, 
-                Api as ICoreClientAPI
-            );
-            clientDialog.TryOpen();
-        }
-        
-        if (On)
-        {
-            Deactivate();
-            Console.WriteLine("Deactivating spinning wheel.");
-        }
-        else
-        {
-            Console.WriteLine("Activating spinning wheel.");
-            Activate();
-        }
-        return true;
+        // Mount the player when they right-click
+        return OnPlayerInteract(byPlayer);
     }
+    
+    #endregion
+    
+    #region Serialization
+    
+    public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
+    {
+        base.FromTreeAttributes(tree, worldForResolving);
+
+        mountedByEntityId = tree.GetLong("mountedByEntityId");
+        mountedByPlayerUid = tree.GetString("mountedByPlayerUid");
+        inputSpinTime = tree.GetFloat("inputSpinTime");
+        
+        if (Api != null)
+        {
+            Inventory.AfterBlocksLoaded(Api.World);
+        }
+        
+        if (Api?.Side == EnumAppSide.Client && clientDialog != null)
+        {
+            clientDialog.Update(inputSpinTime, maxSpinTime());
+        }
+    }
+    
+    public override void ToTreeAttributes(ITreeAttribute tree)
+    {
+        base.ToTreeAttributes(tree);
+
+        tree.SetLong("mountedByEntityId", mountedByEntityId);
+        tree.SetString("mountedByPlayerUid", mountedByPlayerUid);
+        tree.SetFloat("inputSpinTime", inputSpinTime);
+    }
+    
+    public void MountableToTreeAttributes(TreeAttribute tree)
+    {
+        tree.SetString("className", "spinningWheel");
+        tree.SetInt("posx", Pos.X);
+        tree.SetInt("posy", Pos.InternalY);
+        tree.SetInt("posz", Pos.Z);
+    }
+    
+    #endregion
+    
+    #region Block Events
 
     public override void OnBlockRemoved()
     {
@@ -389,7 +544,6 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         base.OnBlockRemoved();
     }
     
-
     public override void OnBlockBroken(IPlayer byPlayer = null)
     {
         base.OnBlockBroken(byPlayer);
@@ -414,4 +568,47 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
 
         return base.OnTesselation(mesher, tessThreadTesselator);
     }
+    
+    #endregion
+    
+    #region Collection Mappings
+    
+    public override void OnStoreCollectibleMappings(Dictionary<int, AssetLocation> blockIdMapping, Dictionary<int, AssetLocation> itemIdMapping)
+    {
+        foreach (var slot in Inventory)
+        {
+            if (slot.Itemstack == null) continue;
+
+            if (slot.Itemstack.Class == EnumItemClass.Item)
+            {
+                itemIdMapping[slot.Itemstack.Item.Id] = slot.Itemstack.Item.Code;
+            }
+            else
+            {
+                blockIdMapping[slot.Itemstack.Block.BlockId] = slot.Itemstack.Block.Code;
+            }
+
+            slot.Itemstack.Collectible.OnStoreCollectibleMappings(Api.World, slot, blockIdMapping, itemIdMapping);
+        }
+    }
+
+    public override void OnLoadCollectibleMappings(IWorldAccessor worldForResolve, Dictionary<int, AssetLocation> oldBlockIdMapping, Dictionary<int, AssetLocation> oldItemIdMapping, int schematicSeed, bool resolveImports)
+    {
+        base.OnLoadCollectibleMappings(worldForResolve, oldBlockIdMapping, oldItemIdMapping, schematicSeed, resolveImports);
+        
+        foreach (var slot in Inventory)
+        {
+            if (slot.Itemstack == null) continue;
+            if (!slot.Itemstack.FixMapping(oldBlockIdMapping, oldItemIdMapping, worldForResolve))
+            {
+                slot.Itemstack = null;
+            }
+            else
+            {
+                slot.Itemstack.Collectible.OnLoadCollectibleMappings(worldForResolve, slot, oldBlockIdMapping, oldItemIdMapping, resolveImports);
+            }
+        }
+    }
+    
+    #endregion
 }
