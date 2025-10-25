@@ -22,7 +22,7 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
     static Vec3f eyePos = new Vec3f(0, 0.3f, 0);
     
     BlockFacing facing;
-    private float y2 = 0.5f;
+    private float y2 = 0.2f;
     public EntityAgent MountedBy;
     bool blockBroken;
     long mountedByEntityId;
@@ -59,10 +59,10 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
             mountPos.Yaw = this.facing.HorizontalAngleIndex * GameMath.PIHALF + GameMath.PIHALF;
 
             // Position player in front of the wheel based on which way it's facing
-            if (facing == BlockFacing.NORTH) return mountPos.Add(0.5, y2, 0.7);
-            if (facing == BlockFacing.EAST) return mountPos.Add(0.3, y2, 0.5);
-            if (facing == BlockFacing.SOUTH) return mountPos.Add(0.5, y2, 0.3);
-            if (facing == BlockFacing.WEST) return mountPos.Add(0.7, y2, 0.5);
+            if (facing == BlockFacing.NORTH) return mountPos.Add(0.5, y2, -0.7);
+            if (facing == BlockFacing.EAST) return mountPos.Add(0.3, y2, -0.5);
+            if (facing == BlockFacing.SOUTH) return mountPos.Add(0.5, y2, -0.3);
+            if (facing == BlockFacing.WEST) return mountPos.Add(0.7, y2, -0.5);
 
             return mountPos.Add(0.5, y2, 0.5); // Fallback: center
         }
@@ -84,7 +84,7 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
     
     public bool SkipIdleAnimation => false;
     public float FpHandPitchFollow => 1;
-    public string SeatId { get => "bed-0"; set { } }
+    public string SeatId { get => "spinner-0"; set { } }
     public SeatConfig Config { get => null; set { } }
     public long PassengerEntityIdForInit { get => mountedByEntityId; set => mountedByEntityId = value; }
     
@@ -168,7 +168,11 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
     public void DidUnmount(EntityAgent entityAgent)
     {
         MountedBy = null;
-
+        if (On)
+        {
+            Deactivate();
+            Console.WriteLine("Deactivating spinning wheel.");
+        }
         if (!blockBroken)
         {
             // Try to place the player in a safe position around the spinning wheel
@@ -209,28 +213,24 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
         if (entityAgent.Api?.Side == EnumAppSide.Server)
         {
             Console.WriteLine("Spinning Wheel Mounted");
-            /*if (restingListener == 0)
-            {
-                var oldapi = this.Api;
-                this.Api = entityAgent.Api;   // in case this.Api is currently null if this is called by LoadEntity method for entityAgent; a null Api here would cause RegisterGameTickListener to throw an exception
-                restingListener = RegisterGameTickListener(RestPlayer, 200);
-                this.Api = oldapi;
-            }
-            hoursTotal = entityAgent.Api.World.Calendar.TotalHours;*/
         }
-
-        /*if (MountedBy != null)
+        if (!On)
         {
-            entityAgent.Api.Event.EnqueueMainThreadTask(() => // Might not be initialized yet if this is loaded from spawnchunks
-            {
-                if (MountedBy != null)
-                {
-                    EntityBehaviorTiredness ebt = MountedBy.GetBehavior("tiredness") as EntityBehaviorTiredness;
-                    if (ebt != null) ebt.IsSleeping = true;
-                }
-            }, "issleeping");
-        }*/
-
+            Console.WriteLine("Activating spinning wheel.");
+            Activate();
+        }
+        
+        //Opens the GUI
+        if (Api.Side == EnumAppSide.Client)
+        {
+            clientDialog = new GuiDialogBlockEntitySpinningWheel(
+                DialogTitle, 
+                Inventory, 
+                Pos, 
+                Api as ICoreClientAPI
+            );
+            clientDialog.TryOpen();
+        }
 
         MarkDirty(false);
     }
@@ -329,47 +329,53 @@ public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableS
     }
 
     
-    //Currently OnInteract probably will be replaced with OnPlayerRightClick() or  some other interaction once mounted
-    public bool OnInteract(BlockSelection blockSel, IPlayer byPlayer)
+    public bool OnPlayerInteract(IPlayer byPlayer)
     {
-        var slot = byPlayer.InventoryManager.ActiveHotbarSlot;
-        Console.WriteLine("Spinning wheel interacted by player: " + byPlayer.PlayerName);
-        Console.WriteLine("Hotbar slot empty: " + slot.Empty);
-        if (slot.Empty)
+        // Check if someone is already using it
+        if (MountedBy != null) 
         {
-            if (On)
+            if (Api.Side == EnumAppSide.Client)
             {
-                Deactivate();
-                Console.WriteLine("Deactivating spinning wheel.");
+                (Api as ICoreClientAPI).TriggerIngameError(this, "occupied", Lang.Get("spinning-wheel-occupied"));
             }
-            else
-            {
-                Console.WriteLine("Activating spinning wheel.");
-                Activate();
-            }
-            return true;
-        }
-        return true;
-    }
-    
-    /* Commeneted out until I figure out GUI solutions
-     public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
-    {
-        if (Api.Side == EnumAppSide.Client)
-        {
-            toggleInventoryDialogClient(byPlayer, () => {
-                SyncedTreeAttribute dtree = new SyncedTreeAttribute();
-                SetDialogValues(dtree);
-                clientDialog = new GuiDialogBlockEntitySpinningWheel(DialogTitle, Inventory, Pos, dtree, Api as ICoreClientAPI);
-                return clientDialog;
-            });
+            return false;
         }
 
-        return true;
-    }*/
-    public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
+        // Try to mount the player to the spinning wheel
+        return byPlayer.Entity.TryMount(this);
+    }
+    
+
+     public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("OnPlayerRightClick happened");
+        // Should check if player hands empty?
+        //var slot = byPlayer.InventoryManager.ActiveHotbarSlot;
+        
+        
+        // CHECK BACK IF THIS FUNCTION EVEN FUCKING HAPPENS WTH ????
+        if (Api.Side == EnumAppSide.Client)
+        {
+            clientDialog = new GuiDialogBlockEntitySpinningWheel(
+                DialogTitle, 
+                Inventory, 
+                Pos, 
+                Api as ICoreClientAPI
+            );
+            clientDialog.TryOpen();
+        }
+        
+        if (On)
+        {
+            Deactivate();
+            Console.WriteLine("Deactivating spinning wheel.");
+        }
+        else
+        {
+            Console.WriteLine("Activating spinning wheel.");
+            Activate();
+        }
+        return true;
     }
 
     public override void OnBlockRemoved()

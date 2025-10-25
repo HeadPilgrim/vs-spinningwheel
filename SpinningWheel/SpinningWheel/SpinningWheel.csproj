@@ -32,6 +32,10 @@
             <HintPath>$(VINTAGE_STORY)/VintagestoryLib.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <Reference Include="cairo-sharp">
+            <HintPath>$(VINTAGE_STORY)/Lib/cairo-sharp.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
@@ -47,14 +51,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="assets\patches\" />
-      <Folder Include="assets\spinningwheel\patches\" />
       <Folder Include="assets\spinningwheel\shapes\" />
       <Folder Include="assets\spinningwheel\textures\icons\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="CairoSharp" Version="3.24.24.95" />
     </ItemGroup>
 
 </Project>

@@ -62,7 +62,8 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
 
     public override float GetSuitability(ItemSlot sourceSlot, ItemSlot targetSlot, bool isMerge)
     {
-        if (targetSlot == slots[0] && sourceSlot.Itemstack.Collectible.GrindingProps!= null) return 4f;
+        if (targetSlot == slots[0] && sourceSlot.Itemstack.Collectible.Attributes?["spinningProps"].Exists == true) 
+            return 4f;
 
         return base.GetSuitability(sourceSlot, targetSlot, isMerge);
     }

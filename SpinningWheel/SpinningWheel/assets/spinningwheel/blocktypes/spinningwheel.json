@@ -23,8 +23,8 @@
       { "code": "creaturecarrier" }
     ]
   },
-  "selectionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 0.875, "y2": 1, "z2": 0.875 },
-  "collisionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 0.875, "y2": 1, "z2": 0.875 },
+  "selectionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 2, "y2": 1, "z2": 2 },
+  "collisionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 2, "y2": 1, "z2": 2 },
   "guiTransform": {
     "translation": { "x": 0, "y": 8, "z": 0 },
     "scale": 0.57

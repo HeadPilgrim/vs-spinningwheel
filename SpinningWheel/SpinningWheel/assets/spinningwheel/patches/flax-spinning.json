@@ -1,0 +1,11 @@
+﻿[
+  {
+    "op": "add",
+    "path": "/attributes/spinningProps",
+    "file": "game:itemtypes/resource/flaxfibers",
+    "value": {
+      "outputQuantity": 3,
+      "spinTime": 5.0
+    }
+  }
+]

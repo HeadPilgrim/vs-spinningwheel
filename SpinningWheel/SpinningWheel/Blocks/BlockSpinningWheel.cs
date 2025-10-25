@@ -22,6 +22,8 @@ public class BlockSpinningWheel : Block
         BlockEntitySpinningWheel beSpinningWheel = world.BlockAccessor.GetBlockEntity(pos) as BlockEntitySpinningWheel;
         return beSpinningWheel;
     }
+    
+    //Possible remove this OnBlockInteract start and move to BESpinningWheel class?
     public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
     {
         // Check if player has permission to use this block
@@ -30,25 +32,11 @@ public class BlockSpinningWheel : Block
             return false;
         }
 
-        // Get the spinning wheel block entity
+        // Get the spinning wheel block entity and route to it
         BlockEntitySpinningWheel beSpinningWheel = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntitySpinningWheel;
     
-        if (beSpinningWheel == null) return false;
-    
-        // Check if someone is already using it
-        if (beSpinningWheel.MountedBy != null) 
-        {
-            if (world.Side == EnumAppSide.Client)
-            {
-                (api as ICoreClientAPI).TriggerIngameError(this, "occupied", Lang.Get("spinning-wheel-occupied"));
-            }
-            return false;
-        }
-
-        // Try to mount the player to the spinning wheel
-        return byPlayer.Entity.TryMount(beSpinningWheel);
+        return beSpinningWheel?.OnPlayerInteract(byPlayer) ?? false;
     }
-
     public override void OnBlockRemoved(IWorldAccessor world, BlockPos pos)
     {
         // Get the spinning wheel block entity

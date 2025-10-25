@@ -951,12 +951,12 @@
 																	"from": [ -1.5014, -0.1564, -0.1564 ],
 																	"to": [ 1.8768, 0.1564, 0.1564 ],
 																	"faces": {
-																		"north": { "texture": "#missing_texture", "uv": [ 1.5, 8.0, 13.5, 9.0 ], "autoUv": false, "snapUv": false },
-																		"east": { "texture": "#missing_texture", "uv": [ 2.5, 5.5, 3.5, 6.5 ], "autoUv": false, "snapUv": false },
-																		"south": { "texture": "#missing_texture", "uv": [ 2.0, 9.0, 14.0, 10.0 ], "autoUv": false, "snapUv": false },
-																		"west": { "texture": "#missing_texture", "uv": [ 1.5, 4.0, 2.5, 5.0 ], "autoUv": false, "snapUv": false },
-																		"up": { "texture": "#missing_texture", "uv": [ 1.0, 7.5, 13.0, 8.5 ], "autoUv": false, "snapUv": false },
-																		"down": { "texture": "#missing_texture", "uv": [ 0.0, 1.5, 12.0, 2.5 ], "autoUv": false, "snapUv": false }
+																		"north": { "texture": "#oak", "uv": [ 1.5, 8.0, 13.5, 9.0 ], "autoUv": false, "snapUv": false },
+																		"east": { "texture": "#oak", "uv": [ 2.5, 5.5, 3.5, 6.5 ], "autoUv": false, "snapUv": false },
+																		"south": { "texture": "#oak", "uv": [ 2.0, 9.0, 14.0, 10.0 ], "autoUv": false, "snapUv": false },
+																		"west": { "texture": "#oak", "uv": [ 1.5, 4.0, 2.5, 5.0 ], "autoUv": false, "snapUv": false },
+																		"up": { "texture": "#oak", "uv": [ 1.0, 7.5, 13.0, 8.5 ], "autoUv": false, "snapUv": false },
+																		"down": { "texture": "#oak", "uv": [ 0.0, 1.5, 12.0, 2.5 ], "autoUv": false, "snapUv": false }
 																	}
 																}
 															]
@@ -14818,10 +14818,10 @@
 				{
 					"frame": 60,
 					"elements": {
-						"Flyer": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 720.0 },
-						"Drive_Wheel": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -354.0 },
-						"Axle2": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 354.0 },
-						"Footman2": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -354.0 }
+						"Flyer": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 708.0, "rotShortestDistanceZ": true },
+						"Drive_Wheel": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -354.0, "rotShortestDistanceZ": true },
+						"Axle2": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 354.0, "rotShortestDistanceZ": true },
+						"Footman2": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": -354.0, "rotShortestDistanceZ": true }
 					}
 				}
 			]
