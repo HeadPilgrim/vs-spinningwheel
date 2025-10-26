@@ -12,7 +12,15 @@
     }
   ],
   "behaviors": [
-    { "name": "Multiblock", "properties": { "sizex": 2, "sizey": 2, "sizez": 2, "cposition": { "x": 0, "y": 0, "z": 0 } } },
+    {
+      "name": "Multiblock",
+      "propertiesByType": {
+        "*-north": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 0, "y": 0, "z": 0 } },
+        "*-east": { "sizex": 1, "sizey": 2, "sizez": 2, "cposition": { "x": 0, "y": 0, "z": 0 } },
+        "*-south": { "sizex": 2, "sizey": 2, "sizez": 1, "cposition": { "x": 1, "y": 0, "z": 0 } },
+        "*-west": { "sizex": 1, "sizey": 2, "sizez": 2, "cposition": { "x": 0, "y": 0, "z": 1 } }
+      }
+    },
     {
       "name": "HorizontalOrientable",
       "properties": {
@@ -32,64 +40,43 @@
   "attributes": {
     "spinnable": true,
     "valuesByMultiblockOffset": {
-      "collisionSelectionBoxes": {
-        "0,0,0": [
-          {
-            "comment": "First block of main assembly (left/west half)",
-            "x1": 0,
-            "y1": 0,
-            "z1": 0,
-            "x2": 1,
-            "y2": 1,
-            "z2": 1
-          },
-          {
-            "comment": "Chair/seat (1x1x1 centered on this block)",
-            "x1": 0,
-            "y1": 0,
-            "z1": 0,
-            "x2": 1,
-            "y2": 1,
-            "z2": 1
-          }
-        ],
-        "1,0,0": [
-          {
-            "comment": "Second block of main assembly (right/east half)",
-            "x1": 0,
-            "y1": 0,
-            "z1": 0,
-            "x2": 1,
-            "y2": 1,
-            "z2": 1
-          }
-        ],
-        "0,1,0": [
-          {
-            "comment": "Upper 0.5 blocks above first block",
-            "x1": 0,
-            "y1": 0,
-            "z1": 0,
-            "x2": 1,
-            "y2": 0.5,
-            "z2": 1
-          }
-        ],
-        "1,1,0": [
-          {
-            "comment": "Upper 0.5 blocks above second block",
-            "x1": 0,
-            "y1": 0,
-            "z1": 0,
-            "x2": 1,
-            "y2": 0.5,
-            "z2": 1
-          }
-        ]
+      "collisionSelectionBoxesByType": {
+        "*-north": {
+          // PART with papers
+          "0,-1,0": [{ "x1": 0.125, "y1": 0, "z1": 0.1875, "x2": 0.875, "y2": 0.25, "z2": 0.875 }],
+          // PART with cloth pile
+          "-1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.0625, "z2": 0.9375 }],
+          // PART right bottom
+          "-1,0,0": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 1, "z2": 0.9375 }]
+        },
+        "*-east": {
+          // PART with papers
+          "0,-1,0": [{ "x1": 0.125, "y1": 0, "z1": 0.1875, "x2": 0.875, "y2": 0.25, "z2": 0.875, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // PART with cloth pile
+          "0,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.0625, "z2": 0.9375, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // PART right bottom
+          "0,0,-1": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 1, "z2": 0.9375, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
+        },
+        "*-south": {
+          // PART with papers
+          "0,-1,0": [{ "x1": 0.125, "y1": 0, "z1": 0.1875, "x2": 0.875, "y2": 0.25, "z2": 0.875, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // PART with cloth pile
+          "1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.0625, "z2": 0.9375, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // PART right bottom
+          "1,0,0": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 1, "z2": 0.9375, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
+        },
+        "*-west": {
+          // PART with papers
+          "0,-1,0": [{ "x1": 0.125, "y1": 0, "z1": 0.1875, "x2": 0.875, "y2": 0.25, "z2": 0.875, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // PART with cloth pile
+          "0,-1,1": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.0625, "z2": 0.9375, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // PART right bottom
+          "0,0,1": [{ "x1": 0, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 1, "z2": 0.9375, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
+        }
       }
     }
   },
-  "collisionSelectionBoxes": [
+/*  "collisionSelectionBoxes": [
     {
       "x1": 0.25,
       "y1": 0,
@@ -129,7 +116,7 @@
         "*-south": 270
       }
     }
-  ],
+  ],*/
   "sideopaque": {
     "all": false
   },

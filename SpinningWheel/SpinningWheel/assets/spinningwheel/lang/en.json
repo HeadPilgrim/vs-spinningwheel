@@ -1,5 +1,5 @@
 {
-    "spinningwheel": "Spinning Wheel",
+    "block-hpspinningwheel-*": "Spinning Wheel",
     "blockhelp-spinningwheel-use": "Sit and spin fiber!",
     "spinning-wheel-occupied": "Someone is already using that!"
 }
