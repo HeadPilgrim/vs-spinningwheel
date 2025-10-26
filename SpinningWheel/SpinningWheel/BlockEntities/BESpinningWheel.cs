@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
+using SpinningWheel.Utilities;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -14,7 +15,7 @@ using Vintagestory.GameContent;
 
 namespace SpinningWheel.BlockEntities;
 
-public class BlockEntitySpinningWheel: BlockEntityOpenableContainer, IMountableSeat, IMountable
+public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountableSeat, IMountable
 {
     internal InventorySpinningWheel inventory;
     

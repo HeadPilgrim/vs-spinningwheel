@@ -1,20 +1,135 @@
 ﻿{
-  "code": "headpilgrim-spinningwheel",
+  "code": "hpspinningwheel",
   "class": "BlockSpinningWheel",
   "entityClass": "BlockEntitySpinningWheel",
   "tags": ["inanimate", "vehicle"],
-  "shape": {"base": "spinningwheel" },
   "blockmaterial": "wood",
-  "creativeinventory": { "general":  [ "*" ], "spinningwheel": ["*"] },
+  "creativeinventory": { "general":  [ "*-north" ], "spinningwheel": ["*-north"] },
+  "variantgroups": [
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "behaviors": [
+    { "name": "Multiblock", "properties": { "sizex": 2, "sizey": 2, "sizez": 2, "cposition": { "x": 0, "y": 0, "z": 0 } } },
+    {
+      "name": "HorizontalOrientable",
+      "properties": {
+        "dropBlockFace": "east"
+      }
+    },
+    {"name": "Container"}
+  ],
   "textures": {
     "linen": {"base": "game:block/linen"},
     "oak": {"base": "game:block/wood/debarked/oak"},
     "1": {"base": "game:block/wood/chair/normal/top"},
     "cover": {"base": "game:block/cloth/linen/normal1"},
     "oak2": {"base": "game:block/wood/crudechair/oak"}
-},
+  },
   "entityBehaviors": [{ "name": "Animatable" }],
-  "attributes": {"spinnable": true},
+  "attributes": {
+    "spinnable": true,
+    "valuesByMultiblockOffset": {
+      "collisionSelectionBoxes": {
+        "0,0,0": [
+          {
+            "comment": "First block of main assembly (left/west half)",
+            "x1": 0,
+            "y1": 0,
+            "z1": 0,
+            "x2": 1,
+            "y2": 1,
+            "z2": 1
+          },
+          {
+            "comment": "Chair/seat (1x1x1 centered on this block)",
+            "x1": 0,
+            "y1": 0,
+            "z1": 0,
+            "x2": 1,
+            "y2": 1,
+            "z2": 1
+          }
+        ],
+        "1,0,0": [
+          {
+            "comment": "Second block of main assembly (right/east half)",
+            "x1": 0,
+            "y1": 0,
+            "z1": 0,
+            "x2": 1,
+            "y2": 1,
+            "z2": 1
+          }
+        ],
+        "0,1,0": [
+          {
+            "comment": "Upper 0.5 blocks above first block",
+            "x1": 0,
+            "y1": 0,
+            "z1": 0,
+            "x2": 1,
+            "y2": 0.5,
+            "z2": 1
+          }
+        ],
+        "1,1,0": [
+          {
+            "comment": "Upper 0.5 blocks above second block",
+            "x1": 0,
+            "y1": 0,
+            "z1": 0,
+            "x2": 1,
+            "y2": 0.5,
+            "z2": 1
+          }
+        ]
+      }
+    }
+  },
+  "collisionSelectionBoxes": [
+    {
+      "x1": 0.25,
+      "y1": 0,
+      "z1": 0.26,
+      "x2": 1,
+      "y2": 0.0625,
+      "z2": 1,
+      "rotateYByType": {
+        "*-north": 90,
+        "*-west": 180,
+        "*-south": 270
+      }
+    },
+    {
+      "x1": 0.25,
+      "y1": 0,
+      "z1": 0.17,
+      "x2": 1,
+      "y2": 0.77,
+      "z2": 0.26,
+      "rotateYByType": {
+        "*-north": 90,
+        "*-west": 180,
+        "*-south": 270
+      }
+    },
+    {
+      "x1": 0.17,
+      "y1": 0,
+      "z1": 0.17,
+      "x2": 0.25,
+      "y2": 0.77,
+      "z2": 1,
+      "rotateYByType": {
+        "*-north": 90,
+        "*-west": 180,
+        "*-south": 270
+      }
+    }
+  ],
   "sideopaque": {
     "all": false
   },
@@ -23,8 +138,35 @@
       { "code": "creaturecarrier" }
     ]
   },
-  "selectionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 2, "y2": 1, "z2": 2 },
-  "collisionBox": { "x1": 0.125, "y1": 0, "z1": 0.125, "x2": 2, "y2": 1, "z2": 2 },
+  "drawtype": "json",
+  "shapeByType": {
+    "*-north": {
+      "base": "spinningwheel",
+      "rotateY": 0
+    },
+    "*-east": {
+      "base": "spinningwheel",
+      "rotateY": 270
+    },
+    "*-west": {
+      "base": "spinningwheel",
+      "rotateY": 90
+    },
+    "*-south": {
+      "base": "spinningwheel",
+      "rotateY": 180
+    }
+  },
+  "sounds": {
+    "place": "game:block/planks",
+    "hit": "game:block/planks",
+    "break": "game:block/planks",
+    "walk": "game:walk/wood"
+  },
+  "materialDensity": 600,
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldRightReadyAnimation": "heldblockready",
+  "heldTpUseAnimation": "twohandplaceblock",
   "guiTransform": {
     "translation": { "x": 0, "y": 8, "z": 0 },
     "scale": 0.57
