@@ -42,42 +42,71 @@
     "valuesByMultiblockOffset": {
       "collisionSelectionBoxesByType": {
         "*-north": {
+          // Upper level - back-left (top of T)
           "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8 }],
+          // Upper level - front-left (top of T extends forward)
           "0,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }],
+          // Lower level - front-left (thin front edge)
           "0,0,-1": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.7, "z2": 1 }],
+          // Upper level - back-right (top of T, right side)
           "-1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8 }],
+          // Upper level - front-right (top of T corner)
           "-1,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }],
+          // Lower level - back-right (stem of T)
           "-1,0,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 0.8 }],
+          // Lower level - front-right (thin front edge)
           "-1,0,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.7, "z2": 1 }]
         },
         "*-east": {
+          // Upper level - back-left (top of T)
           "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - front-left (top of T extends forward)
           "1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - front-left (thin front edge)
           "1,0,0": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.7, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - back-right (top of T, right side)
           "0,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - front-right (top of T corner)
           "1,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - back-right (stem of T)
           "0,0,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - front-right (thin front edge)
           "1,0,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.7, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
         },
         "*-south": {
+          // Upper level - back-left (top of T)
           "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - front-left (top of T extends forward)
           "0,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - front-left (thin front edge)
           "0,0,1": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.7, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - back-right (top of T, right side)
           "1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - front-right (top of T corner)
           "1,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - back-right (stem of T)
           "1,0,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - front-right (thin front edge)
           "1,0,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.7, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
         },
         "*-west": {
+          // Upper level - back-left (top of T)
           "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - front-left (top of T extends forward)
           "-1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - front-left (thin front edge)
           "-1,0,0": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.7, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - back-right (top of T, right side)
           "0,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Upper level - front-right (top of T corner)
           "-1,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - back-right (stem of T)
           "0,0,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          // Lower level - front-right (thin front edge)
           "-1,0,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.7, "z2": 1, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
         }
       }
+
     }
   },
   //Bottomhalf-front-left

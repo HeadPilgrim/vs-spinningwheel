@@ -19,9 +19,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 {
     internal InventorySpinningWheel inventory;
     
-    static Vec3f eyePos = new Vec3f(0, 0.3f, 0);
-    
     BlockFacing facing;
+    private float blockRotationDeg = 0f;
     private float y2 = 0.2f;
     public EntityAgent MountedBy;
     bool blockBroken;
@@ -46,32 +45,49 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         get
         {
             mountPos.SetPos(Pos);
-        
+    
             // Safety check for null facing
             if (facing == null)
             {
-                // Try to get facing again
-                if (Block != null)
-                {
-                    facing = BlockFacing.FromCode(Block.LastCodePart());
-                }
-            
-                // If still null, default to NORTH
-                if (facing == null)
-                {
-                    facing = BlockFacing.NORTH;
-                }
+                facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
+            }
+    
+            mountPos.Yaw = facing.HorizontalAngleIndex * GameMath.PIHALF + GameMath.PIHALF;
+
+            // Position player at the center of the 2x2x2 multiblock
+            // The center is 1 block (in X and Z) from the control position
+            if (facing == BlockFacing.NORTH)
+                return mountPos.Add(1.0, y2 - 0.68, 0.95);  // cposition (0,0,0) + (1,0,1) = center
+            if (facing == BlockFacing.EAST)
+                return mountPos.Add(0.05, y2 - 0.68, 1.0);  // Rotated 90° clockwise : cposition (1,0,0) + (-1,0,1) = center
+            if (facing == BlockFacing.SOUTH)
+                return mountPos.Add(0.0, y2 - 0.68, 0.05);  // Rotated 180° : cposition (1,0,1) + (-1,0,-1) = center
+            if (facing == BlockFacing.WEST)
+                return mountPos.Add(0.95, y2 - 0.68, 0.0);  // Rotated 270° clockwise : cposition (0,0,1) + (1,0,-1) = center
+
+            return mountPos.Add(0.5, y2, 0.5); // Fallback
+        }
+    }
+    public Vec3f LocalEyePos
+    {
+        get
+        {
+            if (facing == null)
+            {
+                facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
             }
         
-            mountPos.Yaw = this.facing.HorizontalAngleIndex * GameMath.PIHALF + GameMath.PIHALF;
-
-            // Position player in front of the wheel based on which way it's facing
-            if (facing == BlockFacing.NORTH) return mountPos.Add(0.5, y2, -0.7);
-            if (facing == BlockFacing.EAST) return mountPos.Add(0.3, y2, -0.5);
-            if (facing == BlockFacing.SOUTH) return mountPos.Add(0.5, y2, -0.3);
-            if (facing == BlockFacing.WEST) return mountPos.Add(0.7, y2, -0.5);
-
-            return mountPos.Add(0.5, y2, 0.5); // Fallback: center
+            // Rotate the eye position offset based on facing
+            if (facing == BlockFacing.NORTH)
+                return new Vec3f(0, 1.5f, 0.12f);
+            if (facing == BlockFacing.EAST)
+                return new Vec3f(-0.12f, 1.5f, 0);      // Z becomes X
+            if (facing == BlockFacing.SOUTH)
+                return new Vec3f(0, 1.5f, -0.12f);     // Z inverts
+            if (facing == BlockFacing.WEST)
+                return new Vec3f(0.12f, 1.5f, 0);     // X becomes -Z
+        
+            return new Vec3f(0, 1.5f, 0);
         }
     }
     
@@ -79,7 +95,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public EntityControls Controls => controls;
     public IMountable MountSupplier => this;
     public EnumMountAngleMode AngleMode => EnumMountAngleMode.FixateYaw;
-    public Vec3f LocalEyePos => eyePos;
     Entity IMountableSeat.Passenger => MountedBy;
     public bool CanControl => false;
     public Entity Entity => null;
@@ -93,6 +108,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public Entity Controller => MountedBy;
     public Entity OnEntity => null;
     public EntityControls ControllingControls => null;
+    
     
     #endregion
 
@@ -166,6 +182,15 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         base.Initialize(api);
     
+        // Get the facing direction from block code
+        facing = BlockFacing.FromCode(Block.LastCodePart());
+        
+        // Calculate rotation in degrees (matching your JSON rotateY values)
+        if (facing != null)
+        {
+            blockRotationDeg = facing.HorizontalAngleIndex * 90f;
+        }
+    
         // Initialize controls
         controls.OnAction = onControls;
     
@@ -173,15 +198,12 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         RegisterGameTickListener(OnSpinTick, 100);
         RegisterGameTickListener(On500msTick, 500);
     
-        // Get collision box height (useful for positioning the seated player)
+        // Get collision box height
         Cuboidf[] collboxes = Block.GetCollisionBoxes(api.World.BlockAccessor, Pos);
         if (collboxes != null && collboxes.Length > 0)
         {
             y2 = collboxes[0].Y2;
         }
-    
-        // Get the facing direction from block code (e.g., "spinningwheel-north")
-        facing = BlockFacing.FromCode(Block.LastCodePart());
     
         // Remount player if they were sitting when the world was saved/reloaded
         if (MountedBy == null && (mountedByEntityId != 0 || mountedByPlayerUid != null))
@@ -573,10 +595,39 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         if (animUtil?.animator == null)
         {
-            animUtil?.InitializeAnimator("spinningwheel");
+            // Get the facing before initializing
+            if (facing == null)
+            {
+                facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
+            }
+        
+            // Initialize with the block's rotation
+            animUtil?.InitializeAnimator("spinningwheel", null, null, GetRotation());
         }
 
         return base.OnTesselation(mesher, tessThreadTesselator);
+    }
+    
+    private Vec3f GetRotation()
+    {
+        if (facing == null)
+        {
+            facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
+        }
+
+        // Match the rotateY values from JSON shapeByType
+        float yRotation = 0f;
+    
+        if (facing == BlockFacing.NORTH)
+            yRotation = 0f;
+        else if (facing == BlockFacing.EAST)
+            yRotation = 270f;
+        else if (facing == BlockFacing.SOUTH)
+            yRotation = 180f;
+        else if (facing == BlockFacing.WEST)
+            yRotation = 90f;
+    
+        return new Vec3f(0, yRotation, 0);
     }
     
     #endregion
