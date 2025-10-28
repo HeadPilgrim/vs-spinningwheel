@@ -33,25 +33,23 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     GuiDialogBlockEntitySpinningWheel clientDialog;
     
     // Animation metadata
-    AnimationMetaData meta = new AnimationMetaData() { Code = "hp-sitspinning", Animation = "HP-SitSpinning" }.Init();
+    private AnimationMetaData idleAnimation = new AnimationMetaData() { Code = "sitidle2", Animation = "SitIdle2" }.Init();
+    private AnimationMetaData spinningAnimation = new AnimationMetaData() { Code = "hp-sitspinning", Animation = "HP-SitSpinning" }.Init();
 
     #region IMountable/IMountableSeat Implementation
     
     public EntityPos SeatPosition => Position;
     public double StepPitch => 0;
-
     public EntityPos Position
     {
         get
         {
             mountPos.SetPos(Pos);
-    
             // Safety check for null facing
             if (facing == null)
             {
                 facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
             }
-    
             mountPos.Yaw = facing.HorizontalAngleIndex * GameMath.PIHALF + GameMath.PIHALF;
 
             // Position player at the center of the 2x2x2 multiblock
@@ -64,7 +62,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 return mountPos.Add(0.0, y2 - 0.68, 0.05);  // Rotated 180° : cposition (1,0,1) + (-1,0,-1) = center
             if (facing == BlockFacing.WEST)
                 return mountPos.Add(0.95, y2 - 0.68, 0.0);  // Rotated 270° clockwise : cposition (0,0,1) + (1,0,-1) = center
-
             return mountPos.Add(0.5, y2, 0.5); // Fallback
         }
     }
@@ -76,7 +73,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             {
                 facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
             }
-        
             // Rotate the eye position offset based on facing
             if (facing == BlockFacing.NORTH)
                 return new Vec3f(0, 1.5f, 0.12f);
@@ -86,12 +82,11 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 return new Vec3f(0, 1.5f, -0.12f);     // Z inverts
             if (facing == BlockFacing.WEST)
                 return new Vec3f(0.12f, 1.5f, 0);     // X becomes -Z
-        
             return new Vec3f(0, 1.5f, 0);
         }
     }
-    
-    public AnimationMetaData SuggestedAnimation => meta;
+    // Make SuggestedAnimation dynamic based on On state:
+    public AnimationMetaData SuggestedAnimation => On ? spinningAnimation : idleAnimation;
     public EntityControls Controls => controls;
     public IMountable MountSupplier => this;
     public EnumMountAngleMode AngleMode => EnumMountAngleMode.FixateYaw;
@@ -109,9 +104,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public Entity OnEntity => null;
     public EntityControls ControllingControls => null;
     
-    
     #endregion
-
+    
     #region Config
     
     // For how long the item has been spinning
@@ -123,14 +117,55 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override string InventoryClassName => "spinningwheel";
     
     public override InventoryBase Inventory => inventory;
-    
+
     public virtual string DialogTitle => Lang.Get("spinningwheel");
     
     // Seconds it requires to complete spinning
-    public virtual float maxSpinTime() => 4f;
+    public virtual float maxSpinTime()
+
+    {
+
+        // Check if there's an item in the input slot
+
+        if (InputSlot?.Itemstack?.ItemAttributes != null)
+
+        {
+
+            var itemAttrs = InputSlot.Itemstack.ItemAttributes;
+
+        
+
+            // Check for spinningProps
+
+            if (itemAttrs.KeyExists("spinningProps"))
+
+            {
+
+                var spinningProps = itemAttrs["spinningProps"];
+
+            
+
+                // Get spinTime from the item's spinningProps, default to 10 if not specified
+
+                float spinTime = spinningProps["spinTime"]?.AsFloat(10f) ?? 10f;
+
+                return spinTime;
+
+            }
+
+        }
+
     
+
+        // Default fallback if no item or no spinningProps
+
+        return 10f;
+
+    }
+
+    
+
     #endregion
-  
     #region Helper Getters
     
     public ItemSlot InputSlot => inventory[0];
@@ -169,7 +204,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     }
     
     #endregion
-
+    
     #region Initialization
     
     public BlockEntitySpinningWheel()
@@ -181,37 +216,38 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override void Initialize(ICoreAPI api)
     {
         base.Initialize(api);
-    
-        // Get the facing direction from block code
-        facing = BlockFacing.FromCode(Block.LastCodePart());
-        
-        // Calculate rotation in degrees (matching your JSON rotateY values)
-        if (facing != null)
-        {
-            blockRotationDeg = facing.HorizontalAngleIndex * 90f;
-        }
-    
+
+
+
         // Initialize controls
         controls.OnAction = onControls;
-    
+
         // Register tick listeners
         RegisterGameTickListener(OnSpinTick, 100);
         RegisterGameTickListener(On500msTick, 500);
-    
+        
+        // Client-side: sync animation with On state
+        if (api.Side == EnumAppSide.Client)
+        {
+            RegisterGameTickListener(OnClientAnimationTick, 100);
+        }
+        
         // Get collision box height
         Cuboidf[] collboxes = Block.GetCollisionBoxes(api.World.BlockAccessor, Pos);
         if (collboxes != null && collboxes.Length > 0)
         {
             y2 = collboxes[0].Y2;
         }
-    
+        
+        // Get the facing direction from block code
+        facing = BlockFacing.FromCode(Block.LastCodePart());
+        
         // Remount player if they were sitting when the world was saved/reloaded
         if (MountedBy == null && (mountedByEntityId != 0 || mountedByPlayerUid != null))
         {
             var entity = mountedByPlayerUid != null 
                 ? api.World.PlayerByUid(mountedByPlayerUid)?.Entity 
                 : api.World.GetEntityById(mountedByEntityId) as EntityAgent;
-            
             if (entity?.SidedProperties != null)
             {
                 entity.TryMount(this);
@@ -251,21 +287,12 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         mountedByPlayerUid = (entityAgent as EntityPlayer)?.PlayerUID;
         mountedByEntityId = MountedBy.EntityId;
 
-        if (!On)
-        {
-            Activate();
-        }
-
         MarkDirty(false);
     }
     
     public void DidUnmount(EntityAgent entityAgent)
     {
         MountedBy = null;
-        if (On)
-        {
-            Deactivate();
-        }
         
         // Close the GUI when player dismounts
         if (Api.Side == EnumAppSide.Client && clientDialog != null)
@@ -279,7 +306,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             foreach (BlockFacing checkFacing in BlockFacing.HORIZONTALS)
             {
                 Vec3d placePos = Pos.ToVec3d().AddCopy(checkFacing).Add(0.5, 0.001, 0.5);
-
                 // Check if this position is safe (not colliding with blocks)
                 if (!Api.World.CollisionTester.IsColliding(Api.World.BlockAccessor, entityAgent.SelectionBox, placePos, false))
                 {
@@ -300,7 +326,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             return;
         }
-    
         if (Api.Side == EnumAppSide.Client)
         {
             if (clientDialog == null || !clientDialog.IsOpened())
@@ -323,9 +348,10 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public bool AnyMounted() => MountedBy != null;
     
     #endregion
-  
-    #region Spinning Logic
     
+    #region Spinning Logic
+    private float currentMaxSpinTime = 10f;
+
     private void OnSpinTick(float dt)
     {
         // Client-side: just update visuals
@@ -335,32 +361,38 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         }
 
         // Server-side processing
-        if (!CanSpin())
+        if (!CanSpin() || MountedBy == null)
         {
-            inputSpinTime = 0;
-            return;
-        }
-
-        // Only process if player is mounted
-        if (MountedBy != null && On)
-        {
-            inputSpinTime += dt;
-
-            if (inputSpinTime >= maxSpinTime())
+            // Stop animation if can't spin
+            if (On)
             {
-                SpinInput();
-                inputSpinTime = 0;
-                MarkDirty(true);
+                Deactivate();
             }
-        }
-        else
-        {
-            // Not spinning, decay progress slowly
+            
+            // Decay progress slowly
             if (inputSpinTime > 0)
             {
                 inputSpinTime -= dt * 0.5f;
                 if (inputSpinTime < 0) inputSpinTime = 0;
             }
+            return;
+        }
+        // We can spin and player is mounted - ensure animation is running
+        if (!On)
+        {
+            Activate();
+        }
+        
+        // Get the current max spin time and store it
+        currentMaxSpinTime = maxSpinTime();
+        // Process spinning
+        inputSpinTime += dt;
+
+        if (inputSpinTime >= currentMaxSpinTime)
+        {
+            SpinInput();
+            inputSpinTime = 0;
+            MarkDirty(true);
         }
     }
     
@@ -368,15 +400,12 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         ItemSlot inputSlot = InputSlot;
         if (inputSlot?.Itemstack == null) return false;
-
         // Check if this item can be spun
         if (inputSlot.Itemstack.ItemAttributes.KeyExists("spinningProps"))
         {
             ItemSlot outputSlot = OutputSlot;
-        
             // Check if output slot has room
             if (outputSlot.Empty) return true;
-        
             // Check if we can stack more
             ItemStack resultStack = GetSpinResult(inputSlot.Itemstack);
             if (resultStack != null && outputSlot.Itemstack.Collectible.Equals(outputSlot.Itemstack, resultStack, GlobalConstants.IgnoredStackAttributes))
@@ -394,11 +423,9 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         if (input.ItemAttributes.KeyExists("spinningProps"))
         {
             var spinningProps = input.ItemAttributes["spinningProps"];
-
             // Get the outputType and outputQuantity from spinningProps
             string outputType = spinningProps["outputType"].AsString();
             int outputQuantity = spinningProps["outputQuantity"].AsInt(1); // Default to 1 if not specified
-
             // Create and return the output ItemStack
             ItemStack outputStack = new ItemStack(Api.World.GetItem(new AssetLocation(outputType)), outputQuantity);
             return outputStack;
@@ -418,10 +445,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         ItemSlot inputSlot = InputSlot;
         ItemSlot outputSlot = OutputSlot;
-
         ItemStack resultStack = GetSpinResult(inputSlot.Itemstack);
         if (resultStack == null) return;
-
         if (outputSlot.Empty)
         {
             outputSlot.Itemstack = resultStack;
@@ -439,22 +464,42 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     #endregion
     
     #region Slot Management
-
+    
     private void OnSlotModified(int slotid)
     {
         if (Api is ICoreClientAPI)
         {
-            clientDialog?.Update(inputSpinTime, maxSpinTime());
+            clientDialog?.Update(inputSpinTime, currentMaxSpinTime); // Use currentMaxSpinTime
+        }
+        // Check animation state when slots change (server-side)
+        if (Api is ICoreServerAPI)
+        {
+            bool canSpin = CanSpin();
+            bool isPlayerMounted = MountedBy != null;
+            bool shouldBeSpinning = canSpin && isPlayerMounted;
+            // Update the max spin time when slot changes
+            if (shouldBeSpinning)
+            {
+                currentMaxSpinTime = maxSpinTime();
+            }
+            if (shouldBeSpinning && !On)
+            {
+                Activate();
+            }
+            else if (!shouldBeSpinning && On)
+            {
+                Deactivate();
+            }
         }
 
         if (slotid == 0)
         {
             if (InputSlot.Empty)
             {
-                inputSpinTime = 0.0f; // reset the progress to 0 if the item is removed.
+                inputSpinTime = 0.0f;
+
             }
             MarkDirty();
-
             if (clientDialog != null && clientDialog.IsOpened())
             {
                 clientDialog.SingleComposer.ReCompose();
@@ -474,34 +519,77 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             MarkDirty();
         }
-    
-        // Client: Update GUI
+        
+        // Client: Update GUI with synced value
         if (Api.Side == EnumAppSide.Client && clientDialog != null && clientDialog.IsOpened())
         {
-            clientDialog.Update(inputSpinTime, maxSpinTime());
+            clientDialog.Update(inputSpinTime, currentMaxSpinTime); // Use currentMaxSpinTime
+        }
+    }
+    // Client-side: sync animation with server's On state
+    private bool clientAnimationRunning = false;
+    private void OnClientAnimationTick(float dt)
+    {
+        if (animUtil?.animator == null) return;
+        
+        // Start animation if On but not running
+        if (On && !clientAnimationRunning)
+        {
+            animUtil.StartAnimation(new AnimationMetaData() { 
+                Animation = "wheelspin", 
+                Code = "wheelspin", 
+                AnimationSpeed = 1f
+            });
+            clientAnimationRunning = true;
+            
+            // Update player animation to spinning
+            RefreshSeatAnimation();
+        }
+
+        // Stop animation if Off but running
+        else if (!On && clientAnimationRunning)
+        {
+            animUtil.StopAnimation("wheelspin");
+            clientAnimationRunning = false;
+            
+            // Update player animation back to idle
+            RefreshSeatAnimation();
         }
     }
     
+    private void RefreshSeatAnimation()
+    {
+        if (MountedBy != null)
+        {
+            // Force the player to re-evaluate their sitting animation
+            MountedBy.AnimManager?.StopAnimation("sitidle2");
+            MountedBy.AnimManager?.StopAnimation("hp-sitspinning");
+            
+            // Start the appropriate animation
+            var anim = SuggestedAnimation;
+            if (anim != null)
+            {
+                MountedBy.AnimManager?.StartAnimation(anim);
+            }
+        }
+    }
+
     #endregion
     
     #region Animation
     
-    // Start animation
+    // Start animation (server sets state, client will sync)
     public void Activate()
     {
+        Api.Logger.Notification($"[SpinningWheel] Activate() called");
         On = true;
-        animUtil?.StartAnimation(new AnimationMetaData() { 
-            Animation = "wheelspin", 
-            Code = "wheelspin", 
-            AnimationSpeed = 1f
-        });
         MarkDirty(true);
     }
     
-    // Stop animation
+    // Stop animation (server sets state, client will sync)
     public void Deactivate()
     {
-        animUtil?.StopAnimation("wheelspin");
+        Api.Logger.Notification($"[SpinningWheel] Deactivate() called");
         On = false;
         MarkDirty(true);
     }
@@ -539,29 +627,29 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
     {
         base.FromTreeAttributes(tree, worldForResolving);
-
         mountedByEntityId = tree.GetLong("mountedByEntityId");
         mountedByPlayerUid = tree.GetString("mountedByPlayerUid");
         inputSpinTime = tree.GetFloat("inputSpinTime");
-        
+
+        On = tree.GetBool("On");
+        currentMaxSpinTime = tree.GetFloat("currentMaxSpinTime", 10f);
         if (Api != null)
         {
             Inventory.AfterBlocksLoaded(Api.World);
         }
-        
         if (Api?.Side == EnumAppSide.Client && clientDialog != null)
         {
-            clientDialog.Update(inputSpinTime, maxSpinTime());
+            clientDialog.Update(inputSpinTime, currentMaxSpinTime);
         }
     }
-    
     public override void ToTreeAttributes(ITreeAttribute tree)
     {
         base.ToTreeAttributes(tree);
-
         tree.SetLong("mountedByEntityId", mountedByEntityId);
         tree.SetString("mountedByPlayerUid", mountedByPlayerUid);
         tree.SetFloat("inputSpinTime", inputSpinTime);
+        tree.SetBool("On", On);
+        tree.SetFloat("currentMaxSpinTime", currentMaxSpinTime);
     }
     
     public void MountableToTreeAttributes(TreeAttribute tree)
@@ -575,7 +663,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     #endregion
     
     #region Block Events
-
     public override void OnBlockRemoved()
     {
         if (clientDialog != null)
@@ -611,7 +698,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             {
                 facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
             }
-        
             // Initialize with the block's rotation
             animUtil?.InitializeAnimator("spinningwheel", null, null, GetRotation());
         }
@@ -628,7 +714,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 
         // Match the rotateY values from JSON shapeByType
         float yRotation = 0f;
-    
         if (facing == BlockFacing.NORTH)
             yRotation = 0f;
         else if (facing == BlockFacing.EAST)
@@ -637,7 +722,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             yRotation = 180f;
         else if (facing == BlockFacing.WEST)
             yRotation = 90f;
-    
         return new Vec3f(0, yRotation, 0);
     }
     
@@ -650,7 +734,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         foreach (var slot in Inventory)
         {
             if (slot.Itemstack == null) continue;
-
             if (slot.Itemstack.Class == EnumItemClass.Item)
             {
                 itemIdMapping[slot.Itemstack.Item.Id] = slot.Itemstack.Item.Code;
@@ -681,6 +764,5 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             }
         }
     }
-    
     #endregion
 }
