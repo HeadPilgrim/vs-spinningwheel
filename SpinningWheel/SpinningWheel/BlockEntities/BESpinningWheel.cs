@@ -121,49 +121,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public virtual string DialogTitle => Lang.Get("spinningwheel");
     
     // Seconds it requires to complete spinning
-    public virtual float maxSpinTime()
-
-    {
-
-        // Check if there's an item in the input slot
-
-        if (InputSlot?.Itemstack?.ItemAttributes != null)
-
-        {
-
-            var itemAttrs = InputSlot.Itemstack.ItemAttributes;
-
-        
-
-            // Check for spinningProps
-
-            if (itemAttrs.KeyExists("spinningProps"))
-
-            {
-
-                var spinningProps = itemAttrs["spinningProps"];
-
-            
-
-                // Get spinTime from the item's spinningProps, default to 10 if not specified
-
-                float spinTime = spinningProps["spinTime"]?.AsFloat(10f) ?? 10f;
-
-                return spinTime;
-
-            }
-
-        }
-
-    
-
-        // Default fallback if no item or no spinningProps
-
-        return 10f;
-
-    }
-
-    
+    public virtual float maxSpinTime() => 4f;
 
     #endregion
     #region Helper Getters
@@ -350,8 +308,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     #endregion
     
     #region Spinning Logic
-    private float currentMaxSpinTime = 10f;
-
+    
     private void OnSpinTick(float dt)
     {
         // Client-side: just update visuals
@@ -368,7 +325,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             {
                 Deactivate();
             }
-            
+    
             // Decay progress slowly
             if (inputSpinTime > 0)
             {
@@ -377,22 +334,23 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             }
             return;
         }
+
         // We can spin and player is mounted - ensure animation is running
         if (!On)
         {
             Activate();
         }
-        
-        // Get the current max spin time and store it
-        currentMaxSpinTime = maxSpinTime();
+
         // Process spinning
         inputSpinTime += dt;
 
-        if (inputSpinTime >= currentMaxSpinTime)
+        if (inputSpinTime >= maxSpinTime())
         {
             SpinInput();
             inputSpinTime = 0;
             MarkDirty(true);
+    
+            // OnSlotModified will be called after SpinInput, which will check CanSpin again
         }
     }
     
@@ -469,25 +427,26 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         if (Api is ICoreClientAPI)
         {
-            clientDialog?.Update(inputSpinTime, currentMaxSpinTime); // Use currentMaxSpinTime
+            clientDialog?.Update(inputSpinTime, maxSpinTime());
         }
+
         // Check animation state when slots change (server-side)
         if (Api is ICoreServerAPI)
         {
             bool canSpin = CanSpin();
             bool isPlayerMounted = MountedBy != null;
             bool shouldBeSpinning = canSpin && isPlayerMounted;
-            // Update the max spin time when slot changes
-            if (shouldBeSpinning)
-            {
-                currentMaxSpinTime = maxSpinTime();
-            }
+        
+            Api.Logger.Notification($"[SpinningWheel] OnSlotModified - Slot: {slotid}, CanSpin: {canSpin}, Mounted: {isPlayerMounted}, On: {On}");
+        
             if (shouldBeSpinning && !On)
             {
+                Api.Logger.Notification($"[SpinningWheel] Starting animation from OnSlotModified");
                 Activate();
             }
             else if (!shouldBeSpinning && On)
             {
+                Api.Logger.Notification($"[SpinningWheel] Stopping animation from OnSlotModified");
                 Deactivate();
             }
         }
@@ -497,9 +456,9 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             if (InputSlot.Empty)
             {
                 inputSpinTime = 0.0f;
-
             }
             MarkDirty();
+
             if (clientDialog != null && clientDialog.IsOpened())
             {
                 clientDialog.SingleComposer.ReCompose();
@@ -523,7 +482,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         // Client: Update GUI with synced value
         if (Api.Side == EnumAppSide.Client && clientDialog != null && clientDialog.IsOpened())
         {
-            clientDialog.Update(inputSpinTime, currentMaxSpinTime); // Use currentMaxSpinTime
+            clientDialog.Update(inputSpinTime, maxSpinTime()); // Use currentMaxSpinTime
         }
     }
     // Client-side: sync animation with server's On state
@@ -632,14 +591,13 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         inputSpinTime = tree.GetFloat("inputSpinTime");
 
         On = tree.GetBool("On");
-        currentMaxSpinTime = tree.GetFloat("currentMaxSpinTime", 10f);
         if (Api != null)
         {
             Inventory.AfterBlocksLoaded(Api.World);
         }
         if (Api?.Side == EnumAppSide.Client && clientDialog != null)
         {
-            clientDialog.Update(inputSpinTime, currentMaxSpinTime);
+            clientDialog.Update(inputSpinTime, maxSpinTime());
         }
     }
     public override void ToTreeAttributes(ITreeAttribute tree)
@@ -649,7 +607,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         tree.SetString("mountedByPlayerUid", mountedByPlayerUid);
         tree.SetFloat("inputSpinTime", inputSpinTime);
         tree.SetBool("On", On);
-        tree.SetFloat("currentMaxSpinTime", currentMaxSpinTime);
     }
     
     public void MountableToTreeAttributes(TreeAttribute tree)

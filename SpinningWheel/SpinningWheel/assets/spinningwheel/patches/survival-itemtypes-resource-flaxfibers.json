@@ -5,7 +5,7 @@
     "value": {
       "outputType": "game:flaxtwine",
       "outputQuantity": 4,
-      "spinTime": 20
+      "spinTime": 4
     },
     "file": "game:itemtypes/resource/flaxfibers.json",
     "side": "Server"
