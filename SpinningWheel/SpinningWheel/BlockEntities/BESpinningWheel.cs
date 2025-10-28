@@ -19,6 +19,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 {
     internal InventorySpinningWheel inventory;
     
+    protected ILoadedSound ambientSound;
+    
     BlockFacing facing;
     private float blockRotationDeg = 0f;
     private float y2 = 0.2f;
@@ -231,6 +233,42 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             {
                 entity.TryMount(this);
             }
+        }
+    }
+    
+    public void ToggleAmbientSound(bool on)
+    {
+        if (Api?.Side != EnumAppSide.Client) return;
+
+        if (on)
+        {
+            if (ambientSound == null || !ambientSound.IsPlaying)
+            {
+                ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                {
+                    Location = new AssetLocation("spinningwheel:sounds/block/wooden-spinning-wheel.ogg"),
+                    ShouldLoop = true,
+                    Position = Pos.ToVec3f().Add(0.5f, 0.5f, 0.5f),
+                    DisposeOnFinish = false,
+                    Volume = 0f,
+                    Range = 6,
+                    SoundType = EnumSoundType.Ambient
+                });
+
+                if (ambientSound != null)
+                {
+                    ambientSound.Start();
+                    ambientSound.FadeTo(0.5f, 1f, (s)=> { });
+                    ambientSound.PlaybackPosition = ambientSound.SoundLengthSeconds * (float)Api.World.Rand.NextDouble();
+                }
+            } else
+            {
+                if (ambientSound.IsPlaying) ambientSound.FadeTo(0.5f, 1f, (s) => { });
+            }
+        }
+        else
+        {
+            ambientSound?.FadeOut(0.5f, (s) => { s.Dispose(); ambientSound = null; });
         }
     }
     
@@ -515,10 +553,11 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     
     // Client-side: sync animation with server's On state
     private bool clientAnimationRunning = false;
+    private bool clientSoundRunning = false;
     private void OnClientAnimationTick(float dt)
     {
         if (animUtil?.animator == null) return;
-        
+    
         // Start animation if On but not running
         if (On && !clientAnimationRunning)
         {
@@ -528,17 +567,24 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 AnimationSpeed = 1f
             });
             clientAnimationRunning = true;
-            
+        
+            // Start sound when animation starts
+            ToggleAmbientSound(true);
+            clientSoundRunning = true;
+        
             // Update player animation to spinning
             RefreshSeatAnimation();
         }
-
         // Stop animation if Off but running
         else if (!On && clientAnimationRunning)
         {
             animUtil.StopAnimation("wheelspin");
             clientAnimationRunning = false;
-            
+        
+            // Stop sound when animation stops
+            ToggleAmbientSound(false);
+            clientSoundRunning = false;
+        
             // Update player animation back to idle
             RefreshSeatAnimation();
         }
@@ -653,6 +699,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     #region Block Events
     public override void OnBlockRemoved()
     {
+        ToggleAmbientSound(false);
+        
         if (clientDialog != null)
         {
             clientDialog.TryClose();
@@ -666,6 +714,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         base.OnBlockBroken(byPlayer);
         
+        ToggleAmbientSound(false);
         if (clientDialog != null)
         {
             clientDialog.TryClose();
