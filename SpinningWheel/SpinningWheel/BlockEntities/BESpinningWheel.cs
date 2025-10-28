@@ -255,18 +255,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             Activate();
         }
-        
-        // Open the GUI
-        if (Api.Side == EnumAppSide.Client)
-        {
-            clientDialog = new GuiDialogBlockEntitySpinningWheel(
-                DialogTitle, 
-                Inventory, 
-                Pos, 
-                Api as ICoreClientAPI
-            );
-            clientDialog.TryOpen();
-        }
 
         MarkDirty(false);
     }
@@ -303,6 +291,29 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 
         mountedByEntityId = 0;
         mountedByPlayerUid = null;
+    }
+    
+    public void OpenGui(IPlayer player)
+    {
+        // Only allow the mounted player to open the GUI
+        if (MountedBy != player.Entity)
+        {
+            return;
+        }
+    
+        if (Api.Side == EnumAppSide.Client)
+        {
+            if (clientDialog == null || !clientDialog.IsOpened())
+            {
+                clientDialog = new GuiDialogBlockEntitySpinningWheel(
+                    DialogTitle, 
+                    Inventory, 
+                    Pos, 
+                    Api as ICoreClientAPI
+                );
+                clientDialog.TryOpen();
+            }
+        }
     }
     
     public bool IsMountedBy(Entity entity) => this.MountedBy == entity;
