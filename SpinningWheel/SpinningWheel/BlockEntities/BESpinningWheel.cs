@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SpinningWheel.BLockEntityRenderer;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
 using SpinningWheel.Utilities;
@@ -10,7 +10,6 @@ using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
-using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 namespace SpinningWheel.BlockEntities;
@@ -22,6 +21,9 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     internal InventorySpinningWheel inventory;
     
     protected ILoadedSound ambientSound;
+    
+    SpinningWheelContentsRenderer renderer;
+    bool shouldRedraw;
     
     BlockFacing facing;
     private float blockRotationDeg = 0f;
@@ -198,31 +200,36 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override void Initialize(ICoreAPI api)
     {
         base.Initialize(api);
-        
+    
         // Initialize controls
         controls.OnAction = onControls;
 
         // Register tick listeners
         RegisterGameTickListener(OnSpinTick, 100);
         RegisterGameTickListener(On500msTick, 500);
-        
+    
         // Client-side: sync animation with On state
         if (api.Side == EnumAppSide.Client)
         {
             RegisterGameTickListener(OnClientAnimationTick, 100);
             RegisterGameTickListener(OnClientGuiUpdateTick, 50);
-        }
         
+            // Initialize renderer - ADD THIS BLOCK
+            renderer = new SpinningWheelContentsRenderer(api as ICoreClientAPI, Pos);
+            (api as ICoreClientAPI).Event.RegisterRenderer(renderer, EnumRenderStage.Opaque, "spinningwheel");
+            UpdateRenderer();
+        }
+    
         // Get collision box height
         Cuboidf[] collboxes = Block.GetCollisionBoxes(api.World.BlockAccessor, Pos);
         if (collboxes != null && collboxes.Length > 0)
         {
             y2 = collboxes[0].Y2;
         }
-        
+    
         // Get the facing direction from block code
         facing = BlockFacing.FromCode(Block.LastCodePart());
-        
+    
         // Remount player if they were sitting when the world was saved/reloaded
         if (MountedBy == null && (mountedByEntityId != 0 || mountedByPlayerUid != null))
         {
@@ -487,22 +494,25 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         if (Api is ICoreClientAPI)
         {
-            clientDialog?.Update(inputSpinTime, currentMaxSpinTime); // Use currentMaxSpinTime
+            clientDialog?.Update(inputSpinTime, currentMaxSpinTime);
         }
-
+        
+        UpdateRenderer();
+        shouldRedraw = true; 
+        
         // Check animation state when slots change (server-side)
         if (Api is ICoreServerAPI)
         {
             bool canSpin = CanSpin();
             bool isPlayerMounted = MountedBy != null;
             bool shouldBeSpinning = canSpin && isPlayerMounted;
-        
+    
             // Update max spin time whenever input slot changes
             if (slotid == 0 && !InputSlot.Empty)
             {
                 currentMaxSpinTime = maxSpinTime();
             }
-        
+    
             if (shouldBeSpinning && !On)
             {
                 Activate();
@@ -518,7 +528,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             if (InputSlot.Empty)
             {
                 inputSpinTime = 0.0f;
-                currentMaxSpinTime = 4f; // Reset to default
+                currentMaxSpinTime = 4f;
             }
             MarkDirty();
 
@@ -557,7 +567,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     private void OnClientAnimationTick(float dt)
     {
         if (animUtil?.animator == null) return;
-    
+
         // Start animation if On but not running
         if (On && !clientAnimationRunning)
         {
@@ -567,26 +577,32 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 AnimationSpeed = 1f
             });
             clientAnimationRunning = true;
-        
+    
             // Start sound when animation starts
             ToggleAmbientSound(true);
             clientSoundRunning = true;
-        
+    
             // Update player animation to spinning
             RefreshSeatAnimation();
+        
+            // Show the distaff fibers
+            UpdateRenderer();
         }
         // Stop animation if Off but running
         else if (!On && clientAnimationRunning)
         {
             animUtil.StopAnimation("wheelspin");
             clientAnimationRunning = false;
-        
+    
             // Stop sound when animation stops
             ToggleAmbientSound(false);
             clientSoundRunning = false;
-        
+    
             // Update player animation back to idle
             RefreshSeatAnimation();
+        
+            // Hide the distaff fibers
+            UpdateRenderer();
         }
     }
     
@@ -663,16 +679,22 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         mountedByEntityId = tree.GetLong("mountedByEntityId");
         mountedByPlayerUid = tree.GetString("mountedByPlayerUid");
         inputSpinTime = tree.GetFloat("inputSpinTime");
-        currentMaxSpinTime = tree.GetFloat("currentMaxSpinTime", 4f); // Add this
+        currentMaxSpinTime = tree.GetFloat("currentMaxSpinTime", 4f);
         On = tree.GetBool("On");
     
         if (Api != null)
         {
             Inventory.AfterBlocksLoaded(Api.World);
         }
-        if (Api?.Side == EnumAppSide.Client && clientDialog != null)
+    
+        if (Api?.Side == EnumAppSide.Client)
         {
-            clientDialog.Update(inputSpinTime, currentMaxSpinTime); // Use currentMaxSpinTime
+            UpdateRenderer();
+            
+            if (clientDialog != null)
+            {
+                clientDialog.Update(inputSpinTime, currentMaxSpinTime);
+            }
         }
     }
 
@@ -682,7 +704,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         tree.SetLong("mountedByEntityId", mountedByEntityId);
         tree.SetString("mountedByPlayerUid", mountedByPlayerUid);
         tree.SetFloat("inputSpinTime", inputSpinTime);
-        tree.SetFloat("currentMaxSpinTime", currentMaxSpinTime); // Add this
+        tree.SetFloat("currentMaxSpinTime", currentMaxSpinTime);
         tree.SetBool("On", On);
     }
     
@@ -700,7 +722,10 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override void OnBlockRemoved()
     {
         ToggleAmbientSound(false);
-        
+    
+        renderer?.Dispose();
+        renderer = null;
+    
         if (clientDialog != null)
         {
             clientDialog.TryClose();
@@ -709,21 +734,31 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         }
         base.OnBlockRemoved();
     }
-    
+
     public override void OnBlockBroken(IPlayer byPlayer = null)
     {
         base.OnBlockBroken(byPlayer);
-        
+    
         ToggleAmbientSound(false);
+    
+        renderer?.Dispose();
+        renderer = null; 
+    
         if (clientDialog != null)
         {
             clientDialog.TryClose();
             clientDialog?.Dispose();
             clientDialog = null;
         }
-        
+    
         blockBroken = true;
         MountedBy?.TryUnmount();
+    }
+    
+    public override void OnBlockUnloaded()
+    {
+        base.OnBlockUnloaded();
+        renderer?.Dispose();
     }
     
     public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
@@ -762,6 +797,48 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         return new Vec3f(0, yRotation, 0);
     }
     
+    void UpdateRenderer()
+    {
+        if (renderer == null) return;
+
+        // Show hpdistafffibers whenever there's a valid spinnable item in the input slot
+        if (InputSlot?.Itemstack != null && InputSlot.Itemstack.ItemAttributes?.KeyExists("spinningProps") == true)
+        {
+            // Load the hpdistafffibers item
+            Item distaffItem = Api.World.GetItem(new AssetLocation("spinningwheel:hpdistafffibers"));
+            if (distaffItem != null)
+            {
+                ItemStack distaffStack = new ItemStack(distaffItem);
+                InSpinningWheelProps props = GetRenderProps(distaffStack);
+            
+                if (props != null)
+                {
+                    renderer.SetContents(distaffStack, props.Transform);
+                }
+                else
+                {
+                    // Use default transform if no props defined
+                    renderer.SetContents(distaffStack, null);
+                }
+            }
+        }
+        else
+        {
+            // Hide the distaff when no valid item in input
+            renderer.SetContents(null, null);
+        }
+    }
+
+    InSpinningWheelProps GetRenderProps(ItemStack contentStack)
+    {
+        if (contentStack?.ItemAttributes?.KeyExists("inSpinningWheelProps") == true)
+        {
+            InSpinningWheelProps props = contentStack.ItemAttributes["inSpinningWheelProps"].AsObject<InSpinningWheelProps>();
+            props.Transform.EnsureDefaultValues();
+            return props;
+        }
+        return null;
+    }
     #endregion
     
     #region Collection Mappings

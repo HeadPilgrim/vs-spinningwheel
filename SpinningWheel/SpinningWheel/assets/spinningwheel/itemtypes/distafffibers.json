@@ -13,22 +13,22 @@
   "attributes": {
     "inSpinningWheelProps": {
       "transform": {
-        "scale": 1,
-        "origin": {
-          "x": 0.5,
-          "y": 0.0625,
-          "z": 0.5
-        },
         "translation": {
           "x": 0,
-          "y": 0.1875,
+          "y": 0,
           "z": 0
         },
         "rotation": {
           "x": 0,
-          "y": 53,
-          "z": -90
-        }
+          "y": 0,
+          "z": 0
+        },
+        "origin": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        },
+        "scale": 1
       }
     }
   }
