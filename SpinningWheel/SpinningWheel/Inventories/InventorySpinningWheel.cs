@@ -62,8 +62,11 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
 
     public override float GetSuitability(ItemSlot sourceSlot, ItemSlot targetSlot, bool isMerge)
     {
-        if (targetSlot == slots[0] && sourceSlot.Itemstack.ItemAttributes.KeyExists("spinningProps"))
+        if (targetSlot == slots[0] && 
+            sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("spinningProps") == true)
+        {
             return 4f;
+        }
 
         return base.GetSuitability(sourceSlot, targetSlot, isMerge);
     }
@@ -71,5 +74,27 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
     public override ItemSlot GetAutoPushIntoSlot(BlockFacing atBlockFace, ItemSlot fromSlot)
     {
         return slots[0];
+    }
+    
+    public override bool CanContain(ItemSlot sinkSlot, ItemSlot sourceSlot)
+    {
+        // Output slot (slot 1) can only be taken from, not put into
+        if (sinkSlot == slots[1]) return false;
+    
+        // Input slot (slot 0) only accepts spinnable items
+        if (sinkSlot == slots[0])
+        {
+            return sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("spinningProps") == true;
+        }
+    
+        return base.CanContain(sinkSlot, sourceSlot);
+    }
+    
+    public override void DidModifyItemSlot(ItemSlot slot, ItemStack extractedStack = null)
+    {
+        base.DidModifyItemSlot(slot, extractedStack);
+    
+        // Force mark dirty when slot changes
+        Api?.World?.BlockAccessor?.GetBlockEntity(Pos)?.MarkDirty(true);
     }
 }

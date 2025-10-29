@@ -811,15 +811,31 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 ItemStack distaffStack = new ItemStack(distaffItem);
                 InSpinningWheelProps props = GetRenderProps(distaffStack);
             
-                if (props != null)
+                ModelTransform transform = props?.Transform ?? new ModelTransform();
+                transform.EnsureDefaultValues();
+            
+                // Apply rotation based on spinning wheel's facing direction
+                if (facing == null)
                 {
-                    renderer.SetContents(distaffStack, props.Transform);
+                    facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
                 }
-                else
-                {
-                    // Use default transform if no props defined
-                    renderer.SetContents(distaffStack, null);
-                }
+            
+                // Rotate the item to match the spinning wheel's orientation
+                // North = 0°, East = 270°, South = 180°, West = 90°
+                float yRotation = 0f;
+                if (facing == BlockFacing.NORTH)
+                    yRotation = 0f;
+                else if (facing == BlockFacing.EAST)
+                    yRotation = 270f;
+                else if (facing == BlockFacing.SOUTH)
+                    yRotation = 180f;
+                else if (facing == BlockFacing.WEST)
+                    yRotation = 90f;
+            
+                // Add the base rotation from JSON to the facing rotation
+                transform.Rotation.Y += yRotation;
+            
+                renderer.SetContents(distaffStack, transform);
             }
         }
         else

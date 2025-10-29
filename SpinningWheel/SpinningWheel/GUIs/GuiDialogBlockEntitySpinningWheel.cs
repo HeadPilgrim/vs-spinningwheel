@@ -123,8 +123,7 @@ namespace SpinningWheel.GUIs
 
         private void OnBgDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
-            // Slots are at Y=30, and slot size is typically around 50 pixels
-            // So we want the bar centered vertically with the slots
+            
             double slotTop = 30;
             double slotSize = 50; // Standard slot height
             double barHeight = 20;
