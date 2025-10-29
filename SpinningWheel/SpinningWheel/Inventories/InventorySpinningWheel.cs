@@ -5,6 +5,8 @@ using Vintagestory.API.MathTools;
 
 namespace SpinningWheel.Inventories;
 
+#nullable disable
+
 public class InventorySpinningWheel: InventoryBase, ISlotProvider
 {
     ItemSlot[] slots;
@@ -107,6 +109,17 @@ public class ItemSlotSpinningInput : ItemSlotSurvival
         }
         return false;
     }
+    
+    public override int GetRemainingSlotSpace(ItemStack forItemstack)
+    {
+        // Reject items without spinningProps
+        if (forItemstack?.ItemAttributes?.KeyExists("spinningProps") != true)
+        {
+            return 0; // No space for non-spinnable items
+        }
+        
+        return base.GetRemainingSlotSpace(forItemstack);
+    }
 }
 
 // Custom slot for output (read-only, can only take out)
@@ -124,5 +137,10 @@ public class ItemSlotOutput : ItemSlotSurvival
     public override bool CanTakeFrom(ItemSlot sourceSlot, EnumMergePriority priority = EnumMergePriority.AutoMerge)
     {
         return false; // Can't put anything into output slot
+    }
+    
+    public override int GetRemainingSlotSpace(ItemStack forItemstack)
+    {
+        return 0; // Output slot never accepts items
     }
 }
