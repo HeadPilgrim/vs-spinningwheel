@@ -10,7 +10,6 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
     ItemSlot[] slots;
     public ItemSlot[] Slots { get { return slots; } }
 
-
     public InventorySpinningWheel(string inventoryID, ICoreAPI api) : base(inventoryID, api)
     {
         // slot 0 = input
@@ -22,7 +21,6 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
     {
         slots = GenEmptySlots(2);
     }
-
 
     public override int Count
     {
@@ -44,7 +42,6 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
         }
     }
 
-
     public override void FromTreeAttributes(ITreeAttribute tree)
     {
         slots = SlotsFromTreeAttributes(tree, slots);
@@ -57,7 +54,16 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
 
     protected override ItemSlot NewSlot(int i)
     {
-        return new ItemSlotSurvival(this);
+        // Slot 0 = input (only accepts spinnable items)
+        // Slot 1 = output (read-only)
+        if (i == 0)
+        {
+            return new ItemSlotSpinningInput(this);
+        }
+        else
+        {
+            return new ItemSlotOutput(this);
+        }
     }
 
     public override float GetSuitability(ItemSlot sourceSlot, ItemSlot targetSlot, bool isMerge)
@@ -75,26 +81,48 @@ public class InventorySpinningWheel: InventoryBase, ISlotProvider
     {
         return slots[0];
     }
-    
-    public override bool CanContain(ItemSlot sinkSlot, ItemSlot sourceSlot)
+}
+
+// Custom slot for input that only accepts spinnable items
+public class ItemSlotSpinningInput : ItemSlotSurvival
+{
+    public ItemSlotSpinningInput(InventoryBase inventory) : base(inventory)
     {
-        // Output slot (slot 1) can only be taken from, not put into
-        if (sinkSlot == slots[1]) return false;
-    
-        // Input slot (slot 0) only accepts spinnable items
-        if (sinkSlot == slots[0])
-        {
-            return sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("spinningProps") == true;
-        }
-    
-        return base.CanContain(sinkSlot, sourceSlot);
     }
-    
-    public override void DidModifyItemSlot(ItemSlot slot, ItemStack extractedStack = null)
+
+    public override bool CanHold(ItemSlot sourceSlot)
     {
-        base.DidModifyItemSlot(slot, extractedStack);
-    
-        // Force mark dirty when slot changes
-        Api?.World?.BlockAccessor?.GetBlockEntity(Pos)?.MarkDirty(true);
+        if (sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("spinningProps") == true)
+        {
+            return base.CanHold(sourceSlot);
+        }
+        return false;
+    }
+
+    public override bool CanTakeFrom(ItemSlot sourceSlot, EnumMergePriority priority = EnumMergePriority.AutoMerge)
+    {
+        if (sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("spinningProps") == true)
+        {
+            return base.CanTakeFrom(sourceSlot, priority);
+        }
+        return false;
+    }
+}
+
+// Custom slot for output (read-only, can only take out)
+public class ItemSlotOutput : ItemSlotSurvival
+{
+    public ItemSlotOutput(InventoryBase inventory) : base(inventory)
+    {
+    }
+
+    public override bool CanHold(ItemSlot sourceSlot)
+    {
+        return false; // Can't put anything into output slot
+    }
+
+    public override bool CanTakeFrom(ItemSlot sourceSlot, EnumMergePriority priority = EnumMergePriority.AutoMerge)
+    {
+        return false; // Can't put anything into output slot
     }
 }
