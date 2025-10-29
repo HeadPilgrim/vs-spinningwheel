@@ -122,7 +122,10 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     
     public override string InventoryClassName => "spinningwheel";
     
-    public override InventoryBase Inventory => inventory;
+    public override InventoryBase Inventory
+    {
+        get { return inventory; }
+    }
 
     public virtual string DialogTitle => Lang.Get("spinningwheel");
     
@@ -200,6 +203,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override void Initialize(ICoreAPI api)
     {
         base.Initialize(api);
+        
+        inventory.LateInitialize("spinningwheel-" + Pos.X + "/" + Pos.Y + "/" + Pos.Z, api);
     
         // Initialize controls
         controls.OnAction = onControls;
@@ -354,13 +359,17 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             if (clientDialog == null || !clientDialog.IsOpened())
             {
-                clientDialog = new GuiDialogBlockEntitySpinningWheel(
-                    DialogTitle, 
-                    Inventory, 
-                    Pos, 
-                    Api as ICoreClientAPI
-                );
-                clientDialog.TryOpen();
+                toggleInventoryDialogClient(player, () =>
+                {
+                    clientDialog = new GuiDialogBlockEntitySpinningWheel(
+                        DialogTitle,
+                        Inventory,
+                        Pos,
+                        Api as ICoreClientAPI
+                    );
+                    //clientDialog.TryOpen();
+                    return clientDialog;
+                });
             }
         }
     }
@@ -719,6 +728,24 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     #endregion
     
     #region Block Events
+    
+    public override void OnReceivedClientPacket(IPlayer player, int packetid, byte[] data)
+    {
+        base.OnReceivedClientPacket(player, packetid, data);
+    }
+
+    public override void OnReceivedServerPacket(int packetid, byte[] data)
+    {
+        base.OnReceivedServerPacket(packetid, data);
+
+        if (packetid == (int)EnumBlockEntityPacketId.Close)
+        {
+            (Api.World as IClientWorldAccessor).Player.InventoryManager.CloseInventory(Inventory);
+            invDialog?.TryClose();
+            invDialog?.Dispose();
+            invDialog = null;
+        }
+    }
     public override void OnBlockRemoved()
     {
         ToggleAmbientSound(false);
