@@ -1,0 +1,35 @@
+﻿{
+  "code": "hpdistafffibers",
+  "shape": {
+    "base": "item/distafffibers"
+  },
+  "textures": {
+    "fibers": {"base": "spinningwheel:item/resource/fibers"}, 
+    "fibers_bottom_var1.png": {"base": "spinningwheel:item/resource/fibers_bottom_var1.png"},
+    "fibers_bottom_var2.png": {"base": "spinningwheel:item/resource/fibers_bottom_var2.png"},
+    "fibers_bottom_var3.png": {"base": "spinningwheel:item/resource/fibers_bottom_var3.png"},
+    "rope": {"base": "spinningwheel:item/resource/rope"}
+  },
+  "attributes": {
+    "inSpinningWheelProps": {
+      "transform": {
+        "scale": 1,
+        "origin": {
+          "x": 0.5,
+          "y": 0.0625,
+          "z": 0.5
+        },
+        "translation": {
+          "x": 0,
+          "y": 0.1875,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 53,
+          "z": -90
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,8 @@ using Vintagestory.GameContent;
 
 namespace SpinningWheel.BlockEntities;
 
+#nullable disable
+
 public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountableSeat, IMountable
 {
     internal InventorySpinningWheel inventory;
@@ -196,9 +198,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public override void Initialize(ICoreAPI api)
     {
         base.Initialize(api);
-
-
-
+        
         // Initialize controls
         controls.OnAction = onControls;
 

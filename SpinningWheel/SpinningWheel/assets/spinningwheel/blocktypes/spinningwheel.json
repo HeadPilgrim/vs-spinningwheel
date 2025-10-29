@@ -129,19 +129,19 @@
   "drawtype": "json",
   "shapeByType": {
     "*-north": {
-      "base": "spinningwheel",
+      "base": "block/spinningwheel",
       "rotateY": 0
     },
     "*-east": {
-      "base": "spinningwheel",
+      "base": "block/spinningwheel",
       "rotateY": 270
     },
     "*-west": {
-      "base": "spinningwheel",
+      "base": "block/spinningwheel",
       "rotateY": 90
     },
     "*-south": {
-      "base": "spinningwheel",
+      "base": "block/spinningwheel",
       "rotateY": 180
     }
   },

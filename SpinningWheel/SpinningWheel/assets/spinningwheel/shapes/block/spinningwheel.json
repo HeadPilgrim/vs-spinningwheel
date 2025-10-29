@@ -1,6 +1,6 @@
 {
 	"editor": {
-		"collapsedPaths": "Root/root/LowerTorso/UpperFootL,Root/MoA,Root/root/LowerTorso/UpperFootR,Root/Drive_Wheel,Root/treadle,Root/Distaff,Root/chair/cloth,Root/root/LowerTorso/UpperTorso,Root/Axle2,Root/chair/Cube2,Root/Drive_Wheel_Threads,Root/chair/Cube3,Root/chair/leg1,Root/chair/Cube4,Root/eyesroot,Root/chair/leg5,Root/chair/Cube5,Root/Bench_Main_Group,Root/chair/leg4,Root/chair/leg3",
+		"collapsedPaths": "Root/MoA/MoA_Support_Group,Root/chair,Root/chair/Cube2,Root/chair/Cube3,Root/chair/leg1,Root/MoA/MoA_adjust_knob1,Root/MoA/MoA_adjust_knob2,Root/chair/Cube4,Root/chair/leg5,Root/chair/Cube5,Root/chair/leg4,Root/chair/leg3,Root/Distaff/Distaff_arm/Distaff_base11,Root/Distaff/Distaff_arm/Distaff_base13,Root/Distaff/Distaff_arm/Distaff_base12,Root/Drive_Wheel,Root/MoA/MoA_platform,Root/treadle,Root/chair/cloth,Root/Drive_Wheel_Threads,Root/eyesroot,Root/Distaff/Distaff_arm/Distaff_base14,Root/MoA/MoA_strutS1,Root/MoA/MoA_strutS2,Root/MoA/MoA_Dowel,Root/root/LowerTorso/UpperTorso,Root/Distaff/Distaff_base4,Root/Distaff/Distaff_base5,Root/Distaff/Distaff_base2,Root/Distaff/Distaff_base3,Root/Distaff/Distaff_base1,Root/root/LowerTorso/UpperFootL,Root/Distaff/Distaff_arm/Distaff_Cage_pole,Root/Distaff/Distaff_base10,Root/Distaff/Distaff_base8,Root/Distaff/Distaff_base9,Root/root/LowerTorso/UpperFootR,Root/MoA/MoA_strutN2,Root/Distaff/Distaff_base6,Root/MoA/MoA_strutN1,Root/Distaff/Distaff_base7,Root/MoA/MoA_Main,Root/Axle2,Root/Bench_Main_Group",
 		"allAngles": true,
 		"entityTextureMode": false
 	},
@@ -10504,10 +10504,10 @@
 				},
 				{
 					"name": "Distaff_arm",
-					"from": [ 0.9247, 9.995, 2.9547 ],
-					"to": [ 0.9247, 9.995, 2.9547 ],
-					"rotationOrigin": [ 0.9247, 9.995, 2.9547 ],
-					"rotationY": 15.0,
+					"from": [ 0.42, 9.995, 3.15 ],
+					"to": [ 0.42, 9.995, 9.15 ],
+					"rotationOrigin": [ 0.42, 9.99, -0.85 ],
+					"rotationY": -19.0,
 					"faces": {
 					},
 					"children": [
@@ -13260,6 +13260,30 @@
 											]
 										}
 									]
+								}
+							]
+						},
+						{
+							"name": "Distaff_base21",
+							"from": [ 8.4, -10.1, 5.65 ],
+							"to": [ 8.4, -10.1, 5.65 ],
+							"rotationOrigin": [ 8.4, -10.1, 5.65 ],
+							"rotationX": 90.0,
+							"faces": {
+							},
+							"children": [
+								{
+									"name": "Distaff_base22",
+									"from": [ -8.9, -6.2, -10.6 ],
+									"to": [ -7.9, -6.1, -9.6 ],
+									"faces": {
+										"north": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.0, 0.1 ], "autoUv": false },
+										"east": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.0, 0.1 ], "autoUv": false },
+										"south": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.0, 0.1 ], "autoUv": false },
+										"west": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.0, 0.1 ], "autoUv": false },
+										"up": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "autoUv": false },
+										"down": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "autoUv": false }
+									}
 								}
 							]
 						}
