@@ -91,7 +91,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             return new Vec3f(0, 1.5f, 0);
         }
     }
-    // Make SuggestedAnimation dynamic based on On state:
+    
+    // SuggestedAnimation dynamic based on On state:
     public AnimationMetaData SuggestedAnimation => On ? spinningAnimation : idleAnimation;
     public EntityControls Controls => controls;
     public IMountable MountSupplier => this;
@@ -663,7 +664,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             if (Api.Side == EnumAppSide.Client)
             {
-                (Api as ICoreClientAPI).TriggerIngameError(this, "occupied", Lang.Get("spinning-wheel-occupied"));
+                (Api as ICoreClientAPI).TriggerIngameError(this, "occupied", Lang.Get("spinningwheel:spinning-wheel-occupied"));
             }
             return false;
         }

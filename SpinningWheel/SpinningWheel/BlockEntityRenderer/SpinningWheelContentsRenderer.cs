@@ -133,7 +133,7 @@ namespace SpinningWheel.BLockEntityRenderer
 
             Vec4f lightrgbs = api.World.BlockAccessor.GetLightRGBs(pos.X, pos.Y, pos.Z);
             prog.RgbaLightIn = lightrgbs;
-            prog.ExtraGlow = 15;
+            prog.ExtraGlow = 86;
             
             prog.ModelMatrix = ModelMat
                 .Identity()

@@ -64,7 +64,6 @@
 
     <ItemGroup>
       <Folder Include="assets\spinningwheel\sounds\" />
-      <Folder Include="assets\spinningwheel\textures\icons\" />
     </ItemGroup>
 
 </Project>

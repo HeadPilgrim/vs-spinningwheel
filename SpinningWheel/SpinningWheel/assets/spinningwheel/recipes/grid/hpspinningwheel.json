@@ -1,0 +1,15 @@
+﻿{
+  "ingredientPattern": " W , M , F ",
+  "ingredients": {
+    "W": { "type": "item", "code": "spinningwheel:hpspinningwheelwheelitem" },
+    "M": { "type": "item", "code": "spinningwheel:hpmoaitem" },
+    "F": { "type": "item", "code": "spinningwheel:hpspinningwheelframe" }
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "block",
+    "code": "spinningwheel:hpspinningwheel-north",
+    "quantity": 1
+  }
+}

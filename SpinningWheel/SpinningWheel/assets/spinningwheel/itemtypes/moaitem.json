@@ -1,0 +1,22 @@
+﻿{
+  "code": "hpmoaitem",
+  "shape": {
+    "base": "item/moaitem"
+  },
+  "creativeinventory": { "general":  [ "*" ]},
+  "textures": {
+    "linen": {"base": "game:block/linen"},
+    "oak": {"base": "game:block/wood/debarked/oak"},
+    "oak2": {"base": "game:block/wood/crudechair/oak"}
+  },
+  "guiTransform": {
+    "translation": { "x": 48, "y": 38, "z": 0 },
+    "rotation": { "x": 0, "y": -51, "z": 180 },
+    "scale": 4.22
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.6, "y": -0.8, "z": -0.4 },
+    "rotation": { "x": 0, "y": -180, "z": 58 },
+    "scale": 0.94
+  }
+}

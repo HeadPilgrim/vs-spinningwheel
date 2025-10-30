@@ -1,5 +1,8 @@
 {
     "block-hpspinningwheel-*": "Spinning Wheel",
-    "blockhelp-spinningwheel-use": "Sit and spin fiber!",
-    "spinning-wheel-occupied": "Someone is already using that!"
+    "spinningwheel:blockhelp-spinningwheel-use": "Sit and spin fiber!",
+    "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
+    "item-hpmoaitem": "Mother of All",
+    "item-hpspinningwheelframe": "Spinning Wheel Frame",
+    "item-hpspinningwheelwheelitem": "Drive Wheel"
 }

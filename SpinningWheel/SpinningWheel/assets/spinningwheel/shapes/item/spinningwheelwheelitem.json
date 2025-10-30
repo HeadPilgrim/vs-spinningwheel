@@ -1,0 +1,3150 @@
+{
+	"editor": {
+		"allAngles": true,
+		"collapsedPaths": "Root/MoA/MoA_Support_Group,Root/chair,Root/chair/Cube2,Root/chair/Cube3,Root/chair/leg1,Root/MoA/MoA_adjust_knob1,Root/MoA/MoA_adjust_knob2,Root/chair/Cube4,Root/chair/leg5,Root/chair/Cube5,Root/chair/leg4,Root/chair/leg3,Root/Distaff/Distaff_arm/Distaff_base11,Root/Distaff/Distaff_arm/Distaff_base13,Root/Distaff/Distaff_arm/Distaff_base12,Root/Drive_Wheel,Root/MoA/MoA_platform,Root/treadle,Root/chair/cloth,Root/Drive_Wheel_Threads,Root/eyesroot,Root/Distaff/Distaff_arm/Distaff_base14,Root/MoA/MoA_strutS1,Root/MoA/MoA_strutS2,Root/MoA/MoA_Dowel,Root/root/LowerTorso/UpperTorso,Root/Distaff/Distaff_base4,Root/Distaff/Distaff_base5,Root/Distaff/Distaff_base2,Root/Distaff/Distaff_base3,Root/Distaff/Distaff_base1,Root/root/LowerTorso/UpperFootL,Root/Distaff/Distaff_arm/Distaff_Cage_pole,Root/Distaff/Distaff_base10,Root/Distaff/Distaff_base8,Root/Distaff/Distaff_base9,Root/root/LowerTorso/UpperFootR,Root/MoA/MoA_strutN2,Root/Distaff/Distaff_base6,Root/MoA/MoA_strutN1,Root/Distaff/Distaff_base7,Root/MoA/MoA_Main,Root/Axle2,Root/Bench_Main_Group"
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+		"oak": [16, 16]
+	},
+	"textures": {
+		"oak": "block/wood/debarked/oak"
+	},
+	"elements": [
+		{
+			"name": "Drive_Wheel",
+			"from": [23.2351, 14.205, 5.6802],
+			"to": [23.2351, 14.205, 5.6802],
+			"rotationOrigin": [23.2351, 14.205, 5.6802],
+			"children": [
+				{
+					"name": "WheelFrame2",
+					"from": [0, 0, 0],
+					"to": [0, 0, 0],
+					"rotationOrigin": [0, 0, 0],
+					"children": [
+						{
+							"name": "wheelframe12",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagon12",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon2",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon2",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon2",
+															"from": [-1.602, -8.058, -1.0735],
+															"to": [1.6021, -7.5227, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe22",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagon22",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon3",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon3",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon3",
+															"from": [-1.603, -8.059, -1.0745],
+															"to": [1.6031, -7.5217, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe32",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"children": [
+								{
+									"name": "hexadecagon32",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon4",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon4",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon4",
+															"from": [-1.602, -8.058, -1.0735],
+															"to": [1.6021, -7.5227, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe42",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagon42",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon5",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon5",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon5",
+															"from": [-1.603, -8.059, -1.0745],
+															"to": [1.6031, -7.5217, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe52",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagon52",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon6",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon6",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon6",
+															"from": [-1.602, -8.058, -1.0735],
+															"to": [1.6021, -7.5227, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe62",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagon62",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon7",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon7",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon7",
+															"from": [-1.602, 7.5227, -1.0735],
+															"to": [1.6021, 8.058, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe72",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagon72",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon8",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon8",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon8",
+															"from": [-1.603, 7.5217, -1.0745],
+															"to": [1.6031, 8.059, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe82",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"children": [
+								{
+									"name": "hexadecagon82",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon9",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon9",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon9",
+															"from": [-1.602, 7.5227, -1.0735],
+															"to": [1.6021, 8.058, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe92",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagon92",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon10",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon10",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon10",
+															"from": [-1.603, 7.5217, -1.0745],
+															"to": [1.6031, 8.059, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe102",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagon102",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon11",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon11",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon11",
+															"from": [-1.602, 7.5227, -1.0735],
+															"to": [1.6021, 8.058, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe112",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagon112",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon12",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon12",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon12",
+															"from": [-8.059, -1.603, -1.0745],
+															"to": [-7.5217, 1.6031, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe122",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"children": [
+								{
+									"name": "hexadecagon122",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon13",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon13",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon13",
+															"from": [-8.058, -1.602, -1.0735],
+															"to": [-7.5227, 1.6021, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe132",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagon132",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon14",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon14",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon14",
+															"from": [-8.059, -1.603, -1.0745],
+															"to": [-7.5217, 1.6031, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe142",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagon142",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon15",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon15",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon15",
+															"from": [7.5217, -1.603, -1.0745],
+															"to": [8.059, 1.6031, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe152",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"children": [
+								{
+									"name": "hexadecagon152",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon16",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon16",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon16",
+															"from": [7.5227, -1.602, -1.0735],
+															"to": [8.058, 1.6021, 0.5363],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframe162",
+							"from": [0, 0, 0.2686],
+							"to": [0, 0, 0.2686],
+							"rotationOrigin": [0, 0, 0.2686],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagon162",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagon17",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagon17",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagon17",
+															"from": [7.5217, -1.603, -1.0745],
+															"to": [8.059, 1.6031, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "WheelFrameEdge12",
+					"from": [0, 0, 0.6716],
+					"to": [0, 0, 0.6716],
+					"rotationOrigin": [0, 0, 0.6716],
+					"children": [
+						{
+							"name": "wheelframeedge13",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagont12",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont2",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont2",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont2",
+															"from": [-1.6313, -8.1948, -0.2702],
+															"to": [1.6313, -7.6545, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge22",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagont22",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont3",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont3",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont3",
+															"from": [-1.6303, -8.1938, -0.2692],
+															"to": [1.6303, -7.6555, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge32",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagont2",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont",
+															"from": [-1.6313, -8.1948, -0.2702],
+															"to": [1.6313, -7.6545, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge42",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagont42",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont5",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont5",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont5",
+															"from": [-1.6303, -8.1938, -0.2692],
+															"to": [1.6303, -7.6555, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge52",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagont52",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont6",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont6",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont6",
+															"from": [-1.6313, -8.1948, -0.2702],
+															"to": [1.6313, -7.6545, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge62",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagont62",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont7",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont7",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont7",
+															"from": [-1.6313, 7.6545, -0.2702],
+															"to": [1.6313, 8.1948, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge72",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagont72",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont8",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont8",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont8",
+															"from": [-1.6303, 7.6555, -0.2692],
+															"to": [1.6303, 8.1938, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge82",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagont82",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont9",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont9",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont9",
+															"from": [-1.6313, 7.6545, -0.2702],
+															"to": [1.6313, 8.1948, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge92",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagont92",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont10",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont10",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont10",
+															"from": [-1.6303, 7.6555, -0.2692],
+															"to": [1.6303, 8.1938, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge102",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagont102",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont11",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont11",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont11",
+															"from": [-1.6313, 7.6545, -0.2702],
+															"to": [1.6313, 8.1948, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge112",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagont112",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont12",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont12",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont12",
+															"from": [-8.1938, -1.6303, -0.2692],
+															"to": [-7.6555, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge122",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagont122",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont13",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont13",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont13",
+															"from": [-8.1948, -1.6313, -0.2702],
+															"to": [-7.6545, 1.6313, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge132",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagont132",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont14",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont14",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont14",
+															"from": [-8.1938, -1.6303, -0.2692],
+															"to": [-7.6555, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge142",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagont142",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont15",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont15",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont15",
+															"from": [7.6555, -1.6303, -0.2692],
+															"to": [8.1938, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge152",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagont152",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont16",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont16",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont16",
+															"from": [7.6545, -1.6313, -0.2702],
+															"to": [8.1948, 1.6313, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge162",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagont162",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagont17",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagont17",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagont17",
+															"from": [7.6555, -1.6303, -0.2692],
+															"to": [8.1938, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "WheelFrameEdge23",
+					"from": [0, 0, -0.6716],
+					"to": [0, 0, -0.6716],
+					"rotationOrigin": [0, 0, -0.6716],
+					"children": [
+						{
+							"name": "wheelframeedge172",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagons12",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons2",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons2",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons2",
+															"from": [-1.6313, -8.1948, -0.2702],
+															"to": [1.6313, -7.6545, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge182",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagons22",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons3",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons3",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons3",
+															"from": [-1.6303, -8.1938, -0.2692],
+															"to": [1.6303, -7.6555, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge192",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagons32",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons4",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons4",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons4",
+															"from": [-1.6313, -8.1948, -0.2702],
+															"to": [1.6313, -7.6545, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge202",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagons42",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons5",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons5",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons5",
+															"from": [-1.6303, -8.1938, -0.2692],
+															"to": [1.6303, -7.6555, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge212",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagons52",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons6",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons6",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons6",
+															"from": [-1.6313, -8.1948, -0.2702],
+															"to": [1.6313, -7.6545, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge222",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagons62",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons7",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons7",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons7",
+															"from": [-1.6313, 7.6545, -0.2702],
+															"to": [1.6313, 8.1948, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge232",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagons72",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons8",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons8",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons8",
+															"from": [-1.6303, 7.6555, -0.2692],
+															"to": [1.6303, 8.1938, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge242",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagons82",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons9",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons9",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons9",
+															"from": [-1.6313, 7.6545, -0.2702],
+															"to": [1.6313, 8.1948, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge252",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagons92",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons10",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons10",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons10",
+															"from": [-1.6303, 7.6555, -0.2692],
+															"to": [1.6303, 8.1938, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge262",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagons102",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons11",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons11",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons11",
+															"from": [-1.6313, 7.6545, -0.2702],
+															"to": [1.6313, 8.1948, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge272",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagons112",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons12",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons12",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons12",
+															"from": [-8.1938, -1.6303, -0.2692],
+															"to": [-7.6555, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge282",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagons122",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons13",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons13",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons13",
+															"from": [-8.1948, -1.6313, -0.2702],
+															"to": [-7.6545, 1.6313, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge292",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagons132",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons14",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons14",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons14",
+															"from": [-8.1938, -1.6303, -0.2692],
+															"to": [-7.6555, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge302",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagons142",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons15",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons15",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons15",
+															"from": [7.6555, -1.6303, -0.2692],
+															"to": [8.1938, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge312",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"children": [
+								{
+									"name": "hexadecagons152",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons16",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons16",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons16",
+															"from": [7.6545, -1.6313, -0.2702],
+															"to": [8.1948, 1.6313, 0.0015],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelframeedge322",
+							"from": [0, 0, 0.1343],
+							"to": [0, 0, 0.1343],
+							"rotationOrigin": [0, 0, 0.1343],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagons162",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagons17",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagons17",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagons17",
+															"from": [7.6555, -1.6303, -0.2692],
+															"to": [8.1938, 1.6303, 0.0005],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "WheelCenter2",
+					"from": [0, 0, 0],
+					"to": [0, 0, 0],
+					"rotationOrigin": [0, 0, 0],
+					"children": [
+						{
+							"name": "wheelcenter12",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": -45,
+							"children": [
+								{
+									"name": "hexadecagona12",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona2",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona2",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona2",
+															"from": [-0.2666, -1.3426, -0.5367],
+															"to": [0.2666, 1.3426, 0.5367],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter22",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagona22",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona3",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona3",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona3",
+															"from": [-0.2671, -1.3432, -0.5373],
+															"to": [0.2672, 1.3432, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter32",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"children": [
+								{
+									"name": "hexadecagona32",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona4",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona4",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona4",
+															"from": [-0.2677, -1.3437, -0.5378],
+															"to": [0.2677, 1.3437, 0.5378],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter42",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagona42",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona5",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona5",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona5",
+															"from": [-0.2671, -1.3432, -0.5373],
+															"to": [0.2672, 1.3432, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter52",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": 45,
+							"children": [
+								{
+									"name": "hexadecagona52",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona6",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona6",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona6",
+															"from": [-0.2682, -1.3442, -0.5383],
+															"to": [0.2682, 1.3442, 0.5383],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter62",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": -22.5,
+							"children": [
+								{
+									"name": "hexadecagona62",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona7",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona7",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona7",
+															"from": [-1.3448, -0.2688, -0.5389],
+															"to": [1.3448, 0.2688, 0.5389],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter72",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"children": [
+								{
+									"name": "hexadecagona72",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona8",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona8",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona8",
+															"from": [-1.3432, -0.2671, -0.5373],
+															"to": [1.3432, 0.2672, 0.5373],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "wheelcenter82",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": 22.5,
+							"children": [
+								{
+									"name": "hexadecagona82",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "hexadecagona9",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "hexadecagona9",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "hexadecagona9",
+															"from": [-1.3421, -0.2661, -0.5362],
+															"to": [1.3421, 0.2661, 0.5362],
+															"rotationOrigin": [0, 0, 0],
+															"uv": [0, 0],
+															"faces": {
+																"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "WheelCenterAccent2",
+							"from": [0, -0.6716, 0.8059],
+							"to": [0, -0.6716, 0.8059],
+							"rotationOrigin": [0, -0.6716, 0.8059],
+							"children": [
+								{
+									"name": "wheelcenteracc12",
+									"from": [0.0105, 0.6721, 0.0677],
+									"to": [0.0105, 0.6721, 0.0677],
+									"rotationOrigin": [0.0105, 0.6721, 0.0677],
+									"rotationZ": 45,
+									"children": [
+										{
+											"name": "octagona92",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "octagona10",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "octagona10",
+															"from": [0, 0, 0],
+															"to": [0, 0, 0],
+															"rotationOrigin": [0, 0, 0],
+															"children": [
+																{
+																	"name": "octagona10",
+																	"from": [-0.2782, -0.6716, -1.5446],
+																	"to": [0.2782, 0.6716, -0.2015],
+																	"rotationOrigin": [0, 0, 0],
+																	"uv": [0, 0],
+																	"faces": {
+																		"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+																	}
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "wheelcenteracc22",
+									"from": [0.0105, 0.6721, 0.0677],
+									"to": [0.0105, 0.6721, 0.0677],
+									"rotationOrigin": [0.0105, 0.6721, 0.0677],
+									"children": [
+										{
+											"name": "octagona102",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "octagona11",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "octagona11",
+															"from": [0, 0, 0],
+															"to": [0, 0, 0],
+															"rotationOrigin": [0, 0, 0],
+															"children": [
+																{
+																	"name": "octagona11",
+																	"from": [-0.2802, -0.6736, -1.5466],
+																	"to": [0.2802, 0.6736, -0.1995],
+																	"rotationOrigin": [0, 0, 0],
+																	"uv": [0, 0],
+																	"faces": {
+																		"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+																	}
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "wheelcenteracc32",
+									"from": [0.0105, 0.6721, 0.0677],
+									"to": [0.0105, 0.6721, 0.0677],
+									"rotationOrigin": [0.0105, 0.6721, 0.0677],
+									"rotationZ": 45,
+									"children": [
+										{
+											"name": "octagona112",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "octagona12",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "octagona12",
+															"from": [0, 0, 0],
+															"to": [0, 0, 0],
+															"rotationOrigin": [0, 0, 0],
+															"children": [
+																{
+																	"name": "octagona12",
+																	"from": [-0.6716, -0.2782, -1.5446],
+																	"to": [0.6716, 0.2782, -0.2015],
+																	"rotationOrigin": [0, 0, 0],
+																	"uv": [0, 0],
+																	"faces": {
+																		"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+																	}
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "wheelcenteracc42",
+									"from": [0.0105, 0.6721, 0.0677],
+									"to": [0.0105, 0.6721, 0.0677],
+									"rotationOrigin": [0.0105, 0.6721, 0.0677],
+									"children": [
+										{
+											"name": "octagona122",
+											"from": [0, 0, 0],
+											"to": [0, 0, 0],
+											"rotationOrigin": [0, 0, 0],
+											"children": [
+												{
+													"name": "octagona13",
+													"from": [0, 0, 0],
+													"to": [0, 0, 0],
+													"rotationOrigin": [0, 0, 0],
+													"children": [
+														{
+															"name": "octagona13",
+															"from": [0, 0, 0],
+															"to": [0, 0, 0],
+															"rotationOrigin": [0, 0, 0],
+															"children": [
+																{
+																	"name": "octagona13",
+																	"from": [-0.6726, -0.2792, -1.5456],
+																	"to": [0.6726, 0.2792, -0.2005],
+																	"rotationOrigin": [0, 0, 0],
+																	"uv": [0, 0],
+																	"faces": {
+																		"north": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"east": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"south": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"west": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+																		"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+																	}
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Spokes2",
+					"from": [0, 0, 0],
+					"to": [0, 0, 0],
+					"rotationOrigin": [0, 0, 0],
+					"children": [
+						{
+							"name": "Spoke2a",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": -90,
+							"children": [
+								{
+									"name": "Spoke2a",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "Spoke2a",
+											"from": [-0.2686, -7.7366, -0.2686],
+											"to": [0.2686, 7.7366, 0.2686],
+											"rotationOrigin": [0, 0, 0],
+											"uv": [0, 0],
+											"faces": {
+												"north": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"east": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"south": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"west": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+												"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Spoke3a",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": -60,
+							"children": [
+								{
+									"name": "Spoke3a",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "Spoke3a",
+											"from": [-0.2686, -7.7366, -0.2686],
+											"to": [0.2686, 7.7366, 0.2686],
+											"rotationOrigin": [0, 0, 0],
+											"uv": [0, 0],
+											"faces": {
+												"north": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"east": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"south": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"west": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+												"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Spoke4a",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": -30,
+							"children": [
+								{
+									"name": "Spoke4a",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "Spoke4a",
+											"from": [-0.2686, -7.7366, -0.2686],
+											"to": [0.2686, 7.7366, 0.2686],
+											"rotationOrigin": [0, 0, 0],
+											"uv": [0, 0],
+											"faces": {
+												"north": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"east": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"south": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"west": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+												"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Spoke5a",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"children": [
+								{
+									"name": "Spoke5a",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "Spoke5a",
+											"from": [-0.2686, -7.7366, -0.2686],
+											"to": [0.2686, 7.7366, 0.2686],
+											"rotationOrigin": [0, 0, 0],
+											"uv": [0, 0],
+											"faces": {
+												"north": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"east": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"south": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"west": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+												"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Spoke6a",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": 30,
+							"children": [
+								{
+									"name": "Spoke6a",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "Spoke6a",
+											"from": [-0.2686, -7.7366, -0.2686],
+											"to": [0.2686, 7.7366, 0.2686],
+											"rotationOrigin": [0, 0, 0],
+											"uv": [0, 0],
+											"faces": {
+												"north": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"east": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"south": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"west": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+												"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Spoke7a",
+							"from": [0, 0, 0],
+							"to": [0, 0, 0],
+							"rotationOrigin": [0, 0, 0],
+							"rotationZ": 60,
+							"children": [
+								{
+									"name": "Spoke7a",
+									"from": [0, 0, 0],
+									"to": [0, 0, 0],
+									"rotationOrigin": [0, 0, 0],
+									"children": [
+										{
+											"name": "Spoke7a",
+											"from": [-0.2686, -7.7366, -0.2686],
+											"to": [0.2686, 7.7366, 0.2686],
+											"rotationOrigin": [0, 0, 0],
+											"uv": [0, 0],
+											"faces": {
+												"north": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"east": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"south": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"west": {"texture": "#oak", "uv": [0, 0, 1, 16], "autoUv": false, "snapUv": false},
+												"up": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false},
+												"down": {"texture": "#oak", "uv": [0, 0, 1, 1], "autoUv": false, "snapUv": false}
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"animations": [
+		{
+			"name": "wheelspin",
+			"code": "wheelspin",
+			"quantityframes": 61,
+			"onActivityStopped": "EaseOut",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"Drive_Wheel": {"rotationX": 0, "rotationY": 0, "rotationZ": 0}
+					}
+				},
+				{
+					"frame": 60,
+					"elements": {
+						"Drive_Wheel": {"rotationX": 0, "rotationY": 0, "rotationZ": -354}
+					}
+				}
+			]
+		}
+	]
+}

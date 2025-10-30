@@ -65,7 +65,7 @@ namespace SpinningWheel.Blocks
             {
                 new WorldInteraction()
                 {
-                    ActionLangCode = "blockhelp-spinningwheel-use",
+                    ActionLangCode = "spinningwheel:blockhelp-spinningwheel-use",
                     MouseButton = EnumMouseButton.Right
                 }
             }.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));

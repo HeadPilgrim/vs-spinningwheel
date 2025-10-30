@@ -1,0 +1,17 @@
+﻿{
+  "ingredientPattern": " C ,SPS,IBI",
+  "ingredients": {
+    "S": { "type": "item", "code": "game:stick" },
+    "P": { "type": "item", "code": "game:plank-*", "name": "wood" },
+    "I": { "type": "item", "code": "game:metalnailsandstrips-*" },
+    "B": { "type": "item", "code": "game:gear-rusty" },
+    "C": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 10}
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "item",
+    "code": "spinningwheel:hpmoaitem",
+    "quantity": 1
+  }
+}

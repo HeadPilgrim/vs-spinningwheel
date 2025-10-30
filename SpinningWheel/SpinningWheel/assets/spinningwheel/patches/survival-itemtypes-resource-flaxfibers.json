@@ -4,7 +4,7 @@
     "path": "/attributes/spinningProps",
     "value": {
       "outputType": "game:flaxtwine",
-      "outputQuantity": 4,
+      "outputQuantity": 2,
       "spinTime": 6
     },
     "file": "game:itemtypes/resource/flaxfibers.json",

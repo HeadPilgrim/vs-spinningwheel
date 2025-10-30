@@ -1,0 +1,24 @@
+﻿{
+  "code": "hpspinningwheelframe",
+  "shape": {
+    "base": "item/spinningwheelframe"
+  },
+  "creativeinventory": { "general":  [ "*" ]},
+  "textures": {
+    "oak": {"base": "game:block/wood/debarked/oak"},
+    "oak2": {"base": "game:block/wood/crudechair/oak"}
+  },
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldRightReadyAnimation": "heldblockready",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "guiTransform": {
+    "translation": { "x": -5, "y": 2, "z": 0 },
+    "rotation": { "x": 0, "y": -180, "z": -180 },
+    "scale": 1.06
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.7, "y": -0.9, "z": -0.4 },
+    "rotation": { "x": -74, y: -180, "z": 105 },
+    "scale": 0.59
+  }
+}

@@ -2415,6 +2415,192 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Connector_thread",
+					"from": [0, 0, 0],
+					"to": [0, 0, 0],
+					"rotationOrigin": [0, 0, 0],
+					"children": [
+						{
+							"name": "connectorthread1",
+							"from": [3.0405, 6.85562, 2.29208],
+							"to": [3.1657, 7.75562, 2.41728],
+							"rotationOrigin": [3.1031, 7.75562, 2.29208],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -66
+						},
+						{
+							"name": "connectorthread2",
+							"from": [3.04637, 6.50032, 3.0901],
+							"to": [3.17157, 7.40032, 3.2153],
+							"rotationOrigin": [3.10897, 7.40032, 3.0901],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -66,
+							"rotationY": 0,
+							"rotationZ": -25
+						},
+						{
+							"name": "connectorthread3",
+							"from": [2.71981, 6.1933, 3.79474],
+							"to": [2.84501, 7.0933, 3.91994],
+							"rotationOrigin": [2.78241, 7.0933, 3.79474],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -55.70211,
+							"rotationY": -14.84391,
+							"rotationZ": -54.65496
+						},
+						{
+							"name": "connectorthread4",
+							"from": [2.04476, 5.74602, 4.12223],
+							"to": [2.16996, 6.64602, 4.24743],
+							"rotationOrigin": [2.10736, 6.64602, 4.12223],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -61.90953,
+							"rotationY": -15.00584,
+							"rotationZ": -89.25516
+						},
+						{
+							"name": "connectorthread5",
+							"from": [1.19002, 5.53933, 4.02494],
+							"to": [1.31522, 6.43933, 4.15014],
+							"rotationOrigin": [1.25262, 6.43933, 4.02494],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -62.79184,
+							"rotationY": -16.69154,
+							"rotationZ": -92.17884
+						},
+						{
+							"name": "connectorthread6",
+							"from": [0.32856, 5.32524, 3.87641],
+							"to": [0.45376, 6.22524, 4.00161],
+							"rotationOrigin": [0.39116, 6.22524, 3.87641],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -62.79184,
+							"rotationY": -16.69154,
+							"rotationZ": -92.17884
+						},
+						{
+							"name": "connectorthread7",
+							"from": [-0.53357, 5.09692, 3.72243],
+							"to": [-0.40837, 5.99692, 3.84763],
+							"rotationOrigin": [-0.47097, 5.99692, 3.72243],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -76.08882,
+							"rotationY": 2.73256,
+							"rotationZ": -104.4712
+						},
+						{
+							"name": "connectorthread8",
+							"from": [-1.39989, 5.19031, 3.51513],
+							"to": [-1.27469, 6.09031, 3.64033],
+							"rotationOrigin": [-1.33729, 6.09031, 3.51513],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -74.31933,
+							"rotationY": 9.50812,
+							"rotationZ": -108.6602
+						},
+						{
+							"name": "connectorthread9",
+							"from": [-2.23389, 5.40185, 3.27842],
+							"to": [-2.10869, 6.30185, 3.40362],
+							"rotationOrigin": [-2.17129, 6.30185, 3.27842],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -69.77181,
+							"rotationY": 18.48463,
+							"rotationZ": -116.76399
+						},
+						{
+							"name": "connectorthread10",
+							"from": [-2.9889, 6.37866, 2.9898],
+							"to": [-2.8637, 6.67866, 3.115],
+							"rotationOrigin": [-2.9263, 6.67866, 2.9898],
+							"uv": [0, 0],
+							"faces": {
+								"north": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#fibers.png", "uv": [4, 4, 5, 10], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#fibers.png", "uv": [0, 0, 1, 6], "autoUv": false, "snapUv": false}
+							},
+							"rotationX": -59.49859,
+							"rotationY": 29.30371,
+							"rotationZ": -128.32157
+						}
+					]
 				}
 			]
 		}

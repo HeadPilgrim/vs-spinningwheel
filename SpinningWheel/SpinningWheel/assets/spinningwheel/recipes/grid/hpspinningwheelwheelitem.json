@@ -1,0 +1,14 @@
+﻿{
+  "ingredientPattern": " P ,PSP, P ",
+  "ingredients": {
+    "S": { "type": "item", "code": "game:stick", "quantity": "12" },
+    "P": { "type": "item", "code": "game:plank-*", "name": "wood" }
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "item",
+    "code": "spinningwheel:hpspinningwheelwheelitem",
+    "quantity": 1
+  }
+}
