@@ -59,7 +59,7 @@
         },
         "*-east": {
           // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0.18, "x2": 0.6, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
+          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
           // Upper level - front-left INVISIBLE NON-COLLIDABLE
           "1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
           // Lower level - front-left
@@ -75,7 +75,7 @@
         },
         "*-south": {
           // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0.18, "x2": 0.6, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
+          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
           // Upper level - front-left INVISIBLE NON-COLLIDABLE
           "0,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
           // Lower level - front-left
@@ -91,7 +91,7 @@
         },
         "*-west": {
           // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.3, "y1": -0.3, "z1": 0.18, "x2": 0.6, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
+          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
           // Upper level - front-left INVISIBLE NON-COLLIDABLE
           "-1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
           // Lower level - front-left

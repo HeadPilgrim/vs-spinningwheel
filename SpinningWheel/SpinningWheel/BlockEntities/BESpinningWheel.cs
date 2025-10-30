@@ -299,6 +299,31 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         }
     }
     
+    private bool CanPlayerUseSpinningWheel(IPlayer player)
+    {
+        // Use server config (or default if not loaded yet)
+        if (SpinningWheelModSystem.Config == null || !SpinningWheelModSystem.Config.RequireTailorClass)
+        {
+            return true;
+        }
+
+        // Get player's class
+        string playerClass = player.Entity.WatchedAttributes.GetString("characterClass", "").ToLower();
+    
+        // Check if player's class is in the allowed list
+        foreach (string allowedClass in SpinningWheelModSystem.Config.AllowedClasses)
+        {
+            if (playerClass == allowedClass.ToLower())
+            {
+                Api?.Logger?.Notification($"[SpinningWheel] Class match found: {allowedClass}");
+                return true;
+            }
+        }
+    
+        Api?.Logger?.Notification($"[SpinningWheel] No matching class found. Allowed classes: {string.Join(", ", SpinningWheelModSystem.Config.AllowedClasses)}");
+        return false;
+    }
+    
     public void DidMount(EntityAgent entityAgent)
     {
         if (MountedBy != null && MountedBy != entityAgent)
@@ -435,12 +460,21 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         ItemSlot inputSlot = InputSlot;
         if (inputSlot?.Itemstack == null) return false;
+    
         // Check if this item can be spun
         if (inputSlot.Itemstack.ItemAttributes.KeyExists("spinningProps"))
         {
+            var spinningProps = inputSlot.Itemstack.ItemAttributes["spinningProps"];
+            int requiredInput = spinningProps["inputQuantity"]?.AsInt(1) ?? 1;
+        
+            // Check if we have enough input items
+            if (inputSlot.Itemstack.StackSize < requiredInput) return false;
+        
             ItemSlot outputSlot = OutputSlot;
+        
             // Check if output slot has room
             if (outputSlot.Empty) return true;
+        
             // Check if we can stack more
             ItemStack resultStack = GetSpinResult(inputSlot.Itemstack);
             if (resultStack != null && outputSlot.Itemstack.Collectible.Equals(outputSlot.Itemstack, resultStack, GlobalConstants.IgnoredStackAttributes))
@@ -458,9 +492,11 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         if (input.ItemAttributes.KeyExists("spinningProps"))
         {
             var spinningProps = input.ItemAttributes["spinningProps"];
+        
             // Get the outputType and outputQuantity from spinningProps
             string outputType = spinningProps["outputType"].AsString();
-            int outputQuantity = spinningProps["outputQuantity"].AsInt(1); // Default to 1 if not specified
+            int outputQuantity = spinningProps["outputQuantity"].AsInt(1);
+        
             // Create and return the output ItemStack
             ItemStack outputStack = new ItemStack(Api.World.GetItem(new AssetLocation(outputType)), outputQuantity);
             return outputStack;
@@ -480,8 +516,19 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     {
         ItemSlot inputSlot = InputSlot;
         ItemSlot outputSlot = OutputSlot;
+    
         ItemStack resultStack = GetSpinResult(inputSlot.Itemstack);
         if (resultStack == null) return;
+    
+        // Get how many input items to consume
+        int inputQuantity = 1; // Default
+        if (inputSlot.Itemstack.ItemAttributes.KeyExists("spinningProps"))
+        {
+            var spinningProps = inputSlot.Itemstack.ItemAttributes["spinningProps"];
+            inputQuantity = spinningProps["inputQuantity"]?.AsInt(1) ?? 1;
+        }
+    
+        // Add output
         if (outputSlot.Empty)
         {
             outputSlot.Itemstack = resultStack;
@@ -491,7 +538,8 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             outputSlot.Itemstack.StackSize += resultStack.StackSize;
         }
 
-        inputSlot.TakeOut(1);
+        // Consume the correct amount of input
+        inputSlot.TakeOut(inputQuantity);
         inputSlot.MarkDirty();
         outputSlot.MarkDirty();
     }
@@ -640,7 +688,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     // Start animation (server sets state, client will sync)
     public void Activate()
     {
-        Api.Logger.Notification($"[SpinningWheel] Activate() called");
         On = true;
         MarkDirty(true);
     }
@@ -648,7 +695,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     // Stop animation (server sets state, client will sync)
     public void Deactivate()
     {
-        Api.Logger.Notification($"[SpinningWheel] Deactivate() called");
         On = false;
         MarkDirty(true);
     }
@@ -659,12 +705,25 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     
     public bool OnPlayerInteract(IPlayer byPlayer)
     {
+        // Check if player has the required class (validated on both sides)
+        if (!CanPlayerUseSpinningWheel(byPlayer))
+        {
+            if (Api.Side == EnumAppSide.Client)
+            {
+                string requiredClasses = string.Join(", ", SpinningWheelModSystem.Config.AllowedClasses);
+                (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass", 
+                    Lang.Get("spinningwheel:spinning-wheel-requires-class", requiredClasses));
+            }
+            return false;
+        }
+
         // Check if someone is already using it
         if (MountedBy != null) 
         {
             if (Api.Side == EnumAppSide.Client)
             {
-                (Api as ICoreClientAPI).TriggerIngameError(this, "occupied", Lang.Get("spinningwheel:spinning-wheel-occupied"));
+                (Api as ICoreClientAPI).TriggerIngameError(this, "occupied", 
+                    Lang.Get("spinningwheel:spinning-wheel-occupied"));
             }
             return false;
         }

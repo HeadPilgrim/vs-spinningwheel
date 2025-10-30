@@ -4,7 +4,8 @@
     "path": "/attributes/spinningProps",
     "value": {
       "outputType": "game:flaxtwine",
-      "outputQuantity": 2,
+      "outputQuantity": 1,
+      "inputQuantity": 2,
       "spinTime": 6
     },
     "file": "floralzonescaribbeanregion:itemtypes/resource/cotton.json",

@@ -4,7 +4,8 @@
     "path": "/attributes/spinningProps",
     "value": {
       "outputType": "game:flaxtwine",
-      "outputQuantity": 2,
+      "outputQuantity": 1,
+      "inputQuantity": 2,
       "spinTime": 6
     },
     "file": "pemmican:itemtypes/papyrus-fiber.json",
@@ -15,7 +16,8 @@
     "path": "/attributes/spinningProps",
     "value": {
       "outputType": "game:flaxtwine",
-      "outputQuantity": 4,
+      "outputQuantity": 2,
+      "inputQuantity": 2,
       "spinTime": 12
     },
     "file": "pemmican:itemtypes/algae-chem.json",
