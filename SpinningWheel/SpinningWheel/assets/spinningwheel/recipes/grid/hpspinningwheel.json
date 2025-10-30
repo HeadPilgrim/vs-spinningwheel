@@ -1,9 +1,10 @@
 ﻿{
-  "ingredientPattern": " W , M , F ",
+  "ingredientPattern": " W , M ,CF ",
   "ingredients": {
     "W": { "type": "item", "code": "spinningwheel:hpspinningwheelwheelitem" },
     "M": { "type": "item", "code": "spinningwheel:hpmoaitem" },
-    "F": { "type": "item", "code": "spinningwheel:hpspinningwheelframe" }
+    "F": { "type": "item", "code": "spinningwheel:hpspinningwheelframe" },
+    "C": { "type": "block", "code": "game:chair-*", "name": "wood"}
   },
   "width": 3,
   "height": 3,
