@@ -9,6 +9,7 @@
       "spinTime": 6
     },
     "file": "floralzonescaribbeanregion:itemtypes/resource/cotton.json",
-    "side": "Server"
+    "side": "Server",
+    "dependsOn": [ { "modid": "floralzonescaribbeanregion" } ]
   }
 ]

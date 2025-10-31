@@ -1,0 +1,160 @@
+﻿[
+  {
+    "op": "addmerge",
+    "path": "/attributesByType",
+    "value": {},
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-black",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-black",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-brown",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-brown",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-gray",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-gray",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-white",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-white",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-yellow",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-yellow",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-redbrown",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-brown",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-lightbrown",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-brown",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-generic-plain",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-plain",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-muskox-brown",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-brown",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/fibers-angora-white",
+    "value": {
+      "spinningProps": {
+        "outputType": "wool:twine-wool-white",
+        "outputQuantity": 1,
+        "inputQuantity": 2,
+        "spinTime": 6
+      }
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  }
+]

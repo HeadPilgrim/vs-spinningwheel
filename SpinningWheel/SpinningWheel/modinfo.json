@@ -7,7 +7,7 @@
         "HeadPilgrim"
     ],
     "description": "Adds a spinning wheel process to make an increased amount of twine",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "dependencies": {
         "game": "1.21.0"
     }

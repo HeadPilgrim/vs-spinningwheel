@@ -63,7 +63,7 @@ public class SpinningWheelModSystem : ModSystem
         }
         
         api.Input.RegisterHotKey("openspinningwheel", "Open Spinning Wheel GUI", 
-            GlKeys.E, HotkeyType.GUIOrOtherControls);
+            GlKeys.F, HotkeyType.GUIOrOtherControls);
         
         api.Input.SetHotKeyHandler("openspinningwheel", OnOpenSpinningWheelHotkey);
     }

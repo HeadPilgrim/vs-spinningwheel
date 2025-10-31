@@ -9,7 +9,8 @@
       "spinTime": 6
     },
     "file": "pemmican:itemtypes/papyrus-fiber.json",
-    "side": "Server"
+    "side": "Server",
+    "dependsOn":[ { "modid": "longtermfood" } ]
   },
   {
     "op": "add",
@@ -18,9 +19,10 @@
       "outputType": "game:flaxtwine",
       "outputQuantity": 2,
       "inputQuantity": 2,
-      "spinTime": 12
+      "spinTime": 10
     },
     "file": "pemmican:itemtypes/algae-chem.json",
-    "side": "Server"
+    "side": "Server",
+    "dependsOn":[ { "modid": "longtermfood" } ]
   }
 ]
