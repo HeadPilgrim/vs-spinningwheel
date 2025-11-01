@@ -5,5 +5,74 @@
     "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
     "item-hpmoaitem": "Mother of All",
     "item-hpspinningwheelframe": "Spinning Wheel Frame",
-    "item-hpspinningwheelwheelitem": "Drive Wheel"
+    "item-hpspinningwheelwheelitem": "Drive Wheel",
+
+    "config-title": "Spinning Wheel Configuration",
+
+    
+    "section-tailor": "Tailor Class Restrictions",
+    "section-flax": "Vanilla Flax Settings",
+    "section-cotton": "Floral Zones of the Caribbean",
+    "section-wool": "Wool & More Settings",
+    "section-pemmican": "Long-term food Settings",
+
+    "RequireTailorClass": "Require Tailor Class",
+    "RequireTailorClass-Comment": "If enabled, only players with allowed classes can use the spinning wheel",
+
+    "setting-allowed-classes": "Allowed Classes",
+    "setting-allowed-classes-comment": "Comma-separated list of player classes that may use the spinning wheel",
+
+    "setting-flax-spin-time": "Flax Spin Time",
+    "setting-flax-spin-time-comment": "Time in seconds to spin flax fibers into twine",
+
+    "setting-flax-input-quantity": "Flax Input Quantity",
+    "setting-flax-input-quantity-comment": "Number of flax fibers required per spin",
+
+    "setting-flax-output-quantity": "Flax Output Quantity",
+    "setting-flax-output-quantity-comment": "Number of flax twine produced per spin",
+
+    "setting-cotton-spin-time": "Cotton Spin Time",
+    "setting-cotton-spin-time-comment": "Time in seconds to spin cotton into twine",
+
+    "setting-cotton-input-quantity": "Cotton Input Quantity",
+    "setting-cotton-input-quantity-comment": "Number of cotton required per spin",
+
+    "setting-cotton-output-quantity": "Cotton Output Quantity",
+    "setting-cotton-output-quantity-comment": "Number of twine produced per cotton spin",
+
+    "setting-wool-fiber-spin-time": "Wool Fiber Spin Time",
+    "setting-wool-fiber-spin-time-comment": "Time in seconds to spin wool fibers into twine",
+
+    "setting-wool-fiber-input-quantity": "Wool Fiber Input Quantity",
+    "setting-wool-fiber-input-quantity-comment": "Number of wool fibers required per spin",
+
+    "setting-wool-fiber-output-quantity": "Wool Fiber Output Quantity",
+    "setting-wool-fiber-output-quantity-comment": "Number of wool twine produced per spin",
+
+    "setting-wool-twine-spin-time": "Wool Twine Spin Time",
+    "setting-wool-twine-spin-time-comment": "Time in seconds to spin wool twine into thread",
+
+    "setting-wool-twine-input-quantity": "Wool Twine Input Quantity",
+    "setting-wool-twine-input-quantity-comment": "Number of wool twine required per spin",
+
+    "setting-wool-twine-output-quantity": "Wool Twine Output Quantity",
+    "setting-wool-twine-output-quantity-comment": "Number of thread produced per wool twine spin",
+
+    "setting-papyrus-input-quantity": "Papyrus Input Quantity",
+    "setting-papyrus-input-quantity-comment": "Number of papyrus fibers required per spin",
+
+    "setting-papyrus-output-quantity": "Papyrus Output Quantity",
+    "setting-papyrus-output-quantity-comment": "Time in seconds to spin papyrus into twine",
+
+    "setting-papyrus-spin-time": "Papyrus Spin Time",
+    "setting-papyrus-spin-time-comment": "Time in seconds to spin papyrus into twine",
+
+    "setting-algae-input-quantity": "Algae Input Quantity",
+    "setting-algae-input-quantity-comment": "Number of algae fibers required per spin",
+
+    "setting-algae-output-quantity": "Algae Output Quantity",
+    "setting-algae-output-quantity-comment": "Time in seconds to spin algae into twine",
+
+    "setting-algae-spin-time": "Algae Spin Time",
+    "setting-algae-spin-time-comment": "Time in seconds to spin algae into twine"
 }

@@ -6,7 +6,7 @@
       "outputType": "game:flaxtwine",
       "outputQuantity": 1,
       "inputQuantity": 2,
-      "spinTime": 6
+      "spinTime": 4
     },
     "file": "floralzonescaribbeanregion:itemtypes/resource/cotton.json",
     "side": "Server",

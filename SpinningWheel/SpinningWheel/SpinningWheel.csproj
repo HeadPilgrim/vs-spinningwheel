@@ -48,6 +48,10 @@
             <HintPath>$(VINTAGE_STORY)/Lib/Microsoft.Data.Sqlite.dll</HintPath>
             <Private>False</Private>
         </Reference>
+        <Reference Include="ConfigLib">
+            <HintPath>..\..\..\..\Vintagestory\mods\configlib.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>

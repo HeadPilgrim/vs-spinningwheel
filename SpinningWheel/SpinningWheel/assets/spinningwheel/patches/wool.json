@@ -15,7 +15,7 @@
         "outputType": "wool:twine-wool-black",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -30,7 +30,7 @@
         "outputType": "wool:twine-wool-brown",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -45,7 +45,7 @@
         "outputType": "wool:twine-wool-gray",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -60,7 +60,7 @@
         "outputType": "wool:twine-wool-white",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -75,7 +75,7 @@
         "outputType": "wool:twine-wool-yellow",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -90,7 +90,7 @@
         "outputType": "wool:twine-wool-brown",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -105,7 +105,7 @@
         "outputType": "wool:twine-wool-brown",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -120,7 +120,7 @@
         "outputType": "wool:twine-wool-plain",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -135,7 +135,7 @@
         "outputType": "wool:twine-wool-brown",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
@@ -150,7 +150,7 @@
         "outputType": "wool:twine-wool-white",
         "outputQuantity": 1,
         "inputQuantity": 2,
-        "spinTime": 6
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",

@@ -1,0 +1,348 @@
+﻿{
+  "version": 1,
+  "file": "spinningwheel.json",
+  "patches": {
+    "float": {
+      "spinningwheel:patches/game-flaxfibers.json": {
+        "0/value/spinTime": "FLAX_SPIN_TIME"
+      },
+      "spinningwheel:patches/floralzonescaribbeanregion-cotton.json": {
+        "0/value/spinTime": "COTTON_SPIN_TIME"
+      },
+      "spinningwheel:patches/pemmican.json": {
+        "0/value/spinTime": "PAPYRUS_SPIN_TIME",
+        "1/value/spinTime": "ALGAE_SPIN_TIME"
+      },
+      "spinningwheel:patches/wool.json": {
+        "1/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "2/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "3/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "4/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "5/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "6/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "7/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "8/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "9/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
+        "10/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME"
+      }
+    },
+    "integer": {
+      "spinningwheel:patches/game-flaxfibers.json": {
+        "0/value/inputQuantity": "FLAX_INPUT_QUANTITY",
+        "0/value/outputQuantity": "FLAX_OUTPUT_QUANTITY"
+      },
+      "spinningwheel:patches/floralzonescaribbeanregion-cotton.json": {
+        "0/value/inputQuantity": "COTTON_INPUT_QUANTITY",
+        "0/value/outputQuantity": "COTTON_OUTPUT_QUANTITY"
+      },
+      "spinningwheel:patches/pemmican.json": {
+        "0/value/inputQuantity": "PAPYRUS_INPUT_QUANTITY",
+        "0/value/outputQuantity": "PAPYRUS_OUTPUT_QUANTITY",
+        "1/value/inputQuantity": "ALGAE_INPUT_QUANTITY",
+        "1/value/outputQuantity": "ALGAE_OUTPUT_QUANTITY"
+      },
+      "spinningwheel:patches/wool.json": {
+        "1/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "1/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "2/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "2/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "3/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "3/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "4/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "4/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "5/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "5/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "6/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "6/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "7/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "7/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "8/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "8/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "9/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "9/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
+        "10/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
+        "10/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY"
+      },
+      "spinningwheel:patches/tailors-delight.json": {
+        "1/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "1/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "1/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "2/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "2/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "2/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "3/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "3/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "3/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "4/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "4/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "4/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "5/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "5/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "5/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "6/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "6/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "6/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "7/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "7/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "7/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "8/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "8/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "8/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "9/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "9/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "9/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "10/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "10/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "10/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "11/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "11/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "11/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "12/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "12/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "12/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "13/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "13/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "13/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "14/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "14/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "14/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
+        "15/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
+        "15/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
+        "15/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY"
+      }
+    }
+  },
+  "settings": {
+    "boolean": {
+      "REQUIRE_TAILOR_CLASS": {
+        "name": "RequireTailorClass",
+        "ingui": "spinningwheel:RequireTailorClass",
+        "weight": 0.91,
+        "comment": "spinningwheel:RequireTailorClass-Comment",
+        "default": false
+      }
+    },
+    "float": {
+      "FLAX_SPIN_TIME": {
+        "name": "FlaxSpinTime",
+        "ingui": "spinningwheel:setting-flax-spin-time",
+        "weight": 1.51,
+        "comment": "spinningwheel:setting-flax-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
+      },
+      "COTTON_SPIN_TIME": {
+        "name": "CottonSpinTime",
+        "ingui": "spinningwheel:setting-cotton-spin-time",
+        "weight": 2.01,
+        "comment": "spinningwheel:setting-cotton-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
+      },
+      "WOOL_FIBER_SPIN_TIME": {
+        "name": "WoolFiberSpinTime",
+        "ingui": "spinningwheel:setting-wool-fiber-spin-time",
+        "weight": 2.51,
+        "comment": "spinningwheel:setting-wool-fiber-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
+      },
+      "WOOL_TWINE_SPIN_TIME": {
+        "name": "WoolTwineSpinTime",
+        "ingui": "spinningwheel:setting-wool-twine-spin-time",
+        "weight": 2.58,
+        "comment": "spinningwheel:setting-wool-twine-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
+      },
+      "PAPYRUS_SPIN_TIME": {
+        "name": "PapyrusFiberSpinTime",
+        "ingui": "spinningwheel:setting-papyrus-spin-time",
+        "weight": 3.03,
+        "comment": "spinningwheel:setting-papyrus-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
+      },
+      "ALGAE_SPIN_TIME": {
+        "name": "AlgaeFiberSpinTime",
+        "ingui": "spinningwheel:setting-algae-spin-time",
+        "weight": 3.06,
+        "comment": "spinningwheel:setting-algae-spin-time-comment",
+        "default": 6.5,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
+      }
+    },
+    "integer": {
+      "FLAX_INPUT_QUANTITY": {
+        "name": "FlaxInputQuantity",
+        "ingui": "spinningwheel:setting-flax-input-quantity",
+        "weight": 1.52,
+        "comment": "spinningwheel:setting-flax-input-quantity-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "FLAX_OUTPUT_QUANTITY": {
+        "name": "FlaxOutputQuantity",
+        "ingui": "spinningwheel:setting-flax-output-quantity",
+        "weight": 1.53,
+        "comment": "spinningwheel:setting-flax-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "COTTON_INPUT_QUANTITY": {
+        "name": "CottonInputQuantity",
+        "ingui": "spinningwheel:setting-cotton-input-quantity",
+        "weight": 2.02,
+        "comment": "spinningwheel:setting-cotton-input-quantity-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "COTTON_OUTPUT_QUANTITY": {
+        "name": "CottonOutputQuantity",
+        "ingui": "spinningwheel:setting-cotton-output-quantity",
+        "weight": 2.03,
+        "comment": "spinningwheel:setting-cotton-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "WOOL_FIBER_INPUT_QUANTITY": {
+        "name": "WoolFiberInputQuantity",
+        "ingui": "spinningwheel:setting-wool-fiber-input-quantity",
+        "weight": 2.52,
+        "comment": "spinningwheel:setting-wool-fiber-input-quantity-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "WOOL_FIBER_OUTPUT_QUANTITY": {
+        "name": "WoolFiberOutputQuantity",
+        "ingui": "spinningwheel:setting-wool-fiber-output-quantity",
+        "weight": 2.53,
+        "comment": "spinningwheel:setting-wool-fiber-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "WOOL_TWINE_INPUT_QUANTITY": {
+        "name": "WoolTwineInputQuantity",
+        "ingui": "spinningwheel:setting-wool-twine-input-quantity",
+        "weight": 2.59,
+        "comment": "spinningwheel:setting-wool-twine-input-quantity-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "WOOL_TWINE_OUTPUT_QUANTITY": {
+        "name": "WoolTwineOutputQuantity",
+        "ingui": "spinningwheel:setting-wool-twine-output-quantity",
+        "weight": 2.60,
+        "comment": "spinningwheel:setting-wool-twine-output-quantity-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "PAPYRUS_INPUT_QUANTITY": {
+        "name": "PapyrusInputQuantity",
+        "ingui": "spinningwheel:setting-papyrus-input-quantity",
+        "weight": 3.01,
+        "comment": "spinningwheel:setting-papyrus-input-quantity-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "PAPYRUS_OUTPUT_QUANTITY": {
+        "name": "PapyrusOutputQuantity",
+        "ingui": "spinningwheel:setting-papyrus-output-quantity",
+        "weight": 3.02,
+        "comment": "spinningwheel:setting-papyrus-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "ALGAE_INPUT_QUANTITY": {
+        "name": "AlgaeInputQuantity",
+        "ingui": "spinningwheel:setting-algae-input-quantity",
+        "weight": 3.04,
+        "comment": "spinningwheel:setting-algae-input-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "ALGAE_OUTPUT_QUANTITY": {
+        "name": "AlgaeOutputQuantity",
+        "ingui": "spinningwheel:setting-algae-output-quantity",
+        "weight": 3.05,
+        "comment": "spinningwheel:setting-algae-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "stringarray": {
+      "ALLOWED_CLASSES": {
+        "name": "AllowedClasses",
+        "ingui": "spinningwheel:setting-allowed-classes",
+        "weight": 0.92,
+        "comment": "spinningwheel:setting-allowed-classes-comment",
+        "default": [
+          "tailor"
+        ]
+      }
+    }
+  },
+  "formatting": [
+    { "type": "title",       "value": "spinningwheel:config-title",       "weight": 0.1 },
+    { "type": "separator",   "weight": 0.5 },
+    { "type": "separator",   "title": "spinningwheel:section-tailor",     "weight": 0.9 },
+    { "type": "separator",   "title": "spinningwheel:section-flax",       "weight": 1.5 },
+    { "type": "separator",   "title": "spinningwheel:section-cotton",     "weight": 2.0 },
+    { "type": "separator",   "title": "spinningwheel:section-wool",       "weight": 2.5 },
+    { "type": "separator",   "title": "spinningwheel:section-pemmican",   "weight": 3.0 }
+  ]
+}

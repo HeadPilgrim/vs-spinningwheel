@@ -6,7 +6,7 @@
       "outputType": "game:flaxtwine",
       "outputQuantity": 1,
       "inputQuantity": 2,
-      "spinTime": 6
+      "spinTime": 4
     },
     "file": "pemmican:itemtypes/papyrus-fiber.json",
     "side": "Server",
@@ -19,7 +19,7 @@
       "outputType": "game:flaxtwine",
       "outputQuantity": 2,
       "inputQuantity": 2,
-      "spinTime": 10
+      "spinTime": 6
     },
     "file": "pemmican:itemtypes/algae-chem.json",
     "side": "Server",

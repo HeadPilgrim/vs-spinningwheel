@@ -15,7 +15,7 @@
         "outputType": "tailorsdelight:twine-red",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -30,7 +30,7 @@
         "outputType": "tailorsdelight:twine-blue",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -45,7 +45,7 @@
         "outputType": "tailorsdelight:twine-gray",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -60,7 +60,7 @@
         "outputType": "tailorsdelight:twine-pink",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -75,7 +75,7 @@
         "outputType": "tailorsdelight:twine-black",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -90,7 +90,7 @@
         "outputType": "tailorsdelight:twine-brown",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -105,7 +105,7 @@
         "outputType": "tailorsdelight:twine-green",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -120,7 +120,7 @@
         "outputType": "tailorsdelight:twine-white",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -135,7 +135,7 @@
         "outputType": "tailorsdelight:twine-orange",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -150,7 +150,7 @@
         "outputType": "tailorsdelight:twine-purple",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -165,7 +165,7 @@
         "outputType": "tailorsdelight:twine-yellow",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -180,7 +180,7 @@
         "outputType": "tailorsdelight:twine-darkblue",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -195,7 +195,7 @@
         "outputType": "tailorsdelight:twine-darkbrown",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -210,7 +210,7 @@
         "outputType": "tailorsdelight:twine-darkgreen",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",
@@ -225,7 +225,7 @@
         "outputType": "tailorsdelight:twine-darkred",
         "outputQuantity": 2,
         "inputQuantity": 2,
-        "spinTime": 8
+        "spinTime": 4
       }
     },
     "file": "wool:itemtypes/resource/twine.json",

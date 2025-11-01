@@ -1,83 +1,112 @@
-﻿using SpinningWheel.BlockEntities;
-using SpinningWheel.Blocks;
-using Vintagestory.API.Client;
-using Vintagestory.API.Server;
-using Vintagestory.API.Config;
-using Vintagestory.API.Common;
-using System;
+﻿namespace SpinningWheel.ModSystem {
 
-namespace SpinningWheel;
+    using SpinningWheel.BlockEntities;
+    using SpinningWheel.Blocks;
+    using Vintagestory.API.Client;
+    using Vintagestory.API.Server;
+    using Vintagestory.API.Config;
+    using Vintagestory.API.Common;
+    using SpinningWheel.ModConfig;
+    using System;
 
-public class SpinningWheelModSystem : ModSystem
-{
-    private ICoreClientAPI clientApi;
-    public static SpinningWheelConfig Config { get; private set; }
+    public class SpinningWheelModSystem : ModSystem
+    {
+        private readonly string thisModID = "spinningwheel";
+        private ICoreClientAPI clientApi;
+        private ICoreAPI api;
+        private IServerNetworkChannel serverChannel;
 
-    // Called on server and client
-    public override void Start(ICoreAPI api)
-    {
-        api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
-        api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
-        
-        Mod.Logger.Notification("Registered block and block entity for headpilgrim-spinningwheel");
-        Mod.Logger.Notification("Mod Started Successfully");
-    }
-    
-    public override void StartServerSide(ICoreServerAPI api)
-    {
-        base.StartServerSide(api);
-        TryToLoadConfig(api);
-    }
-    
-    private void TryToLoadConfig(ICoreAPI api)
-    {
-        try
+        // Called on server and client
+        public override void Start(ICoreAPI api)
         {
-            Config = api.LoadModConfig<SpinningWheelConfig>("spinningwheelconfig.json");
-            if (Config == null)
+            this.api = api;
+            base.Start(api);
+            api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
+            api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
+            api.World.Logger.Event("started 'SpinningWheel' mod");
+            Mod.Logger.Notification("Registered block and block entity for hpspinningwheel");
+        }
+        
+        public override void StartPre(ICoreAPI api)
+        {
+            // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
+            var cfgFileName = this.thisModID + ".json";
+            try
             {
-                Config = new SpinningWheelConfig();
+                ModConfig fromDisk;
+                if ((fromDisk = api.LoadModConfig<ModConfig>(cfgFileName)) == null)
+                { api.StoreModConfig(ModConfig.Loaded, cfgFileName); }
+                else
+                { ModConfig.Loaded = fromDisk; }
             }
-            api.StoreModConfig(Config, "spinningwheelconfig.json");
+            catch
+            {
+                api.StoreModConfig(ModConfig.Loaded, cfgFileName);
+            }
+            base.StartPre(api);
+        }
+        
+        public override void StartClientSide(ICoreClientAPI capi)
+        { 
+            capi.Network.RegisterChannel("spinningwheel")
+                .RegisterMessageType<SyncClientPacket>()
+                .SetMessageHandler<SyncClientPacket>(packet =>
+                {
+                    
+                    ModConfig.Loaded.RequireTailorClass = packet.RequireTailorClass;
+                    this.Mod.Logger.Event($"Received RequireTailorClass of {packet.RequireTailorClass} from server");
+                    ModConfig.Loaded.AllowedClasses = packet.AllowedClasses;
+                    this.Mod.Logger.Event($"Received AllowedClasses of {packet.AllowedClasses} from server");
+                });
             
-            Mod.Logger.Notification($"Spinning Wheel Config Loaded - Require Tailor Class: {Config.RequireTailorClass}");
+            clientApi = capi;
+            // Client creates default config if server hasn't sent one yet
+            capi.Input.RegisterHotKey("openspinningwheel", "Open Spinning Wheel GUI", 
+                GlKeys.F, HotkeyType.GUIOrOtherControls);
+            
+            capi.Input.SetHotKeyHandler("openspinningwheel", OnOpenSpinningWheelHotkey);
         }
-        catch (Exception e)
+        
+        public override void StartServerSide(ICoreServerAPI sapi)
         {
-            Mod.Logger.Error("Could not load spinning wheel config! Loading default settings instead.");
-            Mod.Logger.Error(e);
-            Config = new SpinningWheelConfig();
+            // send connecting players the config settings
+            sapi.Event.PlayerJoin += this.OnPlayerJoin; // add method so we can remove it in dispose to prevent memory leaks
+            // register network channel to send data to clients
+            this.serverChannel = sapi.Network.RegisterChannel("spinningwheel")
+                .RegisterMessageType<SyncClientPacket>()
+                .SetMessageHandler<SyncClientPacket>((player, packet) => { /* do nothing.*/ });
         }
-    }
-    
-    public override void StartClientSide(ICoreClientAPI api)
-    {
-        base.StartClientSide(api);
         
-        clientApi = api;
-        
-        // Client creates default config if server hasn't sent one yet
-        if (Config == null)
+        private bool OnOpenSpinningWheelHotkey(KeyCombination keyCombination)
         {
-            Config = new SpinningWheelConfig();
+            EntityPlayer player = clientApi.World.Player.Entity;
+            
+            if (player?.MountedOn?.MountSupplier is BlockEntitySpinningWheel spinningWheel)
+            {
+                spinningWheel.OpenGui(clientApi.World.Player);
+                return true;
+            }
+            
+            return false;
         }
-        
-        api.Input.RegisterHotKey("openspinningwheel", "Open Spinning Wheel GUI", 
-            GlKeys.F, HotkeyType.GUIOrOtherControls);
-        
-        api.Input.SetHotKeyHandler("openspinningwheel", OnOpenSpinningWheelHotkey);
-    }
-    
-    private bool OnOpenSpinningWheelHotkey(KeyCombination keyCombination)
-    {
-        EntityPlayer player = clientApi.World.Player.Entity;
-        
-        if (player?.MountedOn?.MountSupplier is BlockEntitySpinningWheel spinningWheel)
+
+        public void OnPlayerJoin(IServerPlayer player)
         {
-            spinningWheel.OpenGui(clientApi.World.Player);
-            return true;
+            this.serverChannel.SendPacket(new SyncClientPacket
+            {
+                RequireTailorClass = ModConfig.Loaded.RequireTailorClass,
+                AllowedClasses = ModConfig.Loaded.AllowedClasses
+            }, player);
+
         }
         
-        return false;
+        public override void Dispose()
+        {
+            // remove our player join listener so we dont create memory leaks
+            if (this.api is ICoreServerAPI sapi)
+            {
+                sapi.Event.PlayerJoin -= this.OnPlayerJoin;
+            }
+        }
     }
 }

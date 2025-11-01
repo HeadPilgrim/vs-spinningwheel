@@ -2,6 +2,7 @@
 using SpinningWheel.BLockEntityRenderer;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
+using SpinningWheel.ModConfig;
 using SpinningWheel.Utilities;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -302,7 +303,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     private bool CanPlayerUseSpinningWheel(IPlayer player)
     {
         // Use server config (or default if not loaded yet)
-        if (SpinningWheelModSystem.Config == null || !SpinningWheelModSystem.Config.RequireTailorClass)
+        if (ModConfig.ModConfig.Loaded == null || !ModConfig.ModConfig.Loaded.RequireTailorClass)
         {
             return true;
         }
@@ -311,7 +312,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         string playerClass = player.Entity.WatchedAttributes.GetString("characterClass", "").ToLower();
     
         // Check if player's class is in the allowed list
-        foreach (string allowedClass in SpinningWheelModSystem.Config.AllowedClasses)
+        foreach (string allowedClass in ModConfig.ModConfig.Loaded.AllowedClasses)
         {
             if (playerClass == allowedClass.ToLower())
             {
@@ -320,7 +321,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             }
         }
     
-        Api?.Logger?.Notification($"[SpinningWheel] No matching class found. Allowed classes: {string.Join(", ", SpinningWheelModSystem.Config.AllowedClasses)}");
+        Api?.Logger?.Notification($"[SpinningWheel] No matching class found. Allowed classes: {string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses)}");
         return false;
     }
     
@@ -710,7 +711,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             if (Api.Side == EnumAppSide.Client)
             {
-                string requiredClasses = string.Join(", ", SpinningWheelModSystem.Config.AllowedClasses);
+                string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
                 (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass", 
                     Lang.Get("spinningwheel:spinning-wheel-requires-class", requiredClasses));
             }
