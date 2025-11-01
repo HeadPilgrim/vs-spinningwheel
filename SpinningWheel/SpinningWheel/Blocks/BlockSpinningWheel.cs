@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SpinningWheel.BlockEntities;
 using SpinningWheel.Utilities;
 using Vintagestory.API.Client;
@@ -61,14 +62,37 @@ namespace SpinningWheel.Blocks
 
         public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
         {
-            return new WorldInteraction[]
+            string actionText = "spinningwheel:blockhelp-spinningwheel-use";
+    
+            // Add hotkey hint if on client
+            if (api.Side == EnumAppSide.Client)
+            {
+                var clientApi = api as ICoreClientAPI;
+                var hotkey = clientApi?.Input.GetHotKeyByCode("openspinningwheel");
+                if (hotkey != null)
+                {
+                    string hotkeyName = hotkey.CurrentMapping.ToString();
+                    actionText = Lang.Get("spinningwheel:blockhelp-spinningwheel-use", hotkeyName);
+                }
+            }
+    
+            var interactions = new List<WorldInteraction>
             {
                 new WorldInteraction()
                 {
-                    ActionLangCode = "spinningwheel:blockhelp-spinningwheel-use",
+                    ActionLangCode = actionText,
                     MouseButton = EnumMouseButton.Right
                 }
-            }.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));
+            };
+    
+            // Add base interactions
+            var baseInteractions = base.GetPlacedBlockInteractionHelp(world, selection, forPlayer);
+            if (baseInteractions != null)
+            {
+                interactions.AddRange(baseInteractions);
+            }
+    
+            return interactions.ToArray();
         }
 
         #region Multi-Block Collision/Selection

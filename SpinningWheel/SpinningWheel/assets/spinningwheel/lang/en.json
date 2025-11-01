@@ -1,6 +1,6 @@
 {
     "block-hpspinningwheel-*": "Spinning Wheel",
-    "spinningwheel:blockhelp-spinningwheel-use": "Sit and spin fiber!",
+    "blockhelp-spinningwheel-use": "Sit and spin fibers ({0} to open GUI)",
     "spinningwheel:spinning-wheel-requires-class": "The spinning wheel is restricted to these classes: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
     "item-hpmoaitem": "Mother of All",
@@ -8,7 +8,6 @@
     "item-hpspinningwheelwheelitem": "Drive Wheel",
 
     "config-title": "Spinning Wheel Configuration",
-
     
     "section-tailor": "Tailor Class Restrictions",
     "section-flax": "Vanilla Flax Settings",
