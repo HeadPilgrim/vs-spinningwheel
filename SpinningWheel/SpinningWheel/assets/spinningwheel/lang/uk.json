@@ -1,0 +1,77 @@
+{
+    "block-hpspinningwheel-*": "Самопрядка",
+    "blockhelp-spinningwheel-use": "Сядьте і прядіть волокно ({0} для відкриття інтерфейсу)",
+    "spinningwheel:spinning-wheel-requires-class": "Самопрядка обмежене цими класами {0}.",
+    "spinningwheel:spinning-wheel-occupied": "Хтось вже користується цим!",
+    "item-hpmoaitem": "Рогулька і котушка",
+    "item-hpspinningwheelframe": "Рама самопрядки",
+    "item-hpspinningwheelwheelitem": "Приводне колесо",
+
+    "config-title": "Конфігурація самопрядки",
+    
+    "section-tailor": "Обмеження класом кравця",
+    "section-flax": "Налаштування ванільного льону",
+    "section-cotton": "Floral Zones of the Caribbean",
+    "section-wool": "Wool & More налаштування",
+    "section-pemmican": "Long-term food налаштування",
+
+    "RequireTailorClass": "Вимага класу кравця",
+    "RequireTailorClass-Comment": "Якщо ця опція увімкнена, тільки гравці з дозволеними класами можуть використовувати прядильне колесо.",
+
+    "setting-allowed-classes": "Дозволені класи",
+    "setting-allowed-classes-comment": "Розділений комами список класів гравців, які можуть використовувати прядильне колесо",
+
+    "setting-flax-spin-time": "Час прядіння льону",
+    "setting-flax-spin-time-comment": "Час у секундах, необхідний для прядіння лляних волокон у шпагат",
+
+    "setting-flax-input-quantity": "Кількість споживання льону",
+    "setting-flax-input-quantity-comment": "Кількість лляних волокон, необхідних для одного прядіння",
+
+    "setting-flax-output-quantity": "Кількість виготовленого льону",
+    "setting-flax-output-quantity-comment": "Кількість виробленого лляного шпагату за один цикл прядіння",
+
+    "setting-cotton-spin-time": "Час прядіння бавовни",
+    "setting-cotton-spin-time-comment": "Час у секундах, необхідний для прядіння бавовни у шпагат",
+
+    "setting-cotton-input-quantity": "Кількість споживання бавовни",
+    "setting-cotton-input-quantity-comment": "Кількість бавовни, необхідної для одного прядіння",
+
+    "setting-cotton-output-quantity": "Кількість виготовленої бавовни",
+    "setting-cotton-output-quantity-comment": "Кількість виробленого бавовняного шпагату за один цикл прядіння",
+
+    "setting-wool-fiber-spin-time": "Час прядіння вовни",
+    "setting-wool-fiber-spin-time-comment": "Час у секундах, необхідний для прядіння вовняних волокон у шпагат",
+
+    "setting-wool-fiber-input-quantity": "Кількість споживання вовни",
+    "setting-wool-fiber-input-quantity-comment": "Кількість вовни, необхідної для одного прядіння",
+
+    "setting-wool-fiber-output-quantity": "Кількість виготовленої вовни",
+    "setting-wool-fiber-output-quantity-comment": "Кількість вовняного шпагату, виробленого за один цикл прядіння",
+
+    "setting-wool-twine-spin-time": "Час прядіння вовняного шпагату",
+    "setting-wool-twine-spin-time-comment": "Час у секундах, необхідний для перетворення вовняної шпагату в нитку",
+
+    "setting-wool-twine-input-quantity": "Кількість споживання вовняної нитки",
+    "setting-wool-twine-input-quantity-comment": "Кількість вовняної нитки, необхідної для одного прядіння",
+
+    "setting-wool-twine-output-quantity": "Кількість виготовленого вовняного шпагату",
+    "setting-wool-twine-output-quantity-comment": "Кількість ниток, вироблених за один оберт шерстяної пряжі",
+
+    "setting-papyrus-input-quantity": "Кількість споживання папірусу",
+    "setting-papyrus-input-quantity-comment": "Кількість волокон папірусу, необхідних для одного прядіння",
+
+    "setting-papyrus-output-quantity": "Кількість виготовленого папірусу",
+    "setting-papyrus-output-quantity-comment": "Кількість шпагату, виробленого за один цикл прядіння папірусу",
+
+    "setting-papyrus-spin-time": "Час прядіння папірусу",
+    "setting-papyrus-spin-time-comment": "Час у секундах, необхідний для перетворення папірусу на шпагат",
+
+    "setting-algae-input-quantity": "Кількість споживання водоростей",
+    "setting-algae-input-quantity-comment": "Кількість волокон водоростей, необхідних для одного прядіння",
+
+    "setting-algae-output-quantity": "Кількість виготовлених водоростей",
+    "setting-algae-output-quantity-comment": "Кількість шпагату, виробленого за один цикл переробки водоростей",
+
+    "setting-algae-spin-time": "Час прядіння водоростей",
+    "setting-algae-spin-time-comment": "Час у секундах, необхідний для перетворення водоростей на шпагат"
+}
