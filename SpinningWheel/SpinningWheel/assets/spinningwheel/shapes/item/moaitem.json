@@ -11,9 +11,9 @@
 		"linen": [16, 16]
 	},
 	"textures": {
-		"oak2": "block/wood/crudechair/oak",
-		"oak": "block/wood/debarked/oak",
-		"linen": "block/linen"
+		"oak2": "game:block/wood/crudechair/oak",
+		"oak": "game:block/wood/debarked/oak",
+		"linen": "game:block/linen"
 	},
 	"elements": [
 		{

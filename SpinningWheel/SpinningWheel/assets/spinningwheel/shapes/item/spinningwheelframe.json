@@ -10,8 +10,8 @@
 		"oak": [16, 16]
 	},
 	"textures": {
-		"oak2": "block/wood/crudechair/oak",
-		"oak": "block/wood/debarked/oak"
+		"oak2": "game:block/wood/crudechair/oak",
+		"oak": "game:block/wood/debarked/oak"
 	},
 	"elements": [
 		{

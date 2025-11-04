@@ -13,11 +13,11 @@
 		"rope.png": [16, 16]
 	},
 	"textures": {
-		"fibers.png": "item/resource/fibers",
-		"fibers_bottom_var1.png": "item/resource/fibers",
-		"fibers_bottom_var2.png": "item/resource/fibers",
-		"fibers_bottom_var3.png": "item/resource/fibers",
-		"rope.png": "item/resource/rope"
+		"fibers.png": "game:item/resource/fibers",
+		"fibers_bottom_var1.png": "game:item/resource/fibers",
+		"fibers_bottom_var2.png": "game:item/resource/fibers",
+		"fibers_bottom_var3.png": "game:item/resource/fibers",
+		"rope.png": "game:item/resource/rope"
 	},
 	"elements": [
 		{
