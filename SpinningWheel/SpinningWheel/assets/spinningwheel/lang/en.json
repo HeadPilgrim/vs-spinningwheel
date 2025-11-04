@@ -6,6 +6,26 @@
     "item-hpmoaitem": "Mother of All",
     "item-hpspinningwheelframe": "Spinning Wheel Frame",
     "item-hpspinningwheelwheelitem": "Drive Wheel",
+    
+    
+    "item-dropspindle-wood": "Wooden Drop Spindle",
+    "item-dropspindle-bone": "Bone Drop Spindle",
+
+    "spinningwheel:dropspindle-spin": "Spin fibers (Hold in offhand)",
+    "spinningwheel:dropspindle-extract": "Extract twine (Sneak + Right Click)",
+    "spinningwheel:dropspindle-need-fibers": "Hold spinnable fibers in your offhand",
+    "spinningwheel:dropspindle-extract-hint": "Sneak + Right Click to extract your twine",
+    "spinningwheel:dropspindle-complete": "Spinning complete! Sneak + Right Click to extract.",
+    "spinningwheel:dropspindle-progress": "Spinning progress: {0}%",
+    "spinningwheel:dropspindle-progress-info": "Progress: {0}%",
+    "spinningwheel:dropspindle-ready": "Ready to extract: {0}",
+
+    "itemdesc-dropspindle-wood": "A simple handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
+    "itemdesc-dropspindle-bone": "A durable handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
+
+    
+    
+    
 
     "config-title": "Spinning Wheel Configuration",
     

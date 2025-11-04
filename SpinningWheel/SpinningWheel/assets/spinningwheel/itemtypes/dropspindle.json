@@ -1,0 +1,63 @@
+﻿{
+  "code": "dropspindle",
+  "class": "ItemDropSpindle",
+  "maxstacksize": 1,
+  "variantgroups": [
+    {
+      "code": "material",
+      "states": ["wood", "bone"]
+    }
+  ],
+  "creativeinventory": {
+    "general": ["*"]
+  },
+  "durabilityByType": {
+    "*-wood": 200,
+    "*-bone": 300
+  },
+  "attributes": {
+    "handbook": {
+      "groupBy": ["dropspindle-*"]
+    },
+    "spinsPerCompletion": 2,
+    "spinDurabilityCost": 1,
+    "toolrackTransform": {
+      "translation": { "x": 0, "y": 0.45, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": -90 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+      "scale": 0.75
+    }
+  },
+  "shape": {
+    "base": "spinningwheel:item/dropspindle"
+  },
+  "texturesByType": {
+    "*-wood": {
+      "wood": { "base": "game:block/wood/debarked/oak" },
+      "kapok": {"base": "game:block/wood/debarked/kapok"},
+      "linen": { "base": "game:block/linen"}
+    },
+    "*-bone": {
+      "wood": { "base": "game:block/bone" },
+      "kapok": { "base": "game:block/stone/rock/granite" },
+      "linen": { "base": "game:block/linen"}
+    }
+  },
+  "guiTransform": {
+    "translation": { "x": -6.7, "y": -8.4, "z": 0 },
+    "rotation": { "x": 0, "y": 13, "z": -180 },
+    "scale": 1.78
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.4, "z": 0 },
+    "rotation": { "x": 90, "y": 0, "z": 0 },
+    "scale": 2
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.4, "y": -1, "z": -1.1 },
+    "rotation": { "x": 1, "y": -155, "z": 87 },
+    "scale": 0.6
+  },
+  "heldTpHitAnimation": "breakhit",
+  "heldTpIdleAnimation": "holdbothhands"
+}
