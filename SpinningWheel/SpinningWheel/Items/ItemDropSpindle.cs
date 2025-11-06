@@ -22,10 +22,17 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling)
         {
+            api.Logger.Debug("InteractStart: firstEvent={0}, blockSel={1}, sneak={2}", firstEvent, blockSel != null, byEntity.Controls.Sneak);
+            
             if (blockSel != null || !firstEvent) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
+            
+            api.Logger.Debug("Player valid. Sneak: {0}, Complete: {1}, Offhand empty: {2}", 
+                byEntity.Controls.Sneak, 
+                IsSpindleComplete(slot), 
+                byEntity.LeftHandItemSlot?.Empty);
 
             // Check if sneaking and spindle is complete - extract twine
             if (byEntity.Controls.Sneak && IsSpindleComplete(slot))
@@ -66,19 +73,69 @@ namespace SpinningWheel.Items
 
             // Start spinning
             handHandling = EnumHandHandling.PreventDefault;
-            
-            // Play animation on client
-            if (api.Side == EnumAppSide.Client)
-            {
-                StartSpinAnimation(byEntity);
-            }
         }
+        
+        // Put this at the top of the class (once)
+        private readonly Random rand = new Random();
 
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             if (blockSel != null) return false;
+            if (api.Side != EnumAppSide.Client) return secondsUsed < SPIN_ANIMATION_TIME;
 
-            // Complete after animation time
+            // Spawn burst every 0.1s
+            if (secondsUsed % 0.1f > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
+
+            Vec3d center = byEntity.Pos.XYZ
+                .Add(0, byEntity.LocalEyePos.Y - 1.08, 0)
+                .Ahead(0.5f, byEntity.Pos.Pitch, byEntity.Pos.Yaw);
+
+            // SPIRAL MATH
+            float angle = secondsUsed * 9.42f;  // ~1.5 rev/sec
+            float t = secondsUsed / SPIN_ANIMATION_TIME;  // 0 → 1
+
+            float radius = GameMath.Lerp(0f, 0.22f, t);        // Grow from 0 → 0.22
+            float yOff   = GameMath.Lerp(0.08f, -0.08f, t);    // Rise → fall
+
+            int count = 4 + rand.Next(3);  // 4–6 particles per burst
+
+            for (int i = 0; i < count; i++)
+            {
+                float localAngle = angle + i * (GameMath.PI * 2f / count);
+                double dx = radius * Math.Cos(localAngle);
+                double dz = radius * Math.Sin(localAngle);
+
+                Vec3d pos = center.AddCopy(dx, yOff, dz);
+
+                float tangSpeed = 0.12f + (float)rand.NextDouble() * 0.08f;
+                Vec3f vel = new Vec3f(
+                    (float)-Math.Sin(localAngle) * tangSpeed,
+                    -0.02f + (float)rand.NextDouble() * 0.02f,
+                    (float)Math.Cos(localAngle) * tangSpeed
+                );
+
+                var p = new SimpleParticleProperties(
+                    minQuantity: 1,
+                    maxQuantity: 1,
+                    color: ColorUtil.ColorFromRgba(245, 245, 255, 180),
+                    minPos: pos.AddCopy(-0.02, -0.02, -0.02),
+                    maxPos: pos.AddCopy( 0.02,  0.02,  0.02),
+                    minVelocity: vel,
+                    maxVelocity: vel.AddCopy(0.03f, 0.03f, 0.03f),
+                    lifeLength: 0.3f,
+                    gravityEffect: 0.07f,
+                    minSize: 0.1f,
+                    maxSize: 0.1f
+                )
+                {
+                    ParticleModel = EnumParticleModel.Quad,
+                    OpacityEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -90),
+                    SizeEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, 0.2f)
+                };
+
+                byEntity.World.SpawnParticles(p);
+            }
+
             return secondsUsed < SPIN_ANIMATION_TIME;
         }
 
@@ -269,16 +326,6 @@ namespace SpinningWheel.Items
             }
 
             return spinnableStacks.ToArray();
-        }
-
-        #endregion
-
-        #region Animation
-
-        private void StartSpinAnimation(EntityAgent byEntity)
-        {
-            // Play a spinning animation (you'll need to define this in your entity animations)
-            byEntity.AnimManager?.StartAnimation("spin-dropspindle");
         }
 
         #endregion

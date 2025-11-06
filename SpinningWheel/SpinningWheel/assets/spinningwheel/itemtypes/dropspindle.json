@@ -59,5 +59,6 @@
     "scale": 0.6
   },
   "heldTpHitAnimation": "breakhit",
-  "heldTpIdleAnimation": "holdbothhands"
+  "heldTpIdleAnimation": "holdbothhands",
+  "heldTpUseAnimation": "holdbothhands"
 }
