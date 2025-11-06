@@ -75,66 +75,17 @@ namespace SpinningWheel.Items
             handHandling = EnumHandHandling.PreventDefault;
         }
         
-        // Put this at the top of the class (once)
-        private readonly Random rand = new Random();
 
-        public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
+        public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot,
+            EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             if (blockSel != null) return false;
             if (api.Side != EnumAppSide.Client) return secondsUsed < SPIN_ANIMATION_TIME;
 
-            // Spawn burst every 0.1s
-            if (secondsUsed % 0.1f > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
+            // ---- burst timing -------------------------------------------------
+            if (secondsUsed % BURST_INTERVAL > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
 
-            Vec3d center = byEntity.Pos.XYZ
-                .Add(0, byEntity.LocalEyePos.Y - 1.08, 0)
-                .Ahead(0.5f, byEntity.Pos.Pitch, byEntity.Pos.Yaw);
-
-            // SPIRAL MATH
-            float angle = secondsUsed * 9.42f;  // ~1.5 rev/sec
-            float t = secondsUsed / SPIN_ANIMATION_TIME;  // 0 → 1
-
-            float radius = GameMath.Lerp(0f, 0.22f, t);        // Grow from 0 → 0.22
-            float yOff   = GameMath.Lerp(0.08f, -0.08f, t);    // Rise → fall
-
-            int count = 4 + rand.Next(3);  // 4–6 particles per burst
-
-            for (int i = 0; i < count; i++)
-            {
-                float localAngle = angle + i * (GameMath.PI * 2f / count);
-                double dx = radius * Math.Cos(localAngle);
-                double dz = radius * Math.Sin(localAngle);
-
-                Vec3d pos = center.AddCopy(dx, yOff, dz);
-
-                float tangSpeed = 0.12f + (float)rand.NextDouble() * 0.08f;
-                Vec3f vel = new Vec3f(
-                    (float)-Math.Sin(localAngle) * tangSpeed,
-                    -0.02f + (float)rand.NextDouble() * 0.02f,
-                    (float)Math.Cos(localAngle) * tangSpeed
-                );
-
-                var p = new SimpleParticleProperties(
-                    minQuantity: 1,
-                    maxQuantity: 1,
-                    color: ColorUtil.ColorFromRgba(245, 245, 255, 180),
-                    minPos: pos.AddCopy(-0.02, -0.02, -0.02),
-                    maxPos: pos.AddCopy( 0.02,  0.02,  0.02),
-                    minVelocity: vel,
-                    maxVelocity: vel.AddCopy(0.03f, 0.03f, 0.03f),
-                    lifeLength: 0.3f,
-                    gravityEffect: 0.07f,
-                    minSize: 0.1f,
-                    maxSize: 0.1f
-                )
-                {
-                    ParticleModel = EnumParticleModel.Quad,
-                    OpacityEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -90),
-                    SizeEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, 0.2f)
-                };
-
-                byEntity.World.SpawnParticles(p);
-            }
+            SpawnSpiralBurst(byEntity, secondsUsed);
 
             return secondsUsed < SPIN_ANIMATION_TIME;
         }
@@ -330,6 +281,86 @@ namespace SpinningWheel.Items
 
         #endregion
 
+        
+        #region Particles
+        
+        // ------------------------------------------------------------
+        private readonly Random rand = new Random();
+
+        // ------------------------------------------------------------
+        //  STEEP SPIRAL TUNING
+        private const float SPIN_SPEED      = 9.84f;  // 3 rev/sec → tight coils
+        private const float MAX_RADIUS      = 0.12f;   // Narrow width
+        private const float MAX_Y_OFFSET    = -0.2f;   // Deep drop (from +0.2 to -0.6)
+        private const float PARTICLE_LIFE   = 0.08f;    // Long enough to trace path
+        private const float PARTICLE_GRAV   = 0.02f;   // Very low = follows spiral
+        private const float PARTICLE_MIN_SZ = 0.08f;
+        private const float PARTICLE_MAX_SZ = 0.18f;
+        private const float BURST_INTERVAL  = 0.03f;   // More bursts = denser helix
+        private const int   MIN_PER_BURST   = 1;
+        private const int   MAX_PER_BURST   = 2;
+        // ------------------------------------------------------------
+        
+        private void SpawnSpiralBurst(EntityAgent byEntity, float secondsUsed)
+        {
+            Vec3d center = byEntity.Pos.XYZ
+                .Add(0, byEntity.LocalEyePos.Y - 1.08, 0)
+                .Ahead(0.5f, byEntity.Pos.Pitch, byEntity.Pos.Yaw);
+
+            float t = secondsUsed / SPIN_ANIMATION_TIME;  // [0 → 1]
+            float angle = secondsUsed * SPIN_SPEED;
+
+            // STEEP: wide at top → point at bottom, big Y drop
+            float radius = GameMath.Lerp(MAX_RADIUS, 0.08f, t);           // 0.12 → 0
+            float yOff   = GameMath.Lerp(0.2f, MAX_Y_OFFSET, t);       // +0.2 → -0.6
+
+            int count = MIN_PER_BURST + rand.Next(MAX_PER_BURST - MIN_PER_BURST + 1);
+
+            for (int i = 0; i < count; i++)
+            {
+                float localAngle = angle + i * (GameMath.PI * 2f / count);
+                double dx = radius * Math.Cos(localAngle);
+                double dz = radius * Math.Sin(localAngle);
+                Vec3d pos = center.AddCopy(dx, yOff, dz);
+
+                // Strong tangential + vertical pull
+                float tang = 0.15f + (float)rand.NextDouble() * 0.1f;
+                float velY = GameMath.Lerp(0.06f, -0.08f, t);  // rise → strong pull down
+                Vec3f vel = new Vec3f(
+                    (float)-Math.Sin(localAngle) * tang,
+                    velY + (float)rand.NextDouble() * 0.03f,
+                    (float)Math.Cos(localAngle) * tang
+                );
+
+                // Size tapers with radius
+                float sizeFactor = 1f - t;
+                float sizeBase = PARTICLE_MIN_SZ + (PARTICLE_MAX_SZ - PARTICLE_MIN_SZ) * sizeFactor;
+                float sizeMax  = sizeBase + 0.08f;
+
+                var p = new SimpleParticleProperties(
+                    minQuantity: 1, maxQuantity: 1,
+                    color: ColorUtil.ColorFromRgba(245, 245, 255, 200),
+                    minPos: pos.AddCopy(-0.015, -0.015, -0.015),
+                    maxPos: pos.AddCopy( 0.015,  0.015,  0.015),
+                    minVelocity: vel,
+                    maxVelocity: vel.AddCopy(0.02f, 0.02f, 0.02f),
+                    lifeLength: PARTICLE_LIFE,
+                    gravityEffect: PARTICLE_GRAV,
+                    minSize: sizeBase,
+                    maxSize: sizeMax
+                )
+                {
+                    ParticleModel = EnumParticleModel.Quad,
+                    OpacityEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -120),
+                    SizeEvolve    = new EvolvingNatFloat(EnumTransformFunction.LINEAR, 0.1f)
+                };
+
+                byEntity.World.SpawnParticles(p);
+            }
+        }
+        
+        #endregion
+        
         #region Rendering
 
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
