@@ -21,7 +21,7 @@
     },
     "spinsPerCompletion": 2,
     "spinDurabilityCost": 1,
-    "toolrackTransform": {
+    "dropspindlesrackTransform": {
       "translation": { "x": 0, "y": 0.45, "z": 0 },
       "rotation": { "x": 0, "y": 0, "z": -90 },
       "origin": { "x": 0.5, "y": 0, "z": 0.5 },
@@ -29,7 +29,21 @@
     }
   },
   "shape": {
-    "base": "spinningwheel:item/dropspindle"
+    "base": "spinningwheel:item/dropspindles/dropspindle",
+    "alternates": [
+      { "base": "item/dropspindles/dropspindle-spin1" },
+      { "base": "item/dropspindles/dropspindle-spin2" },
+      { "base": "item/dropspindles/dropspindle-spin3" },
+      { "base": "item/dropspindles/dropspindle-spin4" },
+      { "base": "item/dropspindles/dropspindle-spin5" },
+      { "base": "item/dropspindles/dropspindle-spin6" },
+      { "base": "item/dropspindles/dropspindle-spin7" },
+      { "base": "item/dropspindles/dropspindle-spin8" },
+      { "base": "item/dropspindles/dropspindle-spin9" },
+      { "base": "item/dropspindles/dropspindle-spin10" },
+      { "base": "item/dropspindles/dropspindle-spin11" },
+      { "base": "item/dropspindles/dropspindle-spin12" }
+    ]
   },
   "texturesByType": {
     "*-wood": {

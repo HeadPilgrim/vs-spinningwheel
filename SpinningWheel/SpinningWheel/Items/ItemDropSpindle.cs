@@ -14,6 +14,7 @@ namespace SpinningWheel.Items
     {
         // Animation times in seconds
         private const float SPIN_ANIMATION_TIME = 2.0f;
+        private const int MAX_SPIN_VARIANTS = 12;
         
         public override void OnLoaded(ICoreAPI api)
         {
@@ -70,6 +71,12 @@ namespace SpinningWheel.Items
                 handHandling = EnumHandHandling.PreventDefault;
                 return;
             }
+            
+            if (byEntity.World is IClientWorldAccessor)
+            {
+                slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
+            }
+            slot.Itemstack.Attributes.SetInt("renderVariant", 1);
 
             // Start spinning
             handHandling = EnumHandHandling.PreventDefault;
@@ -80,18 +87,43 @@ namespace SpinningWheel.Items
             EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             if (blockSel != null) return false;
-            if (api.Side != EnumAppSide.Client) return secondsUsed < SPIN_ANIMATION_TIME;
 
-            // ---- burst timing -------------------------------------------------
-            if (secondsUsed % BURST_INTERVAL > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
+            // Calculate render variant based on animation progress
+            int renderVariant = GameMath.Clamp(
+                (int)Math.Ceiling(secondsUsed / SPIN_ANIMATION_TIME * MAX_SPIN_VARIANTS), 
+                1, 
+                MAX_SPIN_VARIANTS
+            );
+            int prevRenderVariant = slot.Itemstack.Attributes.GetInt("renderVariant", 0);
 
-            SpawnSpiralBurst(byEntity, secondsUsed);
+            slot.Itemstack.TempAttributes.SetInt("renderVariant", renderVariant);
+            slot.Itemstack.Attributes.SetInt("renderVariant", renderVariant);
+
+            if (prevRenderVariant != renderVariant)
+            {
+                (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
+            }
+
+            if (api.Side == EnumAppSide.Client)
+            {
+                // Your existing particle code
+                if (secondsUsed % BURST_INTERVAL > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
+                SpawnSpiralBurst(byEntity, secondsUsed);
+            }
 
             return secondsUsed < SPIN_ANIMATION_TIME;
         }
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
+            // Reset render variant
+            if (byEntity.World is IClientWorldAccessor)
+            {
+                slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
+            }
+            slot.Itemstack?.Attributes.SetInt("renderVariant", 0);
+            (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
+            
             if (blockSel != null || secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
@@ -110,6 +142,19 @@ namespace SpinningWheel.Items
             {
                 ProcessSpin(slot, offhandSlot, byEntity);
             }
+        }
+        
+        public override bool OnHeldInteractCancel(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, EnumItemUseCancelReason cancelReason)
+        {
+            // Reset render variant on cancel
+            if (byEntity.World is IClientWorldAccessor)
+            {
+                slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
+            }
+            slot.Itemstack?.Attributes.SetInt("renderVariant", 0);
+            (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
+    
+            return true;
         }
         
 
@@ -291,7 +336,7 @@ namespace SpinningWheel.Items
         //  STEEP SPIRAL TUNING
         private const float SPIN_SPEED      = 9.84f;  // 3 rev/sec → tight coils
         private const float MAX_RADIUS      = 0.12f;   // Narrow width
-        private const float MAX_Y_OFFSET    = -0.2f;   // Deep drop (from +0.2 to -0.6)
+        private const float MAX_Y_OFFSET    = -0.55f;   // Deep drop (from +0.2 to -0.6)
         private const float PARTICLE_LIFE   = 0.08f;    // Long enough to trace path
         private const float PARTICLE_GRAV   = 0.02f;   // Very low = follows spiral
         private const float PARTICLE_MIN_SZ = 0.08f;
@@ -312,7 +357,7 @@ namespace SpinningWheel.Items
 
             // STEEP: wide at top → point at bottom, big Y drop
             float radius = GameMath.Lerp(MAX_RADIUS, 0.08f, t);           // 0.12 → 0
-            float yOff   = GameMath.Lerp(0.2f, MAX_Y_OFFSET, t);       // +0.2 → -0.6
+            float yOff   = GameMath.Lerp(0, MAX_Y_OFFSET, t);       // +0.2 → -0.6
 
             int count = MIN_PER_BURST + rand.Next(MAX_PER_BURST - MIN_PER_BURST + 1);
 
