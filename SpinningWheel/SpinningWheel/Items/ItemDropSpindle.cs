@@ -15,6 +15,7 @@ namespace SpinningWheel.Items
         // Animation times in seconds
         private const float SPIN_ANIMATION_TIME = 2.0f;
         private const int MAX_SPIN_VARIANTS = 12;
+        private ILoadedSound spindleSound;
         
         public override void OnLoaded(ICoreAPI api)
         {
@@ -42,7 +43,7 @@ namespace SpinningWheel.Items
                 {
                     ExtractTwine(slot, player);
                 }
-                handHandling = EnumHandHandling.PreventDefault;
+                handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
 
@@ -56,7 +57,7 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "complete", 
                         Lang.Get("spinningwheel:dropspindle-extract-hint"));
                 }
-                handHandling = EnumHandHandling.PreventDefault;
+                handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
 
@@ -68,18 +69,36 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "nospinnable", 
                         Lang.Get("spinningwheel:dropspindle-need-fibers"));
                 }
-                handHandling = EnumHandHandling.PreventDefault;
+                handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
             
             if (byEntity.World is IClientWorldAccessor)
             {
                 slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
+                
+                // ===== SOUND IMPLEMENTATION START =====
+                // Stop any existing sound first
+                spindleSound?.Stop();
+                spindleSound?.Dispose();
+                
+                // Load and play the spinning sound
+                spindleSound = (api as ICoreClientAPI).World.LoadSound(new SoundParams()
+                {
+                    Location = new AssetLocation("spinningwheel:sounds/item/dropspindle"),
+                    ShouldLoop = false,
+                    Position = byEntity.Pos.XYZ.ToVec3f(),
+                    DisposeOnFinish = true,
+                    Volume = 0.5f,
+                    Range = 8
+                });
+                spindleSound?.Start();
+                // ===== SOUND IMPLEMENTATION END =====
             }
             slot.Itemstack.Attributes.SetInt("renderVariant", 1);
 
             // Start spinning
-            handHandling = EnumHandHandling.PreventDefault;
+            handHandling = EnumHandHandling.PreventDefaultAction;
         }
         
 
@@ -116,6 +135,13 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
+            // ===== SOUND IMPLEMENTATION START =====
+            // Stop and dispose the sound
+            spindleSound?.Stop();
+            spindleSound?.Dispose();
+            spindleSound = null;
+            // ===== SOUND IMPLEMENTATION END =====
+    
             // Reset render variant
             if (byEntity.World is IClientWorldAccessor)
             {
@@ -123,14 +149,14 @@ namespace SpinningWheel.Items
             }
             slot.Itemstack?.Attributes.SetInt("renderVariant", 0);
             (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
-            
+    
             if (blockSel != null || secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
 
             ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
-            
+    
             // Validate again
             if (IsSpindleComplete(slot) || offhandSlot?.Empty != false || !CanSpin(offhandSlot.Itemstack))
             {
@@ -146,6 +172,13 @@ namespace SpinningWheel.Items
         
         public override bool OnHeldInteractCancel(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, EnumItemUseCancelReason cancelReason)
         {
+            // ===== SOUND IMPLEMENTATION START =====
+            // Stop and dispose the sound
+            spindleSound?.Stop();
+            spindleSound?.Dispose();
+            spindleSound = null;
+            // ===== SOUND IMPLEMENTATION END =====
+    
             // Reset render variant on cancel
             if (byEntity.World is IClientWorldAccessor)
             {
@@ -153,7 +186,7 @@ namespace SpinningWheel.Items
             }
             slot.Itemstack?.Attributes.SetInt("renderVariant", 0);
             (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
-    
+
             return true;
         }
         
@@ -187,7 +220,7 @@ namespace SpinningWheel.Items
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             // Prevent normal attack when holding spindle
-            handling = EnumHandHandling.PreventDefault;
+            handling = EnumHandHandling.PreventDefaultAction;
         }
 
         public override bool OnHeldAttackCancel(float secondsPassed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSelection, EntitySelection entitySel, EnumItemUseCancelReason cancelReason)
@@ -246,9 +279,6 @@ namespace SpinningWheel.Items
             DamageItem(api.World, byEntity, spindleSlot, durabilityCost);
 
             spindleSlot.MarkDirty();
-
-            // Play sound
-            api.World.PlaySoundAt(new AssetLocation("game:sounds/player/spinning"), byEntity, null, false, 8);
 
             // Show progress message
             IServerPlayer serverPlayer = (byEntity as EntityPlayer)?.Player as IServerPlayer;
