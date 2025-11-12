@@ -2,6 +2,7 @@
 
     using SpinningWheel.BlockEntities;
     using SpinningWheel.Blocks;
+    using SpinningWheel.Items;
     using Vintagestory.API.Client;
     using Vintagestory.API.Server;
     using Vintagestory.API.Config;
@@ -21,10 +22,15 @@
         {
             this.api = api;
             base.Start(api);
+            
             api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
+            
+            api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
+            
             api.World.Logger.Event("started 'SpinningWheel' mod");
             Mod.Logger.Notification("Registered block and block entity for hpspinningwheel");
+            Mod.Logger.Notification("Registered ItemDropSpindle for portable spinning");
         }
         
         public override void StartPre(ICoreAPI api)

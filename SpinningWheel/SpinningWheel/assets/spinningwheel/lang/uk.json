@@ -7,6 +7,19 @@
     "item-hpspinningwheelframe": "Рама самопрядки",
     "item-hpspinningwheelwheelitem": "Приводне колесо",
 
+    "item-dropspindle": "Дерев'яне веретено для прядіння",
+
+    "spinningwheel:dropspindle-spin": "Прясти волокна (Тримайте в лівій руці)",
+    "spinningwheel:dropspindle-extract": "Витягнути мотузку (Присісти + ПКМ)",
+    "spinningwheel:dropspindle-need-fibers": "Тримайте придатні для прядіння волокна в лівій руці",
+    "spinningwheel:dropspindle-extract-hint": "Присісти + ПКМ, щоб витягнути мотузку",
+    "spinningwheel:dropspindle-complete": "Прядіння завершено! Присісти + ПКМ, щоб витягнути.",
+    "spinningwheel:dropspindle-progress": "Прогрес прядіння: {0}%",
+    "spinningwheel:dropspindle-progress-info": "Прогрес: {0}%",
+    "spinningwheel:dropspindle-ready": "Готово до витягнення: {0}",
+
+    "itemdesc-dropspindle": "Простий ручний інструмент для прядіння волокон у нитку. Тримайте волокна в лівій руці та клацніть ПКМ, щоб прясти.",
+
     "config-title": "Конфігурація самопрядки",
     
     "section-tailor": "Обмеження класом кравця",
@@ -17,6 +30,9 @@
 
     "RequireTailorClass": "Вимага класу кравця",
     "RequireTailorClass-Comment": "Якщо ця опція увімкнена, тільки гравці з дозволеними класами можуть використовувати прядильне колесо.",
+
+    "setting-twine-grid-recipe-toggle": "Перемикач рецепту сітки мотузки",
+    "setting-twine-grid-recipe-toggle-comment": "Увімкніть, щоб вимкнути рецепти сітки мотузки",
 
     "setting-allowed-classes": "Дозволені класи",
     "setting-allowed-classes-comment": "Розділений комами список класів гравців, які можуть використовувати прядильне колесо",

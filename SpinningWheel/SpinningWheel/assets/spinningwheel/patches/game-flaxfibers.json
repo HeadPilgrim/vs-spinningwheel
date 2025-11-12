@@ -10,5 +10,12 @@
     },
     "file": "game:itemtypes/resource/flaxfibers.json",
     "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/storageFlags",
+    "value": 257,
+    "file": "game:itemtypes/resource/flaxfibers.json",
+    "side": "Server"
   }
 ]

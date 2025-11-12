@@ -1,0 +1,62 @@
+﻿{
+  "code": "dropspindle",
+  "class": "ItemDropSpindle",
+  "maxstacksize": 1,
+  "creativeinventory": {
+    "general": ["*"]
+  },
+  "durability": 200,
+  "attributes": {
+    "handbook": {
+      "groupBy": ["dropspindle-*"]
+    },
+    "spinsPerCompletion": 2,
+    "spinDurabilityCost": 1,
+    "dropspindlesrackTransform": {
+      "translation": { "x": 0, "y": 0.45, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": -90 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+      "scale": 0.75
+    }
+  },
+  "shape": {
+    "base": "spinningwheel:item/dropspindles/dropspindle",
+    "alternates": [
+      { "base": "item/dropspindles/dropspindle-spin1" },
+      { "base": "item/dropspindles/dropspindle-spin2" },
+      { "base": "item/dropspindles/dropspindle-spin3" },
+      { "base": "item/dropspindles/dropspindle-spin4" },
+      { "base": "item/dropspindles/dropspindle-spin5" },
+      { "base": "item/dropspindles/dropspindle-spin6" },
+      { "base": "item/dropspindles/dropspindle-spin7" },
+      { "base": "item/dropspindles/dropspindle-spin8" },
+      { "base": "item/dropspindles/dropspindle-spin9" },
+      { "base": "item/dropspindles/dropspindle-spin10" },
+      { "base": "item/dropspindles/dropspindle-spin11" },
+      { "base": "item/dropspindles/dropspindle-spin12" }
+    ]
+  },
+  "textures": {
+    "wood": { "base": "game:block/wood/debarked/oak" },
+    "kapok": {"base": "game:block/wood/debarked/kapok"},
+    "linen": { "base": "game:block/linen"}
+  },
+  "guiTransform": {
+    "translation": { "x": -6.7, "y": -8.4, "z": 0 },
+    "rotation": { "x": 0, "y": 13, "z": -180 },
+    "scale": 1.78
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.4, "z": 0 },
+    "rotation": { "x": 90, "y": 0, "z": 0 },
+    "scale": 2
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.4, "y": -1, "z": -1.1 },
+    "rotation": { "x": 1, "y": -155, "z": 87 },
+    "scale": 0.6
+  },
+  "heldTpHitAnimation": "breakhit",
+  "heldTpIdleAnimation": "holdbothhandsspindleidle",
+  "heldTpUseAnimation": "holdbothhandsspindle"
+}

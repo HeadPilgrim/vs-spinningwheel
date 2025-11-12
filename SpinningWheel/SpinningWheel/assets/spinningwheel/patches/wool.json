@@ -156,5 +156,13 @@
     "file": "wool:itemtypes/resource/fibers.json",
     "side": "Server",
     "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/storageFlags",
+    "value": 257,
+    "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
   }
 ]

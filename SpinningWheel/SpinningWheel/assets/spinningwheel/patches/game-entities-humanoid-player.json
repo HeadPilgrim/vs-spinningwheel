@@ -1,0 +1,71 @@
+[
+  {
+    "op": "add",
+    "path": "/client/animations/-",
+    "value": {
+      "code": "holdbothhandsspindle",
+      "animation": "holdbothhandsspindle",
+      "blendMode": "Add",
+      "elementWeight": {
+        "UpperArmR": 100,
+        "LowerArmR": 100,
+        "UpperArmL": 100,
+        "LowerArmL": 100
+      },
+      "elementBlendMode": {
+        "UpperArmR": "AddAverage",
+        "LowerArmR": "AddAverage",
+        "UpperArmL": "AddAverage",
+        "LowerArmL": "AddAverage"
+      }
+    },
+    "file": "game:entities/humanoid/player.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/client/animations/-",
+    "value": {
+      "code": "holdbothhandsspindle-fp",
+      "animation": "holdbothhandsspindle-fp",
+      "blendMode": "Add",
+      "elementWeight": {
+        "UpperArmR": 100,
+        "LowerArmR": 100,
+        "UpperArmL": 100,
+        "LowerArmL": 100
+      },
+      "elementBlendMode": {
+        "UpperArmR": "AddAverage",
+        "LowerArmR": "AddAverage",
+        "UpperArmL": "AddAverage",
+        "LowerArmL": "AddAverage"
+      }
+    },
+    "file": "game:entities/humanoid/player.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/client/animations/-",
+    "value": {
+      "code": "holdbothhandsspindleidle",
+      "animation": "holdbothhandsspindleidle",
+      "blendMode": "Add",
+      "elementWeight": {
+        "UpperArmR": 100,
+        "LowerArmR": 100,
+        "UpperArmL": 100,
+        "LowerArmL": 100
+      },
+      "elementBlendMode": {
+        "UpperArmR": "AddAverage",
+        "LowerArmR": "AddAverage",
+        "UpperArmL": "AddAverage",
+        "LowerArmL": "AddAverage"
+      }
+    },
+    "file": "game:entities/humanoid/player.json",
+    "side": "Server"
+  }
+]
