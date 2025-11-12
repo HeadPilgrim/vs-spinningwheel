@@ -7,7 +7,7 @@
     "item-hpspinningwheelframe": "Рама самопрядки",
     "item-hpspinningwheelwheelitem": "Приводне колесо",
 
-    "item-dropspindle": "Дерев'яне веретено для прядіння",
+    "item-hpdropspindle": "Дерев'яне веретено для прядіння",
 
     "spinningwheel:dropspindle-spin": "Прясти волокна (Тримайте волокна в лівій руці)",
     "spinningwheel:dropspindle-extract": "Витягнути мотузку (Присісти + ПКМ)",
@@ -18,7 +18,7 @@
     "spinningwheel:dropspindle-progress-info": "Прогрес: {0}%",
     "spinningwheel:dropspindle-ready": "Готово до витягнення: {0}",
 
-    "itemdesc-dropspindle": "Простий ручний інструмент для прядіння волокон у нитку. Тримайте волокна в лівій руці та клацніть ПКМ, щоб прясти.",
+    "itemdesc-hpdropspindle": "Простий ручний інструмент для прядіння волокон у нитку. Тримайте волокна в лівій руці та клацніть ПКМ, щоб прясти.",
 
     "config-title": "Конфігурація самопрядки",
     

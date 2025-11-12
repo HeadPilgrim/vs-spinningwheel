@@ -1,0 +1,15 @@
+﻿{
+  "ingredientPattern": " C ,SSS, S ",
+  "ingredients": {
+    "P": { "type": "item", "code": "game:plank-*", "name": "wood" },
+    "S": { "type": "item", "code": "game:stick" },
+    "C": { "type": "item", "code": "game:knife-*", "isTool": true, "toolDurabilityCost": 5}
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "item",
+    "code": "spinningwheel:hpdropspindle",
+    "quantity": 1
+  }
+}

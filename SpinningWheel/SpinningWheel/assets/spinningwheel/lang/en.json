@@ -7,7 +7,7 @@
     "item-hpspinningwheelframe": "Spinning Wheel Frame",
     "item-hpspinningwheelwheelitem": "Drive Wheel",
     
-    "item-dropspindle": "Wooden Drop Spindle",
+    "item-hpdropspindle": "Wooden Drop Spindle",
 
     "spinningwheel:dropspindle-spin": "Spin fibers (Hold fibers in offhand)",
     "spinningwheel:dropspindle-extract": "Extract twine (Sneak + Right Click)",
@@ -18,7 +18,7 @@
     "spinningwheel:dropspindle-progress-info": "Progress: {0}%",
     "spinningwheel:dropspindle-ready": "Ready to extract: {0}",
 
-    "itemdesc-dropspindle": "A simple handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
+    "itemdesc-hpdropspindle": "A simple handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
 
     "config-title": "Spinning Wheel Configuration",
     

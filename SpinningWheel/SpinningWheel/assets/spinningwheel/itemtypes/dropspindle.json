@@ -1,5 +1,5 @@
 ﻿{
-  "code": "dropspindle",
+  "code": "hpdropspindle",
   "class": "ItemDropSpindle",
   "maxstacksize": 1,
   "creativeinventory": {
@@ -8,16 +8,10 @@
   "durability": 200,
   "attributes": {
     "handbook": {
-      "groupBy": ["dropspindle-*"]
+      "groupBy": ["hpdropspindle-*"]
     },
     "spinsPerCompletion": 2,
-    "spinDurabilityCost": 1,
-    "dropspindlesrackTransform": {
-      "translation": { "x": 0, "y": 0.45, "z": 0 },
-      "rotation": { "x": 0, "y": 0, "z": -90 },
-      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
-      "scale": 0.75
-    }
+    "spinDurabilityCost": 1
   },
   "shape": {
     "base": "spinningwheel:item/dropspindles/dropspindle",
