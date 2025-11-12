@@ -57,7 +57,7 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "complete", 
                         Lang.Get("spinningwheel:dropspindle-extract-hint"));
                 }
-                handHandling = EnumHandHandling.PreventDefaultAction;
+                handHandling = EnumHandHandling.NotHandled;
                 return;
             }
 
@@ -69,15 +69,15 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "nospinnable", 
                         Lang.Get("spinningwheel:dropspindle-need-fibers"));
                 }
-                handHandling = EnumHandHandling.PreventDefaultAction;
+                handHandling = EnumHandHandling.NotHandled;
                 return;
             }
             
-            if (byEntity.World is IClientWorldAccessor)
+            // Client-side only: visual and audio feedback
+            if (api.Side == EnumAppSide.Client)
             {
                 slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
                 
-                // ===== SOUND IMPLEMENTATION START =====
                 // Stop any existing sound first
                 spindleSound?.Stop();
                 spindleSound?.Dispose();
@@ -93,14 +93,12 @@ namespace SpinningWheel.Items
                     Range = 8
                 });
                 spindleSound?.Start();
-                // ===== SOUND IMPLEMENTATION END =====
             }
-            slot.Itemstack.Attributes.SetInt("renderVariant", 1);
 
             // Start spinning
             handHandling = EnumHandHandling.PreventDefaultAction;
         }
-        
+
 
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot,
             EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
@@ -113,19 +111,19 @@ namespace SpinningWheel.Items
                 1, 
                 MAX_SPIN_VARIANTS
             );
-            int prevRenderVariant = slot.Itemstack.Attributes.GetInt("renderVariant", 0);
 
-            slot.Itemstack.TempAttributes.SetInt("renderVariant", renderVariant);
-            slot.Itemstack.Attributes.SetInt("renderVariant", renderVariant);
-
-            if (prevRenderVariant != renderVariant)
-            {
-                (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
-            }
-
+            // Client-side only: Update visual representation
             if (api.Side == EnumAppSide.Client)
             {
-                // Your existing particle code
+                int prevRenderVariant = slot.Itemstack.TempAttributes.GetInt("renderVariant", 0);
+                slot.Itemstack.TempAttributes.SetInt("renderVariant", renderVariant);
+
+                if (prevRenderVariant != renderVariant)
+                {
+                    (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
+                }
+
+                // Particle effects
                 if (secondsUsed % BURST_INTERVAL > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
                 SpawnSpiralBurst(byEntity, secondsUsed);
             }
@@ -135,57 +133,65 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
-            // ===== SOUND IMPLEMENTATION START =====
-            // Stop and dispose the sound
-            spindleSound?.Stop();
-            spindleSound?.Dispose();
-            spindleSound = null;
-            // ===== SOUND IMPLEMENTATION END =====
-    
-            // Reset render variant
-            if (byEntity.World is IClientWorldAccessor)
+            
+            // Client-side cleanup
+            if (api.Side == EnumAppSide.Client)
             {
+                // Stop and dispose the sound
+                spindleSound?.Stop();
+                spindleSound?.Dispose();
+                spindleSound = null;
+                
+                // Reset render variant
                 slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
-            slot.Itemstack?.Attributes.SetInt("renderVariant", 0);
-            (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
-    
+
+            // Early exit if interaction was too short or blocked
             if (blockSel != null || secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
 
             ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
-    
+
             // Validate again
             if (IsSpindleComplete(slot) || offhandSlot?.Empty != false || !CanSpin(offhandSlot.Itemstack))
             {
                 return;
             }
 
-            // Server-side processing
+            // CRITICAL: Only process on server side to prevent double-processing
             if (api.Side == EnumAppSide.Server)
             {
+                // Add a timestamp check to prevent rapid double-processing
+                long lastProcessTime = slot.Itemstack.Attributes.GetLong("lastSpinTime", 0);
+                long currentTime = DateTime.UtcNow.Ticks / 10000;  // Absolute time in milliseconds
+
+                // Prevent processing if less than 100ms since last spin (adjust as needed)
+                if (currentTime - lastProcessTime < 100)
+                {
+                    api.Logger.Debug("Prevented double-spin (too soon): {0}ms since last", currentTime - lastProcessTime);
+                    return;
+                }
+
+                slot.Itemstack.Attributes.SetLong("lastSpinTime", currentTime);
                 ProcessSpin(slot, offhandSlot, byEntity);
             }
         }
-        
+
         public override bool OnHeldInteractCancel(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, EnumItemUseCancelReason cancelReason)
         {
-            // ===== SOUND IMPLEMENTATION START =====
-            // Stop and dispose the sound
-            spindleSound?.Stop();
-            spindleSound?.Dispose();
-            spindleSound = null;
-            // ===== SOUND IMPLEMENTATION END =====
-    
-            // Reset render variant on cancel
-            if (byEntity.World is IClientWorldAccessor)
+            // Client-side cleanup
+            if (api.Side == EnumAppSide.Client)
             {
+                // Stop and dispose the sound
+                spindleSound?.Stop();
+                spindleSound?.Dispose();
+                spindleSound = null;
+                
+                // Reset render variant on cancel
                 slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
-            slot.Itemstack?.Attributes.SetInt("renderVariant", 0);
-            (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
 
             return true;
         }

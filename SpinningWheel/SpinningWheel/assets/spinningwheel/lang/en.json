@@ -7,9 +7,7 @@
     "item-hpspinningwheelframe": "Spinning Wheel Frame",
     "item-hpspinningwheelwheelitem": "Drive Wheel",
     
-    
-    "item-dropspindle-wood": "Wooden Drop Spindle",
-    "item-dropspindle-bone": "Bone Drop Spindle",
+    "item-dropspindle": "Wooden Drop Spindle",
 
     "spinningwheel:dropspindle-spin": "Spin fibers (Hold in offhand)",
     "spinningwheel:dropspindle-extract": "Extract twine (Sneak + Right Click)",
@@ -20,12 +18,7 @@
     "spinningwheel:dropspindle-progress-info": "Progress: {0}%",
     "spinningwheel:dropspindle-ready": "Ready to extract: {0}",
 
-    "itemdesc-dropspindle-wood": "A simple handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
-    "itemdesc-dropspindle-bone": "A durable handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
-
-    
-    
-    
+    "itemdesc-dropspindle": "A simple handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
 
     "config-title": "Spinning Wheel Configuration",
     
@@ -37,6 +30,9 @@
 
     "RequireTailorClass": "Require Tailor Class",
     "RequireTailorClass-Comment": "If enabled, only players with allowed classes can use the spinning wheel",
+
+    "setting-twine-grid-recipe-toggle": "Toggle twine grid recipe",
+    "setting-twine-grid-recipe-toggle-comment": "Enable this to disable twine grid recipes",
 
     "setting-allowed-classes": "Allowed Classes",
     "setting-allowed-classes-comment": "Comma-separated list of player classes that may use the spinning wheel",
