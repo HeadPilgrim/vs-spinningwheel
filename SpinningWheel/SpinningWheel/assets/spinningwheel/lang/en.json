@@ -9,7 +9,7 @@
     
     "item-dropspindle": "Wooden Drop Spindle",
 
-    "spinningwheel:dropspindle-spin": "Spin fibers (Hold in offhand)",
+    "spinningwheel:dropspindle-spin": "Spin fibers (Hold fibers in offhand)",
     "spinningwheel:dropspindle-extract": "Extract twine (Sneak + Right Click)",
     "spinningwheel:dropspindle-need-fibers": "Hold spinnable fibers in your offhand",
     "spinningwheel:dropspindle-extract-hint": "Sneak + Right Click to extract your twine",
