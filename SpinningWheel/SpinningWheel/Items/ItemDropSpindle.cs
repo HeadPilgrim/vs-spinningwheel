@@ -24,32 +24,42 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling)
         {
-            api.Logger.Debug("InteractStart: firstEvent={0}, blockSel={1}, sneak={2}", firstEvent, blockSel != null, byEntity.Controls.Sneak);
-            
-            if (blockSel != null || !firstEvent) return;
+            // === FORCE ITEM PRIORITY ON FIRST CALL (NON-SNEAK) ===
+            if (firstEvent && blockSel != null && !byEntity.Controls.Sneak)
+            {
+                api.Logger.Warning("DROP SPINDLE: FIRST EVENT - FORCING PRIORITY OVER BLOCK (non-sneak)");
+                handHandling = EnumHandHandling.PreventDefaultAction;
+                // DO NOT return — continue with normal logic
+            }
 
-            IPlayer player = (byEntity as EntityPlayer)?.Player;
-            if (player == null) return;
-            
-            api.Logger.Debug("Player valid. Sneak: {0}, Complete: {1}, Offhand empty: {2}", 
-                byEntity.Controls.Sneak, 
-                IsSpindleComplete(slot), 
-                byEntity.LeftHandItemSlot?.Empty);
+            // === DEBUG LOG ===
+            api.Logger.Warning("DROP SPINDLE: OnHeldInteractStart CALLED | Block: {0} | Sneak: {1} | First: {2}", 
+                blockSel != null, byEntity.Controls.Sneak, firstEvent);
 
-            // Check if sneaking and spindle is complete - extract twine
+            if (!firstEvent) return;
+
+            // === SNEAK + COMPLETE: Extract twine (allow on blocks) ===
             if (byEntity.Controls.Sneak && IsSpindleComplete(slot))
             {
                 if (api.Side == EnumAppSide.Server)
                 {
-                    ExtractTwine(slot, player);
+                    ExtractTwine(slot, (byEntity as EntityPlayer)?.Player);
                 }
                 handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
 
+            IPlayer player = (byEntity as EntityPlayer)?.Player;
+            if (player == null) return;
+
+            api.Logger.Debug("Player valid. Sneak: {0}, Complete: {1}, Offhand empty: {2}", 
+                byEntity.Controls.Sneak, 
+                IsSpindleComplete(slot), 
+                byEntity.LeftHandItemSlot?.Empty);
+
             ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
-            
-            // Check if spindle is complete (ready to extract twine) - give hint
+
+            // === COMPLETE BUT NOT SNEAKING: Show hint ===
             if (IsSpindleComplete(slot))
             {
                 if (api.Side == EnumAppSide.Client)
@@ -57,11 +67,11 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "complete", 
                         Lang.Get("spinningwheel:dropspindle-extract-hint"));
                 }
-                handHandling = EnumHandHandling.NotHandled;
+                handHandling = EnumHandHandling.NotHandled; // Let player see hint, no action
                 return;
             }
 
-            // Check for spinnable item in offhand
+            // === NO SPINNABLE FIBERS: Show error ===
             if (offhandSlot?.Empty != false || !CanSpin(offhandSlot.Itemstack))
             {
                 if (api.Side == EnumAppSide.Client)
@@ -69,20 +79,18 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "nospinnable", 
                         Lang.Get("spinningwheel:dropspindle-need-fibers"));
                 }
-                handHandling = EnumHandHandling.NotHandled;
+                handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-            
-            // Client-side only: visual and audio feedback
+
+            // === START SPINNING (non-sneak, valid fibers) ===
             if (api.Side == EnumAppSide.Client)
             {
                 slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
                 
-                // Stop any existing sound first
                 spindleSound?.Stop();
                 spindleSound?.Dispose();
                 
-                // Load and play the spinning sound
                 spindleSound = (api as ICoreClientAPI).World.LoadSound(new SoundParams()
                 {
                     Location = new AssetLocation("spinningwheel:sounds/item/dropspindle"),
@@ -95,7 +103,6 @@ namespace SpinningWheel.Items
                 spindleSound?.Start();
             }
 
-            // Start spinning
             handHandling = EnumHandHandling.PreventDefaultAction;
         }
 
@@ -103,8 +110,6 @@ namespace SpinningWheel.Items
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot,
             EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
-            if (blockSel != null) return false;
-
             // Calculate render variant based on animation progress
             int renderVariant = GameMath.Clamp(
                 (int)Math.Ceiling(secondsUsed / SPIN_ANIMATION_TIME * MAX_SPIN_VARIANTS), 
@@ -133,7 +138,6 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
-            
             // Client-side cleanup
             if (api.Side == EnumAppSide.Client)
             {
@@ -146,8 +150,8 @@ namespace SpinningWheel.Items
                 slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
 
-            // Early exit if interaction was too short or blocked
-            if (blockSel != null || secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
+            // Early exit if interaction was too short
+            if (secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
@@ -165,15 +169,15 @@ namespace SpinningWheel.Items
             {
                 // Add a timestamp check to prevent rapid double-processing
                 long lastProcessTime = slot.Itemstack.Attributes.GetLong("lastSpinTime", 0);
-                long currentTime = DateTime.UtcNow.Ticks / 10000;  // Absolute time in milliseconds
-
+                long currentTime = api.World.ElapsedMilliseconds;
+                
                 // Prevent processing if less than 100ms since last spin (adjust as needed)
                 if (currentTime - lastProcessTime < 100)
                 {
                     api.Logger.Debug("Prevented double-spin (too soon): {0}ms since last", currentTime - lastProcessTime);
                     return;
                 }
-
+                
                 slot.Itemstack.Attributes.SetLong("lastSpinTime", currentTime);
                 ProcessSpin(slot, offhandSlot, byEntity);
             }
@@ -226,7 +230,7 @@ namespace SpinningWheel.Items
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
             // Prevent normal attack when holding spindle
-            handling = EnumHandHandling.PreventDefaultAction;
+            handling = EnumHandHandling.PreventDefault;
         }
 
         public override bool OnHeldAttackCancel(float secondsPassed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSelection, EntitySelection entitySel, EnumItemUseCancelReason cancelReason)
