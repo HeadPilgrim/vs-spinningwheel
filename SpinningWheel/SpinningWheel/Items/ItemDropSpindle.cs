@@ -160,9 +160,10 @@ namespace SpinningWheel.Items
             // CRITICAL: Only process on server side to prevent double-processing
             if (api.Side == EnumAppSide.Server)
             {
-                // Add a timestamp check to prevent rapid double-processing
+                // CRITICAL: Use absolute time instead of world elapsed time to persist across server restarts
+                // Prevents drop spindle breaking if half complete and server restarts or player leaves world. 
                 long lastProcessTime = slot.Itemstack.Attributes.GetLong("lastSpinTime", 0);
-                long currentTime = api.World.ElapsedMilliseconds;
+                long currentTime = DateTime.UtcNow.Ticks / 10000;  // Absolute time in milliseconds
                 
                 // Prevent processing if less than 100ms since last spin (adjust as needed)
                 if (currentTime - lastProcessTime < 100)

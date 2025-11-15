@@ -32,7 +32,49 @@
             Mod.Logger.Notification("Registered block and block entity for hpspinningwheel");
             Mod.Logger.Notification("Registered ItemDropSpindle for portable spinning");
         }
+
+        public override void AssetsFinalize(ICoreAPI api)
+        {
+            base.AssetsFinalize(api);
+    
+            // Patch all spinnable items to allow offhand placement
+            PatchSpinnableItems(api);
+        }
+
+        private void PatchSpinnableItems(ICoreAPI api)
+        {
+            int patchedCount = 0;
+    
+            foreach (var collectible in api.World.Collectibles)
+            {
+                // Skip null collectibles
+                if (collectible?.Attributes == null) continue;
         
+                // Check if item has spinningProps
+                if (collectible.Attributes.KeyExists("spinningProps"))
+                {
+                    EnumItemStorageFlags currentFlags = collectible.StorageFlags;
+            
+                    // Check if offhand flag is missing
+                    if (!currentFlags.HasFlag(EnumItemStorageFlags.Offhand))
+                    {
+                        // Add offhand flag while preserving all other flags
+                        collectible.StorageFlags = currentFlags | EnumItemStorageFlags.Offhand;
+                
+                        api.Logger.Notification(
+                            $"[SpinningWheel] Patched {collectible.Code} storage flags: {currentFlags} -> {collectible.StorageFlags}"
+                        );
+                
+                        patchedCount++;
+                    }
+                }
+            }
+    
+            if (patchedCount > 0)
+            {
+                api.Logger.Notification($"[SpinningWheel] Successfully patched {patchedCount} spinnable items for offhand compatibility");
+            }
+        }
         public override void StartPre(ICoreAPI api)
         {
             // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID

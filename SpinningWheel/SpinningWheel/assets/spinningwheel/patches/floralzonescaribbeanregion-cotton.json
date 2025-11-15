@@ -11,13 +11,5 @@
     "file": "floralzonescaribbeanregion:itemtypes/resource/cotton.json",
     "side": "Server",
     "dependsOn": [ { "modid": "floralzonescaribbeanregion" } ]
-  },
-  {
-    "op": "add",
-    "path": "/storageFlags",
-    "value": 257,
-    "file": "wool:itemtypes/resource/fibers.json",
-    "side": "Server",
-    "dependsOn": [ { "modid": "floralzonescaribbeanregion" } ]
   }
 ]

@@ -156,24 +156,5 @@
     "file": "wool:itemtypes/resource/fibers.json",
     "side": "Server",
     "dependsOn": [ { "modid": "wool" } ]
-  },
-  {
-    "op": "add",
-    "path": "/storageFlags",
-    "value": 257,
-    "file": "wool:itemtypes/resource/fibers.json",
-    "side": "Server",
-    "dependsOn": [ { "modid": "wool" } ]
-  },
-  {
-    "op": "replace",
-    "path": "/storageFlags",
-    "value": 289,
-    "file": "wool:itemtypes/resource/fibers.json",
-    "side": "Server",
-    "dependsOn": [
-      { "modid": "wildcrafttree" },
-      { "modid": "wool" }
-    ]
   }
 ]
