@@ -7,7 +7,7 @@
         "HeadPilgrim"
     ],
     "description": "Adds a spinning wheel & drop-spindle as an immersive twine crafting mechanic.",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "dependencies": {
         "game": "1.21.0"
     }
