@@ -3,9 +3,9 @@
     using SpinningWheel.BlockEntities;
     using SpinningWheel.Blocks;
     using SpinningWheel.Items;
+    using SpinningWheel.Configuration;
     using Vintagestory.API.Client;
     using Vintagestory.API.Server;
-    using Vintagestory.API.Config;
     using Vintagestory.API.Common;
     using SpinningWheel.ModConfig;
     using System;
@@ -16,6 +16,7 @@
         private ICoreClientAPI clientApi;
         private ICoreAPI api;
         private IServerNetworkChannel serverChannel;
+        private SpinningWheelConfigPatcher configPatcher;
 
         // Called on server and client
         public override void Start(ICoreAPI api)
@@ -32,6 +33,18 @@
             Mod.Logger.Notification("Registered block and block entity for hpspinningwheel");
             Mod.Logger.Notification("Registered ItemDropSpindle for portable spinning");
         }
+        
+        public override void AssetsLoaded(ICoreAPI api)
+        {
+            base.AssetsLoaded(api);
+            
+            // Apply config-based patches using the dedicated patcher class
+            // Do this early, right after assets are loaded
+            configPatcher = new SpinningWheelConfigPatcher(api, ModConfig.Loaded);
+            configPatcher.ApplyAllPatches();
+            
+            api.Logger.Notification("[SpinningWheel] Config patches applied in AssetsLoaded");
+        }
 
         public override void AssetsFinalize(ICoreAPI api)
         {
@@ -39,6 +52,10 @@
     
             // Patch all spinnable items to allow offhand placement
             PatchSpinnableItems(api);
+            
+            // Apply config-based patches using the dedicated patcher class
+            configPatcher = new SpinningWheelConfigPatcher(api, ModConfig.Loaded);
+            configPatcher.ApplyAllPatches();
         }
 
         private void PatchSpinnableItems(ICoreAPI api)
@@ -75,6 +92,7 @@
                 api.Logger.Notification($"[SpinningWheel] Successfully patched {patchedCount} spinnable items for offhand compatibility");
             }
         }
+        
         public override void StartPre(ICoreAPI api)
         {
             // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
@@ -83,12 +101,19 @@
             {
                 ModConfig fromDisk;
                 if ((fromDisk = api.LoadModConfig<ModConfig>(cfgFileName)) == null)
-                { api.StoreModConfig(ModConfig.Loaded, cfgFileName); }
+                { 
+                    api.StoreModConfig(ModConfig.Loaded, cfgFileName);
+                    api.Logger.Notification("[SpinningWheel] Created new config file with default values");
+                }
                 else
-                { ModConfig.Loaded = fromDisk; }
+                { 
+                    ModConfig.Loaded = fromDisk;
+                    api.Logger.Notification("[SpinningWheel] Loaded config from disk");
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                api.Logger.Error("[SpinningWheel] Error loading config, creating new one: " + ex.Message);
                 api.StoreModConfig(ModConfig.Loaded, cfgFileName);
             }
             base.StartPre(api);
@@ -100,11 +125,10 @@
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>(packet =>
                 {
-                    
                     ModConfig.Loaded.RequireTailorClass = packet.RequireTailorClass;
                     this.Mod.Logger.Event($"Received RequireTailorClass of {packet.RequireTailorClass} from server");
                     ModConfig.Loaded.AllowedClasses = packet.AllowedClasses;
-                    this.Mod.Logger.Event($"Received AllowedClasses of {packet.AllowedClasses} from server");
+                    this.Mod.Logger.Event($"Received AllowedClasses from server: {string.Join(", ", packet.AllowedClasses)}");
                 });
             
             clientApi = capi;
@@ -145,7 +169,6 @@
                 RequireTailorClass = ModConfig.Loaded.RequireTailorClass,
                 AllowedClasses = ModConfig.Loaded.AllowedClasses
             }, player);
-
         }
         
         public override void Dispose()
