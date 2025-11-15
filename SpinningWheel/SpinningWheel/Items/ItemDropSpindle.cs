@@ -24,17 +24,11 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling)
         {
-            api.Logger.Debug("InteractStart: firstEvent={0}, blockSel={1}, sneak={2}", firstEvent, blockSel != null, byEntity.Controls.Sneak);
             
             if (!firstEvent) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
-            
-            api.Logger.Debug("Player valid. Sneak: {0}, Complete: {1}, Offhand empty: {2}", 
-                byEntity.Controls.Sneak, 
-                IsSpindleComplete(slot), 
-                byEntity.LeftHandItemSlot?.Empty);
 
             // Check if sneaking and spindle is complete - extract twine
             if (byEntity.Controls.Sneak && IsSpindleComplete(slot))

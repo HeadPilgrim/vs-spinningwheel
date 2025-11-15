@@ -1,128 +1,6 @@
 ﻿{
-  "version": 10,
+  "version": 2,
   "file": "spinningwheel.json",
-  "patches": {
-    "boolean" : {
-      "spinningwheel:patches/twine-recipes-off.json": {
-        "0/enabled": "TWINE_GRID_RECIPE_TOGGLE",
-        "1/enabled": "TWINE_GRID_RECIPE_TOGGLE",
-        "2/enabled": "TWINE_GRID_RECIPE_TOGGLE",
-        "3/enabled": "TWINE_GRID_RECIPE_TOGGLE",
-        "4/enabled": "TWINE_GRID_RECIPE_TOGGLE",
-        "5/enabled": "TWINE_GRID_RECIPE_TOGGLE",
-        "6/enabled": "TWINE_GRID_RECIPE_TOGGLE"
-      }
-    },
-    "float": {
-      "spinningwheel:patches/game-flaxfibers.json": {
-        "0/value/spinTime": "FLAX_SPIN_TIME"
-      },
-      "spinningwheel:patches/floralzonescaribbeanregion-cotton.json": {
-        "0/value/spinTime": "COTTON_SPIN_TIME"
-      },
-      "spinningwheel:patches/pemmican.json": {
-        "0/value/spinTime": "PAPYRUS_SPIN_TIME",
-        "1/value/spinTime": "ALGAE_SPIN_TIME"
-      },
-      "spinningwheel:patches/wool.json": {
-        "1/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "2/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "3/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "4/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "5/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "6/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "7/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "8/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "9/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME",
-        "10/value/spinningProps/spinTime": "WOOL_FIBER_SPIN_TIME"
-      }
-    },
-    "integer": {
-      "spinningwheel:patches/game-flaxfibers.json": {
-        "0/value/inputQuantity": "FLAX_INPUT_QUANTITY",
-        "0/value/outputQuantity": "FLAX_OUTPUT_QUANTITY"
-      },
-      "spinningwheel:patches/floralzonescaribbeanregion-cotton.json": {
-        "0/value/inputQuantity": "COTTON_INPUT_QUANTITY",
-        "0/value/outputQuantity": "COTTON_OUTPUT_QUANTITY"
-      },
-      "spinningwheel:patches/pemmican.json": {
-        "0/value/inputQuantity": "PAPYRUS_INPUT_QUANTITY",
-        "0/value/outputQuantity": "PAPYRUS_OUTPUT_QUANTITY",
-        "1/value/inputQuantity": "ALGAE_INPUT_QUANTITY",
-        "1/value/outputQuantity": "ALGAE_OUTPUT_QUANTITY"
-      },
-      "spinningwheel:patches/wool.json": {
-        "1/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "1/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "2/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "2/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "3/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "3/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "4/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "4/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "5/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "5/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "6/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "6/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "7/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "7/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "8/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "8/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "9/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "9/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY",
-        "10/value/spinningProps/inputQuantity": "WOOL_FIBER_INPUT_QUANTITY",
-        "10/value/spinningProps/outputQuantity": "WOOL_FIBER_OUTPUT_QUANTITY"
-      },
-      "spinningwheel:patches/tailors-delight.json": {
-        "1/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "1/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "1/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "2/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "2/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "2/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "3/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "3/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "3/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "4/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "4/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "4/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "5/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "5/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "5/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "6/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "6/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "6/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "7/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "7/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "7/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "8/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "8/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "8/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "9/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "9/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "9/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "10/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "10/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "10/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "11/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "11/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "11/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "12/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "12/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "12/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "13/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "13/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "13/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "14/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "14/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "14/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY",
-        "15/value/spinningProps/spinTime": "WOOL_TWINE_SPIN_TIME",
-        "15/value/spinningProps/inputQuantity": "WOOL_TWINE_INPUT_QUANTITY",
-        "15/value/spinningProps/outputQuantity": "WOOL_TWINE_OUTPUT_QUANTITY"
-      }
-    }
-  },
   "settings": {
     "boolean": {
       "REQUIRE_TAILOR_CLASS": {
@@ -133,7 +11,7 @@
         "default": false
       },
       "TWINE_GRID_RECIPE_TOGGLE": {
-        "name": "TwineGridRecipeToggle",
+        "name": "DisableTwineGridRecipes",
         "ingui": "spinningwheel:setting-twine-grid-recipe-toggle",
         "weight": 0.92,
         "comment": "spinningwheel:setting-twine-grid-recipe-toggle-comment",
@@ -186,7 +64,7 @@
         }
       },
       "PAPYRUS_SPIN_TIME": {
-        "name": "PapyrusFiberSpinTime",
+        "name": "PapyrusSpinTime",
         "ingui": "spinningwheel:setting-papyrus-spin-time",
         "weight": 3.03,
         "comment": "spinningwheel:setting-papyrus-spin-time-comment",
@@ -197,7 +75,7 @@
         }
       },
       "ALGAE_SPIN_TIME": {
-        "name": "AlgaeFiberSpinTime",
+        "name": "AlgaeSpinTime",
         "ingui": "spinningwheel:setting-algae-spin-time",
         "weight": 3.06,
         "comment": "spinningwheel:setting-algae-spin-time-comment",
