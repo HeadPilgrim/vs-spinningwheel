@@ -24,42 +24,32 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling)
         {
-            // === FORCE ITEM PRIORITY ON FIRST CALL (NON-SNEAK) ===
-            if (firstEvent && blockSel != null && !byEntity.Controls.Sneak)
-            {
-                api.Logger.Warning("DROP SPINDLE: FIRST EVENT - FORCING PRIORITY OVER BLOCK (non-sneak)");
-                handHandling = EnumHandHandling.PreventDefaultAction;
-                // DO NOT return — continue with normal logic
-            }
-
-            // === DEBUG LOG ===
-            api.Logger.Warning("DROP SPINDLE: OnHeldInteractStart CALLED | Block: {0} | Sneak: {1} | First: {2}", 
-                blockSel != null, byEntity.Controls.Sneak, firstEvent);
-
+            api.Logger.Debug("InteractStart: firstEvent={0}, blockSel={1}, sneak={2}", firstEvent, blockSel != null, byEntity.Controls.Sneak);
+            
             if (!firstEvent) return;
-
-            // === SNEAK + COMPLETE: Extract twine (allow on blocks) ===
-            if (byEntity.Controls.Sneak && IsSpindleComplete(slot))
-            {
-                if (api.Side == EnumAppSide.Server)
-                {
-                    ExtractTwine(slot, (byEntity as EntityPlayer)?.Player);
-                }
-                handHandling = EnumHandHandling.PreventDefaultAction;
-                return;
-            }
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
-
+            
             api.Logger.Debug("Player valid. Sneak: {0}, Complete: {1}, Offhand empty: {2}", 
                 byEntity.Controls.Sneak, 
                 IsSpindleComplete(slot), 
                 byEntity.LeftHandItemSlot?.Empty);
 
-            ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
+            // Check if sneaking and spindle is complete - extract twine
+            if (byEntity.Controls.Sneak && IsSpindleComplete(slot))
+            {
+                if (api.Side == EnumAppSide.Server)
+                {
+                    ExtractTwine(slot, player);
+                }
+                handHandling = EnumHandHandling.PreventDefaultAction;
+                return;
+            }
 
-            // === COMPLETE BUT NOT SNEAKING: Show hint ===
+            ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
+            
+            // Check if spindle is complete (ready to extract twine) - give hint
             if (IsSpindleComplete(slot))
             {
                 if (api.Side == EnumAppSide.Client)
@@ -67,11 +57,11 @@ namespace SpinningWheel.Items
                     (api as ICoreClientAPI).TriggerIngameError(this, "complete", 
                         Lang.Get("spinningwheel:dropspindle-extract-hint"));
                 }
-                handHandling = EnumHandHandling.NotHandled; // Let player see hint, no action
+                handHandling = EnumHandHandling.NotHandled; // Changed from PreventDefaultAction
                 return;
             }
 
-            // === NO SPINNABLE FIBERS: Show error ===
+            // Check for spinnable item in offhand
             if (offhandSlot?.Empty != false || !CanSpin(offhandSlot.Itemstack))
             {
                 if (api.Side == EnumAppSide.Client)
@@ -82,15 +72,17 @@ namespace SpinningWheel.Items
                 handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-
-            // === START SPINNING (non-sneak, valid fibers) ===
+            
+            // Client-side only: visual and audio feedback
             if (api.Side == EnumAppSide.Client)
             {
                 slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
                 
+                // Stop any existing sound first
                 spindleSound?.Stop();
                 spindleSound?.Dispose();
                 
+                // Load and play the spinning sound
                 spindleSound = (api as ICoreClientAPI).World.LoadSound(new SoundParams()
                 {
                     Location = new AssetLocation("spinningwheel:sounds/item/dropspindle"),
@@ -103,6 +95,7 @@ namespace SpinningWheel.Items
                 spindleSound?.Start();
             }
 
+            // Start spinning
             handHandling = EnumHandHandling.PreventDefaultAction;
         }
 

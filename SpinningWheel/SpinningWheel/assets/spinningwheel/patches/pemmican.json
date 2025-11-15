@@ -31,7 +31,7 @@
     "value": 257,
     "file": "pemmican:itemtypes/papyrus-fiber.json",
     "side": "Server",
-    "dependsOn": [ { "modid": "wool" } ]
+    "dependsOn": [ { "modid": "longtermfood" } ]
   },
   {
     "op": "add",
@@ -39,6 +39,6 @@
     "value": 257,
     "file": "pemmican:itemtypes/algae-chem.json",
     "side": "Server",
-    "dependsOn": [ { "modid": "wool" } ]
+    "dependsOn": [ { "modid": "longtermfood" } ]
   }
 ]

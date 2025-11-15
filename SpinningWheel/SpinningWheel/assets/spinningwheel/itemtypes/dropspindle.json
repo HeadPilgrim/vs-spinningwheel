@@ -1,6 +1,7 @@
 ﻿{
   "code": "hpdropspindle",
   "class": "ItemDropSpindle",
+  "heldPriorityInteract": true,
   "maxstacksize": 1,
   "creativeinventory": {
     "general": ["*"]
@@ -13,6 +14,7 @@
     "spinsPerCompletion": 2,
     "spinDurabilityCost": 1
   },
+  "storageFlags": 257,
   "shape": {
     "base": "spinningwheel:item/dropspindles/dropspindle",
     "alternates": [
