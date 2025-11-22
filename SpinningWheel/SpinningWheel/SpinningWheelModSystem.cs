@@ -18,20 +18,50 @@
         private IServerNetworkChannel serverChannel;
         private SpinningWheelConfigPatcher configPatcher;
 
-        // Called on server and client
-        public override void Start(ICoreAPI api)
+        // Called very early, before assets are loaded
+        public override void StartPre(ICoreAPI api)
         {
-            this.api = api;
-            base.Start(api);
-            
+            // Register classes FIRST, before anything else
             api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
             
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
             
+            api.Logger.Notification("[SpinningWheel] Registered block and block entity classes");
+            api.Logger.Notification("[SpinningWheel] Registered ItemDropSpindle for portable spinning");
+            
+            // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
+            var cfgFileName = this.thisModID + ".json";
+            try
+            {
+                ModConfig fromDisk;
+                if ((fromDisk = api.LoadModConfig<ModConfig>(cfgFileName)) == null)
+                { 
+                    api.StoreModConfig(ModConfig.Loaded, cfgFileName);
+                    api.Logger.Notification("[SpinningWheel] Created new config file with default values");
+                }
+                else
+                { 
+                    ModConfig.Loaded = fromDisk;
+                    api.Logger.Notification("[SpinningWheel] Loaded config from disk");
+                }
+            }
+            catch (Exception ex)
+            {
+                api.Logger.Error("[SpinningWheel] Error loading config, creating new one: " + ex.Message);
+                api.StoreModConfig(ModConfig.Loaded, cfgFileName);
+            }
+            
+            base.StartPre(api);
+        }
+
+        // Called on server and client after StartPre
+        public override void Start(ICoreAPI api)
+        {
+            this.api = api;
+            base.Start(api);
+            
             api.World.Logger.Event("started 'SpinningWheel' mod");
-            Mod.Logger.Notification("Registered block and block entity for hpspinningwheel");
-            Mod.Logger.Notification("Registered ItemDropSpindle for portable spinning");
         }
         
         public override void AssetsLoaded(ICoreAPI api)
@@ -93,42 +123,57 @@
             }
         }
         
-        public override void StartPre(ICoreAPI api)
-        {
-            // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
-            var cfgFileName = this.thisModID + ".json";
-            try
-            {
-                ModConfig fromDisk;
-                if ((fromDisk = api.LoadModConfig<ModConfig>(cfgFileName)) == null)
-                { 
-                    api.StoreModConfig(ModConfig.Loaded, cfgFileName);
-                    api.Logger.Notification("[SpinningWheel] Created new config file with default values");
-                }
-                else
-                { 
-                    ModConfig.Loaded = fromDisk;
-                    api.Logger.Notification("[SpinningWheel] Loaded config from disk");
-                }
-            }
-            catch (Exception ex)
-            {
-                api.Logger.Error("[SpinningWheel] Error loading config, creating new one: " + ex.Message);
-                api.StoreModConfig(ModConfig.Loaded, cfgFileName);
-            }
-            base.StartPre(api);
-        }
-        
         public override void StartClientSide(ICoreClientAPI capi)
         { 
             capi.Network.RegisterChannel("spinningwheel")
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>(packet =>
                 {
+                    // Class restrictions
                     ModConfig.Loaded.RequireTailorClass = packet.RequireTailorClass;
                     this.Mod.Logger.Event($"Received RequireTailorClass of {packet.RequireTailorClass} from server");
                     ModConfig.Loaded.AllowedClasses = packet.AllowedClasses;
                     this.Mod.Logger.Event($"Received AllowedClasses from server: {string.Join(", ", packet.AllowedClasses)}");
+                    
+                    // Recipe control
+                    ModConfig.Loaded.DisableTwineGridRecipes = packet.DisableTwineGridRecipes;
+                    this.Mod.Logger.Event($"Received DisableTwineGridRecipes of {packet.DisableTwineGridRecipes} from server");
+                    
+                    // Vanilla flax settings
+                    ModConfig.Loaded.FlaxSpinTime = packet.FlaxSpinTime;
+                    ModConfig.Loaded.FlaxInputQuantity = packet.FlaxInputQuantity;
+                    ModConfig.Loaded.FlaxOutputQuantity = packet.FlaxOutputQuantity;
+                    this.Mod.Logger.Event($"Received Flax settings from server: SpinTime={packet.FlaxSpinTime}, Input={packet.FlaxInputQuantity}, Output={packet.FlaxOutputQuantity}");
+                    
+                    // Cotton settings
+                    ModConfig.Loaded.CottonSpinTime = packet.CottonSpinTime;
+                    ModConfig.Loaded.CottonInputQuantity = packet.CottonInputQuantity;
+                    ModConfig.Loaded.CottonOutputQuantity = packet.CottonOutputQuantity;
+                    this.Mod.Logger.Event($"Received Cotton settings from server: SpinTime={packet.CottonSpinTime}, Input={packet.CottonInputQuantity}, Output={packet.CottonOutputQuantity}");
+                    
+                    // Wool fiber settings
+                    ModConfig.Loaded.WoolFiberSpinTime = packet.WoolFiberSpinTime;
+                    ModConfig.Loaded.WoolFiberInputQuantity = packet.WoolFiberInputQuantity;
+                    ModConfig.Loaded.WoolFiberOutputQuantity = packet.WoolFiberOutputQuantity;
+                    this.Mod.Logger.Event($"Received Wool Fiber settings from server: SpinTime={packet.WoolFiberSpinTime}, Input={packet.WoolFiberInputQuantity}, Output={packet.WoolFiberOutputQuantity}");
+                    
+                    // Wool twine settings
+                    ModConfig.Loaded.WoolTwineSpinTime = packet.WoolTwineSpinTime;
+                    ModConfig.Loaded.WoolTwineInputQuantity = packet.WoolTwineInputQuantity;
+                    ModConfig.Loaded.WoolTwineOutputQuantity = packet.WoolTwineOutputQuantity;
+                    this.Mod.Logger.Event($"Received Wool Twine settings from server: SpinTime={packet.WoolTwineSpinTime}, Input={packet.WoolTwineInputQuantity}, Output={packet.WoolTwineOutputQuantity}");
+                    
+                    // Papyrus settings
+                    ModConfig.Loaded.PapyrusSpinTime = packet.PapyrusSpinTime;
+                    ModConfig.Loaded.PapyrusInputQuantity = packet.PapyrusInputQuantity;
+                    ModConfig.Loaded.PapyrusOutputQuantity = packet.PapyrusOutputQuantity;
+                    this.Mod.Logger.Event($"Received Papyrus settings from server: SpinTime={packet.PapyrusSpinTime}, Input={packet.PapyrusInputQuantity}, Output={packet.PapyrusOutputQuantity}");
+                    
+                    // Algae settings
+                    ModConfig.Loaded.AlgaeSpinTime = packet.AlgaeSpinTime;
+                    ModConfig.Loaded.AlgaeInputQuantity = packet.AlgaeInputQuantity;
+                    ModConfig.Loaded.AlgaeOutputQuantity = packet.AlgaeOutputQuantity;
+                    this.Mod.Logger.Event($"Received Algae settings from server: SpinTime={packet.AlgaeSpinTime}, Input={packet.AlgaeInputQuantity}, Output={packet.AlgaeOutputQuantity}");
                 });
             
             clientApi = capi;
@@ -166,8 +211,42 @@
         {
             this.serverChannel.SendPacket(new SyncClientPacket
             {
+                // Class restrictions
                 RequireTailorClass = ModConfig.Loaded.RequireTailorClass,
-                AllowedClasses = ModConfig.Loaded.AllowedClasses
+                AllowedClasses = ModConfig.Loaded.AllowedClasses,
+        
+                // Recipe control
+                DisableTwineGridRecipes = ModConfig.Loaded.DisableTwineGridRecipes,
+        
+                // Vanilla flax settings
+                FlaxSpinTime = ModConfig.Loaded.FlaxSpinTime,
+                FlaxInputQuantity = ModConfig.Loaded.FlaxInputQuantity,
+                FlaxOutputQuantity = ModConfig.Loaded.FlaxOutputQuantity,
+        
+                // Cotton settings
+                CottonSpinTime = ModConfig.Loaded.CottonSpinTime,
+                CottonInputQuantity = ModConfig.Loaded.CottonInputQuantity,
+                CottonOutputQuantity = ModConfig.Loaded.CottonOutputQuantity,
+        
+                // Wool fiber settings
+                WoolFiberSpinTime = ModConfig.Loaded.WoolFiberSpinTime,
+                WoolFiberInputQuantity = ModConfig.Loaded.WoolFiberInputQuantity,
+                WoolFiberOutputQuantity = ModConfig.Loaded.WoolFiberOutputQuantity,
+        
+                // Wool twine settings
+                WoolTwineSpinTime = ModConfig.Loaded.WoolTwineSpinTime,
+                WoolTwineInputQuantity = ModConfig.Loaded.WoolTwineInputQuantity,
+                WoolTwineOutputQuantity = ModConfig.Loaded.WoolTwineOutputQuantity,
+        
+                // Papyrus settings
+                PapyrusSpinTime = ModConfig.Loaded.PapyrusSpinTime,
+                PapyrusInputQuantity = ModConfig.Loaded.PapyrusInputQuantity,
+                PapyrusOutputQuantity = ModConfig.Loaded.PapyrusOutputQuantity,
+        
+                // Algae settings
+                AlgaeSpinTime = ModConfig.Loaded.AlgaeSpinTime,
+                AlgaeInputQuantity = ModConfig.Loaded.AlgaeInputQuantity,
+                AlgaeOutputQuantity = ModConfig.Loaded.AlgaeOutputQuantity
             }, player);
         }
         
