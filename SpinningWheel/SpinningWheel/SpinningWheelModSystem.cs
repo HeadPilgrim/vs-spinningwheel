@@ -25,6 +25,8 @@
             api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
             
+            api.RegisterBlockClass("BlockFlyshuttleLoom", typeof(BlockFlyshuttleLoom));
+            
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
             
             api.Logger.Notification("[SpinningWheel] Registered block and block entity classes");
