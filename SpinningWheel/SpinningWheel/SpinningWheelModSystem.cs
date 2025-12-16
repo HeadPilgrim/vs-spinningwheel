@@ -25,7 +25,8 @@
             api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
             
-            api.RegisterBlockClass("BlockFlyshuttleLoom", typeof(BlockFlyshuttleLoom));
+            api.RegisterBlockClass("BlockFlyShuttleLoom", typeof(BlockFlyShuttleLoom));
+            api.RegisterBlockEntityClass("BlockEntityFlyShuttleLoom", typeof(BlockEntityFlyshuttleLoom));
             
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
             
@@ -179,11 +180,6 @@
                 });
             
             clientApi = capi;
-            // Client creates default config if server hasn't sent one yet
-            capi.Input.RegisterHotKey("openspinningwheel", "Open Spinning Wheel GUI", 
-                GlKeys.F, HotkeyType.GUIOrOtherControls);
-            
-            capi.Input.SetHotKeyHandler("openspinningwheel", OnOpenSpinningWheelHotkey);
         }
         
         public override void StartServerSide(ICoreServerAPI sapi)
@@ -194,19 +190,6 @@
             this.serverChannel = sapi.Network.RegisterChannel("spinningwheel")
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>((player, packet) => { /* do nothing.*/ });
-        }
-        
-        private bool OnOpenSpinningWheelHotkey(KeyCombination keyCombination)
-        {
-            EntityPlayer player = clientApi.World.Player.Entity;
-            
-            if (player?.MountedOn?.MountSupplier is BlockEntitySpinningWheel spinningWheel)
-            {
-                spinningWheel.OpenGui(clientApi.World.Player);
-                return true;
-            }
-            
-            return false;
         }
 
         public void OnPlayerJoin(IServerPlayer player)

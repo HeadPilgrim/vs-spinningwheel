@@ -1,7 +1,7 @@
 ﻿{
   "code": "hpflyshuttleloom",
-  "class": "BlockFlyshuttleloom",
-  "entityClass": "BlockEntityFlyshuttleloom",
+  "class": "BlockFlyShuttleLoom",
+  "entityClass": "BlockEntityFlyShuttleLoom",
   "tags": ["inanimate", "vehicle"],
   "blockmaterial": "wood",
   "creativeinventory": { "general":  [ "*-north" ]},
