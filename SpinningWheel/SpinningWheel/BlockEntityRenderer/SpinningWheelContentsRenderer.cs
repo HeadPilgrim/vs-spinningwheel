@@ -65,7 +65,9 @@ namespace SpinningWheel.BLockEntityRenderer
             contentStackRenderer = renderer;
         }
 
-        public void SetContents(ItemStack newContentStack, ModelTransform transform)
+        Vec4f colorTint = ColorUtil.WhiteArgbVec; // Add this field
+
+        public void SetContents(ItemStack newContentStack, ModelTransform transform, Vec4f fiberColor)
         {
             contentStackRenderer?.Dispose();
             contentStackRenderer = null;
@@ -77,11 +79,16 @@ namespace SpinningWheel.BLockEntityRenderer
             meshref?.Dispose();
             meshref = null;
             
+            // Store the color tint
+            this.colorTint = fiberColor;
+            
             if (newContentStack == null)
             {
                 this.ContentStack = null;
                 return;
             }
+
+            api.Logger.Debug($"[Renderer] Setting color tint: R={colorTint.R}, G={colorTint.G}, B={colorTint.B}");
 
             MeshData ingredientMesh;
             if (newContentStack.Class == EnumItemClass.Item)
@@ -95,8 +102,91 @@ namespace SpinningWheel.BLockEntityRenderer
                 textureId = api.BlockTextureAtlas.Positions[newContentStack.Block.Textures.FirstOrDefault().Value.Baked.TextureSubId].atlasTextureId;
             }
 
+            // Apply color tint directly to mesh vertices
+            TintMeshVertices(ingredientMesh, fiberColor);
+            api.Logger.Debug($"[Renderer] Tinted {ingredientMesh.Rgba?.Length / 4 ?? 0} vertices");
+
             meshref = api.Render.UploadMultiTextureMesh(ingredientMesh);
             this.ContentStack = newContentStack;
+        }
+
+        private void TintMeshVertices(MeshData mesh, Vec4f color)
+        {
+            if (mesh.Rgba == null || mesh.Rgba.Length == 0)
+            {
+                api.Logger.Debug("[Renderer] No RGBA data in mesh!");
+                return;
+            }
+            
+            api.Logger.Debug($"[Renderer] Tinting mesh with R={color.R}, G={color.G}, B={color.B}");
+            
+            for (int i = 0; i < mesh.Rgba.Length; i += 4)
+            {
+                // Multiply existing vertex color by tint color
+                mesh.Rgba[i] = (byte)(mesh.Rgba[i] * color.R);         // R
+                mesh.Rgba[i + 1] = (byte)(mesh.Rgba[i + 1] * color.G); // G
+                mesh.Rgba[i + 2] = (byte)(mesh.Rgba[i + 2] * color.B); // B
+                // Keep alpha the same: mesh.Rgba[i + 3]
+            }
+        }
+
+        private Vec4f GetFiberColor(ItemStack contentStack)
+        {
+            // Default to white (no tint)
+            Vec4f baseColor = ColorUtil.WhiteArgbVec;
+
+            if (contentStack?.Item == null) return baseColor;
+
+            string itemCode = contentStack.Item.Code.ToString();
+
+            // Parse color from item code (e.g., "fibers-generic-gray" -> gray)
+            if (itemCode.Contains("fibers-"))
+            {
+                // Extract color name from code
+                string[] parts = itemCode.Split('-');
+                if (parts.Length >= 3)
+                {
+                    string colorName = parts[2]; // e.g., "gray", "black", "brown"
+                    return GetColorFromName(colorName);
+                }
+            }
+
+            // Alternative: Check item attributes for color
+            if (contentStack.Item.Attributes?.KeyExists("fiberColor") == true)
+            {
+                string colorHex = contentStack.Item.Attributes["fiberColor"].AsString();
+                double[] colorArray = ColorUtil.Hex2Doubles(colorHex);
+                return new Vec4f((float)colorArray[0], (float)colorArray[1], (float)colorArray[2], (float)colorArray[3]);
+            }
+
+            return baseColor;
+        }
+
+        private Vec4f GetColorFromName(string colorName)
+        {
+            // Map color names to RGB values
+            switch (colorName.ToLower())
+            {
+                case "white":
+                    return new Vec4f(1.0f, 1.0f, 1.0f, 1.0f);
+                case "gray":
+                case "grey":
+                    return new Vec4f(0.5f, 0.5f, 0.5f, 1.0f);
+                case "black":
+                    return new Vec4f(0.2f, 0.2f, 0.2f, 1.0f);
+                case "brown":
+                    return new Vec4f(0.6f, 0.4f, 0.2f, 1.0f);
+                case "redbrown":
+                    return new Vec4f(0.7f, 0.3f, 0.2f, 1.0f);
+                case "lightbrown":
+                    return new Vec4f(0.8f, 0.7f, 0.5f, 1.0f);
+                case "yellow":
+                    return new Vec4f(1.0f, 1.0f, 0.5f, 1.0f);
+                case "plain":
+                    return new Vec4f(0.9f, 0.85f, 0.75f, 1.0f);
+                default:
+                    return ColorUtil.WhiteArgbVec;
+            }
         }
 
         public void OnRenderFrame(float deltaTime, EnumRenderStage stage)
@@ -108,12 +198,10 @@ namespace SpinningWheel.BLockEntityRenderer
             }
 
             if (meshref == null) return;
-            
+    
             IRenderAPI rpi = api.Render;
             Vec3d camPos = api.World.Player.Entity.CameraPos;
-            
-            
-            //rpi.GlDisableCullFace();
+
             rpi.GlToggleBlend(true);
 
             IStandardShaderProgram prog = rpi.StandardShader;
@@ -124,7 +212,12 @@ namespace SpinningWheel.BLockEntityRenderer
             prog.RgbaFogIn = rpi.FogColor;
             prog.FogMinIn = rpi.FogMin;
             prog.FogDensityIn = rpi.FogDensity;
-            prog.RgbaTint = ColorUtil.WhiteArgbVec;
+    
+            // Remove this - not working:
+            // prog.RgbaTint = colorTint;
+    
+            prog.RgbaTint = ColorUtil.WhiteArgbVec; // Set to white (no shader tint)
+    
             prog.NormalShaded = 1;
             prog.ExtraGodray = 0;
             prog.SsaoAttn = 0;
@@ -133,19 +226,19 @@ namespace SpinningWheel.BLockEntityRenderer
 
             Vec4f lightrgbs = api.World.BlockAccessor.GetLightRGBs(pos.X, pos.Y, pos.Z);
             prog.RgbaLightIn = lightrgbs;
-            prog.ExtraGlow = 86;
-            
+            prog.ExtraGlow = 0;
+    
             prog.ModelMatrix = ModelMat
-                .Identity()
-                .Translate(pos.X - camPos.X + transform.Translation.X, pos.Y - camPos.Y + transform.Translation.Y, pos.Z - camPos.Z + transform.Translation.Z)
-                .Translate(transform.Origin.X, transform.Origin.Y, transform.Origin.Z)
-                .RotateX(transform.Rotation.X * GameMath.DEG2RAD)
-                .RotateY(transform.Rotation.Y * GameMath.DEG2RAD)
-                .RotateZ(transform.Rotation.Z * GameMath.DEG2RAD)
-                .Scale(transform.ScaleXYZ.X, transform.ScaleXYZ.Y, transform.ScaleXYZ.Z)
-                .Translate(-transform.Origin.X, -transform.Origin.Y, -transform.Origin.Z)
-                .Values
-            ;
+                    .Identity()
+                    .Translate(pos.X - camPos.X + transform.Translation.X, pos.Y - camPos.Y + transform.Translation.Y, pos.Z - camPos.Z + transform.Translation.Z)
+                    .Translate(transform.Origin.X, transform.Origin.Y, transform.Origin.Z)
+                    .RotateX(transform.Rotation.X * GameMath.DEG2RAD)
+                    .RotateY(transform.Rotation.Y * GameMath.DEG2RAD)
+                    .RotateZ(transform.Rotation.Z * GameMath.DEG2RAD)
+                    .Scale(transform.ScaleXYZ.X, transform.ScaleXYZ.Y, transform.ScaleXYZ.Z)
+                    .Translate(-transform.Origin.X, -transform.Origin.Y, -transform.Origin.Z)
+                    .Values
+                ;
 
             prog.ViewMatrix = rpi.CameraMatrixOriginf;
             prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;

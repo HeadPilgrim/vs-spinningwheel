@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SpinningWheel.BLockEntityRenderer;
 using SpinningWheel.Blocks;
 using SpinningWheel.GUIs;
@@ -972,18 +973,16 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             {
                 ItemStack distaffStack = new ItemStack(distaffItem);
                 InSpinningWheelProps props = GetRenderProps(distaffStack);
-            
+        
                 ModelTransform transform = props?.Transform ?? new ModelTransform();
                 transform.EnsureDefaultValues();
-            
+        
                 // Apply rotation based on spinning wheel's facing direction
                 if (facing == null)
                 {
                     facing = BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
                 }
-            
-                // Rotate the item to match the spinning wheel's orientation
-                // North = 0°, East = 270°, South = 180°, West = 90°
+        
                 float yRotation = 0f;
                 if (facing == BlockFacing.NORTH)
                     yRotation = 0f;
@@ -993,18 +992,211 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                     yRotation = 180f;
                 else if (facing == BlockFacing.WEST)
                     yRotation = 90f;
-            
-                // Add the base rotation from JSON to the facing rotation
+        
                 transform.Rotation.Y += yRotation;
-            
-                renderer.SetContents(distaffStack, transform);
+        
+                // Use the actual fiber color (remove the test red line)
+                Vec4f fiberColor = GetFiberColorFromInput(InputSlot.Itemstack);
+                renderer.SetContents(distaffStack, transform, fiberColor);
             }
         }
         else
         {
             // Hide the distaff when no valid item in input
-            renderer.SetContents(null, null);
+            renderer.SetContents(null, null, ColorUtil.WhiteArgbVec);
         }
+    }
+
+    private Vec4f GetFiberColorFromInput(ItemStack inputStack)
+    {
+        if (inputStack?.Item == null) return ColorUtil.WhiteArgbVec;
+
+        string itemCode = inputStack.Item.Code.ToString().ToLower();
+        Api.Logger.Debug($"[SpinningWheel] Getting color for: {itemCode}");
+
+        // Check if the item has spinningProps that define output color
+        if (inputStack.Item.Attributes?.KeyExists("spinningProps") == true)
+        {
+            var spinningProps = inputStack.Item.Attributes["spinningProps"];
+            
+            // Check if there's an output item defined
+            if (spinningProps.KeyExists("output"))
+            {
+                string outputCode = spinningProps["output"].AsString();
+                Vec4f colorFromOutput = GetColorFromOutputItem(outputCode);
+                if (colorFromOutput != ColorUtil.WhiteArgbVec)
+                {
+                    Api.Logger.Debug($"[SpinningWheel] Color from output: R={colorFromOutput.R:F2}, G={colorFromOutput.G:F2}, B={colorFromOutput.B:F2}");
+                    return colorFromOutput;
+                }
+            }
+        }
+
+        // Extract color name from item code
+        string colorName = ExtractColorName(itemCode);
+        if (!string.IsNullOrEmpty(colorName))
+        {
+            Vec4f color = GetClothColor(colorName);
+            Api.Logger.Debug($"[SpinningWheel] Color from name '{colorName}': R={color.R:F2}, G={color.G:F2}, B={color.B:F2}");
+            return color;
+        }
+
+        return ColorUtil.WhiteArgbVec;
+    }
+
+    private string ExtractColorName(string itemCode)
+    {
+        // Handle twine format: "twine-wool-gray" -> "gray"
+        if (itemCode.Contains("twine-"))
+        {
+            string[] parts = itemCode.Split('-');
+            if (parts.Length >= 3)
+            {
+                string colorPart = parts[2]; // twine-wool-[color]
+                if (IsColorName(colorPart)) return colorPart;
+            }
+        }
+        
+        // Handle fiber formats:
+        // "fibers-generic-gray" -> "gray"
+        // "fibers-angora-white" -> "white"
+        if (itemCode.Contains("fibers-"))
+        {
+            string[] parts = itemCode.Split('-');
+            
+            // Check last part first (e.g., "fibers-angora-white")
+            if (parts.Length >= 3)
+            {
+                string lastPart = parts[parts.Length - 1];
+                if (IsColorName(lastPart)) return lastPart;
+            }
+            
+            // Check second-to-last part (e.g., "fibers-generic-gray")
+            if (parts.Length >= 3)
+            {
+                string secondLast = parts[parts.Length - 2];
+                if (secondLast != "generic" && IsColorName(secondLast)) return secondLast;
+            }
+            
+            // Check second part (e.g., "fibers-gray")
+            if (parts.Length >= 2)
+            {
+                string secondPart = parts[1];
+                if (IsColorName(secondPart)) return secondPart;
+            }
+        }
+        
+        // Handle thread/yarn formats: "thread-linen-gray" -> "gray"
+        if (itemCode.Contains("thread-") || itemCode.Contains("yarn-"))
+        {
+            string[] parts = itemCode.Split('-');
+            if (parts.Length >= 3)
+            {
+                string colorPart = parts[2];
+                if (IsColorName(colorPart)) return colorPart;
+            }
+        }
+        
+        // Default colors for specific material types
+        if (itemCode.Contains("flax")) return "plain";
+        if (itemCode.Contains("cattail")) return "plain";
+        if (itemCode.Contains("algae")) return "green";
+        if (itemCode.Contains("plain")) return "plain";
+        if (itemCode.Contains("mordant")) return "plain"; // Mordant twine is undyed
+        
+        return "plain"; // Default
+    }
+
+    private bool IsColorName(string part)
+    {
+        string[] knownColors = {
+            // Basic colors
+            "white", "gray", "grey", "black", "brown", "lightbrown", "redbrown",
+            "yellow", "plain", "orange", "red", "green", "blue", "purple", "pink",
+            // Dark variants (for Wool & More)
+            "darkblue", "darkbrown", "darkgreen", "darkred", "darkgray", "darkgrey",
+            // Special
+            "mordant"
+        };
+        return knownColors.Contains(part);
+    }
+
+    private Vec4f GetClothColor(string colorName)
+    {
+        // These colors match the game's cloth/linen colors
+        switch (colorName.ToLower())
+        {
+            case "white":
+                return new Vec4f(0.95f, 0.95f, 0.95f, 1.0f);
+            case "gray":
+            case "grey":
+                return new Vec4f(0.6f, 0.6f, 0.6f, 1.0f);
+            case "black":
+                return new Vec4f(0.15f, 0.15f, 0.15f, 1.0f);
+            case "brown":
+                return new Vec4f(0.55f, 0.35f, 0.2f, 1.0f);
+            case "redbrown":
+                return new Vec4f(0.65f, 0.25f, 0.2f, 1.0f);
+            case "lightbrown":
+                return new Vec4f(0.75f, 0.65f, 0.5f, 1.0f);
+            case "yellow":
+                return new Vec4f(0.95f, 0.9f, 0.5f, 1.0f);
+            case "orange":
+                return new Vec4f(0.9f, 0.55f, 0.25f, 1.0f);
+            case "red":
+                return new Vec4f(0.8f, 0.2f, 0.2f, 1.0f);
+            case "green":
+                return new Vec4f(0.4f, 0.6f, 0.3f, 1.0f);
+            case "blue":
+                return new Vec4f(0.3f, 0.4f, 0.7f, 1.0f);
+            case "purple":
+                return new Vec4f(0.5f, 0.3f, 0.6f, 1.0f);
+            case "pink":
+                return new Vec4f(0.9f, 0.6f, 0.7f, 1.0f);
+            
+            // Dark variants
+            case "darkblue":
+                return new Vec4f(0.15f, 0.2f, 0.4f, 1.0f);
+            case "darkbrown":
+                return new Vec4f(0.3f, 0.2f, 0.1f, 1.0f);
+            case "darkgreen":
+                return new Vec4f(0.2f, 0.35f, 0.15f, 1.0f);
+            case "darkred":
+                return new Vec4f(0.45f, 0.1f, 0.1f, 1.0f);
+            case "darkgray":
+            case "darkgrey":
+                return new Vec4f(0.3f, 0.3f, 0.3f, 1.0f);
+            
+            case "plain":
+            case "mordant":
+            default:
+                return new Vec4f(0.85f, 0.8f, 0.7f, 1.0f); // Natural fiber color
+        }
+    }
+
+    private Vec4f GetColorFromOutputItem(string outputCode)
+    {
+        // Try to load the output item and get its color
+        try
+        {
+            Item outputItem = Api.World.GetItem(new AssetLocation(outputCode));
+            if (outputItem != null)
+            {
+                // Try to extract color from the output item's code
+                string outputItemCode = outputItem.Code.ToString().ToLower();
+                string colorName = ExtractColorName(outputItemCode);
+                if (!string.IsNullOrEmpty(colorName))
+                {
+                    return GetClothColor(colorName);
+                }
+            }
+        }
+        catch
+        {
+            // Ignore and fall back
+        }
+        
+        return ColorUtil.WhiteArgbVec;
     }
 
     InSpinningWheelProps GetRenderProps(ItemStack contentStack)
