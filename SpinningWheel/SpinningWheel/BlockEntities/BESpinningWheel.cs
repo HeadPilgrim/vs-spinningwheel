@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SpinningWheel.BLockEntityRenderer;
+using SpinningWheel.Blocks;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
 using SpinningWheel.ModConfig;
@@ -62,13 +63,13 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             // Position player at the center of the 2x2x2 multiblock
             // The center is 1 block (in X and Z) from the control position
             if (facing == BlockFacing.NORTH)
-                return mountPos.Add(1.0, y2 - 0.68, 0.95);  // cposition (0,0,0) + (1,0,1) = center
+                return mountPos.Add(1.0, y2 - 0.97, 0.95);  // cposition (0,0,0) + (1,0,1) = center
             if (facing == BlockFacing.EAST)
-                return mountPos.Add(0.05, y2 - 0.68, 1.0);  // Rotated 90° clockwise : cposition (1,0,0) + (-1,0,1) = center
+                return mountPos.Add(0.05, y2 - 0.97, 1.0);  // Rotated 90° clockwise : cposition (1,0,0) + (-1,0,1) = center
             if (facing == BlockFacing.SOUTH)
-                return mountPos.Add(0.0, y2 - 0.68, 0.05);  // Rotated 180° : cposition (1,0,1) + (-1,0,-1) = center
+                return mountPos.Add(0.0, y2 - 0.97, 0.05);  // Rotated 180° : cposition (1,0,1) + (-1,0,-1) = center
             if (facing == BlockFacing.WEST)
-                return mountPos.Add(0.95, y2 - 0.68, 0.0);  // Rotated 270° clockwise : cposition (0,0,1) + (1,0,-1) = center
+                return mountPos.Add(0.95, y2 - 0.97, 0.0);  // Rotated 270° clockwise : cposition (0,0,1) + (1,0,-1) = center
             return mountPos.Add(0.5, y2, 0.5); // Fallback
         }
     }
@@ -373,32 +374,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 
         mountedByEntityId = 0;
         mountedByPlayerUid = null;
-    }
-    
-    public void OpenGui(IPlayer player)
-    {
-        // Only allow the mounted player to open the GUI
-        if (MountedBy != player.Entity)
-        {
-            return;
-        }
-        if (Api.Side == EnumAppSide.Client)
-        {
-            if (clientDialog == null || !clientDialog.IsOpened())
-            {
-                toggleInventoryDialogClient(player, () =>
-                {
-                    clientDialog = new GuiDialogBlockEntitySpinningWheel(
-                        DialogTitle,
-                        Inventory,
-                        Pos,
-                        Api as ICoreClientAPI
-                    );
-                    //clientDialog.TryOpen();
-                    return clientDialog;
-                });
-            }
-        }
     }
     
     public bool IsMountedBy(Entity entity) => this.MountedBy == entity;
@@ -735,7 +710,106 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     
     public override bool OnPlayerRightClick(IPlayer byPlayer, BlockSelection blockSel)
     {
-        // Mount the player when they right-click
+        // This method is required by the abstract base class but won't be called directly
+        // because the Block class implements IMultiBlockInteract which takes precedence.
+        // However, we still need it for fallback cases or if called programmatically.
+    
+        // Default to opening GUI
+        return OpenGui(byPlayer);
+    }
+    
+    private string GetOffsetKeyFromSelectionIndex(int globalIndex, out int localBoxIndex)
+    {
+        int cumulativeIndex = 0;
+    
+        // Iterate through the ValuesByMultiblockOffset to find which offset contains this box
+        foreach (var kvp in ((BlockSpinningWheel)Block).ValuesByMultiblockOffset.SelectionBoxesByOffset)
+        {
+            Vec3i offset = kvp.Key;
+            Cuboidf[] boxes = kvp.Value;
+        
+            if (boxes == null || boxes.Length == 0) continue;
+        
+            if (globalIndex >= cumulativeIndex && globalIndex < cumulativeIndex + boxes.Length)
+            {
+                localBoxIndex = globalIndex - cumulativeIndex;
+                return $"{offset.X},{offset.Y},{offset.Z}";
+            }
+        
+            cumulativeIndex += boxes.Length;
+        }
+    
+        localBoxIndex = 0;
+        return "0,0,0"; // Default to control block
+    }
+    
+    private Vec3i GetMultiblockOffset(BlockPos clickedPos)
+    {
+        // Get the master/control block position
+        BlockPos masterPos = GetMasterBlockPos();
+        
+        // Calculate offset from master
+        return new Vec3i(
+            clickedPos.X - masterPos.X,
+            clickedPos.Y - masterPos.Y,
+            clickedPos.Z - masterPos.Z
+        );
+    }
+    
+    private BlockPos GetMasterBlockPos()
+    {
+        // The control block is the master - this BlockEntity IS on the control block
+        // The control block has offset (0,0,0) in your multiblock structure
+        return Pos;
+    }
+    
+    public bool OpenGui(IPlayer player)
+    {
+        Api.Logger.Debug($"[SpinningWheel] OpenGui called, Side: {Api.Side}");
+    
+        if (Api.Side == EnumAppSide.Client)
+        {
+            Api.Logger.Debug("[SpinningWheel] On client side, checking permissions");
+        
+            // Check if player has the required class first
+            if (!CanPlayerUseSpinningWheel(player))
+            {
+                Api.Logger.Debug("[SpinningWheel] Player doesn't have required class");
+                string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
+                (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass", 
+                    Lang.Get("spinningwheel:spinning-wheel-requires-class", requiredClasses));
+                return false;
+            }
+        
+            Api.Logger.Debug("[SpinningWheel] Opening dialog");
+        
+            // Open the GUI instead of mounting
+            if (clientDialog == null || !clientDialog.IsOpened())
+            {
+                toggleInventoryDialogClient(player, () =>
+                {
+                    clientDialog = new GuiDialogBlockEntitySpinningWheel(
+                        DialogTitle,
+                        Inventory,
+                        Pos,
+                        Api as ICoreClientAPI
+                    );
+                    Api.Logger.Debug("[SpinningWheel] Dialog created");
+                    return clientDialog;
+                });
+            }
+        }
+        else
+        {
+            Api.Logger.Debug("[SpinningWheel] On server side, returning true");
+        }
+    
+        return true;
+    }
+    
+    private bool MountPlayer(IPlayer byPlayer)
+    {
+        // Use the existing OnPlayerInteract method which handles mounting
         return OnPlayerInteract(byPlayer);
     }
     
