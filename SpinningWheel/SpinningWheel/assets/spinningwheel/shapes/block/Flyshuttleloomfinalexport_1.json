@@ -7194,7 +7194,7 @@
 			"code": "loom_full_cycle",
 			"quantityframes": 257,
 			"onActivityStopped": "EaseOut",
-			"onAnimationEnd": "Hold",
+			"onAnimationEnd": "Repeat",
 			"keyframes": [
 				{
 					"frame": 0,

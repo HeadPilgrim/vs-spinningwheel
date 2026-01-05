@@ -53,30 +53,6 @@ namespace SpinningWheel.Blocks
             return beSpinningWheel;
         }
         
-        // BlockFlyShuttleLoom.cs
-        // BlockFlyShuttleLoom.cs
-        public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
-        {
-            BlockEntityFlyShuttleLoom be = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityFlyShuttleLoom;
-    
-            if (be != null)
-            {
-                // Toggle the animation
-                if (be.On)
-                {
-                    be.Deactivate();
-                }
-                else
-                {
-                    be.Activate();
-                }
-                return true;
-            }
-    
-            return base.OnBlockInteractStart(world, byPlayer, blockSel);
-        }
-        
-        
         // --- IMultiBlockInteract Implementation ---
         #region IMultiBlockInteract Implementation
         public bool MBDoParticalSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
@@ -155,10 +131,11 @@ namespace SpinningWheel.Blocks
                     break;
 
                 default:
-                    world.Api.Logger.Debug($"[FlyShuttleLoom] No action for offset: {offsetKey}");
-                    return false;
+                    // All other parts of the loom - open GUI
+                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for offset: {offsetKey}");
+                    return beLoom.OpenGui(byPlayer);
             }
-            
+
             return false;
         }
 
@@ -223,8 +200,18 @@ namespace SpinningWheel.Blocks
                     }
                 };
             }
-            
-            return new WorldInteraction[0];
+            else
+            {
+                // Show "Open Crafting Menu" for other parts
+                return new WorldInteraction[]
+                {
+                    new WorldInteraction()
+                    {
+                        ActionLangCode = "blockhelp-loom-opencrafting",
+                        MouseButton = EnumMouseButton.Right
+                    }
+                };
+            }
         }
 
         public bool MBOnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)

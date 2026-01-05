@@ -368,9 +368,9 @@
     "value": {
       "name": "SitLoomFull",
       "code": "sitloomfull",
-      "quantityframes": 256,
+      "quantityframes": 257,
       "onActivityStopped": "Stop",
-      "onAnimationEnd": "Stop",
+      "onAnimationEnd": "Repeat",
       "keyframes": [
         {
           "frame": 0,
