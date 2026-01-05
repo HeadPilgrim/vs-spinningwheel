@@ -52,6 +52,49 @@ namespace SpinningWheel.BlockEntities
                    InputSlot3?.Itemstack != null;
         }
 
+        // Helper to get all input slots as a list
+        private ItemSlot[] GetAllInputSlots()
+        {
+            return new ItemSlot[] { InputSlot1, InputSlot2, InputSlot3 };
+        }
+
+        // Helper to calculate total quantity of weavable items across all input slots
+        // Returns 0 if slots contain different items or items without weavingProps
+        private int GetTotalWeavableQuantity()
+        {
+            ItemStack referenceStack = null;
+            int totalQuantity = 0;
+
+            foreach (var slot in GetAllInputSlots())
+            {
+                if (slot?.Itemstack == null) continue;
+
+                // Check if this item has weavingProps
+                if (!slot.Itemstack.ItemAttributes.KeyExists("weavingProps"))
+                {
+                    return 0; // Mixed items - invalid
+                }
+
+                // First item sets the reference
+                if (referenceStack == null)
+                {
+                    referenceStack = slot.Itemstack;
+                    totalQuantity = slot.Itemstack.StackSize;
+                }
+                else
+                {
+                    // Check if this is the same item type as the reference
+                    if (!slot.Itemstack.Collectible.Equals(slot.Itemstack, referenceStack, GlobalConstants.IgnoredStackAttributes))
+                    {
+                        return 0; // Different items - invalid
+                    }
+                    totalQuantity += slot.Itemstack.StackSize;
+                }
+            }
+
+            return totalQuantity;
+        }
+
         public EntityAgent MountedBy;
         bool blockBroken;
         long mountedByEntityId;
@@ -421,30 +464,32 @@ namespace SpinningWheel.BlockEntities
             // Check if we have any input items
             if (!HasInputItems()) return false;
 
-            // Get the first slot with items
+            // Get the first slot with items to check weavingProps
             ItemSlot inputSlot = GetFirstInputSlotWithItem();
             if (inputSlot?.Itemstack == null) return false;
 
             // Check if this item can be woven
-            if (inputSlot.Itemstack.ItemAttributes.KeyExists("weavingProps"))
+            if (!inputSlot.Itemstack.ItemAttributes.KeyExists("weavingProps")) return false;
+
+            var weavingProps = inputSlot.Itemstack.ItemAttributes["weavingProps"];
+            int requiredInput = weavingProps["inputQuantity"]?.AsInt(1) ?? 1;
+
+            // Calculate total quantity across all input slots
+            int totalQuantity = GetTotalWeavableQuantity();
+
+            // Check if we have enough total input items across all slots
+            if (totalQuantity < requiredInput) return false;
+
+            ItemSlot outputSlot = OutputSlot;
+
+            // Check if output slot has room
+            if (outputSlot.Empty) return true;
+
+            // Check if we can stack more
+            ItemStack resultStack = GetWeaveResult(inputSlot.Itemstack);
+            if (resultStack != null && outputSlot.Itemstack.Collectible.Equals(outputSlot.Itemstack, resultStack, GlobalConstants.IgnoredStackAttributes))
             {
-                var weavingProps = inputSlot.Itemstack.ItemAttributes["weavingProps"];
-                int requiredInput = weavingProps["inputQuantity"]?.AsInt(1) ?? 1;
-
-                // Check if we have enough input items in this slot
-                if (inputSlot.Itemstack.StackSize < requiredInput) return false;
-
-                ItemSlot outputSlot = OutputSlot;
-
-                // Check if output slot has room
-                if (outputSlot.Empty) return true;
-
-                // Check if we can stack more
-                ItemStack resultStack = GetWeaveResult(inputSlot.Itemstack);
-                if (resultStack != null && outputSlot.Itemstack.Collectible.Equals(outputSlot.Itemstack, resultStack, GlobalConstants.IgnoredStackAttributes))
-                {
-                    return outputSlot.Itemstack.StackSize < outputSlot.Itemstack.Collectible.MaxStackSize;
-                }
+                return outputSlot.Itemstack.StackSize < outputSlot.Itemstack.Collectible.MaxStackSize;
             }
 
             return false;
@@ -488,20 +533,20 @@ namespace SpinningWheel.BlockEntities
 
         private void WeaveInput()
         {
-            // Get the first slot with items to weave
-            ItemSlot inputSlot = GetFirstInputSlotWithItem();
-            if (inputSlot == null) return;
+            // Get the first slot with items to check recipe
+            ItemSlot firstInputSlot = GetFirstInputSlotWithItem();
+            if (firstInputSlot == null) return;
 
             ItemSlot outputSlot = OutputSlot;
 
-            ItemStack resultStack = GetWeaveResult(inputSlot.Itemstack);
+            ItemStack resultStack = GetWeaveResult(firstInputSlot.Itemstack);
             if (resultStack == null) return;
 
-            // Get how many input items to consume
+            // Get how many input items to consume total
             int inputQuantity = 1; // Default
-            if (inputSlot.Itemstack.ItemAttributes.KeyExists("weavingProps"))
+            if (firstInputSlot.Itemstack.ItemAttributes.KeyExists("weavingProps"))
             {
-                var weavingProps = inputSlot.Itemstack.ItemAttributes["weavingProps"];
+                var weavingProps = firstInputSlot.Itemstack.ItemAttributes["weavingProps"];
                 inputQuantity = weavingProps["inputQuantity"]?.AsInt(1) ?? 1;
             }
 
@@ -515,9 +560,18 @@ namespace SpinningWheel.BlockEntities
                 outputSlot.Itemstack.StackSize += resultStack.StackSize;
             }
 
-            // Consume the correct amount of input from whichever slot we used
-            inputSlot.TakeOut(inputQuantity);
-            inputSlot.MarkDirty();
+            // Consume items from slots in order until we've consumed enough
+            int remainingToConsume = inputQuantity;
+            foreach (var slot in GetAllInputSlots())
+            {
+                if (slot?.Itemstack == null || remainingToConsume <= 0) continue;
+
+                int toTakeFromThisSlot = Math.Min(remainingToConsume, slot.Itemstack.StackSize);
+                slot.TakeOut(toTakeFromThisSlot);
+                slot.MarkDirty();
+                remainingToConsume -= toTakeFromThisSlot;
+            }
+
             outputSlot.MarkDirty();
         }
 
