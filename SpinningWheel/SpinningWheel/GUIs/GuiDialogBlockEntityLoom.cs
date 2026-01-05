@@ -42,12 +42,15 @@ namespace SpinningWheel.GUIs
                 hoveredSlot = null;
             }
 
-            ElementBounds loomBounds = ElementBounds.Fixed(0, 0, 200, 90);
+            // Total width to accommodate 3 horizontal input slots + progress bar + output slot
+            ElementBounds loomBounds = ElementBounds.Fixed(0, 0, 380, 90);
 
-            // Input slot on the left (twine/thread)
-            ElementBounds inputSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, 30, 1, 1);
+            // 3 Input slots arranged horizontally on the left (twine/thread)
+            // Using a single SlotGrid call for proper spacing
+            ElementBounds inputSlotsGroupBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, 30, 3, 1);
+
             // Output slot on the right (cloth/fabric)
-            ElementBounds outputSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 153, 30, 1, 1);
+            ElementBounds outputSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 330, 30, 1, 1);
 
             // Padding around everything
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
@@ -65,8 +68,8 @@ namespace SpinningWheel.GUIs
                 .AddDialogTitleBar(DialogTitle, OnTitleBarClose)
                 .BeginChildElements(bgBounds)
                     .AddDynamicCustomDraw(loomBounds, new DrawDelegateWithBounds(OnBgDraw), "symbolDrawer")
-                    .AddItemSlotGrid(Inventory, SendInvPacket, 1, new int[] { 0 }, inputSlotBounds, "inputSlot")
-                    .AddItemSlotGrid(Inventory, SendInvPacket, 1, new int[] { 1 }, outputSlotBounds, "outputslot")
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 3, new int[] { 0, 1, 2 }, inputSlotsGroupBounds, "inputSlots")
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 1, new int[] { 3 }, outputSlotBounds, "outputslot")
                 .EndChildElements()
                 .Compose()
             ;
@@ -123,16 +126,18 @@ namespace SpinningWheel.GUIs
 
         private void OnBgDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
-
-            double slotTop = 30;
+            // Position the progress bar centered between input and output slots
+            double slotTop = 30; // Align with the horizontal slot row
             double slotSize = 50; // Standard slot height
             double barHeight = 20;
 
             // Center the bar vertically with the slots
-            double top = slotTop + (slotSize - barHeight) / 2; // This centers it
+            double top = slotTop + (slotSize - barHeight) / 2;
 
-            double left = 63;
-            double barWidth = 75;
+            // Position bar between input slots (3 slots = ~150px wide) and output slot (at x=330)
+            // Input slots end at approximately x=150, output starts at x=330
+            double left = 170;  // Space after input slots
+            double barWidth = 140; // Bar width to span the gap nicely
 
             // Calculate progress (0.0 to 1.0)
             double progress = maxWeaveTime > 0 ? System.Math.Min(inputWeaveTime / maxWeaveTime, 1.0) : 0;
@@ -236,7 +241,7 @@ namespace SpinningWheel.GUIs
         {
             Inventory.SlotModified -= OnInventorySlotModified;
 
-            SingleComposer.GetSlotGrid("inputSlot").OnGuiClosed(capi);
+            SingleComposer.GetSlotGrid("inputSlots").OnGuiClosed(capi);
             SingleComposer.GetSlotGrid("outputslot").OnGuiClosed(capi);
 
             base.OnGuiClosed();

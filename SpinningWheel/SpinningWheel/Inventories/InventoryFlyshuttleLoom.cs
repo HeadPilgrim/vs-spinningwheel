@@ -14,19 +14,19 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
 
     public InventoryFlyshuttleLoom(string inventoryID, ICoreAPI api) : base(inventoryID, api)
     {
-        // slot 0 = input (twine/thread)
-        // slot 1 = output (cloth/fabric)
-        slots = GenEmptySlots(2);
+        // slots 0-2 = input (twine/thread) - 3 slots to allow up to 96 twine (32x3)
+        // slot 3 = output (cloth/fabric)
+        slots = GenEmptySlots(4);
     }
 
     public InventoryFlyshuttleLoom(string className, string instanceID, ICoreAPI api) : base(className, instanceID, api)
     {
-        slots = GenEmptySlots(2);
+        slots = GenEmptySlots(4);
     }
 
     public override int Count
     {
-        get { return 2; }
+        get { return 4; }
     }
 
     public override ItemSlot this[int slotId]
@@ -56,21 +56,23 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
 
     protected override ItemSlot NewSlot(int i)
     {
-        // Slot 0 = input (only accepts weavable items)
-        // Slot 1 = output (read-only)
-        if (i == 0)
+        // Slots 0-2 = input (only accepts weavable items)
+        // Slot 3 = output (read-only)
+        if (i >= 0 && i <= 2)
         {
             return new ItemSlotWeavingInput(this);
         }
-        else
+        else if (i == 3)
         {
             return new ItemSlotOutput(this);
         }
+        return new ItemSlot(this);
     }
 
     public override float GetSuitability(ItemSlot sourceSlot, ItemSlot targetSlot, bool isMerge)
     {
-        if (targetSlot == slots[0] &&
+        // Accept weavable items in any of the 3 input slots
+        if ((targetSlot == slots[0] || targetSlot == slots[1] || targetSlot == slots[2]) &&
             sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true)
         {
             return 4f;
@@ -81,7 +83,16 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
 
     public override ItemSlot GetAutoPushIntoSlot(BlockFacing atBlockFace, ItemSlot fromSlot)
     {
-        return slots[0];
+        // Try to push into input slots in order (0, 1, 2)
+        // Return the first slot that can accept the item
+        for (int i = 0; i <= 2; i++)
+        {
+            if (slots[i].Empty || slots[i].CanTakeFrom(fromSlot))
+            {
+                return slots[i];
+            }
+        }
+        return null;
     }
 }
 

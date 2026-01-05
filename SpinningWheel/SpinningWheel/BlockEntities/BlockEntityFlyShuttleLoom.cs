@@ -29,31 +29,27 @@ namespace SpinningWheel.BlockEntities
         private float currentMaxWeaveTime = 8.53f; // 257 keyframes at 30 fps
 
         // Helper properties for inventory slots
-        public ItemSlot InputSlot => inventory?[0];
-        public ItemSlot OutputSlot => inventory?[1];
-        public ItemStack InputStack
+        // Slots 0-2 are input, slot 3 is output
+        public ItemSlot InputSlot1 => inventory?[0];
+        public ItemSlot InputSlot2 => inventory?[1];
+        public ItemSlot InputSlot3 => inventory?[2];
+        public ItemSlot OutputSlot => inventory?[3];
+
+        // Helper to get first non-empty input slot
+        private ItemSlot GetFirstInputSlotWithItem()
         {
-            get => inventory?[0]?.Itemstack;
-            set
-            {
-                if (inventory?[0] != null)
-                {
-                    inventory[0].Itemstack = value;
-                    inventory[0].MarkDirty();
-                }
-            }
+            if (InputSlot1?.Itemstack != null) return InputSlot1;
+            if (InputSlot2?.Itemstack != null) return InputSlot2;
+            if (InputSlot3?.Itemstack != null) return InputSlot3;
+            return null;
         }
-        public ItemStack OutputStack
+
+        // Helper to check if any input slot has items
+        private bool HasInputItems()
         {
-            get => inventory?[1]?.Itemstack;
-            set
-            {
-                if (inventory?[1] != null)
-                {
-                    inventory[1].Itemstack = value;
-                    inventory[1].MarkDirty();
-                }
-            }
+            return InputSlot1?.Itemstack != null ||
+                   InputSlot2?.Itemstack != null ||
+                   InputSlot3?.Itemstack != null;
         }
 
         public EntityAgent MountedBy;
@@ -422,7 +418,11 @@ namespace SpinningWheel.BlockEntities
 
         private bool CanWeave()
         {
-            ItemSlot inputSlot = InputSlot;
+            // Check if we have any input items
+            if (!HasInputItems()) return false;
+
+            // Get the first slot with items
+            ItemSlot inputSlot = GetFirstInputSlotWithItem();
             if (inputSlot?.Itemstack == null) return false;
 
             // Check if this item can be woven
@@ -431,7 +431,7 @@ namespace SpinningWheel.BlockEntities
                 var weavingProps = inputSlot.Itemstack.ItemAttributes["weavingProps"];
                 int requiredInput = weavingProps["inputQuantity"]?.AsInt(1) ?? 1;
 
-                // Check if we have enough input items
+                // Check if we have enough input items in this slot
                 if (inputSlot.Itemstack.StackSize < requiredInput) return false;
 
                 ItemSlot outputSlot = OutputSlot;
@@ -488,7 +488,10 @@ namespace SpinningWheel.BlockEntities
 
         private void WeaveInput()
         {
-            ItemSlot inputSlot = InputSlot;
+            // Get the first slot with items to weave
+            ItemSlot inputSlot = GetFirstInputSlotWithItem();
+            if (inputSlot == null) return;
+
             ItemSlot outputSlot = OutputSlot;
 
             ItemStack resultStack = GetWeaveResult(inputSlot.Itemstack);
@@ -512,7 +515,7 @@ namespace SpinningWheel.BlockEntities
                 outputSlot.Itemstack.StackSize += resultStack.StackSize;
             }
 
-            // Consume the correct amount of input
+            // Consume the correct amount of input from whichever slot we used
             inputSlot.TakeOut(inputQuantity);
             inputSlot.MarkDirty();
             outputSlot.MarkDirty();
@@ -546,9 +549,11 @@ namespace SpinningWheel.BlockEntities
                 }
             }
 
-            if (slotid == 0)
+            // Handle changes to any input slot (0, 1, or 2)
+            if (slotid >= 0 && slotid <= 2)
             {
-                if (InputSlot.Empty)
+                // If all input slots are empty, reset progress
+                if (!HasInputItems())
                 {
                     inputWeaveTime = 0.0f;
                     currentMaxWeaveTime = ANIMATION_DURATION;
