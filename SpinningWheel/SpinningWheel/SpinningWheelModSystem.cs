@@ -26,7 +26,7 @@
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
             
             api.RegisterBlockClass("BlockFlyShuttleLoom", typeof(BlockFlyShuttleLoom));
-            api.RegisterBlockEntityClass("BlockEntityFlyShuttleLoom", typeof(BlockEntityFlyshuttleLoom));
+            api.RegisterBlockEntityClass("BlockEntityFlyShuttleLoom", typeof(BlockEntityFlyShuttleLoom));
             
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
             
