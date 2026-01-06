@@ -1,0 +1,17 @@
+{
+  "code": "spinningwheel:checkered-orange",
+  "enabled": true,
+  "pattern": {
+    "topLeft": "tailorsdelight:twine-orange",
+    "topRight": "game:flaxtwine",
+    "bottomLeft": "game:flaxtwine",
+    "bottomRight": "tailorsdelight:twine-orange"
+  },
+  "input": {
+    "quantityPerSlot": 2
+  },
+  "output": {
+    "type": "tailorsdelight:checkeredcloth-orange",
+    "quantity": 2
+  }
+}

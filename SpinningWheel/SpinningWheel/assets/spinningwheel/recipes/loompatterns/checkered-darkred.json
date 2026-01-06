@@ -1,0 +1,17 @@
+{
+  "code": "spinningwheel:checkered-darkred",
+  "enabled": true,
+  "pattern": {
+    "topLeft": "tailorsdelight:twine-darkred",
+    "topRight": "tailorsdelight:twine-red",
+    "bottomLeft": "tailorsdelight:twine-red",
+    "bottomRight": "tailorsdelight:twine-darkred"
+  },
+  "input": {
+    "quantityPerSlot": 2
+  },
+  "output": {
+    "type": "tailorsdelight:checkeredcloth-darkred",
+    "quantity": 2
+  }
+}
