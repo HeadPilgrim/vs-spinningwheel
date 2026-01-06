@@ -2,6 +2,11 @@ using Cairo;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Config;
+using SpinningWheel.BlockEntities;
+using SpinningWheel.BlockEntityPackets;
+using ProtoBuf;
+using System.IO;
 
 namespace SpinningWheel.GUIs
 {
@@ -12,6 +17,10 @@ namespace SpinningWheel.GUIs
         private bool isWeaving;
         private long lastUpdateMs;
 
+        // Tabbed interface support
+        private int currentTabIndex = 0; // 0 = Normal, 1 = Pattern
+        private bool hasPatternWeavingEnabled = false;
+
         protected override double FloatyDialogPosition => 0.75;
 
         public GuiDialogBlockEntityLoom(string DialogTitle, InventoryBase Inventory, BlockPos BlockEntityPosition, ICoreClientAPI capi)
@@ -20,6 +29,13 @@ namespace SpinningWheel.GUIs
             if (IsDuplicate) return;
 
             capi.World.Player.InventoryManager.OpenInventory(Inventory);
+
+            // Detect if pattern weaving is enabled
+            if (capi.World.BlockAccessor.GetBlockEntity(BlockEntityPosition) is BlockEntityFlyShuttleLoom loomEntity)
+            {
+                hasPatternWeavingEnabled = loomEntity.HasPatternWeavingEnabled;
+                currentTabIndex = (int)loomEntity.CurrentWeavingMode;
+            }
 
             SetupDialog();
         }
@@ -42,37 +58,94 @@ namespace SpinningWheel.GUIs
                 hoveredSlot = null;
             }
 
-            // Total width to accommodate 3 horizontal input slots + progress bar + output slot
-            ElementBounds loomBounds = ElementBounds.Fixed(0, 0, 380, 90);
+            // Calculate layout dimensions based on whether tabs are shown
+            double titleBarHeight = 31; // Standard VS title bar height
+            double tabHeight = 30;
+            double tabGap = 5;
 
-            // 3 Input slots arranged horizontally on the left (twine/thread)
-            // Using a single SlotGrid call for proper spacing
-            ElementBounds inputSlotsGroupBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, 30, 3, 1);
+            double tabsTop = hasPatternWeavingEnabled ? titleBarHeight : 0;
+            double contentTop = hasPatternWeavingEnabled ? (titleBarHeight + tabHeight + tabGap) : 0;
 
-            // Output slot on the right (cloth/fabric)
-            ElementBounds outputSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 330, 30, 1, 1);
+            double contentHeight = currentTabIndex == 0 ? 90 : 120;
+            double contentWidth = currentTabIndex == 0 ? 380 : 320;
 
-            // Padding around everything
+            // Tab button bounds (if pattern weaving is enabled) - positioned below title bar
+            ElementBounds normalTabBounds = hasPatternWeavingEnabled ? ElementBounds.Fixed(0, tabsTop, 100, tabHeight) : null;
+            ElementBounds patternTabBounds = hasPatternWeavingEnabled ? ElementBounds.Fixed(105, tabsTop, 100, tabHeight) : null;
+            ElementBounds tabContainerBounds = hasPatternWeavingEnabled ? ElementBounds.Fixed(0, 0, 210, titleBarHeight + tabHeight + tabGap) : null;
+
+            // Content area bounds - positioned below tabs (or below title if no tabs)
+            ElementBounds loomBounds = ElementBounds.Fixed(0, contentTop, contentWidth, contentHeight);
+
+            // Background bounds with proper padding
             ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
             bgBounds.BothSizing = ElementSizing.FitToChildren;
-            bgBounds.WithChildren(loomBounds);
+
+            if (hasPatternWeavingEnabled)
+            {
+                bgBounds.WithChildren(tabContainerBounds, loomBounds);
+            }
+            else
+            {
+                bgBounds.WithChildren(loomBounds);
+            }
 
             // Dialog bounds
             ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.RightMiddle)
                 .WithFixedAlignmentOffset(-GuiStyle.DialogToScreenPadding, 0);
 
             ClearComposers();
-            SingleComposer = capi.Gui
+
+            var composer = capi.Gui
                 .CreateCompo("blockentityloom" + BlockEntityPosition, dialogBounds)
                 .AddShadedDialogBG(bgBounds)
                 .AddDialogTitleBar(DialogTitle, OnTitleBarClose)
-                .BeginChildElements(bgBounds)
-                    .AddDynamicCustomDraw(loomBounds, new DrawDelegateWithBounds(OnBgDraw), "symbolDrawer")
-                    .AddItemSlotGrid(Inventory, SendInvPacket, 3, new int[] { 0, 1, 2 }, inputSlotsGroupBounds, "inputSlots")
-                    .AddItemSlotGrid(Inventory, SendInvPacket, 1, new int[] { 3 }, outputSlotBounds, "outputslot")
-                .EndChildElements()
-                .Compose()
-            ;
+                .BeginChildElements(bgBounds);
+
+            // Add tab buttons if pattern weaving is enabled
+            if (hasPatternWeavingEnabled)
+            {
+                string normalText = Lang.Get("spinningwheel:gui-loom-tab-normal");
+                string patternText = Lang.Get("spinningwheel:gui-loom-tab-pattern");
+
+                // Use different button styles to indicate active tab
+                EnumButtonStyle normalStyle = currentTabIndex == 0 ? EnumButtonStyle.MainMenu : EnumButtonStyle.Normal;
+                EnumButtonStyle patternStyle = currentTabIndex == 1 ? EnumButtonStyle.MainMenu : EnumButtonStyle.Normal;
+
+                composer
+                    .AddSmallButton(normalText, OnNormalTabClick, normalTabBounds, normalStyle, "normalTab")
+                    .AddSmallButton(patternText, OnPatternTabClick, patternTabBounds, patternStyle, "patternTab");
+            }
+
+            // Add content based on current tab
+            composer.AddDynamicCustomDraw(loomBounds, new DrawDelegateWithBounds(OnBgDraw), "symbolDrawer");
+
+            if (currentTabIndex == 0) // Normal mode
+            {
+                // 3 Input slots arranged horizontally + output slot
+                // Position slots within the content area (after tabs)
+                ElementBounds inputSlotsBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, contentTop + 30, 3, 1);
+                ElementBounds outputSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 330, contentTop + 30, 1, 1);
+
+                composer
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 3, new int[] { 0, 1, 2 }, inputSlotsBounds, "inputSlots")
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 1, new int[] { 3 }, outputSlotBounds, "outputslot");
+            }
+            else // Pattern mode
+            {
+                // Pattern grid: 2x2 (slots 4-7) + output slot
+                // Position slots within the content area (after tabs)
+                ElementBounds patternTopRowBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, contentTop + 30, 2, 1);
+                ElementBounds patternBottomRowBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, contentTop + 80, 2, 1);
+                ElementBounds outputSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 270, contentTop + 55, 1, 1);
+
+                composer
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 2, new int[] { 4, 5 }, patternTopRowBounds, "patternTopRow")
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 2, new int[] { 6, 7 }, patternBottomRowBounds, "patternBottomRow")
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 1, new int[] { 3 }, outputSlotBounds, "outputslot");
+            }
+
+            SingleComposer = composer.EndChildElements().Compose();
 
             lastUpdateMs = capi.ElapsedMilliseconds;
 
@@ -126,18 +199,39 @@ namespace SpinningWheel.GUIs
 
         private void OnBgDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
-            // Position the progress bar centered between input and output slots
-            double slotTop = 30; // Align with the horizontal slot row
             double slotSize = 50; // Standard slot height
             double barHeight = 20;
 
-            // Center the bar vertically with the slots
-            double top = slotTop + (slotSize - barHeight) / 2;
+            double slotTop, left, barWidth, top;
 
-            // Position bar between input slots (3 slots = ~150px wide) and output slot (at x=330)
-            // Input slots end at approximately x=150, output starts at x=330
-            double left = 170;  // Space after input slots
-            double barWidth = 140; // Bar width to span the gap nicely
+            if (currentTabIndex == 0) // Normal mode
+            {
+                // Position the progress bar centered between input and output slots
+                // Slots are at Y=30 relative to loomBounds
+                slotTop = 30;
+
+                // Center the bar vertically with the slots
+                top = slotTop + (slotSize - barHeight) / 2;
+
+                // Position bar between input slots (3 slots = ~150px wide) and output slot (at x=330)
+                // Input slots end at approximately x=150, output starts at x=330
+                left = 170;  // Space after input slots
+                barWidth = 140; // Bar width to span the gap nicely
+            }
+            else // Pattern mode
+            {
+                // Position the progress bar to the right of the 2x2 grid
+                // Pattern grid starts at Y=30, center is at Y=55 (30 + 50/2)
+                slotTop = 55; // Align with center of 2x2 grid
+
+                // Center the bar vertically with the slots
+                top = slotTop + (slotSize - barHeight) / 2;
+
+                // Position bar between pattern grid (2x2 = ~100px wide) and output slot (at x=270)
+                // Pattern grid ends at approximately x=100, output starts at x=270
+                left = 120;  // Space after pattern grid
+                barWidth = 130; // Bar width to span the gap nicely
+            }
 
             // Calculate progress (0.0 to 1.0)
             double progress = maxWeaveTime > 0 ? System.Math.Min(inputWeaveTime / maxWeaveTime, 1.0) : 0;
@@ -231,6 +325,44 @@ namespace SpinningWheel.GUIs
             TryClose();
         }
 
+        private bool OnNormalTabClick()
+        {
+            if (currentTabIndex != 0)
+            {
+                currentTabIndex = 0;
+
+                // Send packet to server to change mode
+                var packet = new SetWeavingModePacket { WeavingMode = (int)WeavingMode.Normal };
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Serializer.Serialize(ms, packet);
+                    capi.Network.SendBlockEntityPacket(BlockEntityPosition.X, BlockEntityPosition.Y, BlockEntityPosition.Z, 1001, ms.ToArray());
+                }
+
+                SetupDialog();
+            }
+            return true;
+        }
+
+        private bool OnPatternTabClick()
+        {
+            if (currentTabIndex != 1)
+            {
+                currentTabIndex = 1;
+
+                // Send packet to server to change mode
+                var packet = new SetWeavingModePacket { WeavingMode = (int)WeavingMode.Pattern };
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Serializer.Serialize(ms, packet);
+                    capi.Network.SendBlockEntityPacket(BlockEntityPosition.X, BlockEntityPosition.Y, BlockEntityPosition.Z, 1001, ms.ToArray());
+                }
+
+                SetupDialog();
+            }
+            return true;
+        }
+
         public override void OnGuiOpened()
         {
             base.OnGuiOpened();
@@ -241,8 +373,17 @@ namespace SpinningWheel.GUIs
         {
             Inventory.SlotModified -= OnInventorySlotModified;
 
-            SingleComposer.GetSlotGrid("inputSlots").OnGuiClosed(capi);
-            SingleComposer.GetSlotGrid("outputslot").OnGuiClosed(capi);
+            if (currentTabIndex == 0) // Normal mode
+            {
+                SingleComposer.GetSlotGrid("inputSlots")?.OnGuiClosed(capi);
+            }
+            else // Pattern mode
+            {
+                SingleComposer.GetSlotGrid("patternTopRow")?.OnGuiClosed(capi);
+                SingleComposer.GetSlotGrid("patternBottomRow")?.OnGuiClosed(capi);
+            }
+
+            SingleComposer.GetSlotGrid("outputslot")?.OnGuiClosed(capi);
 
             base.OnGuiClosed();
         }

@@ -7,6 +7,13 @@
     "side": "Server",
     "dependsOn": [ { "modid": "wool" } ]
   },
+  {"op": "addmerge",
+    "path": "/attributesByType",
+    "value": {},
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
   {
     "op": "add",
     "path": "/attributesByType/fibers-generic-black",
@@ -154,6 +161,244 @@
       }
     },
     "file": "wool:itemtypes/resource/fibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-mordant",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-mordant",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-plain",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-plain",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-black",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-black",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-blue",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-blue",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-brown",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-brown",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-gray",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-gray",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-green",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-green",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-orange",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-orange",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-pink",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-pink",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-purple",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-purple",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-red",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-red",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-white",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-white",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-yellow",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-yellow",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-darkblue",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-darkblue",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-darkbrown",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-darkbrown",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-darkgreen",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-darkgreen",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-wool-darkred",
+    "value": {
+      "weavingProps": {
+        "outputType": "wool:cloth-wool-darkred",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "wool:itemtypes/resource/twine.json",
     "side": "Server",
     "dependsOn": [ { "modid": "wool" } ]
   }

@@ -8,6 +8,7 @@
     using Vintagestory.API.Server;
     using Vintagestory.API.Common;
     using SpinningWheel.ModConfig;
+    using SpinningWheel.Recipes;
     using System;
 
     public class SpinningWheelModSystem : ModSystem
@@ -17,6 +18,13 @@
         private ICoreAPI api;
         private IServerNetworkChannel serverChannel;
         private SpinningWheelConfigPatcher configPatcher;
+
+        // Pattern weaving support (requires tailorsdelight and wool mods)
+        private bool hasTailorsDelightAndWool = false;
+        private LoomPatternRecipeLoader patternRecipeLoader;
+
+        public bool HasPatternWeavingEnabled => hasTailorsDelightAndWool;
+        public LoomPatternRecipeLoader PatternRecipeLoader => patternRecipeLoader;
 
         // Called very early, before assets are loaded
         public override void StartPre(ICoreAPI api)
@@ -70,12 +78,32 @@
         public override void AssetsLoaded(ICoreAPI api)
         {
             base.AssetsLoaded(api);
-            
+
+            // Detect required mods for pattern weaving using ModLoader API
+            bool hasTailorsDelight = api.ModLoader.IsModEnabled("tailorsdelight");
+            bool hasWool = api.ModLoader.IsModEnabled("wool");
+            hasTailorsDelightAndWool = hasTailorsDelight && hasWool;
+
+            api.Logger.Notification($"[SpinningWheel] Mod detection - tailorsdelight: {hasTailorsDelight}, wool: {hasWool}");
+
+            if (hasTailorsDelightAndWool)
+            {
+                api.Logger.Notification("[SpinningWheel] Detected tailorsdelight and wool mods - enabling pattern weaving");
+
+                // Load pattern recipes
+                patternRecipeLoader = new LoomPatternRecipeLoader(api);
+                patternRecipeLoader.LoadPatternRecipes();
+            }
+            else
+            {
+                api.Logger.Notification("[SpinningWheel] Pattern weaving disabled (requires both tailorsdelight and wool mods)");
+            }
+
             // Apply config-based patches using the dedicated patcher class
             // Do this early, right after assets are loaded
             configPatcher = new SpinningWheelConfigPatcher(api, ModConfig.Loaded);
             configPatcher.ApplyAllPatches();
-            
+
             api.Logger.Notification("[SpinningWheel] Config patches applied in AssetsLoaded");
         }
 

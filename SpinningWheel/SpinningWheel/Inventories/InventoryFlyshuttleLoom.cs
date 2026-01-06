@@ -14,19 +14,20 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
 
     public InventoryFlyshuttleLoom(string inventoryID, ICoreAPI api) : base(inventoryID, api)
     {
-        // slots 0-2 = input (twine/thread) - 3 slots to allow up to 96 twine (32x3)
-        // slot 3 = output (cloth/fabric)
-        slots = GenEmptySlots(4);
+        // slots 0-2 = normal input (twine/thread) - 3 slots to allow up to 96 twine (32x3)
+        // slot 3 = output (cloth/fabric) - shared between normal and pattern weaving
+        // slots 4-7 = pattern grid (2x2: top-left, top-right, bottom-left, bottom-right)
+        slots = GenEmptySlots(8);
     }
 
     public InventoryFlyshuttleLoom(string className, string instanceID, ICoreAPI api) : base(className, instanceID, api)
     {
-        slots = GenEmptySlots(4);
+        slots = GenEmptySlots(8);
     }
 
     public override int Count
     {
-        get { return 4; }
+        get { return 8; }
     }
 
     public override ItemSlot this[int slotId]
@@ -56,8 +57,9 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
 
     protected override ItemSlot NewSlot(int i)
     {
-        // Slots 0-2 = input (only accepts weavable items)
-        // Slot 3 = output (read-only)
+        // Slots 0-2 = normal input (only accepts weavable items)
+        // Slot 3 = output (read-only, shared between modes)
+        // Slots 4-7 = pattern grid (accepts vanilla flaxtwine and colored twine)
         if (i >= 0 && i <= 2)
         {
             return new ItemSlotWeavingInput(this);
@@ -65,6 +67,10 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
         else if (i == 3)
         {
             return new ItemSlotOutput(this);
+        }
+        else if (i >= 4 && i <= 7)
+        {
+            return new ItemSlotPatternInput(this);
         }
         return new ItemSlot(this);
     }
@@ -130,6 +136,67 @@ public class ItemSlotWeavingInput : ItemSlotSurvival
         }
 
         return base.GetRemainingSlotSpace(forItemstack);
+    }
+}
+
+// Custom slot for pattern inputs - accepts vanilla flaxtwine and colored twine from tailorsdelight or wool mods
+public class ItemSlotPatternInput : ItemSlotSurvival
+{
+    public ItemSlotPatternInput(InventoryBase inventory) : base(inventory)
+    {
+    }
+
+    public override bool CanHold(ItemSlot sourceSlot)
+    {
+        if (sourceSlot?.Itemstack != null)
+        {
+            string domain = sourceSlot.Itemstack.Collectible.Code.Domain;
+            string path = sourceSlot.Itemstack.Collectible.Code.Path;
+
+            // Accept vanilla flaxtwine, tailorsdelight:twine-{color}, or wool:twine-wool-{color}
+            if ((domain == "game" && path == "flaxtwine") ||
+                (domain == "tailorsdelight" && path.StartsWith("twine-")) ||
+                (domain == "wool" && path.StartsWith("twine-wool-")))
+            {
+                return base.CanHold(sourceSlot);
+            }
+        }
+        return false;
+    }
+
+    public override bool CanTakeFrom(ItemSlot sourceSlot, EnumMergePriority priority = EnumMergePriority.AutoMerge)
+    {
+        if (sourceSlot?.Itemstack != null)
+        {
+            string domain = sourceSlot.Itemstack.Collectible.Code.Domain;
+            string path = sourceSlot.Itemstack.Collectible.Code.Path;
+
+            if ((domain == "game" && path == "flaxtwine") ||
+                (domain == "tailorsdelight" && path.StartsWith("twine-")) ||
+                (domain == "wool" && path.StartsWith("twine-wool-")))
+            {
+                return base.CanTakeFrom(sourceSlot, priority);
+            }
+        }
+        return false;
+    }
+
+    public override int GetRemainingSlotSpace(ItemStack forItemstack)
+    {
+        // Reject items that aren't twine (vanilla or colored)
+        if (forItemstack != null)
+        {
+            string domain = forItemstack.Collectible.Code.Domain;
+            string path = forItemstack.Collectible.Code.Path;
+
+            if ((domain == "game" && path == "flaxtwine") ||
+                (domain == "tailorsdelight" && path.StartsWith("twine-")) ||
+                (domain == "wool" && path.StartsWith("twine-wool-")))
+            {
+                return base.GetRemainingSlotSpace(forItemstack);
+            }
+        }
+        return 0; // No space for non-twine items
     }
 }
 

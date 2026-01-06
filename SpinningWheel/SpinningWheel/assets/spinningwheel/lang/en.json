@@ -90,5 +90,14 @@
     "setting-algae-output-quantity-comment": "Number of twine produced per algae spin",
 
     "setting-algae-spin-time": "Algae Spin Time",
-    "setting-algae-spin-time-comment": "Time in seconds to spin algae into twine"
+    "setting-algae-spin-time-comment": "Time in seconds to spin algae into twine",
+
+    "gui-loom-tab-normal": "Normal",
+    "gui-loom-tab-pattern": "Pattern",
+    "gui-loom-pattern-nomatch": "Pattern does not match any recipe",
+    "gui-loom-requires-mods": "Pattern weaving requires both tailorsdelight and wool mods",
+
+    "block-hpflyshuttleloom-*": "Fly Shuttle Loom",
+    "spinningwheel:blockhelp-flyshuttleloom-use": "Sit and Weave Cloth!",
+    "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Open Weaving Menu!"
 }

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
+using SpinningWheel.Recipes;
+using SpinningWheel.ModSystem;
+using SpinningWheel.BlockEntityPackets;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -10,9 +14,17 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
+using ProtoBuf;
 
 namespace SpinningWheel.BlockEntities
 {
+    // Weaving mode enum
+    public enum WeavingMode
+    {
+        Normal = 0,
+        Pattern = 1
+    }
+
     public class BlockEntityFlyShuttleLoom : BlockEntityOpenableContainer, IMountableSeat, IMountable
     {
         BlockFacing facing;
@@ -51,6 +63,19 @@ namespace SpinningWheel.BlockEntities
                    InputSlot2?.Itemstack != null ||
                    InputSlot3?.Itemstack != null;
         }
+
+        // Pattern slot properties (slots 4-7 for 2x2 grid)
+        public ItemSlot PatternSlotTopLeft => inventory?[4];
+        public ItemSlot PatternSlotTopRight => inventory?[5];
+        public ItemSlot PatternSlotBottomLeft => inventory?[6];
+        public ItemSlot PatternSlotBottomRight => inventory?[7];
+
+        // Weaving mode state
+        private WeavingMode currentWeavingMode = WeavingMode.Normal;
+        private bool hasPatternWeavingEnabled = false;
+
+        public WeavingMode CurrentWeavingMode => currentWeavingMode;
+        public bool HasPatternWeavingEnabled => hasPatternWeavingEnabled;
 
         // Helper to get all input slots as a list
         private ItemSlot[] GetAllInputSlots()
@@ -218,7 +243,7 @@ namespace SpinningWheel.BlockEntities
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-            
+
             // Get the facing direction from block code
             facing = BlockFacing.FromCode(Block.LastCodePart());
 
@@ -227,6 +252,10 @@ namespace SpinningWheel.BlockEntities
 
             // Initialize controls
             controls.OnAction = onControls;
+
+            // Check if pattern weaving is enabled
+            var modSystem = api.ModLoader.GetModSystem<SpinningWheelModSystem>();
+            hasPatternWeavingEnabled = modSystem?.HasPatternWeavingEnabled ?? false;
 
             // Register tick listeners for weaving
             RegisterGameTickListener(OnWeaveTick, 100); // Process weaving every 100ms
@@ -245,12 +274,12 @@ namespace SpinningWheel.BlockEntities
             {
                 y2 = collboxes[0].Y2;
             }
-            
+
             // Remount player if they were sitting when the world was saved/reloaded
             if (MountedBy == null && (mountedByEntityId != 0 || mountedByPlayerUid != null))
             {
-                var entity = mountedByPlayerUid != null 
-                    ? api.World.PlayerByUid(mountedByPlayerUid)?.Entity 
+                var entity = mountedByPlayerUid != null
+                    ? api.World.PlayerByUid(mountedByPlayerUid)?.Entity
                     : api.World.GetEntityById(mountedByEntityId) as EntityAgent;
                 if (entity?.SidedProperties != null)
                 {
@@ -461,6 +490,27 @@ namespace SpinningWheel.BlockEntities
 
         private bool CanWeave()
         {
+            // Log current mode
+            Api?.Logger.Notification($"[Loom] CanWeave called - Current mode: {currentWeavingMode}");
+
+            // Route to appropriate weaving logic based on mode
+            if (currentWeavingMode == WeavingMode.Normal)
+            {
+                Api?.Logger.Notification("[Loom] Routing to CanWeaveNormal");
+                return CanWeaveNormal();
+            }
+            else if (currentWeavingMode == WeavingMode.Pattern)
+            {
+                Api?.Logger.Notification("[Loom] Routing to CanWeavePattern");
+                return CanWeavePattern();
+            }
+
+            Api?.Logger.Warning($"[Loom] Unknown weaving mode: {currentWeavingMode}");
+            return false;
+        }
+
+        private bool CanWeaveNormal()
+        {
             // Check if we have any input items
             if (!HasInputItems()) return false;
 
@@ -493,6 +543,82 @@ namespace SpinningWheel.BlockEntities
             }
 
             return false;
+        }
+
+        private bool CanWeavePattern()
+        {
+            // Log current pattern slots (even if empty/incomplete)
+            Api?.Logger.Notification($"[Loom] Pattern check - Current slots:");
+            Api?.Logger.Notification($"  Top-Left: {(PatternSlotTopLeft?.Itemstack != null ? $"{PatternSlotTopLeft.Itemstack.Collectible.Code} (qty: {PatternSlotTopLeft.Itemstack.StackSize})" : "EMPTY")}");
+            Api?.Logger.Notification($"  Top-Right: {(PatternSlotTopRight?.Itemstack != null ? $"{PatternSlotTopRight.Itemstack.Collectible.Code} (qty: {PatternSlotTopRight.Itemstack.StackSize})" : "EMPTY")}");
+            Api?.Logger.Notification($"  Bottom-Left: {(PatternSlotBottomLeft?.Itemstack != null ? $"{PatternSlotBottomLeft.Itemstack.Collectible.Code} (qty: {PatternSlotBottomLeft.Itemstack.StackSize})" : "EMPTY")}");
+            Api?.Logger.Notification($"  Bottom-Right: {(PatternSlotBottomRight?.Itemstack != null ? $"{PatternSlotBottomRight.Itemstack.Collectible.Code} (qty: {PatternSlotBottomRight.Itemstack.StackSize})" : "EMPTY")}");
+
+            if (!hasPatternWeavingEnabled)
+            {
+                Api?.Logger.Debug("[Loom] Pattern weaving not enabled");
+                return false;
+            }
+
+            // Check if all 4 pattern slots have items
+            if (PatternSlotTopLeft?.Itemstack == null || PatternSlotTopRight?.Itemstack == null ||
+                PatternSlotBottomLeft?.Itemstack == null || PatternSlotBottomRight?.Itemstack == null)
+            {
+                Api?.Logger.Notification("[Loom] Not all pattern slots filled - cannot weave");
+                return false;
+            }
+
+            // Get matching recipe
+            var recipe = GetMatchingPatternRecipe();
+            if (recipe == null)
+            {
+                Api?.Logger.Notification("[Loom] No matching pattern recipe found");
+                return false;
+            }
+
+            Api?.Logger.Notification($"[Loom] Found matching recipe: {recipe.Code}");
+
+            // Check if each slot has enough quantity
+            if (!recipe.HasSufficientInput(
+                PatternSlotTopLeft.Itemstack,
+                PatternSlotTopRight.Itemstack,
+                PatternSlotBottomLeft.Itemstack,
+                PatternSlotBottomRight.Itemstack))
+                return false;
+
+            ItemSlot outputSlot = OutputSlot;
+
+            // Check if output slot has room
+            if (outputSlot.Empty) return true;
+
+            // Check if we can stack more
+            ItemStack resultStack = recipe.GetOutput(Api);
+            if (resultStack != null && outputSlot.Itemstack.Collectible.Equals(outputSlot.Itemstack, resultStack, GlobalConstants.IgnoredStackAttributes))
+            {
+                return outputSlot.Itemstack.StackSize < outputSlot.Itemstack.Collectible.MaxStackSize;
+            }
+
+            return false;
+        }
+
+        private LoomPatternRecipe GetMatchingPatternRecipe()
+        {
+            var modSystem = Api.ModLoader.GetModSystem<SpinningWheelModSystem>();
+            var patternLoader = modSystem?.PatternRecipeLoader;
+
+            if (patternLoader == null)
+            {
+                Api?.Logger.Warning("[Loom] Pattern loader is null");
+                return null;
+            }
+
+            Api?.Logger.Notification($"[Loom] Checking against {patternLoader.PatternRecipes.Count} pattern recipes");
+
+            return patternLoader.FindMatchingRecipe(
+                PatternSlotTopLeft?.Itemstack,
+                PatternSlotTopRight?.Itemstack,
+                PatternSlotBottomLeft?.Itemstack,
+                PatternSlotBottomRight?.Itemstack);
         }
 
         private ItemStack GetWeaveResult(ItemStack input)
@@ -532,6 +658,18 @@ namespace SpinningWheel.BlockEntities
         }
 
         private void WeaveInput()
+        {
+            if (currentWeavingMode == WeavingMode.Normal)
+            {
+                WeaveInputNormal();
+            }
+            else if (currentWeavingMode == WeavingMode.Pattern)
+            {
+                WeaveInputPattern();
+            }
+        }
+
+        private void WeaveInputNormal()
         {
             // Get the first slot with items to check recipe
             ItemSlot firstInputSlot = GetFirstInputSlotWithItem();
@@ -575,6 +713,84 @@ namespace SpinningWheel.BlockEntities
             outputSlot.MarkDirty();
         }
 
+        private void WeaveInputPattern()
+        {
+            var recipe = GetMatchingPatternRecipe();
+            if (recipe == null) return;
+
+            ItemSlot outputSlot = OutputSlot;
+            ItemStack resultStack = recipe.GetOutput(Api);
+            if (resultStack == null) return;
+
+            // Add output
+            if (outputSlot.Empty)
+            {
+                outputSlot.Itemstack = resultStack;
+            }
+            else
+            {
+                outputSlot.Itemstack.StackSize += resultStack.StackSize;
+            }
+
+            // Consume from all 4 pattern slots
+            int quantityPerSlot = recipe.QuantityPerSlot;
+            PatternSlotTopLeft.TakeOut(quantityPerSlot);
+            PatternSlotTopRight.TakeOut(quantityPerSlot);
+            PatternSlotBottomLeft.TakeOut(quantityPerSlot);
+            PatternSlotBottomRight.TakeOut(quantityPerSlot);
+
+            PatternSlotTopLeft.MarkDirty();
+            PatternSlotTopRight.MarkDirty();
+            PatternSlotBottomLeft.MarkDirty();
+            PatternSlotBottomRight.MarkDirty();
+            outputSlot.MarkDirty();
+        }
+
+        /// <summary>
+        /// Sets the weaving mode and resets progress when switching
+        /// </summary>
+        public void SetWeavingMode(WeavingMode mode)
+        {
+            if (currentWeavingMode != mode)
+            {
+                currentWeavingMode = mode;
+
+                // Reset progress when switching modes
+                inputWeaveTime = 0;
+
+                // Update max weave time - always use standard animation duration
+                currentMaxWeaveTime = ANIMATION_DURATION;
+
+                // Stop animation if running
+                if (On)
+                {
+                    Deactivate();
+                }
+
+                MarkDirty(true);
+            }
+        }
+
+        // Packet handler for receiving weaving mode changes from client
+        private const int PACKET_ID_SET_WEAVING_MODE = 1001;
+
+        public override void OnReceivedClientPacket(IPlayer player, int packetid, byte[] data)
+        {
+            base.OnReceivedClientPacket(player, packetid, data);
+
+            if (packetid == PACKET_ID_SET_WEAVING_MODE && data != null)
+            {
+                using (MemoryStream ms = new MemoryStream(data))
+                {
+                    var packet = Serializer.Deserialize<SetWeavingModePacket>(ms);
+                    WeavingMode newMode = (WeavingMode)packet.WeavingMode;
+
+                    Api.Logger.Notification($"[Loom] Server received mode change request from {player.PlayerName}: {newMode}");
+                    SetWeavingMode(newMode);
+                }
+            }
+        }
+
         #endregion
 
         #region Slot Management
@@ -603,7 +819,7 @@ namespace SpinningWheel.BlockEntities
                 }
             }
 
-            // Handle changes to any input slot (0, 1, or 2)
+            // Handle changes to any input slot (0, 1, or 2) for normal mode
             if (slotid >= 0 && slotid <= 2)
             {
                 // If all input slots are empty, reset progress
@@ -612,6 +828,21 @@ namespace SpinningWheel.BlockEntities
                     inputWeaveTime = 0.0f;
                     currentMaxWeaveTime = ANIMATION_DURATION;
                 }
+                MarkDirty();
+
+                if (clientDialog != null && clientDialog.IsOpened())
+                {
+                    clientDialog.SingleComposer.ReCompose();
+                }
+            }
+
+            // Handle changes to any pattern slot (4, 5, 6, or 7) for pattern mode
+            if (slotid >= 4 && slotid <= 7)
+            {
+                // Reset progress when pattern changes
+                inputWeaveTime = 0;
+                currentMaxWeaveTime = ANIMATION_DURATION;
+
                 MarkDirty();
 
                 if (clientDialog != null && clientDialog.IsOpened())
@@ -757,6 +988,9 @@ namespace SpinningWheel.BlockEntities
             currentMaxWeaveTime = tree.GetFloat("currentMaxWeaveTime", ANIMATION_DURATION);
             On = tree.GetBool("On");
 
+            // Restore weaving mode
+            currentWeavingMode = (WeavingMode)tree.GetInt("weavingMode", 0);
+
             if (Api != null)
             {
                 Inventory.AfterBlocksLoaded(Api.World);
@@ -800,6 +1034,9 @@ namespace SpinningWheel.BlockEntities
             tree.SetFloat("inputWeaveTime", inputWeaveTime);
             tree.SetFloat("currentMaxWeaveTime", currentMaxWeaveTime);
             tree.SetBool("On", On);
+
+            // Save weaving mode
+            tree.SetInt("weavingMode", (int)currentWeavingMode);
         }
         
         public void MountableToTreeAttributes(TreeAttribute tree)

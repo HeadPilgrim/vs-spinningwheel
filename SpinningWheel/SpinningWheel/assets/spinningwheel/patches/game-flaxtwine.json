@@ -4,8 +4,8 @@
     "path": "/attributes/weavingProps",
     "value": {
       "outputType": "game:linen-normal-down",
-      "inputQuantity": 8,
-      "outputQuantity": 1
+      "inputQuantity": 9,
+      "outputQuantity": 3
     },
     "file": "game:itemtypes/resource/flaxtwine.json"
   }

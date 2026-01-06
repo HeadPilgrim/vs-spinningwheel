@@ -8,6 +8,14 @@
     "dependsOn": [ { "modid": "tailorsdelight" }, { "modid": "wool" } ]
   },
   {
+    "op": "addmerge",
+    "path": "/attributesByType",
+    "value": {},
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
     "op": "add",
     "path": "/attributesByType/twine-wool-red",
     "value": {
@@ -231,5 +239,215 @@
     "file": "wool:itemtypes/resource/twine.json",
     "side": "Server",
     "dependsOn": [ { "modid": "tailorsdelight" }, { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-black",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-black",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-blue",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-blue",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-brown",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-brown",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-gray",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-gray",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-green",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-green",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-orange",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-orange",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-pink",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-pink",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-purple",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-purple",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-red",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-red",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-white",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-white",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-yellow",
+    "value": {
+      "weavingProps": {
+        "outputType": "game:cloth-yellow",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-darkblue",
+    "value": {
+      "weavingProps": {
+        "outputType": "tailorsdelight:cloth-darkblue",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-darkbrown",
+    "value": {
+      "weavingProps": {
+        "outputType": "tailorsdelight:cloth-darkbrown",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-darkgreen",
+    "value": {
+      "weavingProps": {
+        "outputType": "tailorsdelight:cloth-darkgreen",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/twine-darkred",
+    "value": {
+      "weavingProps": {
+        "outputType": "tailorsdelight:cloth-darkred",
+        "inputQuantity": 9,
+        "outputQuantity": 3
+      }
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
   }
 ]
