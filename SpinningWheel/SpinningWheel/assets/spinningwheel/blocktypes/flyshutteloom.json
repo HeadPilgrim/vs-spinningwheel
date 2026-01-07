@@ -4,7 +4,6 @@
   "entityClass": "BlockEntityFlyShuttleLoom",
   "tags": ["inanimate", "vehicle"],
   "blockmaterial": "wood",
-  "creativeinventory": { "general":  [ "*-north" ]},
   "variantgroups": [
     {
       "code": "side",
@@ -22,75 +21,109 @@
       }
     },
     {
-      "name": "HorizontalOrientable",
+      "name": "AttributeRenderingLibrary.HorizontalOrientable",
       "properties": {
         "dropBlockFace": "north"
       }
     },
-    {"name": "Container"}
+    { "name": "Container" },
+    {
+      "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+      "properties": {
+        "textures": {
+          "wood-*": {
+            "ebony": { "base": "game:block/wood/debarked/{wood}" }
+          }
+        }
+      }
+    }
+  ],
+  "entityBehaviors": [
+    { "name": "Animatable" },
+    { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" }
   ],
   "textures": {
-    "plain": {"base": "game:block/cloth/linen/plain"},
-    "warpstrings": {"base": "block/flyshuttleloom/warpstrings"},
-    "reeddents": {"base": "block/flyshuttleloom/reeddents"},
-    "heddleties1": {"base": "block/flyshuttleloom/heddleties1"},
-    "heddleties2": {"base": "block/flyshuttleloom/heddleties2"},
-    "warpnewnewbase": {"base": "block/flyshuttleloom/warpnewnewbase"},
-    "loomstring32": {"base": "block/flyshuttleloom/loomstring32"},
-    "rope": {"base": "game:item/resource/rope"},
-    "ebony": {"base": "game:block/wood/debarked/ebony"},
-    "oak1": {"base": "game:block/wood/planks/oak1"}
+    "plain": { "base": "game:block/cloth/linen/plain" },
+    "warpstrings": { "base": "block/flyshuttleloom/warpstrings" },
+    "reeddents": { "base": "block/flyshuttleloom/reeddents" },
+    "heddleties1": { "base": "block/flyshuttleloom/heddleties1" },
+    "heddleties2": { "base": "block/flyshuttleloom/heddleties2" },
+    "warpnewnewbase": { "base": "block/flyshuttleloom/warpnewnewbase" },
+    "loomstring32": { "base": "block/flyshuttleloom/loomstring32" },
+    "rope": { "base": "game:item/resource/rope" },
+    "ebony": { "base": "game:block/wood/debarked/ebony" },
+    "oak1": { "base": "game:block/wood/planks/oak1" }
   },
-  "entityBehaviors": [{ "name": "Animatable" }],
+  "creativeInventoryStacksByType": {
+    "*-north": [
+      {
+        "tabs": ["general"],
+        "stacks": [
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "birch" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "oak" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "maple" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "pine" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "acacia" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "kapok" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "baldcypress" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "larch" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "redwood" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "ebony" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "walnut" } } },
+          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "purpleheart" } } }
+        ]
+      }
+    ],
+    "*-east": [],
+    "*-south": [],
+    "*-west": []
+  },
   "attributes": {
+    "handbook": {
+      "groupBy": [ "hpflyshuttleloom-*" ]
+    },
     "spinnable": true,
     "valuesByMultiblockOffset": {
       "collisionSelectionBoxesByType": {
         "*-north": {
-          // --Bottom Half--
-          // Control block itself
           "0,0,0": [
-            {"x1": -0.94, "y1": 0, "z1": 0.15, "x2": 1.94, "y2": 0.2, "z2": 0.4}
+            { "x1": -0.94, "y1": 0, "z1": 0.15, "x2": 1.94, "y2": 0.2, "z2": 0.4 }
           ],
           "-1,0,0": [
-            {"x1": -1.94, "y1": 0, "z1": 0.15, "x2": 0.94, "y2": 0.2, "z2": 0.4}
+            { "x1": -1.94, "y1": 0, "z1": 0.15, "x2": 0.94, "y2": 0.2, "z2": 0.4 }
           ],
           "1,0,0": [
-            {"x1": 2.94, "y1": 0, "z1": 0.15, "x2": 0.06, "y2": 0.2, "z2": 0.4}
+            { "x1": 2.94, "y1": 0, "z1": 0.15, "x2": 0.06, "y2": 0.2, "z2": 0.4 }
           ],
           "0,0,-1": [
-            {"x1": -0.94, "y1": 0, "z1": 0.68, "x2": 1.94, "y2": 0.2, "z2": 0.93},
-            //Bench Center
-            {"x1": -0.6, "y1": 0.5, "z1": 0.62, "x2": 1.60, "y2": 0.7, "z2": 0.93}
+            { "x1": -0.94, "y1": 0, "z1": 0.68, "x2": 1.94, "y2": 0.2, "z2": 0.93 },
+            { "x1": -0.6, "y1": 0.5, "z1": 0.62, "x2": 1.60, "y2": 0.7, "z2": 0.93 }
           ],
           "-1,0,-1": [
-            {"x1": -1.94, "y1": 0, "z1": 0.68, "x2": 0.94, "y2": 0.2, "z2":  0.93},
-            //Bench Left
-            {"x1": -1.6, "y1": 0.5, "z1": 0.62, "x2": 0.60, "y2": 0.7, "z2": 0.93}
+            { "x1": -1.94, "y1": 0, "z1": 0.68, "x2": 0.94, "y2": 0.2, "z2": 0.93 },
+            { "x1": -1.6, "y1": 0.5, "z1": 0.62, "x2": 0.60, "y2": 0.7, "z2": 0.93 }
           ],
           "1,0,-1": [
-            {"x1": 2.94, "y1": 0, "z1": 0.68, "x2": 0.06, "y2": 0.2, "z2":  0.93},
-            //Bench Right
-            {"x1": 2.6, "y1": 0.5, "z1": 0.62, "x2": 0.4, "y2": 0.7, "z2": 0.93}
+            { "x1": 2.94, "y1": 0, "z1": 0.68, "x2": 0.06, "y2": 0.2, "z2": 0.93 },
+            { "x1": 2.6, "y1": 0.5, "z1": 0.62, "x2": 0.4, "y2": 0.7, "z2": 0.93 }
           ],
-          // --Top Half--
           "0,-1,0": [
-            {"x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0}
+            { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "-1,-1,0": [
-            {"x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0}
+            { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "1,-1,0": [
-            {"x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0}
+            { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "0,-1,-1": [
-            {"x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0}
+            { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "-1,-1,-1": [
-            {"x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2":  0}
+            { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "1,-1,-1": [
-            {"x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2":  0}
+            { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ]
         }
       }
@@ -125,7 +158,7 @@
   },
   "lightAbsorption": 0,
   "renderflags": 3,
-  "sidesolid": {"all": false},
+  "sidesolid": { "all": false },
   "sounds": {
     "place": "game:block/planks",
     "hit": "game:block/planks",

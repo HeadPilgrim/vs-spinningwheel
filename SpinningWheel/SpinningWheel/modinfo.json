@@ -9,6 +9,7 @@
     "description": "Adds a spinning wheel & drop-spindle as an immersive twine crafting mechanic.",
     "version": "1.0.7",
     "dependencies": {
-        "game": "1.21.0"
+        "game": "1.21.0",
+        "attributerenderinglibrary": "2.4.2"
     }
 }

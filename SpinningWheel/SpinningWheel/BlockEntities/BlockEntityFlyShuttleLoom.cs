@@ -491,21 +491,21 @@ namespace SpinningWheel.BlockEntities
         private bool CanWeave()
         {
             // Log current mode
-            Api?.Logger.Notification($"[Loom] CanWeave called - Current mode: {currentWeavingMode}");
+            //Api?.Logger.Notification($"[Loom] CanWeave called - Current mode: {currentWeavingMode}");
 
             // Route to appropriate weaving logic based on mode
             if (currentWeavingMode == WeavingMode.Normal)
             {
-                Api?.Logger.Notification("[Loom] Routing to CanWeaveNormal");
+                //Api?.Logger.Notification("[Loom] Routing to CanWeaveNormal");
                 return CanWeaveNormal();
             }
             else if (currentWeavingMode == WeavingMode.Pattern)
             {
-                Api?.Logger.Notification("[Loom] Routing to CanWeavePattern");
+                //Api?.Logger.Notification("[Loom] Routing to CanWeavePattern");
                 return CanWeavePattern();
             }
 
-            Api?.Logger.Warning($"[Loom] Unknown weaving mode: {currentWeavingMode}");
+            //Api?.Logger.Warning($"[Loom] Unknown weaving mode: {currentWeavingMode}");
             return false;
         }
 

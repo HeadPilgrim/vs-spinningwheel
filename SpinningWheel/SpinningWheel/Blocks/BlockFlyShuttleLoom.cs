@@ -13,7 +13,7 @@ using Vintagestory.GameContent;
 
 namespace SpinningWheel.Blocks
 {
-    public class BlockFlyShuttleLoom : Block, IMultiBlockColSelBoxes, IMultiBlockInteract
+    public class BlockFlyShuttleLoom : BlockGeneric, IMultiBlockColSelBoxes, IMultiBlockInteract
     {
         private static Dictionary<string, ValuesByMultiblockOffset> valuesByCode = new Dictionary<string, ValuesByMultiblockOffset>();
         
