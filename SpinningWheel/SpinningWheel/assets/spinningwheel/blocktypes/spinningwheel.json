@@ -4,7 +4,27 @@
   "entityClass": "BlockEntitySpinningWheel",
   "tags": ["inanimate", "vehicle"],
   "blockmaterial": "wood",
-  "creativeinventory": { "general":  [ "*-north" ]},
+  "creativeInventoryStacksByType": {
+    "*-north": [
+      {
+        "tabs": ["general"],
+        "stacks": [
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "birch" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "oak" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "maple" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "pine" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "acacia" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "kapok" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "baldcypress" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "larch" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "redwood" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "ebony" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "walnut" } } },
+          { "type": "block", "code": "hpspinningwheel-north", "attributes": { "types": { "wood": "purpleheart" } } }
+        ]
+      }
+    ]
+  },
   "variantgroups": [
     {
       "code": "side",
@@ -22,21 +42,45 @@
       }
     },
     {
-      "name": "HorizontalOrientable",
+      "name": "AttributeRenderingLibrary.HorizontalOrientable",
       "properties": {
         "dropBlockFace": "north"
       }
     },
-    {"name": "Container"}
+    {"name": "Container"},
+    {
+      "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
+      "properties": {
+        "name": {
+          "wood-*": ["hpspinningwheel-{side}", " (", "material-{wood}", ")"],
+          "*": ["hpspinningwheel-{side}"]
+        },
+        "textures": {
+          "wood-*": {
+            "oak": { "base": "game:block/wood/debarked/{wood}" },
+            "oak2": { "base": "game:block/wood/debarked/{wood}" },
+            "1": {"base": "game:block/wood/debarked/{wood}"}
+          },
+          "*": {
+            "oak": { "base": "game:block/wood/debarked/oak" },
+            "oak2": { "base": "game:block/wood/crudechair/oak" },
+            "1": {"base": "game:block/wood/debarked/oak"}
+          }
+        }
+      }
+    }
   ],
   "textures": {
     "linen": {"base": "game:block/linen"},
     "oak": {"base": "game:block/wood/debarked/oak"},
-    "1": {"base": "game:block/wood/chair/normal/top"},
+    "1": {"base": "game:block/wood/debarked/oak"},
     "cover": {"base": "game:block/cloth/linen/normal1"},
     "oak2": {"base": "game:block/wood/crudechair/oak"}
   },
-  "entityBehaviors": [{ "name": "Animatable" }],
+  "entityBehaviors": [
+    { "name": "Animatable" },
+    { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" }
+  ],
   "attributes": {
     "spinnable": true,
     "valuesByMultiblockOffset": {

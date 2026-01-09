@@ -3,7 +3,46 @@
   "shape": {
     "base": "item/moaitem"
   },
-  "creativeinventory": { "general":  [ "*" ]},
+  "creativeInventoryStacks": [
+    {
+      "tabs": ["general"],
+      "stacks": [
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "birch" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "oak" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "maple" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "pine" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "acacia" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "kapok" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "baldcypress" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "larch" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "redwood" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "ebony" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "walnut" } } },
+        { "type": "item", "code": "hpmoaitem", "attributes": { "types": { "wood": "purpleheart" } } }
+      ]
+    }
+  ],
+  "behaviors": [
+    {
+      "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
+      "properties": {
+        "name": {
+          "wood-*": ["item-hpmoaitem", " (", "material-{wood}", ")"],
+          "*": ["item-hpmoaitem"]
+        },
+        "textures": {
+          "wood-*": {
+            "oak": { "base": "game:block/wood/debarked/{wood}" },
+            "oak2": { "base": "game:block/wood/crudechair/{wood}" }
+          },
+          "*": {
+            "oak": { "base": "game:block/wood/debarked/oak" },
+            "oak2": { "base": "game:block/wood/crudechair/oak" }
+          }
+        }
+      }
+    }
+  ],
   "textures": {
     "linen": {"base": "game:block/linen"},
     "oak": {"base": "game:block/wood/debarked/oak"},

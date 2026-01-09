@@ -9,6 +9,11 @@
   "output": {
     "type": "item",
     "code": "spinningwheel:hpspinningwheelwheelitem",
-    "quantity": 1
+    "quantity": 1,
+    "attributes": {
+      "types": {
+        "wood": "{wood}"
+      }
+    }
   }
 }

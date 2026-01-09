@@ -3,9 +3,46 @@
   "shape": {
     "base": "item/spinningwheelwheelitem"
   },
-  "creativeinventory": { "general":  [ "*" ]},
+  "creativeInventoryStacks": [
+    {
+      "tabs": ["general"],
+      "stacks": [
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "birch" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "oak" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "maple" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "pine" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "acacia" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "kapok" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "baldcypress" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "larch" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "redwood" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "ebony" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "walnut" } } },
+        { "type": "item", "code": "hpspinningwheelwheelitem", "attributes": { "types": { "wood": "purpleheart" } } }
+      ]
+    }
+  ],
+  "behaviors": [
+    {
+      "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
+      "properties": {
+        "name": {
+          "wood-*": ["item-hpspinningwheelwheelitem", " (", "material-{wood}", ")"],
+          "*": ["item-hpspinningwheelwheelitem"]
+        },
+        "textures": {
+          "wood-*": {
+            "oak": { "base": "game:block/wood/debarked/{wood}" }
+          },
+          "*": {
+            "oak": { "base": "game:block/wood/debarked/oak" }
+          }
+        }
+      }
+    }
+  ],
   "textures": {
-    "oak": {"base": "game:block/wood/debarked/oak"},
+    "oak": {"base": "game:block/wood/debarked/oak"}
   },
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",
