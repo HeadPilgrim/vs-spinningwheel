@@ -2,12 +2,29 @@
     "block-hpspinningwheel-*": "Spinning Wheel",
     "spinningwheel:blockhelp-spinningwheel-use": "Sit and Spin Fibers!",
     "spinningwheel:blockhelp-spinningwheel-opencrafting": "Open Crafting Menu!",
+
+    "material-birch": "Birch",
+    "material-oak": "Oak",
+    "material-maple": "Maple",
+    "material-pine": "Pine",
+    "material-acacia": "Acacia",
+    "material-kapok": "Kapok",
+    "material-baldcypress": "Bald Cypress",
+    "material-larch": "Larch",
+    "material-redwood": "Redwood",
+    "material-ebony": "Ebony",
+    "material-walnut": "Walnut",
+    "material-purpleheart": "Purpleheart",
     "spinningwheel:spinning-wheel-requires-class": "The spinning wheel is restricted to these classes: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
     "item-hpmoaitem": "Mother of All",
     "item-hpspinningwheelframe": "Spinning Wheel Frame",
     "item-hpspinningwheelwheelitem": "Drive Wheel",
-    
+
+    "item-hpflyshuttleloomframe": "Loom Frame",
+    "item-hpflyshuttleloombeater": "Loom Beater",
+    "item-hpflyshuttleloomheddle": "Loom Heddle",
+
     "item-hpdropspindle": "Wooden Drop Spindle",
 
     "spinningwheel:dropspindle-spin": "Spin fibers (Hold fibers in offhand)",
@@ -97,7 +114,11 @@
     "gui-loom-pattern-nomatch": "Pattern does not match any recipe",
     "gui-loom-requires-mods": "Pattern weaving requires both tailorsdelight and wool mods",
 
-    "block-hpflyshuttleloom-*": "Fly Shuttle Loom",
+    "block-hpflyshuttleloom-*": "Flying Shuttle Loom",
     "spinningwheel:blockhelp-flyshuttleloom-use": "Sit and Weave Cloth!",
-    "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Open Weaving Menu!"
+    "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Open Weaving Menu!",
+
+    "block-hpflyshuttleloomtest-*": "Flying Shuttle Loom (Test)",
+    "spinningwheel:blockhelp-flyshuttleloomtest-use": "Sit and Weave Cloth!",
+    "spinningwheel:blockhelp-flyshuttleloomtest-opencrafting": "Open Weaving Menu!"
 }

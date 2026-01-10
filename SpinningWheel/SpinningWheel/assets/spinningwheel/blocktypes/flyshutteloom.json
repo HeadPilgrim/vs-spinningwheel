@@ -439,19 +439,19 @@
   "drawtype": "json",
   "shapeByType": {
     "*-north": {
-      "base": "block/flyshuttleloomfinalexport_1",
+      "base": "block/flyshuttleloom",
       "rotateY": 0
     },
     "*-east": {
-      "base": "block/flyshuttleloomfinalexport_1",
+      "base": "block/flyshuttleloom",
       "rotateY": 270
     },
     "*-west": {
-      "base": "block/flyshuttleloomfinalexport_1",
+      "base": "block/flyshuttleloom",
       "rotateY": 90
     },
     "*-south": {
-      "base": "block/flyshuttleloomfinalexport_1",
+      "base": "block/flyshuttleloom",
       "rotateY": 180
     }
   },

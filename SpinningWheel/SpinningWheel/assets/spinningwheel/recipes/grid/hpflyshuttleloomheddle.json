@@ -1,0 +1,19 @@
+﻿{
+  "ingredientPattern": "_P_,_T_,_P_",
+  "ingredients": {
+    "P": { "type": "item", "code": "game:plank-*", "name": "wood" },
+    "T": { "type": "item", "code": "game:flaxtwine", "quantity": 4 }
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "item",
+    "code": "spinningwheel:hpflyshuttleloomheddle",
+    "quantity": 1,
+    "attributes": {
+      "types": {
+        "wood": "{wood}"
+      }
+    }
+  }
+}

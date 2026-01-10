@@ -1,0 +1,20 @@
+﻿{
+  "ingredientPattern": "LCL,LAL,LLL",
+  "ingredients": {
+    "L": { "type": "block", "code": "game:debarkedlog-*-ud", "name": "wood", "quantity": 2 },
+    "C": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 10},
+    "A": { "type": "item", "code": "game:axe-*", "isTool": true, "toolDurabilityCost": 15}
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "item",
+    "code": "spinningwheel:hpflyshuttleloomframe",
+    "quantity": 1,
+    "attributes": {
+      "types": {
+        "wood": "{wood}"
+      }
+    }
+  }
+}

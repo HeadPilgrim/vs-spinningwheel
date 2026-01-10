@@ -1,0 +1,61 @@
+{
+  "code": "hpflyshuttleloomheddle",
+  "shape": {
+    "base": "item/flyshuttleloomheddle"
+  },
+  "creativeInventoryStacks": [
+    {
+      "tabs": ["general"],
+      "stacks": [
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "birch" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "oak" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "maple" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "pine" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "acacia" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "kapok" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "baldcypress" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "larch" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "redwood" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "ebony" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "walnut" } } },
+        { "type": "item", "code": "hpflyshuttleloomheddle", "attributes": { "types": { "wood": "purpleheart" } } }
+      ]
+    }
+  ],
+  "behaviors": [
+    {
+      "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
+      "properties": {
+        "name": {
+          "wood-*": ["item-hpflyshuttleloomheddle", " (", "material-{wood}", ")"],
+          "*": ["item-hpflyshuttleloomheddle"]
+        },
+        "textures": {
+          "wood-*": {
+            "ebony": { "base": "game:block/wood/debarked/{wood}" }
+          },
+          "*": {
+            "ebony": { "base": "game:block/wood/debarked/oak" }
+          }
+        }
+      }
+    }
+  ],
+  "textures": {
+    "heddleties2": { "base": "block/flyshuttleloom/heddleties2" },
+    "rope": { "base": "game:item/resource/rope" },
+    "ebony": { "base": "game:block/wood/debarked/ebony" }
+  },
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldRightReadyAnimation": "heldblockready",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "guiTransform": {
+    "translation": { "x": 4.5, "y": -17, "z": 0 },
+    "scale": 2.04
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.5, "y": -0.7, "z": -0.1 },
+    "rotation": { "x": -86, "y": 16, "z": -77 },
+    "scale": 0.6
+  }
+}
