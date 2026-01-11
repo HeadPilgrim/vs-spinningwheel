@@ -180,15 +180,16 @@ namespace SpinningWheel.BlockEntities
 
                 // Position player at the center front of the loom
                 // Adjust based on loom dimensions: 3 wide, 2 deep
+                // Player sits at the working side of the loom, facing into it
                 if (facing == BlockFacing.NORTH)
-                    return mountPos.Add(0.5, 0.6, 1.4);  // Center of 3-wide loom
+                    return mountPos.Add(0.5, 0.6, 1.4);   // Player south of loom, facing north
                 if (facing == BlockFacing.EAST)
-                    return mountPos.Add(0.5, y2 - 0.97, 1.5);  // Rotated 90° clockwise
+                    return mountPos.Add(-0.4, 0.6, 0.5);  // Player west of loom, facing east
                 if (facing == BlockFacing.SOUTH)
-                    return mountPos.Add(0.5, y2 - 0.97, 0.5);  // Rotated 180°
+                    return mountPos.Add(0.5, 0.6, -0.4);  // Player north of loom, facing south
                 if (facing == BlockFacing.WEST)
-                    return mountPos.Add(1.5, y2 - 0.97, 0.5);  // Rotated 270° clockwise
-                return mountPos.Add(0.5, y2, 0.5); // Fallback
+                    return mountPos.Add(1.4, 0.6, 0.5);   // Player east of loom, facing west
+                return mountPos.Add(0.5, 0.6, 0.5); // Fallback
             }
         }
         
