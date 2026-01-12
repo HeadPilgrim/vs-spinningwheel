@@ -298,8 +298,10 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             MountedBy?.TryUnmount();
             controls.StopAllMovement();
-            handled = EnumHandling.PassThrough;
         }
+
+        // Always pass through to allow normal input handling
+        handled = EnumHandling.PassThrough;
     }
     
     private bool CanPlayerUseSpinningWheel(IPlayer player)

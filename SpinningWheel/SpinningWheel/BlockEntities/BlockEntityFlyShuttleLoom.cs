@@ -297,8 +297,10 @@ namespace SpinningWheel.BlockEntities
             {
                 MountedBy?.TryUnmount();
                 controls.StopAllMovement();
-                handled = EnumHandling.PassThrough;
             }
+
+            // Always pass through to allow normal input handling
+            handled = EnumHandling.PassThrough;
         }
         
         public void DidMount(EntityAgent entityAgent)
