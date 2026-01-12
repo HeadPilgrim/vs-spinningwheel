@@ -13,7 +13,7 @@ using Vintagestory.GameContent;
 
 namespace SpinningWheel.Blocks
 {
-    public class BlockFlyShuttleLoom : BlockGeneric, IMultiBlockColSelBoxes, IMultiBlockInteract
+    public class BlockFlyShuttleLoom : Block, IMultiBlockColSelBoxes, IMultiBlockInteract
     {
         private static Dictionary<string, ValuesByMultiblockOffset> valuesByCode = new Dictionary<string, ValuesByMultiblockOffset>();
         
@@ -48,9 +48,9 @@ namespace SpinningWheel.Blocks
                 tree.GetInt("posy"),
                 tree.GetInt("posz")
             );
-    
-            BlockEntitySpinningWheel beSpinningWheel = world.BlockAccessor.GetBlockEntity(pos) as BlockEntitySpinningWheel;
-            return beSpinningWheel;
+
+            BlockEntityFlyShuttleLoom beLoom = world.BlockAccessor.GetBlockEntity(pos) as BlockEntityFlyShuttleLoom;
+            return beLoom;
         }
         
         // --- IMultiBlockInteract Implementation ---
@@ -67,7 +67,7 @@ namespace SpinningWheel.Blocks
 
         public bool MBOnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason, Vec3i offset)
         {
-            return false; // No special cancel behavior
+            return true; // Allow cancellation to proceed normally
         }
         public bool MBOnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
@@ -216,7 +216,7 @@ namespace SpinningWheel.Blocks
 
         public bool MBOnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            return false; // No hold-to-use mechanic
+            return true; // Allow interaction to complete normally
         }
 
         public void MBOnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
