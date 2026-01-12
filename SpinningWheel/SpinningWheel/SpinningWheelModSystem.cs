@@ -32,13 +32,15 @@
             // Register classes FIRST, before anything else
             api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
-            
+            api.RegisterMountable("spinningWheel", BlockSpinningWheel.GetMountable);
+
             api.RegisterBlockClass("BlockFlyShuttleLoom", typeof(BlockFlyShuttleLoom));
             api.RegisterBlockEntityClass("BlockEntityFlyShuttleLoom", typeof(BlockEntityFlyShuttleLoom));
-            
+            api.RegisterMountable("flyShuttleLoom", BlockFlyShuttleLoom.GetMountable);
+
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
-            
-            api.Logger.Notification("[SpinningWheel] Registered block and block entity classes");
+
+            api.Logger.Notification("[SpinningWheel] Registered block, block entity, and mountable classes");
             api.Logger.Notification("[SpinningWheel] Registered ItemDropSpindle for portable spinning");
             
             // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
