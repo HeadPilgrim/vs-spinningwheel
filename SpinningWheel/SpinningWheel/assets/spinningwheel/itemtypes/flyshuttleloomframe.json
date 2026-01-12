@@ -1,48 +1,34 @@
 {
   "code": "hpflyshuttleloomframe",
+  "variantgroups": [
+    {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    }
+  ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
   "shape": {
     "base": "item/flyshuttleloomframe"
   },
-  "creativeInventoryStacks": [
-    {
-      "tabs": ["general"],
-      "stacks": [
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "birch" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "oak" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "maple" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "pine" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "acacia" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "kapok" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "baldcypress" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "larch" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "redwood" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "ebony" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "walnut" } } },
-        { "type": "item", "code": "hpflyshuttleloomframe", "attributes": { "types": { "wood": "purpleheart" } } }
-      ]
-    }
-  ],
-  "behaviors": [
-    {
-      "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
-      "properties": {
-        "name": {
-          "wood-*": ["item-hpflyshuttleloomframe", " (", "material-{wood}", ")"],
-          "*": ["item-hpflyshuttleloomframe"]
-        },
-        "textures": {
-          "wood-*": {
-            "ebony": { "base": "game:block/wood/debarked/{wood}" }
-          },
-          "*": {
-            "ebony": { "base": "game:block/wood/debarked/oak" }
-          }
-        }
-      }
-    }
-  ],
+  "creativeinventory": { "general":  [ "*" ]},
   "textures": {
     "ebony": { "base": "game:block/wood/debarked/ebony" }
+  },
+  "texturesByType": {
+    "*-birch": { "ebony": { "base": "game:block/wood/debarked/birch" } },
+    "*-oak": { "ebony": { "base": "game:block/wood/debarked/oak" } },
+    "*-maple": { "ebony": { "base": "game:block/wood/debarked/maple" } },
+    "*-pine": { "ebony": { "base": "game:block/wood/debarked/pine" } },
+    "*-acacia": { "ebony": { "base": "game:block/wood/debarked/acacia" } },
+    "*-kapok": { "ebony": { "base": "game:block/wood/debarked/kapok" } },
+    "*-baldcypress": { "ebony": { "base": "game:block/wood/debarked/baldcypress" } },
+    "*-larch": { "ebony": { "base": "game:block/wood/debarked/larch" } },
+    "*-redwood": { "ebony": { "base": "game:block/wood/debarked/redwood" } },
+    "*-ebony": { "ebony": { "base": "game:block/wood/debarked/ebony" } },
+    "*-walnut": { "ebony": { "base": "game:block/wood/debarked/walnut" } },
+    "*-purpleheart": { "ebony": { "base": "game:block/wood/debarked/purpleheart" } }
   },
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",

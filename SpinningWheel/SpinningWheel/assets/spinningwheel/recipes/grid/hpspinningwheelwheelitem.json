@@ -1,19 +1,19 @@
-﻿{
+{
   "ingredientPattern": " P ,PSP, P ",
   "ingredients": {
     "S": { "type": "item", "code": "game:stick", "quantity": "12" },
-    "P": { "type": "item", "code": "game:plank-*", "name": "wood" }
+    "P": {
+      "type": "item",
+      "code": "game:plank-*",
+      "name": "wood",
+      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    }
   },
   "width": 3,
   "height": 3,
   "output": {
     "type": "item",
-    "code": "spinningwheel:hpspinningwheelwheelitem",
-    "quantity": 1,
-    "attributes": {
-      "types": {
-        "wood": "{wood}"
-      }
-    }
+    "code": "spinningwheel:hpspinningwheelwheelitem-{wood}",
+    "quantity": 1
   }
 }

@@ -1,16 +1,15 @@
-﻿{
+{
   "ingredientPattern": "_B_,_H_,_F_",
   "ingredients": {
-    "B": { "type": "item", "code": "spinningwheel:hpflyshuttleloombeater", "name": "wood" },
-    "H": { "type": "item", "code": "spinningwheel:hpflyshuttleloomheddle", "name": "wood" },
-    "F": { "type": "item", "code": "spinningwheel:hpflyshuttleloomframe", "name": "wood" }
+    "B": { "type": "item", "code": "spinningwheel:hpflyshuttleloombeater-*", "name": "wood" },
+    "H": { "type": "item", "code": "spinningwheel:hpflyshuttleloomheddle-*", "name": "wood" },
+    "F": { "type": "item", "code": "spinningwheel:hpflyshuttleloomframe-*", "name": "wood" }
   },
   "width": 3,
   "height": 3,
-  "mergeAttributesFrom": ["F", "H", "B"],
   "output": {
     "type": "block",
-    "code": "spinningwheel:hpflyshuttleloom-north",
+    "code": "spinningwheel:hpflyshuttleloom-{wood}-north",
     "quantity": 1
   }
 }

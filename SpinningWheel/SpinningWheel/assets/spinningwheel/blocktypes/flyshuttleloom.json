@@ -1,4 +1,4 @@
-﻿{
+{
   "code": "hpflyshuttleloom",
   "class": "BlockFlyShuttleLoom",
   "entityClass": "BlockEntityFlyShuttleLoom",
@@ -6,10 +6,18 @@
   "blockmaterial": "wood",
   "variantgroups": [
     {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    },
+    {
       "code": "side",
       "loadFromProperties": "abstract/horizontalorientation"
     }
   ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
+  "creativeinventory": { "general":  [ "*-north" ]},
   "behaviors": [
     {
       "name": "Multiblock",
@@ -21,33 +29,15 @@
       }
     },
     {
-      "name": "AttributeRenderingLibrary.HorizontalOrientable",
+      "name": "HorizontalOrientable",
       "properties": {
         "dropBlockFace": "north"
       }
     },
-    { "name": "Container" },
-    {
-      "name": "AttributeRenderingLibrary.BlockShapeTexturesFromAttributes",
-      "properties": {
-        "name": {
-          "wood-*": ["hpflyshuttleloom-{side}", " (", "material-{wood}", ")"],
-          "*": ["hpflyshuttleloom-{side}"]
-        },
-        "textures": {
-          "wood-*": {
-            "ebony": { "base": "game:block/wood/debarked/{wood}" }
-          },
-          "*": {
-            "ebony": { "base": "game:block/wood/debarked/ebony" }
-          }
-        }
-      }
-    }
+    { "name": "Container" }
   ],
   "entityBehaviors": [
-    { "name": "Animatable" },
-    { "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes" }
+    { "name": "Animatable" }
   ],
   "textures": {
     "plain": { "base": "game:block/cloth/linen/plain" },
@@ -61,26 +51,19 @@
     "ebony": { "base": "game:block/wood/debarked/ebony" },
     "oak1": { "base": "game:block/wood/planks/oak1" }
   },
-  "creativeInventoryStacksByType": {
-    "*-north": [
-      {
-        "tabs": ["general"],
-        "stacks": [
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "birch" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "oak" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "maple" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "pine" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "acacia" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "kapok" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "baldcypress" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "larch" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "redwood" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "ebony" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "walnut" } } },
-          { "type": "block", "code": "hpflyshuttleloom-north", "attributes": { "types": { "wood": "purpleheart" } } }
-        ]
-      }
-    ]
+  "texturesByType": {
+    "*-birch-*": { "ebony": { "base": "game:block/wood/debarked/birch" } },
+    "*-oak-*": { "ebony": { "base": "game:block/wood/debarked/oak" } },
+    "*-maple-*": { "ebony": { "base": "game:block/wood/debarked/maple" } },
+    "*-pine-*": { "ebony": { "base": "game:block/wood/debarked/pine" } },
+    "*-acacia-*": { "ebony": { "base": "game:block/wood/debarked/acacia" } },
+    "*-kapok-*": { "ebony": { "base": "game:block/wood/debarked/kapok" } },
+    "*-baldcypress-*": { "ebony": { "base": "game:block/wood/debarked/baldcypress" } },
+    "*-larch-*": { "ebony": { "base": "game:block/wood/debarked/larch" } },
+    "*-redwood-*": { "ebony": { "base": "game:block/wood/debarked/redwood" } },
+    "*-ebony-*": { "ebony": { "base": "game:block/wood/debarked/ebony" } },
+    "*-walnut-*": { "ebony": { "base": "game:block/wood/debarked/walnut" } },
+    "*-purpleheart-*": { "ebony": { "base": "game:block/wood/debarked/purpleheart" } }
   },
   "attributesByType": {
     "*-north": {
@@ -99,329 +82,225 @@
       "collisionSelectionBoxesByType": {
         "*-north": {
           "0,0,0": [
-            //warp roller center
             { "x1": -0.55, "y1": 0.78, "z1": 0.03, "x2": 1.55, "y2": 1.05, "z2": 0.3 },
-            //bottom beam x-axis center
             { "x1": -0.94, "y1": 0, "z1": 0.15, "x2": 1.94, "y2": 0.2, "z2": 0.4 }
           ],
           "-1,0,0": [
-            //warp roller right
             { "x1": 0.55, "y1": 0.78, "z1": 0.03, "x2": -1.55, "y2": 1.05, "z2": 0.3 },
-            //bottom beam x-axis right
             { "x1": -1.94, "y1": 0, "z1": 0.15, "x2": 0.94, "y2": 0.2, "z2": 0.4 },
-            //beam z-axis
             { "x1": 0.55, "y1": 0.09, "z1": 0.08, "x2": 0.83, "y2": 0.32, "z2": 1.99 },
-            //warp beam post right
             { "x1": 0.575, "y1": 0.31, "z1": 0.19, "x2": 0.80, "y2": 1.44, "z2": 0.79 }
           ],
           "1,0,0": [
-            //warp roller left
             { "x1": 2.55, "y1": 0.78, "z1": 0.03, "x2": 0.45, "y2": 1.05, "z2": 0.3 },
-            //bottom beam x-axis left
             { "x1": 2.94, "y1": 0, "z1": 0.15, "x2": 0.06, "y2": 0.2, "z2": 0.4 },
-            //beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": 0.08, "x2": 0.45, "y2": 0.32, "z2": 1.99 },
-            //warp beam post left
             { "x1": 0.20, "y1": 0.31, "z1": 0.19, "x2": 0.425, "y2": 1.44, "z2": 0.79 }
           ],
           "0,0,-1": [
             { "x1": -0.94, "y1": 0, "z1": 0.68, "x2": 1.94, "y2": 0.2, "z2": 0.93 },
-            //bench
             { "x1": -0.6, "y1": 0.5, "z1": 0.62, "x2": 1.60, "y2": 0.7, "z2": 0.93 }
           ],
           "-1,0,-1": [
             { "x1": -1.94, "y1": 0, "z1": 0.68, "x2": 0.94, "y2": 0.2, "z2": 0.93 },
-            //bench
             { "x1": -1.6, "y1": 0.5, "z1": 0.62, "x2": 0.60, "y2": 0.7, "z2": 0.93 },
-            //post beam right
             { "x1": 0.585, "y1": 0.31, "z1": 0.39, "x2": 0.79, "y2": 1.81, "z2": 0.92 },
-            //bottom beam z-axis right
             { "x1": 0.55, "y1": 0.09, "z1": -0.92, "x2": 0.83, "y2": 0.32, "z2": 0.99 },
-            //support w/ wheel right
             { "x1": 0.585, "y1": 0.31, "z1": -0.02, "x2": 0.79, "y2": 0.79, "z2": 0.41 }
           ],
           "1,0,-1": [
             { "x1": 2.94, "y1": 0, "z1": 0.68, "x2": 0.06, "y2": 0.2, "z2": 0.93 },
-            //bench
             { "x1": 2.6, "y1": 0.5, "z1": 0.62, "x2": 0.4, "y2": 0.7, "z2": 0.93 },
-            //post beam left
             { "x1": 0.21, "y1": 0.31, "z1": 0.39, "x2": 0.415, "y2": 1.81, "z2": 0.92 },
-            //bottom beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": -0.92, "x2": 0.45, "y2": 0.32, "z2": 0.99 },
-            //support w/ wheel left
             { "x1": 0.21, "y1": 0.31, "z1": -0.02, "x2": 0.415, "y2": 0.79, "z2": 0.41 }
           ],
           "0,-1,0": [
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "-1,-1,0": [
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": 0.65, "x2": 0.805, "y2": 1.01, "z2": 1.96 }
           ],
           "1,-1,0": [
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": 0.65, "x2": 0.43, "y2": 1.01, "z2": 1.96 }
           ],
           "0,-1,-1": [
-            //center top air
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
           ],
           "-1,-1,-1": [
-            //post beam right
             { "x1": 0.585, "y1": -0.69, "z1": 0.39, "x2": 0.79, "y2": 0.81, "z2": 0.92 },
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": -0.35, "x2": 0.805, "y2": 1.01, "z2": 0.96 }
           ],
           "1,-1,-1": [
-            //post beam left
             { "x1": 0.21, "y1": -0.69, "z1": 0.39, "x2": 0.415, "y2": 0.81, "z2": 0.92 },
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": -0.35, "x2": 0.43, "y2": 1.01, "z2": 0.96 }
           ]
         },
         "*-east": {
           "0,0,0": [
-            //warp roller center
             { "x1": -0.55, "y1": 0.78, "z1": 0.03, "x2": 1.55, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis center
             { "x1": -0.94, "y1": 0, "z1": 0.15, "x2": 1.94, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,0,-1": [
-            //warp roller right
             { "x1": 0.55, "y1": 0.78, "z1": 0.03, "x2": -1.55, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis right
             { "x1": -1.94, "y1": 0, "z1": 0.15, "x2": 0.94, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //beam z-axis right
             { "x1": 0.55, "y1": 0.09, "z1": 0.08, "x2": 0.83, "y2": 0.32, "z2": 1.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //warp beam post right
             { "x1": 0.575, "y1": 0.31, "z1": 0.19, "x2": 0.80, "y2": 1.44, "z2": 0.79, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,0,1": [
-            //warp roller left
             { "x1": 2.55, "y1": 0.78, "z1": 0.03, "x2": 0.45, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis left
             { "x1": 2.94, "y1": 0, "z1": 0.15, "x2": 0.06, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": 0.08, "x2": 0.45, "y2": 0.32, "z2": 1.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //warp beam post right
             { "x1": 0.20, "y1": 0.31, "z1": 0.19, "x2": 0.425, "y2": 1.44, "z2": 0.79, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,0,0": [
             { "x1": -0.94, "y1": 0, "z1": 0.68, "x2": 1.94, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": -0.6, "y1": 0.5, "z1": 0.62, "x2": 1.60, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,0,-1": [
             { "x1": -1.94, "y1": 0, "z1": 0.68, "x2": 0.94, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": -1.6, "y1": 0.5, "z1": 0.62, "x2": 0.60, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //post beam right
             { "x1": 0.585, "y1": 0.31, "z1": 0.39, "x2": 0.79, "y2": 1.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam z-axis right
             { "x1": 0.55, "y1": 0.09, "z1": -0.92, "x2": 0.83, "y2": 0.32, "z2": 0.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //support w/ wheel right
             { "x1": 0.585, "y1": 0.31, "z1": -0.02, "x2": 0.79, "y2": 0.79, "z2": 0.41, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,0,1": [
             { "x1": 2.94, "y1": 0, "z1": 0.68, "x2": 0.06, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": 2.6, "y1": 0.5, "z1": 0.62, "x2": 0.4, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //post beam left
             { "x1": 0.21, "y1": 0.31, "z1": 0.39, "x2": 0.415, "y2": 1.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": -0.92, "x2": 0.45, "y2": 0.32, "z2": 0.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //support w/ wheel left
             { "x1": 0.21, "y1": 0.31, "z1": -0.02, "x2": 0.415, "y2": 0.79, "z2": 0.41, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,0": [
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,-1": [
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": 0.65, "x2": 0.805, "y2": 1.01, "z2": 1.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,1": [
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": 0.65, "x2": 0.43, "y2": 1.01, "z2": 1.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,-1,0": [
-            //center top air
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,-1,-1": [
-            //post beam right
             { "x1": 0.585, "y1": -0.69, "z1": 0.39, "x2": 0.79, "y2": 0.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": -0.35, "x2": 0.805, "y2": 1.01, "z2": 0.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,-1,1": [
-            //post beam left
             { "x1": 0.21, "y1": -0.69, "z1": 0.39, "x2": 0.415, "y2": 0.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": -0.35, "x2": 0.43, "y2": 1.01, "z2": 0.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ]
         },
         "*-south": {
           "0,0,0": [
-            //warp roller center
             { "x1": -0.55, "y1": 0.78, "z1": 0.03, "x2": 1.55, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis center
             { "x1": -0.94, "y1": 0, "z1": 0.15, "x2": 1.94, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,0,0": [
-            //warp roller right
             { "x1": 0.55, "y1": 0.78, "z1": 0.03, "x2": -1.55, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis right
             { "x1": -1.94, "y1": 0, "z1": 0.15, "x2": 0.94, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //beam z-axis right
             { "x1": 0.55, "y1": 0.09, "z1": 0.08, "x2": 0.83, "y2": 0.32, "z2": 1.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //warp beam post right
             { "x1": 0.575, "y1": 0.31, "z1": 0.19, "x2": 0.80, "y2": 1.44, "z2": 0.79, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,0,0": [
-            //warp roller left
             { "x1": 2.55, "y1": 0.78, "z1": 0.03, "x2": 0.45, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis left
             { "x1": 2.94, "y1": 0, "z1": 0.15, "x2": 0.06, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": 0.08, "x2": 0.45, "y2": 0.32, "z2": 1.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //warp beam post right
             { "x1": 0.20, "y1": 0.31, "z1": 0.19, "x2": 0.425, "y2": 1.44, "z2": 0.79, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,0,1": [
             { "x1": -0.94, "y1": 0, "z1": 0.68, "x2": 1.94, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": -0.6, "y1": 0.5, "z1": 0.62, "x2": 1.60, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,0,1": [
             { "x1": -1.94, "y1": 0, "z1": 0.68, "x2": 0.94, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": -1.6, "y1": 0.5, "z1": 0.62, "x2": 0.60, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //post beam right
             { "x1": 0.585, "y1": 0.31, "z1": 0.39, "x2": 0.79, "y2": 1.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam z-axis right
             { "x1": 0.55, "y1": 0.09, "z1": -0.92, "x2": 0.83, "y2": 0.32, "z2": 0.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //support w/ wheel right
             { "x1": 0.585, "y1": 0.31, "z1": -0.02, "x2": 0.79, "y2": 0.79, "z2": 0.41, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,0,1": [
             { "x1": 2.94, "y1": 0, "z1": 0.68, "x2": 0.06, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": 2.6, "y1": 0.5, "z1": 0.62, "x2": 0.4, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //post beam left
             { "x1": 0.21, "y1": 0.31, "z1": 0.39, "x2": 0.415, "y2": 1.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": -0.92, "x2": 0.45, "y2": 0.32, "z2": 0.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //support w/ wheel left
             { "x1": 0.21, "y1": 0.31, "z1": -0.02, "x2": 0.415, "y2": 0.79, "z2": 0.41, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,0": [
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,-1,0": [
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": 0.65, "x2": 0.805, "y2": 1.01, "z2": 1.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,-1,0": [
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": 0.65, "x2": 0.43, "y2": 1.01, "z2": 1.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,1": [
-            //center top air
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "1,-1,1": [
-            //post beam right
             { "x1": 0.585, "y1": -0.69, "z1": 0.39, "x2": 0.79, "y2": 0.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": -0.35, "x2": 0.805, "y2": 1.01, "z2": 0.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,-1,1": [
-            //post beam left
             { "x1": 0.21, "y1": -0.69, "z1": 0.39, "x2": 0.415, "y2": 0.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": -0.35, "x2": 0.43, "y2": 1.01, "z2": 0.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ]
         },
         "*-west": {
           "0,0,0": [
-            //warp roller center
             { "x1": -0.55, "y1": 0.78, "z1": 0.03, "x2": 1.55, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis center
             { "x1": -0.94, "y1": 0, "z1": 0.15, "x2": 1.94, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,0,1": [
-            //warp roller right
             { "x1": 0.55, "y1": 0.78, "z1": 0.03, "x2": -1.55, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis right
             { "x1": -1.94, "y1": 0, "z1": 0.15, "x2": 0.94, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //beam z-axis right
-            { "x1": 0.55, "y1": 0.09, "z1": 0.08, "x2": 0.83, "y2": 0.32, "z2": 1.99 , "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //warp beam post right
+            { "x1": 0.55, "y1": 0.09, "z1": 0.08, "x2": 0.83, "y2": 0.32, "z2": 1.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
             { "x1": 0.575, "y1": 0.31, "z1": 0.19, "x2": 0.80, "y2": 1.44, "z2": 0.79, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,0,-1": [
-            //warp roller left
             { "x1": 2.55, "y1": 0.78, "z1": 0.03, "x2": 0.45, "y2": 1.05, "z2": 0.3, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam x-axis left
             { "x1": 2.94, "y1": 0, "z1": 0.15, "x2": 0.06, "y2": 0.2, "z2": 0.4, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": 0.08, "x2": 0.45, "y2": 0.32, "z2": 1.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //warp beam post right
             { "x1": 0.20, "y1": 0.31, "z1": 0.19, "x2": 0.425, "y2": 1.44, "z2": 0.79, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,0,0": [
             { "x1": -0.94, "y1": 0, "z1": 0.68, "x2": 1.94, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": -0.6, "y1": 0.5, "z1": 0.62, "x2": 1.60, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,0,1": [
             { "x1": -1.94, "y1": 0, "z1": 0.68, "x2": 0.94, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": -1.6, "y1": 0.5, "z1": 0.62, "x2": 0.60, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //post beam right
             { "x1": 0.585, "y1": 0.31, "z1": 0.39, "x2": 0.79, "y2": 1.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam z-axis right
             { "x1": 0.55, "y1": 0.09, "z1": -0.92, "x2": 0.83, "y2": 0.32, "z2": 0.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //support w/ wheel right
             { "x1": 0.585, "y1": 0.31, "z1": -0.02, "x2": 0.79, "y2": 0.79, "z2": 0.41, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,0,-1": [
             { "x1": 2.94, "y1": 0, "z1": 0.68, "x2": 0.06, "y2": 0.2, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bench
             { "x1": 2.6, "y1": 0.5, "z1": 0.62, "x2": 0.4, "y2": 0.7, "z2": 0.93, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //post beam left
             { "x1": 0.21, "y1": 0.31, "z1": 0.39, "x2": 0.415, "y2": 1.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //bottom beam z-axis left
             { "x1": 0.17, "y1": 0.09, "z1": -0.92, "x2": 0.45, "y2": 0.32, "z2": 0.99, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //support w/ wheel left
             { "x1": 0.21, "y1": 0.31, "z1": -0.02, "x2": 0.415, "y2": 0.79, "z2": 0.41, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,0": [
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,1": [
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": 0.65, "x2": 0.805, "y2": 1.01, "z2": 1.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "0,-1,-1": [
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": 0.65, "x2": 0.43, "y2": 1.01, "z2": 1.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,-1,0": [
-            //center top air
             { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,-1,1": [
-            //post beam right
             { "x1": 0.585, "y1": -0.69, "z1": 0.39, "x2": 0.79, "y2": 0.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //top beam z-axis right
             { "x1": 0.57, "y1": 0.81, "z1": -0.35, "x2": 0.805, "y2": 1.01, "z2": 0.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ],
           "-1,-1,-1": [
-            //post beam left
             { "x1": 0.21, "y1": -0.69, "z1": 0.39, "x2": 0.415, "y2": 0.81, "z2": 0.92, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
-            //top beam z-axis left
             { "x1": 0.195, "y1": 0.81, "z1": -0.35, "x2": 0.43, "y2": 1.01, "z2": 0.96, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
           ]
         }

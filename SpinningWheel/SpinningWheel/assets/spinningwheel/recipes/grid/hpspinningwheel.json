@@ -1,17 +1,16 @@
-﻿{
+{
   "ingredientPattern": "__W,_M_,_CF",
   "ingredients": {
-    "W": { "type": "item", "code": "spinningwheel:hpspinningwheelwheelitem", "name": "wood" },
-    "M": { "type": "item", "code": "spinningwheel:hpmoaitem", "name": "wood" },
-    "F": { "type": "item", "code": "spinningwheel:hpspinningwheelframe", "name": "wood" },
+    "W": { "type": "item", "code": "spinningwheel:hpspinningwheelwheelitem-*", "name": "wood" },
+    "M": { "type": "item", "code": "spinningwheel:hpmoaitem-*", "name": "wood" },
+    "F": { "type": "item", "code": "spinningwheel:hpspinningwheelframe-*", "name": "wood" },
     "C": { "type": "block", "code": "game:chair-*" }
   },
   "width": 3,
   "height": 3,
-  "mergeAttributesFrom": ["F", "W", "M"],
   "output": {
     "type": "block",
-    "code": "spinningwheel:hpspinningwheel-north",
+    "code": "spinningwheel:hpspinningwheel-{wood}-north",
     "quantity": 1
   }
 }

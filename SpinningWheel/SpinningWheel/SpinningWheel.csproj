@@ -73,8 +73,4 @@
       <Folder Include="assets\spinningwheel\textures\block\flyshuttleloom\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="CraluminumMods.VintageStory.AttributeRenderingLibrary" Version="2.4.2" />
-    </ItemGroup>
-
 </Project>
