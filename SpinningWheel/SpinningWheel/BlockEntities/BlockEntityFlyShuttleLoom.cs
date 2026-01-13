@@ -344,10 +344,16 @@ namespace SpinningWheel.BlockEntities
 
             if (!blockBroken)
             {
-                // Try to place the player in a safe position around the loom
-                foreach (BlockFacing checkFacing in BlockFacing.HORIZONTALS)
+                // Calculate dismount position at the front of the loom (where the player was sitting)
+                // The loom is 2 blocks deep, and the player sits at the front
+                Vec3d frontPos = GetFrontDismountPosition();
+
+                // Try to place the player at the front first, then check sides
+                BlockFacing[] dismountOrder = GetDismountFacingOrder();
+
+                foreach (BlockFacing checkFacing in dismountOrder)
                 {
-                    Vec3d placePos = Pos.ToVec3d().AddCopy(checkFacing).Add(0.5, 0.001, 0.5);
+                    Vec3d placePos = frontPos.AddCopy(checkFacing.Normalf.X, 0, checkFacing.Normalf.Z).Add(0, 0.001, 0);
                     // Check if this position is safe (not colliding with blocks)
                     if (!Api.World.CollisionTester.IsColliding(Api.World.BlockAccessor, entityAgent.SelectionBox, placePos, false))
                     {
@@ -360,6 +366,45 @@ namespace SpinningWheel.BlockEntities
             mountedByEntityId = 0;
             mountedByPlayerUid = null;
             MarkDirty(false);
+        }
+
+        /// <summary>
+        /// Gets the position at the front of the loom where the player should dismount
+        /// </summary>
+        private Vec3d GetFrontDismountPosition()
+        {
+            Vec3d basePos = Pos.ToVec3d();
+
+            // Return position at the front of the loom based on facing
+            // Player sits at the front, so dismount should be there
+            if (facing == BlockFacing.NORTH)
+                return basePos.Add(0.5, 0, 1.5);   // Front is south side
+            if (facing == BlockFacing.EAST)
+                return basePos.Add(-0.5, 0, 0.5);  // Front is west side
+            if (facing == BlockFacing.SOUTH)
+                return basePos.Add(0.5, 0, -0.5);  // Front is north side
+            if (facing == BlockFacing.WEST)
+                return basePos.Add(1.5, 0, 0.5);   // Front is east side
+
+            return basePos.Add(0.5, 0, 0.5); // Fallback
+        }
+
+        /// <summary>
+        /// Gets the order of facings to try for dismount, prioritizing forward from the loom
+        /// </summary>
+        private BlockFacing[] GetDismountFacingOrder()
+        {
+            // First try directly in front (away from loom), then sides, then back
+            if (facing == BlockFacing.NORTH)
+                return new[] { BlockFacing.SOUTH, BlockFacing.EAST, BlockFacing.WEST, BlockFacing.NORTH };
+            if (facing == BlockFacing.EAST)
+                return new[] { BlockFacing.WEST, BlockFacing.NORTH, BlockFacing.SOUTH, BlockFacing.EAST };
+            if (facing == BlockFacing.SOUTH)
+                return new[] { BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.WEST, BlockFacing.SOUTH };
+            if (facing == BlockFacing.WEST)
+                return new[] { BlockFacing.EAST, BlockFacing.NORTH, BlockFacing.SOUTH, BlockFacing.WEST };
+
+            return BlockFacing.HORIZONTALS;
         }
         
         public bool IsMountedBy(Entity entity) => this.MountedBy == entity;
