@@ -1,7 +1,7 @@
 {
     "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
     "type": "Code",
-    "modid": "hpspinningwheel",
+    "modid": "spinningwheel",
     "name": "Spinning Wheel",
     "authors": [
         "HeadPilgrim"
