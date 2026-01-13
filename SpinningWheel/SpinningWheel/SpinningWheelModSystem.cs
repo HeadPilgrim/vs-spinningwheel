@@ -101,12 +101,8 @@
                 api.Logger.Notification("[SpinningWheel] Pattern weaving disabled (requires both tailorsdelight and wool mods)");
             }
 
-            // Apply config-based patches using the dedicated patcher class
-            // Do this early, right after assets are loaded
-            configPatcher = new SpinningWheelConfigPatcher(api, ModConfig.Loaded);
-            configPatcher.ApplyAllPatches();
-
-            api.Logger.Notification("[SpinningWheel] Config patches applied in AssetsLoaded");
+            // Note: Config-based patches (recipe disabling, spinning/weaving properties) are applied
+            // in AssetsFinalize when GridRecipes and Collectibles are fully loaded
         }
 
         public override void AssetsFinalize(ICoreAPI api)

@@ -43,8 +43,16 @@ namespace SpinningWheel.Configuration
         private void DisableTwineRecipes()
         {
             int disabledCount = 0;
-            
-            api.Logger.Notification($"[SpinningWheel] Attempting to disable recipes. Total GridRecipes available: {api.World.GridRecipes.Count}");
+            int recipeCount = api.World.GridRecipes.Count;
+
+            // Skip if no recipes available yet - this can happen in early lifecycle stages
+            if (recipeCount == 0)
+            {
+                api.Logger.Debug("[SpinningWheel] GridRecipes not yet loaded, skipping recipe disabling");
+                return;
+            }
+
+            api.Logger.Debug($"[SpinningWheel] Scanning {recipeCount} grid recipes for twine recipes to disable");
 
             // Iterate through all recipes and check their output
             foreach (var recipe in api.World.GridRecipes)
@@ -99,7 +107,8 @@ namespace SpinningWheel.Configuration
             }
             else
             {
-                api.Logger.Warning("[SpinningWheel] No twine recipes found to disable.");
+                // This is not necessarily an error - the mods that provide these recipes may not be installed
+                api.Logger.Debug("[SpinningWheel] No twine recipes found to disable (expected if related mods are not installed)");
             }
         }
 
@@ -110,6 +119,13 @@ namespace SpinningWheel.Configuration
         {
             int patchedCount = 0;
             int totalSpinnable = 0;
+
+            // Skip if collectibles aren't loaded yet
+            if (api.World.Collectibles == null || !api.World.Collectibles.Any())
+            {
+                api.Logger.Debug("[SpinningWheel] Collectibles not yet loaded, skipping spinning property patching");
+                return;
+            }
 
             foreach (var collectible in api.World.Collectibles)
             {
@@ -138,9 +154,10 @@ namespace SpinningWheel.Configuration
             {
                 api.Logger.Notification($"[SpinningWheel] Patched spinning properties for {patchedCount} items based on config");
             }
-            else
+            else if (totalSpinnable > 0)
             {
-                api.Logger.Warning("[SpinningWheel] No spinning properties were patched - this may indicate a configuration issue");
+                // Only warn if there are spinnable items but none were patched (unexpected)
+                api.Logger.Debug("[SpinningWheel] Found spinnable items but none matched config patterns");
             }
         }
 
@@ -237,6 +254,13 @@ namespace SpinningWheel.Configuration
         {
             int patchedCount = 0;
             int totalWeavable = 0;
+
+            // Skip if collectibles aren't loaded yet
+            if (api.World.Collectibles == null || !api.World.Collectibles.Any())
+            {
+                api.Logger.Debug("[SpinningWheel] Collectibles not yet loaded, skipping weaving property patching");
+                return;
+            }
 
             foreach (var collectible in api.World.Collectibles)
             {

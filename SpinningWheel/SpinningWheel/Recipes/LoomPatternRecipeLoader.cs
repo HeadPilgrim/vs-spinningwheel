@@ -22,27 +22,30 @@ namespace SpinningWheel.Recipes
         public void LoadPatternRecipes()
         {
             // Try different path variations to find the assets
+            // Use Debug level for fallback attempts to avoid confusing warnings in logs
             var assets = api.Assets.GetMany("spinningwheel:recipes/loompatterns/").ToList();
 
             if (assets.Count == 0)
             {
-                api.Logger.Warning("[SpinningWheel] No assets found with 'spinningwheel:recipes/loompatterns/', trying alternative paths");
+                api.Logger.Debug("[SpinningWheel] No assets found with 'spinningwheel:recipes/loompatterns/', trying alternative paths");
                 assets = api.Assets.GetMany("recipes/loompatterns/", "spinningwheel").ToList();
             }
 
             if (assets.Count == 0)
             {
-                api.Logger.Warning("[SpinningWheel] No assets found with alternative path, trying without trailing slash");
+                api.Logger.Debug("[SpinningWheel] No assets found with alternative path, trying without trailing slash");
                 assets = api.Assets.GetMany("spinningwheel:recipes/loompatterns").ToList();
             }
 
-            api.Logger.Notification($"[SpinningWheel] Found {assets.Count} asset files in recipes/loompatterns");
-
             if (assets.Count == 0)
             {
-                api.Logger.Notification("[SpinningWheel] No pattern recipes found in assets/spinningwheel/recipes/loompatterns/");
+                // Only notify if no recipes found after all attempts - this is expected on client side
+                // since pattern recipes are only needed server-side for crafting validation
+                api.Logger.Debug("[SpinningWheel] No pattern recipe assets found (this is normal on client side)");
                 return;
             }
+
+            api.Logger.Notification($"[SpinningWheel] Found {assets.Count} asset files in recipes/loompatterns");
 
             foreach (var asset in assets)
             {
