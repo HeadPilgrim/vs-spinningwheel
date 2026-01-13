@@ -97,6 +97,7 @@ namespace SpinningWheel.Configuration
                 if (shouldDisable)
                 {
                     recipe.Enabled = false;
+                    recipe.ShowInCreatedBy = false;
                     disabledCount++;
                 }
             }
