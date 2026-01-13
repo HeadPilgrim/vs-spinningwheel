@@ -99,18 +99,20 @@ namespace SpinningWheel.Recipes
         /// </summary>
         public LoomPatternRecipe FindMatchingRecipe(ItemStack topLeft, ItemStack topRight, ItemStack bottomLeft, ItemStack bottomRight)
         {
-            api.Logger.Notification($"[LoomRecipeLoader] Searching {PatternRecipes.Count} recipes for match");
+            // Debug logging for recipe matching - uncomment to troubleshoot recipe detection issues.
+            // This logs every time loom slots change, so it generates significant log spam during normal gameplay.
+            // api.Logger.Notification($"[LoomRecipeLoader] Searching {PatternRecipes.Count} recipes for match");
 
             foreach (var recipe in PatternRecipes)
             {
                 if (recipe.Matches(topLeft, topRight, bottomLeft, bottomRight, api))
                 {
-                    api.Logger.Notification($"[LoomRecipeLoader] Match found: {recipe.Code}");
+                    // api.Logger.Notification($"[LoomRecipeLoader] Match found: {recipe.Code}");
                     return recipe;
                 }
             }
 
-            api.Logger.Notification("[LoomRecipeLoader] No match found");
+            // api.Logger.Notification("[LoomRecipeLoader] No match found");
             return null;
         }
     }

@@ -35,13 +35,20 @@ namespace SpinningWheel.Recipes
             bool brMatch = MatchesSlot(bottomRight.Collectible.Code, BottomRight);
 
             bool matches = tlMatch && trMatch && blMatch && brMatch;
-
+            
+            
+            // Debug logs track input slot assignments, verify if each slot contains an item.
+            // Confirms a match when all slots are filled. 
+            // Additionally, reports any recipe match detected.
+            
+            /*
             api?.Logger.Notification($"[LoomRecipe] Testing {Code}:");
             api?.Logger.Notification($"  TL: {(tlMatch ? "✓" : "✗")} - Slot: {topLeft.Collectible.Code} | Recipe: {TopLeft}");
             api?.Logger.Notification($"  TR: {(trMatch ? "✓" : "✗")} - Slot: {topRight.Collectible.Code} | Recipe: {TopRight}");
             api?.Logger.Notification($"  BL: {(blMatch ? "✓" : "✗")} - Slot: {bottomLeft.Collectible.Code} | Recipe: {BottomLeft}");
             api?.Logger.Notification($"  BR: {(brMatch ? "✓" : "✗")} - Slot: {bottomRight.Collectible.Code} | Recipe: {BottomRight}");
             api?.Logger.Notification($"  Result: {(matches ? "MATCH" : "NO MATCH")}");
+            */
 
             return matches;
         }
