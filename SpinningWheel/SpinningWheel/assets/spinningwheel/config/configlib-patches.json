@@ -109,6 +109,28 @@
           "max": 10
         }
       },
+      "FLAX_TWINE_WEAVE_INPUT_QUANTITY": {
+        "name": "FlaxTwineWeaveInputQuantity",
+        "ingui": "spinningwheel:setting-flax-weaving-input-quantity",
+        "weight": 1.61,
+        "comment": "spinningwheel:setting-flax-weaving-input-quantity-comment",
+        "default": 9,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "FLAX_TWINE_WEAVE_OUTPUT_QUANTITY": {
+        "name": "FlaxTwineWeaveOutputQuantity",
+        "ingui": "spinningwheel:setting-flax-weaving-output-quantity",
+        "weight": 1.62,
+        "comment": "spinningwheel:setting-flax-weaving-output-quantity-comment",
+        "default": 3,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
       "COTTON_INPUT_QUANTITY": {
         "name": "CottonInputQuantity",
         "ingui": "spinningwheel:setting-cotton-input-quantity",
@@ -175,6 +197,50 @@
           "max": 10
         }
       },
+      "WOOL_TWINE_WEAVE_INPUT_QUANTITY": {
+        "name": "WoolTwineWeaveInputQuantity",
+        "ingui": "spinningwheel:setting-wool-twine-weave-input",
+        "weight": 2.61,
+        "comment": "spinningwheel:setting-wool-twine-weave-input-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "WOOL_TWINE_WEAVE_OUTPUT_QUANTITY": {
+        "name": "WoolTwineWeaveOutputQuantity",
+        "ingui": "spinningwheel:setting-wool-twine-weave-output",
+        "weight": 2.62,
+        "comment": "spinningwheel:setting-wool-twine-weave-output-comment",
+        "default": 2,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "THREAD_WEAVE_INPUT_QUANTITY": {
+        "name": "TailorsDelightThreadWeaveInputQuantity",
+        "ingui": "spinningwheel:setting-tailorsdelight-thread-weave-input",
+        "weight": 2.71,
+        "comment": "spinningwheel:setting-tailorsdelight-thread-weave-input-comment",
+        "default": 9,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "THREAD_WEAVE_OUTPUT_QUANTITY": {
+        "name": "TailorsDelightThreadWeaveOutputQuantity",
+        "ingui": "spinningwheel:setting-tailorsdelight-thread-weave-output",
+        "weight": 2.72,
+        "comment": "spinningwheel:setting-tailorsdelight-thread-weave-output-comment",
+        "default": 3,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
       "PAPYRUS_INPUT_QUANTITY": {
         "name": "PapyrusInputQuantity",
         "ingui": "spinningwheel:setting-papyrus-input-quantity",
@@ -236,9 +302,11 @@
     { "type": "title",       "value": "spinningwheel:config-title",       "weight": 0.1 },
     { "type": "separator",   "weight": 0.5 },
     { "type": "separator",   "title": "spinningwheel:section-tailor",     "weight": 0.9 },
-    { "type": "separator",   "title": "spinningwheel:section-flax",       "weight": 1.5 },
+    { "type": "separator",   "title": "spinningwheel:section-flax-spinning",       "weight": 1.5 },
+    { "type": "separator",   "title": "spinningwheel:section-flax-weaving",       "weight": 1.6 },
     { "type": "separator",   "title": "spinningwheel:section-cotton",     "weight": 2.0 },
     { "type": "separator",   "title": "spinningwheel:section-wool",       "weight": 2.5 },
+    { "type": "separator",   "title": "spinningwheel:section-tailorsdelight",       "weight": 2.7 },
     { "type": "separator",   "title": "spinningwheel:section-pemmican",   "weight": 3.0 }
   ]
 }

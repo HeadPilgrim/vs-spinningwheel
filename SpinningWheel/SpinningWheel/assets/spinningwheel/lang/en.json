@@ -17,6 +17,8 @@
     "material-purpleheart": "Purpleheart",
     "spinningwheel:spinning-wheel-requires-class": "The spinning wheel is restricted to these classes: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
+    "spinningwheel:loom-requires-class": "The loom is restricted to these classes: {0}.",
+    "spinningwheel:loom-occupied": "Someone is already using this loom!",
     "item-hpmoaitem": "Mother of All",
     "item-hpspinningwheelframe": "Spinning Wheel Frame",
     "item-hpspinningwheelwheelitem": "Drive Wheel",
@@ -41,9 +43,11 @@
     "config-title": "Spinning Wheel Configuration",
     
     "section-tailor": "Tailor Class Restrictions",
-    "section-flax": "Vanilla Flax Settings",
+    "section-flax-spinning": "Vanilla Flax Spinning Settings",
+    "spinningwheel:section-flax-weaving": "Vanilla Flax Weaving Settings",
     "section-cotton": "Floral Zones of the Caribbean",
     "section-wool": "Wool & More Settings",
+    "section-tailorsdelight": "Tailor's Delight Settings",
     "section-pemmican": "Long-term food Settings",
 
     "RequireTailorClass": "Require Tailor Class",
@@ -58,16 +62,22 @@
     "setting-flax-spin-time": "Flax Spin Time",
     "setting-flax-spin-time-comment": "Time in seconds to spin flax fibers into twine",
 
-    "setting-flax-input-quantity": "Flax Input Quantity",
+    "setting-flax-input-quantity": "Flax Fiber Input Quantity",
     "setting-flax-input-quantity-comment": "Number of flax fibers required per spin",
 
-    "setting-flax-output-quantity": "Flax Output Quantity",
+    "setting-flax-output-quantity": "Flax Fiber Output Quantity",
     "setting-flax-output-quantity-comment": "Number of flax twine produced per spin",
 
-    "setting-cotton-spin-time": "Cotton Spin Time",
+    "spinningwheel:setting-flax-weaving-input-quantity": "Flax Twine Input Quantity",
+    "spinningwheel:setting-flax-weaving-input-quantity-comment": "Number of flax twine required per weave.",
+
+    "spinningwheel:setting-flax-weaving-output-quantity": "Cloth Output Quantity",
+    "spinningwheel:setting-flax-weaving-output-quantity-comment": "Number of cloth produced per cycle.",
+
+    "setting-cotton-spin-time": "Cotton Fiber Spin Time",
     "setting-cotton-spin-time-comment": "Time in seconds to spin cotton into twine",
 
-    "setting-cotton-input-quantity": "Cotton Input Quantity",
+    "setting-cotton-input-quantity": "Cotton Fiber Input Quantity",
     "setting-cotton-input-quantity-comment": "Number of cotton required per spin",
 
     "setting-cotton-output-quantity": "Cotton Output Quantity",
@@ -85,10 +95,10 @@
     "setting-wool-twine-spin-time": "Wool Twine Spin Time",
     "setting-wool-twine-spin-time-comment": "Time in seconds to spin wool twine into thread",
 
-    "setting-wool-twine-input-quantity": "Wool Twine Input Quantity",
+    "setting-wool-twine-input-quantity": "Wool Twine Spin Input Quantity",
     "setting-wool-twine-input-quantity-comment": "Number of wool twine required per spin",
 
-    "setting-wool-twine-output-quantity": "Wool Twine Output Quantity",
+    "setting-wool-twine-output-quantity": "Wool Twine Spin Output Quantity",
     "setting-wool-twine-output-quantity-comment": "Number of thread produced per wool twine spin",
 
     "setting-papyrus-input-quantity": "Papyrus Input Quantity",
@@ -108,6 +118,24 @@
 
     "setting-algae-spin-time": "Algae Spin Time",
     "setting-algae-spin-time-comment": "Time in seconds to spin algae into twine",
+
+    "setting-flax-twine-weave-input": "Flax Twine Weave Input",
+    "setting-flax-twine-weave-input-comment": "Number of flax twine required per weave cycle",
+
+    "setting-flax-twine-weave-output": "Flax Twine Weave Output",
+    "setting-flax-twine-weave-output-comment": "Number of linen produced per weave cycle",
+
+    "setting-wool-twine-weave-input": "Wool Twine Weave Input",
+    "setting-wool-twine-weave-input-comment": "Number of wool twine required per weave cycle",
+
+    "setting-wool-twine-weave-output": "Wool Cloth Output",
+    "setting-wool-twine-weave-output-comment": "Number of wool cloth produced per weave cycle",
+
+    "setting-tailorsdelight-thread-weave-input": "Thread Weave Input",
+    "setting-tailorsdelight-thread-weave-input-comment": "Number of thread required per weave cycle",
+
+    "setting-tailorsdelight-thread-weave-output": "Thread Cloth Output",
+    "setting-tailorsdelight-thread-weave-output-comment": "Number of cloth produced per weave cycle",
 
     "gui-loom-tab-normal": "Normal",
     "gui-loom-tab-pattern": "Pattern",

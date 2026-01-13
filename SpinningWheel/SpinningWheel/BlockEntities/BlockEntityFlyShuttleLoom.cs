@@ -5,6 +5,7 @@ using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
 using SpinningWheel.Recipes;
 using SpinningWheel.ModSystem;
+using SpinningWheel.ModConfig;
 using SpinningWheel.BlockEntityPackets;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -366,9 +367,34 @@ namespace SpinningWheel.BlockEntities
         public bool CanUnmount(EntityAgent entityAgent) => true;
         public bool CanMount(EntityAgent entityAgent) => !AnyMounted();
         public bool AnyMounted() => MountedBy != null;
-        
+
+        private bool CanPlayerUseLoom(IPlayer player)
+        {
+            // Use server config (or default if not loaded yet)
+            if (ModConfig.ModConfig.Loaded == null || !ModConfig.ModConfig.Loaded.RequireTailorClass)
+            {
+                return true;
+            }
+
+            // Get player's class
+            string playerClass = player.Entity.WatchedAttributes.GetString("characterClass", "").ToLower();
+
+            // Check if player's class is in the allowed list
+            foreach (string allowedClass in ModConfig.ModConfig.Loaded.AllowedClasses)
+            {
+                if (playerClass == allowedClass.ToLower())
+                {
+                    Api?.Logger?.Notification($"[FlyShuttleLoom] Class match found: {allowedClass}");
+                    return true;
+                }
+            }
+
+            Api?.Logger?.Notification($"[FlyShuttleLoom] No matching class found. Allowed classes: {string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses)}");
+            return false;
+        }
+
         #endregion
-        
+
         #region Animation
         
         // Client-side: sync animation with server's On state
@@ -883,13 +909,25 @@ namespace SpinningWheel.BlockEntities
 
         public bool OnPlayerInteract(IPlayer byPlayer)
         {
-            // Check if someone is already using it
-            if (MountedBy != null) 
+            // Check if player has the required class (validated on both sides)
+            if (!CanPlayerUseLoom(byPlayer))
             {
                 if (Api.Side == EnumAppSide.Client)
                 {
-                    (Api as ICoreClientAPI)?.TriggerIngameError(this, "occupied", 
-                        "Someone is already using this loom");
+                    string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
+                    (Api as ICoreClientAPI)?.TriggerIngameError(this, "wrongclass",
+                        Lang.Get("spinningwheel:loom-requires-class", requiredClasses));
+                }
+                return false;
+            }
+
+            // Check if someone is already using it
+            if (MountedBy != null)
+            {
+                if (Api.Side == EnumAppSide.Client)
+                {
+                    (Api as ICoreClientAPI)?.TriggerIngameError(this, "occupied",
+                        Lang.Get("spinningwheel:loom-occupied"));
                 }
                 return false;
             }
@@ -915,7 +953,19 @@ namespace SpinningWheel.BlockEntities
 
             if (Api.Side == EnumAppSide.Client)
             {
-                Api.Logger.Debug("[FlyShuttleLoom] On client side, opening dialog");
+                Api.Logger.Debug("[FlyShuttleLoom] On client side, checking permissions");
+
+                // Check if player has the required class first
+                if (!CanPlayerUseLoom(player))
+                {
+                    Api.Logger.Debug("[FlyShuttleLoom] Player doesn't have required class");
+                    string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
+                    (Api as ICoreClientAPI)?.TriggerIngameError(this, "wrongclass",
+                        Lang.Get("spinningwheel:loom-requires-class", requiredClasses));
+                    return false;
+                }
+
+                Api.Logger.Debug("[FlyShuttleLoom] Opening dialog");
 
                 // Open the GUI
                 if (clientDialog == null || !clientDialog.IsOpened())
