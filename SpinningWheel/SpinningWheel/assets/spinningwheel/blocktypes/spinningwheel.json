@@ -221,6 +221,7 @@
     "break": "game:block/planks",
     "walk": "game:walk/wood"
   },
+  "maxstacksize": 1,
   "materialDensity": 600,
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",
