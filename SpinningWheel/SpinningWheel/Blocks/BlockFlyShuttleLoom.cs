@@ -195,7 +195,7 @@ namespace SpinningWheel.Blocks
                 {
                     new WorldInteraction()
                     {
-                        ActionLangCode = "blockhelp-loom-sit",
+                        ActionLangCode = "spinningwheel:blockhelp-loom-sit",
                         MouseButton = EnumMouseButton.Right
                     }
                 };
@@ -207,7 +207,7 @@ namespace SpinningWheel.Blocks
                 {
                     new WorldInteraction()
                     {
-                        ActionLangCode = "blockhelp-loom-opencrafting",
+                        ActionLangCode = "spinningwheel:blockhelp-loom-opencrafting",
                         MouseButton = EnumMouseButton.Right
                     }
                 };
