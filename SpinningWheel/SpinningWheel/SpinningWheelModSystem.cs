@@ -203,6 +203,21 @@
                     ModConfig.Loaded.AlgaeInputQuantity = packet.AlgaeInputQuantity;
                     ModConfig.Loaded.AlgaeOutputQuantity = packet.AlgaeOutputQuantity;
                     this.Mod.Logger.Event($"Received Algae settings from server: SpinTime={packet.AlgaeSpinTime}, Input={packet.AlgaeInputQuantity}, Output={packet.AlgaeOutputQuantity}");
+
+                    // Flax twine weaving settings
+                    ModConfig.Loaded.FlaxTwineWeaveInputQuantity = packet.FlaxTwineWeaveInputQuantity;
+                    ModConfig.Loaded.FlaxTwineWeaveOutputQuantity = packet.FlaxTwineWeaveOutputQuantity;
+                    this.Mod.Logger.Event($"Received Flax Twine Weave settings from server: Input={packet.FlaxTwineWeaveInputQuantity}, Output={packet.FlaxTwineWeaveOutputQuantity}");
+
+                    // Wool twine weaving settings
+                    ModConfig.Loaded.WoolTwineWeaveInputQuantity = packet.WoolTwineWeaveInputQuantity;
+                    ModConfig.Loaded.WoolTwineWeaveOutputQuantity = packet.WoolTwineWeaveOutputQuantity;
+                    this.Mod.Logger.Event($"Received Wool Twine Weave settings from server: Input={packet.WoolTwineWeaveInputQuantity}, Output={packet.WoolTwineWeaveOutputQuantity}");
+
+                    // Tailor's Delight thread weaving settings
+                    ModConfig.Loaded.TailorsDelightThreadWeaveInputQuantity = packet.TailorsDelightThreadWeaveInputQuantity;
+                    ModConfig.Loaded.TailorsDelightThreadWeaveOutputQuantity = packet.TailorsDelightThreadWeaveOutputQuantity;
+                    this.Mod.Logger.Event($"Received Tailor's Delight Thread Weave settings from server: Input={packet.TailorsDelightThreadWeaveInputQuantity}, Output={packet.TailorsDelightThreadWeaveOutputQuantity}");
                 });
             
             clientApi = capi;
@@ -257,7 +272,19 @@
                 // Algae settings
                 AlgaeSpinTime = ModConfig.Loaded.AlgaeSpinTime,
                 AlgaeInputQuantity = ModConfig.Loaded.AlgaeInputQuantity,
-                AlgaeOutputQuantity = ModConfig.Loaded.AlgaeOutputQuantity
+                AlgaeOutputQuantity = ModConfig.Loaded.AlgaeOutputQuantity,
+
+                // Flax twine weaving settings
+                FlaxTwineWeaveInputQuantity = ModConfig.Loaded.FlaxTwineWeaveInputQuantity,
+                FlaxTwineWeaveOutputQuantity = ModConfig.Loaded.FlaxTwineWeaveOutputQuantity,
+
+                // Wool twine weaving settings
+                WoolTwineWeaveInputQuantity = ModConfig.Loaded.WoolTwineWeaveInputQuantity,
+                WoolTwineWeaveOutputQuantity = ModConfig.Loaded.WoolTwineWeaveOutputQuantity,
+
+                // Tailor's Delight thread weaving settings
+                TailorsDelightThreadWeaveInputQuantity = ModConfig.Loaded.TailorsDelightThreadWeaveInputQuantity,
+                TailorsDelightThreadWeaveOutputQuantity = ModConfig.Loaded.TailorsDelightThreadWeaveOutputQuantity
             }, player);
         }
         
