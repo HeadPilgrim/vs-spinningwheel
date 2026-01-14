@@ -71,7 +71,8 @@ namespace SpinningWheel.Blocks
         }
         public bool MBOnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            world.Api.Logger.Debug($"[FlyShuttleLoom] MBOnBlockInteractStart - offset: {offset.X},{offset.Y},{offset.Z}, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+            // Debug: Logs position of right clicks
+            //world.Api.Logger.Debug($"[FlyShuttleLoom] MBOnBlockInteractStart - offset: {offset.X},{offset.Y},{offset.Z}, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
             
             // Check if player has permission
             if (!world.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
@@ -98,7 +99,7 @@ namespace SpinningWheel.Blocks
             Vec3i normalizedOffset = NormalizeOffset(offset, facing);
             string offsetKey = $"{normalizedOffset.X},{normalizedOffset.Y},{normalizedOffset.Z}";
             
-            world.Api.Logger.Debug($"[FlyShuttleLoom] Facing: {facing.Code}, Raw offset: {offset.X},{offset.Y},{offset.Z}, Normalized: {offsetKey}");
+            //world.Api.Logger.Debug($"[FlyShuttleLoom] Facing: {facing.Code}, Raw offset: {offset.X},{offset.Y},{offset.Z}, Normalized: {offsetKey}");
 
             // Route based on which part was clicked (using north-facing coordinates)
             switch (offsetKey)
@@ -111,34 +112,34 @@ namespace SpinningWheel.Blocks
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
                     // SelectionBoxIndex 0, 2, 3 are other loom parts at this position - open GUI
-                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench center, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+                    //world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench center, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
                     return beLoom.OpenGui(byPlayer);
 
                 case "-1,0,-1":
                     // Bench left (when facing north) - SelectionBoxIndex 1 is the seat
                     if (blockSel.SelectionBoxIndex == 1)
                     {
-                        world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench left");
+                        //world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench left");
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
                     // Other selection box indexes - open GUI
-                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench left, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+                    //world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench left, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
                     return beLoom.OpenGui(byPlayer);
 
                 case "1,0,-1":
                     // Bench right (when facing north) - SelectionBoxIndex 1 is the seat
                     if (blockSel.SelectionBoxIndex == 1)
                     {
-                        world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench right");
+                        //world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench right");
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
                     // Other selection box indexes - open GUI
-                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench right, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+                    //world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench right, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
                     return beLoom.OpenGui(byPlayer);
 
                 default:
                     // All other parts of the loom - open GUI
-                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for offset: {offsetKey}");
+                    //world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for offset: {offsetKey}");
                     return beLoom.OpenGui(byPlayer);
             }
         }

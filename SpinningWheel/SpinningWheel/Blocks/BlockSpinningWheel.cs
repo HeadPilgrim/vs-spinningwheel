@@ -87,7 +87,7 @@ namespace SpinningWheel.Blocks
 
         public bool MBOnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            world.Api.Logger.Debug($"[SpinningWheel] MBOnBlockInteractStart - offset: {offset.X},{offset.Y},{offset.Z}");
+            //world.Api.Logger.Debug($"[SpinningWheel] MBOnBlockInteractStart - offset: {offset.X},{offset.Y},{offset.Z}");
             
             // Check if player has permission
             if (!world.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
@@ -103,7 +103,7 @@ namespace SpinningWheel.Blocks
             
             if (beSpinningWheel == null)
             {
-                world.Api.Logger.Debug("[SpinningWheel] Block entity is null!");
+                //world.Api.Logger.Debug("[SpinningWheel] Block entity is null!");
                 return false;
             }
 
@@ -114,21 +114,21 @@ namespace SpinningWheel.Blocks
             Vec3i normalizedOffset = NormalizeOffset(offset, facing);
             string offsetKey = $"{normalizedOffset.X},{normalizedOffset.Y},{normalizedOffset.Z}";
             
-            world.Api.Logger.Debug($"[SpinningWheel] Facing: {facing.Code}, Raw offset: {offset.X},{offset.Y},{offset.Z}, Normalized: {offsetKey}");
+            //world.Api.Logger.Debug($"[SpinningWheel] Facing: {facing.Code}, Raw offset: {offset.X},{offset.Y},{offset.Z}, Normalized: {offsetKey}");
 
             // Route based on which part was clicked (using north-facing coordinates)
             switch (offsetKey)
             {
                 case "0,0,-1":
-                    world.Api.Logger.Debug("[SpinningWheel] Mounting player at SeatL");
+                    //world.Api.Logger.Debug("[SpinningWheel] Mounting player at SeatL");
                     return beSpinningWheel.OnPlayerInteract(byPlayer);
 
                 case "-1,0,-1":
-                    world.Api.Logger.Debug("[SpinningWheel] Mounting player at SeatR");
+                    //world.Api.Logger.Debug("[SpinningWheel] Mounting player at SeatR");
                     return beSpinningWheel.OnPlayerInteract(byPlayer);
 
                 default:
-                    world.Api.Logger.Debug($"[SpinningWheel] Default Opening GUI: {offsetKey}");
+                    //world.Api.Logger.Debug($"[SpinningWheel] Default Opening GUI: {offsetKey}");
                     return beSpinningWheel.OpenGui(byPlayer);
             }
         }
