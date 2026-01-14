@@ -104,39 +104,43 @@ namespace SpinningWheel.Blocks
             switch (offsetKey)
             {
                 case "0,0,-1":
-                    // Bench center
+                    // Bench center - SelectionBoxIndex 1 is the seat, others are loom parts
                     if (blockSel.SelectionBoxIndex == 1)
                     {
                         world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench center");
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
-                    break;
+                    // SelectionBoxIndex 0, 2, 3 are other loom parts at this position - open GUI
+                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench center, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+                    return beLoom.OpenGui(byPlayer);
 
                 case "-1,0,-1":
-                    // Bench left (when facing north)
+                    // Bench left (when facing north) - SelectionBoxIndex 1 is the seat
                     if (blockSel.SelectionBoxIndex == 1)
                     {
                         world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench left");
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
-                    break;
+                    // Other selection box indexes - open GUI
+                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench left, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+                    return beLoom.OpenGui(byPlayer);
 
                 case "1,0,-1":
-                    // Bench right (when facing north)
+                    // Bench right (when facing north) - SelectionBoxIndex 1 is the seat
                     if (blockSel.SelectionBoxIndex == 1)
                     {
                         world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench right");
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
-                    break;
+                    // Other selection box indexes - open GUI
+                    world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for bench right, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
+                    return beLoom.OpenGui(byPlayer);
 
                 default:
                     // All other parts of the loom - open GUI
                     world.Api.Logger.Debug($"[FlyShuttleLoom] Opening GUI for offset: {offsetKey}");
                     return beLoom.OpenGui(byPlayer);
             }
-
-            return false;
         }
 
         private Vec3i NormalizeOffset(Vec3i offset, BlockFacing facing)
