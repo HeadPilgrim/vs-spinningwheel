@@ -224,8 +224,8 @@
     "gui-loom-pattern-nomatch": "Pattern does not match any recipe",
     "gui-loom-requires-mods": "Pattern weaving requires both tailorsdelight and wool mods",
 
-    "blockhelp-loom-sit": "Sit and Weave Cloth!",
-    "blockhelp-loom-opencrafting": "Open Weaving Menu!",
+    "spinningwheel:blockhelp-loom-sit": "Sit and Weave Cloth!",
+    "spinningwheel:blockhelp-loom-opencrafting": "Open Weaving Menu!",
 
     "block-hpflyshuttleloom-birch-*": "Flying Shuttle Loom (Birch)",
     "block-hpflyshuttleloom-oak-*": "Flying Shuttle Loom (Oak)",
