@@ -161,6 +161,8 @@ namespace SpinningWheel.BLockEntityRenderer
 
             return baseColor;
         }
+        
+        //TBH this whole system probably needs a rewrite. I experimented grabbing the textures from the Atlas and I should look into it again.
 
         private Vec4f GetColorFromName(string colorName)
         {
