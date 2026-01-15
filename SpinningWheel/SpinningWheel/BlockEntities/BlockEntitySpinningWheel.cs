@@ -84,14 +84,14 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
             }
             // Rotate the eye position offset based on facing
             if (facing == BlockFacing.NORTH)
-                return new Vec3f(0, 1.5f, 0.12f);
+                return new Vec3f(0, 1.6f, 0.12f);
             if (facing == BlockFacing.EAST)
-                return new Vec3f(-0.12f, 1.5f, 0);      // Z becomes X
+                return new Vec3f(-0.12f, 1.6f, 0);      // Z becomes X
             if (facing == BlockFacing.SOUTH)
-                return new Vec3f(0, 1.5f, -0.12f);     // Z inverts
+                return new Vec3f(0, 1.6f, -0.12f);     // Z inverts
             if (facing == BlockFacing.WEST)
-                return new Vec3f(0.12f, 1.5f, 0);     // X becomes -Z
-            return new Vec3f(0, 1.5f, 0);
+                return new Vec3f(0.12f, 1.6f, 0);     // X becomes -Z
+            return new Vec3f(0, 1.6f, 0);
         }
     }
     
