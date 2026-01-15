@@ -167,7 +167,11 @@
                     // Recipe control
                     ModConfig.Loaded.DisableTwineGridRecipes = packet.DisableTwineGridRecipes;
                     this.Mod.Logger.Event($"Received DisableTwineGridRecipes of {packet.DisableTwineGridRecipes} from server");
-                    
+
+                    // Drop spindle chat messages
+                    ModConfig.Loaded.ShowDropSpindleProgressMessages = packet.ShowDropSpindleProgressMessages;
+                    this.Mod.Logger.Event($"Received ShowDropSpindleProgressMessages of {packet.ShowDropSpindleProgressMessages} from server");
+
                     // Vanilla flax settings
                     ModConfig.Loaded.FlaxSpinTime = packet.FlaxSpinTime;
                     ModConfig.Loaded.FlaxInputQuantity = packet.FlaxInputQuantity;
@@ -243,7 +247,10 @@
         
                 // Recipe control
                 DisableTwineGridRecipes = ModConfig.Loaded.DisableTwineGridRecipes,
-        
+
+                // Drop spindle chat messages
+                ShowDropSpindleProgressMessages = ModConfig.Loaded.ShowDropSpindleProgressMessages,
+
                 // Vanilla flax settings
                 FlaxSpinTime = ModConfig.Loaded.FlaxSpinTime,
                 FlaxInputQuantity = ModConfig.Loaded.FlaxInputQuantity,

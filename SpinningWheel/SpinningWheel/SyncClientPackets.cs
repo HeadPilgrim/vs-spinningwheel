@@ -11,6 +11,9 @@ namespace SpinningWheel.ModSystem
         
         // Recipe control
         public bool DisableTwineGridRecipes;
+
+        // Drop spindle chat messages
+        public bool ShowDropSpindleProgressMessages;
         
         // ===========================================
         // Spinning Settings

@@ -15,6 +15,13 @@
         "ingui": "spinningwheel:setting-twine-grid-recipe-toggle",
         "weight": 0.92,
         "comment": "spinningwheel:setting-twine-grid-recipe-toggle-comment",
+        "default": true
+      },
+      "SHOW_DROP_SPINDLE_PROGRESS": {
+        "name": "ShowDropSpindleProgressMessages",
+        "ingui": "spinningwheel:setting-show-dropspindle-progress",
+        "weight": 0.93,
+        "comment": "spinningwheel:setting-show-dropspindle-progress-comment",
         "default": false
       }
     },

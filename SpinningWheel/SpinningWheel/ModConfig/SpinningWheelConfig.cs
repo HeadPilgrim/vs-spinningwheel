@@ -10,6 +10,9 @@
         
         // Recipe toggle
         public bool DisableTwineGridRecipes { get; set; } = true;
+
+        // Drop spindle chat messages
+        public bool ShowDropSpindleProgressMessages { get; set; } = false;
         
         // Vanilla flax settings
         public float FlaxSpinTime { get; set; } = 4.0f;

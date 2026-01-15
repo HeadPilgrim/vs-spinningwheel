@@ -138,6 +138,9 @@
     "setting-twine-grid-recipe-toggle": "Toggle twine grid recipe",
     "setting-twine-grid-recipe-toggle-comment": "Enable this to disable twine grid recipes",
 
+    "setting-show-dropspindle-progress": "Show Drop Spindle Progress Messages",
+    "setting-show-dropspindle-progress-comment": "Display chat messages when using the drop spindle",
+
     "setting-allowed-classes": "Allowed Classes",
     "setting-allowed-classes-comment": "Comma-separated list of player classes that may use the spinning wheel",
 
