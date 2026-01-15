@@ -320,12 +320,10 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         {
             if (playerClass == allowedClass.ToLower())
             {
-                Api?.Logger?.Notification($"[SpinningWheel] Class match found: {allowedClass}");
                 return true;
             }
         }
-    
-        Api?.Logger?.Notification($"[SpinningWheel] No matching class found. Allowed classes: {string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses)}");
+        
         return false;
     }
     
@@ -768,23 +766,18 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     
     public bool OpenGui(IPlayer player)
     {
-        Api.Logger.Debug($"[SpinningWheel] OpenGui called, Side: {Api.Side}");
     
         if (Api.Side == EnumAppSide.Client)
         {
-            Api.Logger.Debug("[SpinningWheel] On client side, checking permissions");
         
             // Check if player has the required class first
             if (!CanPlayerUseSpinningWheel(player))
             {
-                Api.Logger.Debug("[SpinningWheel] Player doesn't have required class");
                 string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
                 (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass", 
                     Lang.Get("spinningwheel:spinning-wheel-requires-class", requiredClasses));
                 return false;
             }
-        
-            Api.Logger.Debug("[SpinningWheel] Opening dialog");
         
             // Open the GUI instead of mounting
             if (clientDialog == null || !clientDialog.IsOpened())
@@ -797,14 +790,9 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                         Pos,
                         Api as ICoreClientAPI
                     );
-                    Api.Logger.Debug("[SpinningWheel] Dialog created");
                     return clientDialog;
                 });
             }
-        }
-        else
-        {
-            Api.Logger.Debug("[SpinningWheel] On server side, returning true");
         }
     
         return true;
@@ -1014,7 +1002,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         if (inputStack?.Item == null) return ColorUtil.WhiteArgbVec;
 
         string itemCode = inputStack.Item.Code.ToString().ToLower();
-        Api.Logger.Debug($"[SpinningWheel] Getting color for: {itemCode}");
+        //Api.Logger.Debug($"[SpinningWheel] Getting color for: {itemCode}");
 
         // Check if the item has spinningProps that define output color
         if (inputStack.Item.Attributes?.KeyExists("spinningProps") == true)
@@ -1028,7 +1016,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 Vec4f colorFromOutput = GetColorFromOutputItem(outputCode);
                 if (colorFromOutput != ColorUtil.WhiteArgbVec)
                 {
-                    Api.Logger.Debug($"[SpinningWheel] Color from output: R={colorFromOutput.R:F2}, G={colorFromOutput.G:F2}, B={colorFromOutput.B:F2}");
+                    //Api.Logger.Debug($"[SpinningWheel] Color from output: R={colorFromOutput.R:F2}, G={colorFromOutput.G:F2}, B={colorFromOutput.B:F2}");
                     return colorFromOutput;
                 }
             }
@@ -1039,7 +1027,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         if (!string.IsNullOrEmpty(colorName))
         {
             Vec4f color = GetClothColor(colorName);
-            Api.Logger.Debug($"[SpinningWheel] Color from name '{colorName}': R={color.R:F2}, G={color.G:F2}, B={color.B:F2}");
+            //Api.Logger.Debug($"[SpinningWheel] Color from name '{colorName}': R={color.R:F2}, G={color.G:F2}, B={color.B:F2}");
             return color;
         }
 

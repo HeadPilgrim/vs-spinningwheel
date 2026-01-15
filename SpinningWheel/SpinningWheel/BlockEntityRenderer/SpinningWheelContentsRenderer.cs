@@ -88,7 +88,7 @@ namespace SpinningWheel.BLockEntityRenderer
                 return;
             }
 
-            api.Logger.Debug($"[Renderer] Setting color tint: R={colorTint.R}, G={colorTint.G}, B={colorTint.B}");
+            //api.Logger.Debug($"[Renderer] Setting color tint: R={colorTint.R}, G={colorTint.G}, B={colorTint.B}");
 
             MeshData ingredientMesh;
             if (newContentStack.Class == EnumItemClass.Item)
@@ -104,7 +104,7 @@ namespace SpinningWheel.BLockEntityRenderer
 
             // Apply color tint directly to mesh vertices
             TintMeshVertices(ingredientMesh, fiberColor);
-            api.Logger.Debug($"[Renderer] Tinted {ingredientMesh.Rgba?.Length / 4 ?? 0} vertices");
+            //api.Logger.Debug($"[Renderer] Tinted {ingredientMesh.Rgba?.Length / 4 ?? 0} vertices");
 
             meshref = api.Render.UploadMultiTextureMesh(ingredientMesh);
             this.ContentStack = newContentStack;
@@ -118,7 +118,7 @@ namespace SpinningWheel.BLockEntityRenderer
                 return;
             }
             
-            api.Logger.Debug($"[Renderer] Tinting mesh with R={color.R}, G={color.G}, B={color.B}");
+            //api.Logger.Debug($"[Renderer] Tinting mesh with R={color.R}, G={color.G}, B={color.B}");
             
             for (int i = 0; i < mesh.Rgba.Length; i += 4)
             {

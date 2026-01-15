@@ -103,7 +103,7 @@ namespace SpinningWheel.Blocks
             
             if (beSpinningWheel == null)
             {
-                //world.Api.Logger.Debug("[SpinningWheel] Block entity is null!");
+                world.Api.Logger.Debug("[SpinningWheel] Block entity is null!");
                 return false;
             }
 
@@ -120,15 +120,12 @@ namespace SpinningWheel.Blocks
             switch (offsetKey)
             {
                 case "0,0,-1":
-                    //world.Api.Logger.Debug("[SpinningWheel] Mounting player at SeatL");
                     return beSpinningWheel.OnPlayerInteract(byPlayer);
 
                 case "-1,0,-1":
-                    //world.Api.Logger.Debug("[SpinningWheel] Mounting player at SeatR");
                     return beSpinningWheel.OnPlayerInteract(byPlayer);
 
                 default:
-                    //world.Api.Logger.Debug($"[SpinningWheel] Default Opening GUI: {offsetKey}");
                     return beSpinningWheel.OpenGui(byPlayer);
             }
         }

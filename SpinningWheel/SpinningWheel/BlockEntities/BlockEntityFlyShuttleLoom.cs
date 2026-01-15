@@ -429,12 +429,9 @@ namespace SpinningWheel.BlockEntities
             {
                 if (playerClass == allowedClass.ToLower())
                 {
-                    Api?.Logger?.Notification($"[FlyShuttleLoom] Class match found: {allowedClass}");
                     return true;
                 }
             }
-
-            Api?.Logger?.Notification($"[FlyShuttleLoom] No matching class found. Allowed classes: {string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses)}");
             return false;
         }
 
@@ -622,15 +619,16 @@ namespace SpinningWheel.BlockEntities
         private bool CanWeavePattern()
         {
             // Log current pattern slots (even if empty/incomplete)
+            /*
             Api?.Logger.Notification($"[Loom] Pattern check - Current slots:");
             Api?.Logger.Notification($"  Top-Left: {(PatternSlotTopLeft?.Itemstack != null ? $"{PatternSlotTopLeft.Itemstack.Collectible.Code} (qty: {PatternSlotTopLeft.Itemstack.StackSize})" : "EMPTY")}");
             Api?.Logger.Notification($"  Top-Right: {(PatternSlotTopRight?.Itemstack != null ? $"{PatternSlotTopRight.Itemstack.Collectible.Code} (qty: {PatternSlotTopRight.Itemstack.StackSize})" : "EMPTY")}");
             Api?.Logger.Notification($"  Bottom-Left: {(PatternSlotBottomLeft?.Itemstack != null ? $"{PatternSlotBottomLeft.Itemstack.Collectible.Code} (qty: {PatternSlotBottomLeft.Itemstack.StackSize})" : "EMPTY")}");
             Api?.Logger.Notification($"  Bottom-Right: {(PatternSlotBottomRight?.Itemstack != null ? $"{PatternSlotBottomRight.Itemstack.Collectible.Code} (qty: {PatternSlotBottomRight.Itemstack.StackSize})" : "EMPTY")}");
+            */
 
             if (!hasPatternWeavingEnabled)
             {
-                Api?.Logger.Debug("[Loom] Pattern weaving not enabled");
                 return false;
             }
 
@@ -638,7 +636,7 @@ namespace SpinningWheel.BlockEntities
             if (PatternSlotTopLeft?.Itemstack == null || PatternSlotTopRight?.Itemstack == null ||
                 PatternSlotBottomLeft?.Itemstack == null || PatternSlotBottomRight?.Itemstack == null)
             {
-                Api?.Logger.Notification("[Loom] Not all pattern slots filled - cannot weave");
+                //Api?.Logger.Notification("[Loom] Not all pattern slots filled - cannot weave");
                 return false;
             }
 
@@ -646,11 +644,8 @@ namespace SpinningWheel.BlockEntities
             var recipe = GetMatchingPatternRecipe();
             if (recipe == null)
             {
-                Api?.Logger.Notification("[Loom] No matching pattern recipe found");
                 return false;
             }
-
-            Api?.Logger.Notification($"[Loom] Found matching recipe: {recipe.Code}");
 
             // Check if each slot has enough quantity
             if (!recipe.HasSufficientInput(
@@ -858,8 +853,7 @@ namespace SpinningWheel.BlockEntities
                 {
                     var packet = Serializer.Deserialize<SetWeavingModePacket>(ms);
                     WeavingMode newMode = (WeavingMode)packet.WeavingMode;
-
-                    Api.Logger.Notification($"[Loom] Server received mode change request from {player.PlayerName}: {newMode}");
+                    
                     SetWeavingMode(newMode);
                 }
             }
@@ -994,23 +988,18 @@ namespace SpinningWheel.BlockEntities
         // Add new method for GUI opening
         public bool OpenGui(IPlayer player)
         {
-            Api.Logger.Debug($"[FlyShuttleLoom] OpenGui called, Side: {Api.Side}");
 
             if (Api.Side == EnumAppSide.Client)
             {
-                Api.Logger.Debug("[FlyShuttleLoom] On client side, checking permissions");
 
                 // Check if player has the required class first
                 if (!CanPlayerUseLoom(player))
                 {
-                    Api.Logger.Debug("[FlyShuttleLoom] Player doesn't have required class");
                     string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
                     (Api as ICoreClientAPI)?.TriggerIngameError(this, "wrongclass",
                         Lang.Get("spinningwheel:loom-requires-class", requiredClasses));
                     return false;
                 }
-
-                Api.Logger.Debug("[FlyShuttleLoom] Opening dialog");
 
                 // Open the GUI
                 if (clientDialog == null || !clientDialog.IsOpened())
@@ -1023,14 +1012,9 @@ namespace SpinningWheel.BlockEntities
                             Pos,
                             Api as ICoreClientAPI
                         );
-                        Api.Logger.Debug("[FlyShuttleLoom] Dialog created");
                         return clientDialog;
                     });
                 }
-            }
-            else
-            {
-                Api.Logger.Debug("[FlyShuttleLoom] On server side, returning true");
             }
 
             return true;
