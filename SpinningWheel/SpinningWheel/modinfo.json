@@ -2,11 +2,11 @@
     "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
     "type": "Code",
     "modid": "spinningwheel",
-    "name": "Spinning Wheel",
+    "name": "Immersive Fibercraft",
     "authors": [
         "HeadPilgrim"
     ],
-    "description": "Adds a spinning wheel & drop-spindle as an immersive twine crafting mechanic.",
+    "description": "Adds immersive crafting mechanics for spinning and weaving.",
     "version": "1.1.0",
     "dependencies": {
         "game": "1.21.0"
