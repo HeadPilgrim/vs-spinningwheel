@@ -1,0 +1,21 @@
+{
+  "ingredientPattern": "PCP,SIS,PPP",
+  "ingredients": {
+    "S": { "type": "item", "code": "game:stick" },
+    "P": {
+      "type": "item",
+      "code": "game:plank-*",
+      "name": "wood",
+      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    },
+    "I": { "type": "item", "code": "game:metalnailsandstrips-*", "quantity": 8},
+    "C": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 10}
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "item",
+    "code": "spinningwheel:hpflyshuttleloombeater-{wood}",
+    "quantity": 1
+  }
+}

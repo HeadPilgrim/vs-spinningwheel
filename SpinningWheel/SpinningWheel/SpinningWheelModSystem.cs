@@ -8,6 +8,7 @@
     using Vintagestory.API.Server;
     using Vintagestory.API.Common;
     using SpinningWheel.ModConfig;
+    using SpinningWheel.Recipes;
     using System;
 
     public class SpinningWheelModSystem : ModSystem
@@ -18,16 +19,28 @@
         private IServerNetworkChannel serverChannel;
         private SpinningWheelConfigPatcher configPatcher;
 
+        // Pattern weaving support (requires tailorsdelight and wool mods)
+        private bool hasTailorsDelightAndWool = false;
+        private LoomPatternRecipeLoader patternRecipeLoader;
+
+        public bool HasPatternWeavingEnabled => hasTailorsDelightAndWool;
+        public LoomPatternRecipeLoader PatternRecipeLoader => patternRecipeLoader;
+
         // Called very early, before assets are loaded
         public override void StartPre(ICoreAPI api)
         {
             // Register classes FIRST, before anything else
             api.RegisterBlockClass("BlockSpinningWheel", typeof(BlockSpinningWheel));
             api.RegisterBlockEntityClass("BlockEntitySpinningWheel", typeof(BlockEntitySpinningWheel));
-            
+            api.RegisterMountable("spinningWheel", BlockSpinningWheel.GetMountable);
+
+            api.RegisterBlockClass("BlockFlyShuttleLoom", typeof(BlockFlyShuttleLoom));
+            api.RegisterBlockEntityClass("BlockEntityFlyShuttleLoom", typeof(BlockEntityFlyShuttleLoom));
+            api.RegisterMountable("flyShuttleLoom", BlockFlyShuttleLoom.GetMountable);
+
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
-            
-            api.Logger.Notification("[SpinningWheel] Registered block and block entity classes");
+
+            api.Logger.Notification("[SpinningWheel] Registered block, block entity, and mountable classes");
             api.Logger.Notification("[SpinningWheel] Registered ItemDropSpindle for portable spinning");
             
             // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
@@ -67,13 +80,29 @@
         public override void AssetsLoaded(ICoreAPI api)
         {
             base.AssetsLoaded(api);
-            
-            // Apply config-based patches using the dedicated patcher class
-            // Do this early, right after assets are loaded
-            configPatcher = new SpinningWheelConfigPatcher(api, ModConfig.Loaded);
-            configPatcher.ApplyAllPatches();
-            
-            api.Logger.Notification("[SpinningWheel] Config patches applied in AssetsLoaded");
+
+            // Detect required mods for pattern weaving using ModLoader API
+            bool hasTailorsDelight = api.ModLoader.IsModEnabled("tailorsdelight");
+            bool hasWool = api.ModLoader.IsModEnabled("wool");
+            hasTailorsDelightAndWool = hasTailorsDelight && hasWool;
+
+            api.Logger.Notification($"[SpinningWheel] Mod detection - tailorsdelight: {hasTailorsDelight}, wool: {hasWool}");
+
+            if (hasTailorsDelightAndWool)
+            {
+                api.Logger.Notification("[SpinningWheel] Detected tailorsdelight and wool mods - enabling pattern weaving");
+
+                // Load pattern recipes
+                patternRecipeLoader = new LoomPatternRecipeLoader(api);
+                patternRecipeLoader.LoadPatternRecipes();
+            }
+            else
+            {
+                api.Logger.Notification("[SpinningWheel] Pattern weaving disabled (requires both tailorsdelight and wool mods)");
+            }
+
+            // Note: Config-based patches (recipe disabling, spinning/weaving properties) are applied
+            // in AssetsFinalize when GridRecipes and Collectibles are fully loaded
         }
 
         public override void AssetsFinalize(ICoreAPI api)
@@ -138,7 +167,11 @@
                     // Recipe control
                     ModConfig.Loaded.DisableTwineGridRecipes = packet.DisableTwineGridRecipes;
                     this.Mod.Logger.Event($"Received DisableTwineGridRecipes of {packet.DisableTwineGridRecipes} from server");
-                    
+
+                    // Drop spindle chat messages
+                    ModConfig.Loaded.ShowDropSpindleProgressMessages = packet.ShowDropSpindleProgressMessages;
+                    this.Mod.Logger.Event($"Received ShowDropSpindleProgressMessages of {packet.ShowDropSpindleProgressMessages} from server");
+
                     // Vanilla flax settings
                     ModConfig.Loaded.FlaxSpinTime = packet.FlaxSpinTime;
                     ModConfig.Loaded.FlaxInputQuantity = packet.FlaxInputQuantity;
@@ -174,14 +207,24 @@
                     ModConfig.Loaded.AlgaeInputQuantity = packet.AlgaeInputQuantity;
                     ModConfig.Loaded.AlgaeOutputQuantity = packet.AlgaeOutputQuantity;
                     this.Mod.Logger.Event($"Received Algae settings from server: SpinTime={packet.AlgaeSpinTime}, Input={packet.AlgaeInputQuantity}, Output={packet.AlgaeOutputQuantity}");
+
+                    // Flax twine weaving settings
+                    ModConfig.Loaded.FlaxTwineWeaveInputQuantity = packet.FlaxTwineWeaveInputQuantity;
+                    ModConfig.Loaded.FlaxTwineWeaveOutputQuantity = packet.FlaxTwineWeaveOutputQuantity;
+                    this.Mod.Logger.Event($"Received Flax Twine Weave settings from server: Input={packet.FlaxTwineWeaveInputQuantity}, Output={packet.FlaxTwineWeaveOutputQuantity}");
+
+                    // Wool twine weaving settings
+                    ModConfig.Loaded.WoolTwineWeaveInputQuantity = packet.WoolTwineWeaveInputQuantity;
+                    ModConfig.Loaded.WoolTwineWeaveOutputQuantity = packet.WoolTwineWeaveOutputQuantity;
+                    this.Mod.Logger.Event($"Received Wool Twine Weave settings from server: Input={packet.WoolTwineWeaveInputQuantity}, Output={packet.WoolTwineWeaveOutputQuantity}");
+
+                    // Tailor's Delight thread weaving settings
+                    ModConfig.Loaded.TailorsDelightThreadWeaveInputQuantity = packet.TailorsDelightThreadWeaveInputQuantity;
+                    ModConfig.Loaded.TailorsDelightThreadWeaveOutputQuantity = packet.TailorsDelightThreadWeaveOutputQuantity;
+                    this.Mod.Logger.Event($"Received Tailor's Delight Thread Weave settings from server: Input={packet.TailorsDelightThreadWeaveInputQuantity}, Output={packet.TailorsDelightThreadWeaveOutputQuantity}");
                 });
             
             clientApi = capi;
-            // Client creates default config if server hasn't sent one yet
-            capi.Input.RegisterHotKey("openspinningwheel", "Open Spinning Wheel GUI", 
-                GlKeys.F, HotkeyType.GUIOrOtherControls);
-            
-            capi.Input.SetHotKeyHandler("openspinningwheel", OnOpenSpinningWheelHotkey);
         }
         
         public override void StartServerSide(ICoreServerAPI sapi)
@@ -192,19 +235,6 @@
             this.serverChannel = sapi.Network.RegisterChannel("spinningwheel")
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>((player, packet) => { /* do nothing.*/ });
-        }
-        
-        private bool OnOpenSpinningWheelHotkey(KeyCombination keyCombination)
-        {
-            EntityPlayer player = clientApi.World.Player.Entity;
-            
-            if (player?.MountedOn?.MountSupplier is BlockEntitySpinningWheel spinningWheel)
-            {
-                spinningWheel.OpenGui(clientApi.World.Player);
-                return true;
-            }
-            
-            return false;
         }
 
         public void OnPlayerJoin(IServerPlayer player)
@@ -217,7 +247,10 @@
         
                 // Recipe control
                 DisableTwineGridRecipes = ModConfig.Loaded.DisableTwineGridRecipes,
-        
+
+                // Drop spindle chat messages
+                ShowDropSpindleProgressMessages = ModConfig.Loaded.ShowDropSpindleProgressMessages,
+
                 // Vanilla flax settings
                 FlaxSpinTime = ModConfig.Loaded.FlaxSpinTime,
                 FlaxInputQuantity = ModConfig.Loaded.FlaxInputQuantity,
@@ -246,7 +279,19 @@
                 // Algae settings
                 AlgaeSpinTime = ModConfig.Loaded.AlgaeSpinTime,
                 AlgaeInputQuantity = ModConfig.Loaded.AlgaeInputQuantity,
-                AlgaeOutputQuantity = ModConfig.Loaded.AlgaeOutputQuantity
+                AlgaeOutputQuantity = ModConfig.Loaded.AlgaeOutputQuantity,
+
+                // Flax twine weaving settings
+                FlaxTwineWeaveInputQuantity = ModConfig.Loaded.FlaxTwineWeaveInputQuantity,
+                FlaxTwineWeaveOutputQuantity = ModConfig.Loaded.FlaxTwineWeaveOutputQuantity,
+
+                // Wool twine weaving settings
+                WoolTwineWeaveInputQuantity = ModConfig.Loaded.WoolTwineWeaveInputQuantity,
+                WoolTwineWeaveOutputQuantity = ModConfig.Loaded.WoolTwineWeaveOutputQuantity,
+
+                // Tailor's Delight thread weaving settings
+                TailorsDelightThreadWeaveInputQuantity = ModConfig.Loaded.TailorsDelightThreadWeaveInputQuantity,
+                TailorsDelightThreadWeaveOutputQuantity = ModConfig.Loaded.TailorsDelightThreadWeaveOutputQuantity
             }, player);
         }
         

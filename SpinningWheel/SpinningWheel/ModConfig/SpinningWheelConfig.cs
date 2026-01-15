@@ -10,6 +10,9 @@
         
         // Recipe toggle
         public bool DisableTwineGridRecipes { get; set; } = true;
+
+        // Drop spindle chat messages
+        public bool ShowDropSpindleProgressMessages { get; set; } = false;
         
         // Vanilla flax settings
         public float FlaxSpinTime { get; set; } = 4.0f;
@@ -40,5 +43,21 @@
         public float AlgaeSpinTime { get; set; } = 6.5f;
         public int AlgaeInputQuantity { get; set; } = 1;
         public int AlgaeOutputQuantity { get; set; } = 1;
+
+        // ===========================================
+        // Loom Weaving Settings
+        // ===========================================
+
+        // Vanilla flax twine weaving settings (flax twine -> linen)
+        public int FlaxTwineWeaveInputQuantity { get; set; } = 9;
+        public int FlaxTwineWeaveOutputQuantity { get; set; } = 3;
+
+        // Wool twine weaving settings (Wool & More mod -> wool cloth)
+        public int WoolTwineWeaveInputQuantity { get; set; } = 9;
+        public int WoolTwineWeaveOutputQuantity { get; set; } = 3;
+
+        // Tailor's Delight thread weaving settings (thread -> game cloth)
+        public int TailorsDelightThreadWeaveInputQuantity { get; set; } = 9;
+        public int TailorsDelightThreadWeaveOutputQuantity { get; set; } = 3;
     }
 }

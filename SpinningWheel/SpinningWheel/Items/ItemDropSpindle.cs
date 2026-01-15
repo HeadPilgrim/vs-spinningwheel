@@ -7,6 +7,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
+using SpinningWheel.ModConfig;
 
 namespace SpinningWheel.Items
 {
@@ -278,21 +279,24 @@ namespace SpinningWheel.Items
 
             spindleSlot.MarkDirty();
 
-            // Show progress message
-            IServerPlayer serverPlayer = (byEntity as EntityPlayer)?.Player as IServerPlayer;
-            if (serverPlayer != null)
+            // Show progress message (if enabled in config)
+            if (ModConfig.ModConfig.Loaded.ShowDropSpindleProgressMessages)
             {
-                if (currentSpins >= spinsNeeded)
+                IServerPlayer serverPlayer = (byEntity as EntityPlayer)?.Player as IServerPlayer;
+                if (serverPlayer != null)
                 {
-                    serverPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, 
-                        Lang.Get("spinningwheel:dropspindle-complete"), EnumChatType.Notification);
-                }
-                else
-                {
-                    float progress = (float)currentSpins / spinsNeeded * 100f;
-                    serverPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, 
-                        Lang.Get("spinningwheel:dropspindle-progress", progress.ToString("F0")), 
-                        EnumChatType.Notification);
+                    if (currentSpins >= spinsNeeded)
+                    {
+                        serverPlayer.SendMessage(GlobalConstants.InfoLogChatGroup,
+                            Lang.Get("spinningwheel:dropspindle-complete"), EnumChatType.Notification);
+                    }
+                    else
+                    {
+                        float progress = (float)currentSpins / spinsNeeded * 100f;
+                        serverPlayer.SendMessage(GlobalConstants.InfoLogChatGroup,
+                            Lang.Get("spinningwheel:dropspindle-progress", progress.ToString("F0")),
+                            EnumChatType.Notification);
+                    }
                 }
             }
         }

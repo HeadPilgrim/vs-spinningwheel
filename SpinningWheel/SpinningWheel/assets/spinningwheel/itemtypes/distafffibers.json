@@ -10,6 +10,7 @@
     "fibers_bottom_var3.png": {"base": "spinningwheel:item/resource/fibers_bottom_var3.png"},
     "rope": {"base": "spinningwheel:item/resource/rope"}
   },
+  "lightAbsorption": 0,
   "attributes": {
     "inSpinningWheelProps": {
       "transform": {

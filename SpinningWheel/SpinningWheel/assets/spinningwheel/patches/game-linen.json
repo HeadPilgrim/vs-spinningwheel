@@ -1,0 +1,15 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-weaving",
+          "text": "spinningwheel:handbook-see-also-weaving-text"
+        }
+      ]
+    },
+    "file": "game:itemtypes/resources/cloth.json"
+  }
+]

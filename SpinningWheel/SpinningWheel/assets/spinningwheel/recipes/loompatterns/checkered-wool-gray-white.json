@@ -1,0 +1,17 @@
+{
+  "code": "spinningwheel:checkered-wool-gray-white",
+  "enabled": true,
+  "pattern": {
+    "topLeft": "wool:twine-wool-gray",
+    "topRight": "game:flaxtwine",
+    "bottomLeft": "game:flaxtwine",
+    "bottomRight": "wool:twine-wool-gray"
+  },
+  "input": {
+    "quantityPerSlot": 2
+  },
+  "output": {
+    "type": "tailorsdelight:checkeredcloth-gray",
+    "quantity": 2
+  }
+}

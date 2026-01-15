@@ -63,7 +63,14 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="assets\**\*.*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
       <Folder Include="assets\spinningwheel\sounds\" />
+      <Folder Include="assets\spinningwheel\textures\block\flyshuttleloom\" />
     </ItemGroup>
 
 </Project>

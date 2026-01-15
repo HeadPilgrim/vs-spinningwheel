@@ -1,13 +1,13 @@
 {
     "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
     "type": "Code",
-    "modid": "hpspinningwheel",
+    "modid": "spinningwheel",
     "name": "Spinning Wheel",
     "authors": [
         "HeadPilgrim"
     ],
     "description": "Adds a spinning wheel & drop-spindle as an immersive twine crafting mechanic.",
-    "version": "1.0.7",
+    "version": "1.1.0",
     "dependencies": {
         "game": "1.21.0"
     }

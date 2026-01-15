@@ -1,16 +1,23 @@
-﻿{
+{
   "code": "hpspinningwheel",
   "class": "BlockSpinningWheel",
   "entityClass": "BlockEntitySpinningWheel",
   "tags": ["inanimate", "vehicle"],
   "blockmaterial": "wood",
-  "creativeinventory": { "general":  [ "*-north" ]},
   "variantgroups": [
+    {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart", "aged"]
+    },
     {
       "code": "side",
       "loadFromProperties": "abstract/horizontalorientation"
     }
   ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
+  "creativeinventory": { "general":  [ "*-north" ]},
   "behaviors": [
     {
       "name": "Multiblock",
@@ -32,92 +39,154 @@
   "textures": {
     "linen": {"base": "game:block/linen"},
     "oak": {"base": "game:block/wood/debarked/oak"},
-    "1": {"base": "game:block/wood/chair/normal/top"},
+    "1": {"base": "game:block/wood/debarked/oak"},
     "cover": {"base": "game:block/cloth/linen/normal1"},
     "oak2": {"base": "game:block/wood/crudechair/oak"}
   },
-  "entityBehaviors": [{ "name": "Animatable" }],
+  "texturesByType": {
+    "*-birch-*": {
+      "oak": { "base": "game:block/wood/debarked/birch" },
+      "oak2": { "base": "game:block/wood/debarked/birch" },
+      "1": { "base": "game:block/wood/debarked/birch" }
+    },
+    "*-oak-*": {
+      "oak": { "base": "game:block/wood/debarked/oak" },
+      "oak2": { "base": "game:block/wood/debarked/oak" },
+      "1": { "base": "game:block/wood/debarked/oak" }
+    },
+    "*-maple-*": {
+      "oak": { "base": "game:block/wood/debarked/maple" },
+      "oak2": { "base": "game:block/wood/debarked/maple" },
+      "1": { "base": "game:block/wood/debarked/maple" }
+    },
+    "*-pine-*": {
+      "oak": { "base": "game:block/wood/debarked/pine" },
+      "oak2": { "base": "game:block/wood/debarked/pine" },
+      "1": { "base": "game:block/wood/debarked/pine" }
+    },
+    "*-acacia-*": {
+      "oak": { "base": "game:block/wood/debarked/acacia" },
+      "oak2": { "base": "game:block/wood/debarked/acacia" },
+      "1": { "base": "game:block/wood/debarked/acacia" }
+    },
+    "*-kapok-*": {
+      "oak": { "base": "game:block/wood/debarked/kapok" },
+      "oak2": { "base": "game:block/wood/debarked/kapok" },
+      "1": { "base": "game:block/wood/debarked/kapok" }
+    },
+    "*-baldcypress-*": {
+      "oak": { "base": "game:block/wood/debarked/baldcypress" },
+      "oak2": { "base": "game:block/wood/debarked/baldcypress" },
+      "1": { "base": "game:block/wood/debarked/baldcypress" }
+    },
+    "*-larch-*": {
+      "oak": { "base": "game:block/wood/debarked/larch" },
+      "oak2": { "base": "game:block/wood/debarked/larch" },
+      "1": { "base": "game:block/wood/debarked/larch" }
+    },
+    "*-redwood-*": {
+      "oak": { "base": "game:block/wood/debarked/redwood" },
+      "oak2": { "base": "game:block/wood/debarked/redwood" },
+      "1": { "base": "game:block/wood/debarked/redwood" }
+    },
+    "*-ebony-*": {
+      "oak": { "base": "game:block/wood/debarked/ebony" },
+      "oak2": { "base": "game:block/wood/debarked/ebony" },
+      "1": { "base": "game:block/wood/debarked/ebony" }
+    },
+    "*-walnut-*": {
+      "oak": { "base": "game:block/wood/debarked/walnut" },
+      "oak2": { "base": "game:block/wood/debarked/walnut" },
+      "1": { "base": "game:block/wood/debarked/walnut" }
+    },
+    "*-purpleheart-*": {
+      "oak": { "base": "game:block/wood/debarked/purpleheart" },
+      "oak2": { "base": "game:block/wood/debarked/purpleheart" },
+      "1": { "base": "game:block/wood/debarked/purpleheart" }
+    }
+  },
+  "entityBehaviors": [
+    { "name": "Animatable" }
+  ],
   "attributes": {
     "spinnable": true,
     "valuesByMultiblockOffset": {
       "collisionSelectionBoxesByType": {
         "*-north": {
-          // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8 },{ "x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75 }],
-          // Upper level - front-left INVISIBLE NON-COLLIDABLE
+          "0,0,0": [
+            { "x1": 0.2, "y1": 0, "z1": 0.13, "x2": 1, "y2": 0.7, "z2": 0.5 }
+          ],
+          "0,-1,0": [
+            { "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8 },
+            { "x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75 }
+          ],
           "0,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }],
-          // Lower level - front-left 
-          "0,0,-1": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.60, "z2": 0.9 }],
-          // Upper level - back-right 
-          "-1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55 }],
-          // Upper level - front-right INVISIBLE NON-COLLIDABLE
+          "0,0,-1": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1.5, "y2": 0.65, "z2": 0.95 }],
+          "-1,-1,0": [{ "x1": 0, "y1": -0.6, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55 }],
           "-1,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }],
-          // Lower level - back-right
-          "-1,0,0": [{ "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1, "z2": 0.6 },{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85 }],
-          // Lower level - front-right
-          "-1,0,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.60, "z2": 0.9 }]
+          "-1,0,0": [
+            { "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1.5, "z2": 0.55 },
+            { "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85 }
+          ],
+          "-1,0,-1": [{ "x1": -0.5, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.65, "z2": 0.95 }]
         },
         "*-east": {
-          // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
-          // Upper level - front-left INVISIBLE NON-COLLIDABLE
+          "0,0,0": [
+            { "x1": 0.2, "y1": 0, "z1": 0.13, "x2": 1, "y2": 0.7, "z2": 0.5, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
+          ],
+          "0,-1,0": [
+            { "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},
+            { "x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }}
+          ],
           "1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - front-left
-          "1,0,0": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.60, "z2": 0.9, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Upper level - back-right
-          "0,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Upper level - front-right INVISIBLE NON-COLLIDABLE
+          "1,0,0": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1.5, "y2": 0.65, "z2": 0.95, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          "0,-1,-1": [{ "x1": 0, "y1": -0.6, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
           "1,-1,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - back-right
-          "0,0,-1": [{ "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1, "z2": 0.6, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90  }},{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - front-right
-          "1,0,-1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.60, "z2": 0.9, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
+          "0,0,-1": [
+            { "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},
+            { "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }}
+          ],
+          "1,0,-1": [{ "x1": -0.5, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.65, "z2": 0.95, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
         },
         "*-south": {
-          // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
-          // Upper level - front-left INVISIBLE NON-COLLIDABLE
+          "0,0,0": [
+            { "x1": 0.2, "y1": 0, "z1": 0.13, "x2": 1, "y2": 0.7, "z2": 0.5, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
+          ],
+          "0,-1,0": [
+            { "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},
+            { "x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }}
+          ],
           "0,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - front-left
-          "0,0,1": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.60, "z2": 0.9, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Upper level - back-right
-          "1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Upper level - front-right INVISIBLE NON-COLLIDABLE
+          "0,0,1": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1.5, "y2": 0.65, "z2": 0.95, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          "1,-1,0": [{ "x1": 0, "y1": -0.6, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
           "1,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - back-right
-          "1,0,0": [{ "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1, "z2": 0.6, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - front-right
-          "1,0,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.60, "z2": 0.9, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
+          "1,0,0": [
+            { "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},
+            { "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }}
+          ],
+          "1,0,1": [{ "x1": -0.5, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.65, "z2": 0.95, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
         },
         "*-west": {
-          // Upper level - back-left
-          "0,-1,0": [{ "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{"x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }} ],
-          // Upper level - front-left INVISIBLE NON-COLLIDABLE
+          "0,0,0": [
+            { "x1": 0.2, "y1": 0, "z1": 0.13, "x2": 1, "y2": 0.7, "z2": 0.5, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }
+          ],
+          "0,-1,0": [
+            { "x1": 0.1, "y1": -0.3, "z1": 0.18, "x2": 0.4, "y2": 0.45, "z2": 0.8, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},
+            { "x1": 0.6, "y1": -0.3, "z1": 0.18, "x2": 0.85, "y2": 0.2, "z2": 0.75, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }}
+          ],
           "-1,-1,0": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - front-left
-          "-1,0,0": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1, "y2": 0.60, "z2": 0.9, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Upper level - back-right
-          "0,-1,1": [{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Upper level - front-right INVISIBLE NON-COLLIDABLE
+          "-1,0,0": [{ "x1": 0.5, "y1": 0, "z1": 0, "x2": 1.5, "y2": 0.65, "z2": 0.95, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
+          "0,-1,1": [{ "x1": 0, "y1": -0.6, "z1": 0.18, "x2": 1, "y2": 0.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
           "-1,-1,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - back-right
-          "0,0,1": [{ "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1, "z2": 0.6, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},{ "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }],
-          // Lower level - front-right
-          "-1,0,1": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.60, "z2": 0.9, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
+          "0,0,1": [
+            { "x1": 0, "y1": 0.4, "z1": 0.18, "x2": 1, "y2": 1.5, "z2": 0.55, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }},
+            { "x1": 0, "y1": 0, "z1": 0.18, "x2": 0.7, "y2": 0.4, "z2": 0.85, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 }}
+          ],
+          "-1,0,1": [{ "x1": -0.5, "y1": 0, "z1": 0, "x2": 0.5, "y2": 0.65, "z2": 0.95, "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } }]
         }
       }
     }
   },
-  //Bottomhalf-front-left
-  "collisionSelectionBoxes": [
-    { "x1": 0.5, "y1": 0, "z1": 0.2, "x2": 0.87, "y2": 0.70, "z2": 1,
-      "rotateYByType": {
-        "*-north": 90,
-        "*-west": 180,
-        "*-south": 270
-      }
-    }
-  ],
   "sideopaque": {
     "all": false
   },
@@ -145,12 +214,14 @@
       "rotateY": 180
     }
   },
+  "lightAbsorption": 0,
   "sounds": {
     "place": "game:block/planks",
     "hit": "game:block/planks",
     "break": "game:block/planks",
     "walk": "game:walk/wood"
   },
+  "maxstacksize": 1,
   "materialDensity": 600,
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",

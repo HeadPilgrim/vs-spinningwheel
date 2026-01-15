@@ -32,6 +32,9 @@ namespace SpinningWheel.Configuration
 
             // Patch spinning properties based on config
             PatchSpinningProperties();
+
+            // Patch weaving properties based on config
+            PatchWeavingProperties();
         }
 
         /// <summary>
@@ -40,8 +43,16 @@ namespace SpinningWheel.Configuration
         private void DisableTwineRecipes()
         {
             int disabledCount = 0;
-            
-            api.Logger.Notification($"[SpinningWheel] Attempting to disable recipes. Total GridRecipes available: {api.World.GridRecipes.Count}");
+            int recipeCount = api.World.GridRecipes.Count;
+
+            // Skip if no recipes available yet - this can happen in early lifecycle stages
+            if (recipeCount == 0)
+            {
+                api.Logger.Debug("[SpinningWheel] GridRecipes not yet loaded, skipping recipe disabling");
+                return;
+            }
+
+            api.Logger.Debug($"[SpinningWheel] Scanning {recipeCount} grid recipes for twine recipes to disable");
 
             // Iterate through all recipes and check their output
             foreach (var recipe in api.World.GridRecipes)
@@ -86,6 +97,7 @@ namespace SpinningWheel.Configuration
                 if (shouldDisable)
                 {
                     recipe.Enabled = false;
+                    recipe.ShowInCreatedBy = false;
                     disabledCount++;
                 }
             }
@@ -96,7 +108,8 @@ namespace SpinningWheel.Configuration
             }
             else
             {
-                api.Logger.Warning("[SpinningWheel] No twine recipes found to disable.");
+                // This is not necessarily an error - the mods that provide these recipes may not be installed
+                api.Logger.Debug("[SpinningWheel] No twine recipes found to disable (expected if related mods are not installed)");
             }
         }
 
@@ -107,6 +120,13 @@ namespace SpinningWheel.Configuration
         {
             int patchedCount = 0;
             int totalSpinnable = 0;
+
+            // Skip if collectibles aren't loaded yet
+            if (api.World.Collectibles == null || !api.World.Collectibles.Any())
+            {
+                api.Logger.Debug("[SpinningWheel] Collectibles not yet loaded, skipping spinning property patching");
+                return;
+            }
 
             foreach (var collectible in api.World.Collectibles)
             {
@@ -135,9 +155,10 @@ namespace SpinningWheel.Configuration
             {
                 api.Logger.Notification($"[SpinningWheel] Patched spinning properties for {patchedCount} items based on config");
             }
-            else
+            else if (totalSpinnable > 0)
             {
-                api.Logger.Warning("[SpinningWheel] No spinning properties were patched - this may indicate a configuration issue");
+                // Only warn if there are spinnable items but none were patched (unexpected)
+                api.Logger.Debug("[SpinningWheel] Found spinnable items but none matched config patterns");
             }
         }
 
@@ -218,6 +239,87 @@ namespace SpinningWheel.Configuration
                 spinningPropsToken.Token["spinTime"] = config.AlgaeSpinTime;
                 spinningPropsToken.Token["inputQuantity"] = config.AlgaeInputQuantity;
                 spinningPropsToken.Token["outputQuantity"] = config.AlgaeOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region Weaving Properties Patching
+
+        /// <summary>
+        /// Patches weaving properties for all weavable items based on config values
+        /// </summary>
+        private void PatchWeavingProperties()
+        {
+            int patchedCount = 0;
+            int totalWeavable = 0;
+
+            // Skip if collectibles aren't loaded yet
+            if (api.World.Collectibles == null || !api.World.Collectibles.Any())
+            {
+                api.Logger.Debug("[SpinningWheel] Collectibles not yet loaded, skipping weaving property patching");
+                return;
+            }
+
+            foreach (var collectible in api.World.Collectibles)
+            {
+                if (collectible?.Attributes == null) continue;
+                if (!collectible.Attributes.KeyExists("weavingProps")) continue;
+
+                totalWeavable++;
+                var weavingPropsToken = collectible.Attributes["weavingProps"];
+                string code = collectible.Code.Path;
+                string domain = collectible.Code.Domain;
+
+                // Apply patches based on item type
+                if (TryPatchFlaxTwineWeaving(weavingPropsToken, code, domain) ||
+                    TryPatchWoolTwineWeaving(weavingPropsToken, code, domain) ||
+                    TryPatchTailorsDelightThreadWeaving(weavingPropsToken, code, domain))
+                {
+                    patchedCount++;
+                }
+            }
+
+            api.Logger.Notification($"[SpinningWheel] Found {totalWeavable} total weavable items");
+            if (patchedCount > 0)
+            {
+                api.Logger.Notification($"[SpinningWheel] Patched weaving properties for {patchedCount} items based on config");
+            }
+        }
+
+        private bool TryPatchFlaxTwineWeaving(JsonObject weavingPropsToken, string code, string domain)
+        {
+            // Match vanilla flax twine (flaxtwine)
+            if (code == "flaxtwine" && domain == "game")
+            {
+                weavingPropsToken.Token["inputQuantity"] = config.FlaxTwineWeaveInputQuantity;
+                weavingPropsToken.Token["outputQuantity"] = config.FlaxTwineWeaveOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
+        private bool TryPatchWoolTwineWeaving(JsonObject weavingPropsToken, string code, string domain)
+        {
+            // Match wool twine from Wool & More mod (twine-wool-*)
+            if (code.StartsWith("twine-wool-") && domain == "wool")
+            {
+                weavingPropsToken.Token["inputQuantity"] = config.WoolTwineWeaveInputQuantity;
+                weavingPropsToken.Token["outputQuantity"] = config.WoolTwineWeaveOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
+        private bool TryPatchTailorsDelightThreadWeaving(JsonObject weavingPropsToken, string code, string domain)
+        {
+            // Match twine/thread from Tailor's Delight mod (twine-*)
+            if (code.StartsWith("twine-") && domain == "tailorsdelight")
+            {
+                weavingPropsToken.Token["inputQuantity"] = config.TailorsDelightThreadWeaveInputQuantity;
+                weavingPropsToken.Token["outputQuantity"] = config.TailorsDelightThreadWeaveOutputQuantity;
                 return true;
             }
             return false;

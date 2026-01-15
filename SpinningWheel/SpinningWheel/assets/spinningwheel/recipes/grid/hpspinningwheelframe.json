@@ -1,7 +1,12 @@
-﻿{
+{
   "ingredientPattern": "S C,SSP,PPP",
   "ingredients": {
-    "P": { "type": "item", "code": "game:plank-*", "name": "wood" },
+    "P": {
+      "type": "item",
+      "code": "game:plank-*",
+      "name": "wood",
+      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    },
     "S": { "type": "item", "code": "game:stick" },
     "C": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 10}
   },
@@ -9,7 +14,7 @@
   "height": 3,
   "output": {
     "type": "item",
-    "code": "spinningwheel:hpspinningwheelframe",
+    "code": "spinningwheel:hpspinningwheelframe-{wood}",
     "quantity": 1
   }
 }

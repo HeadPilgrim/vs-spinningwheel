@@ -11,5 +11,19 @@
     "file": "floralzonescaribbeanregion:itemtypes/resource/cotton.json",
     "side": "Server",
     "dependsOn": [ { "modid": "floralzonescaribbeanregion" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "floralzonescaribbeanregion:itemtypes/resource/cotton.json",
+    "dependsOn": [ { "modid": "floralzonescaribbeanregion" } ]
   }
 ]

@@ -1,0 +1,53 @@
+{
+  "code": "hpflyshuttleloomframe",
+  "variantgroups": [
+    {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    }
+  ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
+  "shape": {
+    "base": "item/flyshuttleloomframe"
+  },
+  "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpflyshuttleloomframe-*"
+      ]
+    }
+  },
+  "textures": {
+    "ebony": { "base": "game:block/wood/debarked/ebony" }
+  },
+  "texturesByType": {
+    "*-birch": { "ebony": { "base": "game:block/wood/debarked/birch" } },
+    "*-oak": { "ebony": { "base": "game:block/wood/debarked/oak" } },
+    "*-maple": { "ebony": { "base": "game:block/wood/debarked/maple" } },
+    "*-pine": { "ebony": { "base": "game:block/wood/debarked/pine" } },
+    "*-acacia": { "ebony": { "base": "game:block/wood/debarked/acacia" } },
+    "*-kapok": { "ebony": { "base": "game:block/wood/debarked/kapok" } },
+    "*-baldcypress": { "ebony": { "base": "game:block/wood/debarked/baldcypress" } },
+    "*-larch": { "ebony": { "base": "game:block/wood/debarked/larch" } },
+    "*-redwood": { "ebony": { "base": "game:block/wood/debarked/redwood" } },
+    "*-ebony": { "ebony": { "base": "game:block/wood/debarked/ebony" } },
+    "*-walnut": { "ebony": { "base": "game:block/wood/debarked/walnut" } },
+    "*-purpleheart": { "ebony": { "base": "game:block/wood/debarked/purpleheart" } }
+  },
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldRightReadyAnimation": "heldblockready",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "guiTransform": {
+    "translation": { "x": 0, "y": 6, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 180 },
+    "scale": 0.54
+  },
+  "tpHandTransform": {
+    "translation": {"x": -2.1, "y": -3.4, "z": -1.5},
+    "rotation": {"x": 98, "y": -15, "z": -77},
+    "scale": 0.25
+  }
+}

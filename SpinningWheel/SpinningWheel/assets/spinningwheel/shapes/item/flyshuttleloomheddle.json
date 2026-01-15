@@ -1,0 +1,138 @@
+{
+	"editor": {
+		"backDropShape": "",
+		"collapsedPaths": "Root/Autoloom/tinb rod13,Root/MechanismLBase2,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR2/Cube153,Root/Autoloom/tinb rod11,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/Cube89/Cube90,Root/MechanismLBase/GearLarger26/GearSpindle2/ROLLERS3,Root/MechanismLBase/GearLarger26/GearSpindle2/GearSpindle4/LEATHER ROLLERS 1,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/Cube89/Cube115,Root/Autoloom/Linen3,Root/mover-baseframe,Root/Autoloom/tinb rod7,Root/Autoloom/tinb rod19,Root/Autoloom/tinb rod9,Root/Autoloom/tinb rod15/BigGearHub4/Cube179/Tooth109,Root/Autoloom/tinb rod17/WHEEL GEAR2/Cube166,Root/Autoloom/Cube224,Root/MechanismLBase/GearLarger26/GearSpindle2/GearSpindle4/Cube68,Root/Autoloom/lumber/wood 7/wood 1,Root/Autoloom/tinb rod15/BigGearHub4/GearRim136,Root/Autoloom/Linen3/Linen2/Linen7/Linen8/Linen9/Linen130,Root/Autoloom/tinb rod/Linen3/Linen2/Linen7/Linen8/Linen9/LINEN PIVOT 3,Root/Autoloom/tinb rod/Linen3/Linen2/Linen7/Linen8/Linen9/LINEN PIVOT 1,Root/origin2,Root/waterframe ROOT/BigGearHub4,Root/Autoloom/lumber/wood 1,Root/mover-topframe,Root/mover-toggle,Root/Autoloom/tinb rod4/Linen12/Linen16,Root/Autoloom/tinb rod17/WHEEL GEAR2,Root/Autoloom/tinb rod17/WHEEL GEAR2/Cube153,Root/MechanismLBase/GearLarger26/GearSpindle2/GearSpindle4/LEATHER ROLLERS 3,Root/Autoloom/Linen3/Linen2/Linen7/Linen8/Linen9/Linen90,Root/Autoloom/Linen3/Linen2/Linen7/Linen8/Linen9/Linen11,Root/Autoloom/tinb rod4/Linen12/Linen52,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR2,Root/Autoloom/tinb rod15/BigGearHub4/Cube179/GearRim136,Root/reinforcingMover2,Root/Autoloom/tinb rod38,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR2/Cube136,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR/Cube76,Root/Autoloom/Cube224/Cube225,Root/reinforcingMover1,Root/Autoloom/tinb rod31,Root/Autoloom/Cube208,Root/waterframe ROOT/ingot/WEIGHT,Root/Autoloom/tinb rod17/SMALLER  GEAR4,Root/Autoloom/movers origin/HOLDER 1/tinb rod41,Root/BigGearHub3,Root/Autoloom/tinb rod19/Cube216/Cube217/Cube231,Root/Autoloom/Linen3/Linen2/Linen7/Linen8/Linen9/Linen20,Root/Autoloom/tinb rod19/Cube216/SHUTTLE2/shuttle10/shuttle14,Root/Autoloom/movers origin/HOLDER 2/Cube225,Root/MechanismLBase,Root/Autoloom/tinb rod19/Cube216/SHUTTLE2/shuttle10/shuttle12,Root/Autoloom/tinb rod25,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/Cube89/Cube76/Cube91,Root/Autoloom/tinb rod23,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR2/Cube166,Root/Autoloom/tinb rod21,Root/Autoloom/tinb rod19/Cube216/Cube268/Cube269,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR/Cube89,Root/Autoloom/tinb rod17/WHEEL GEAR2/Cube136,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/Cube89,Root/Autoloom/Cube211,Root/Autoloom/tinb rod4/Linen12/Linen32,Root/Autoloom/tinb rod4/Linen12/Linen35,Root/Cube7,Root/waterframe ROOT/mover-baseframe/frame-leg-nw/FrameWHoriz8/Cube44/WHEEL GEAR/Cube90,Root/MechanismLBase/GearLarger26/GearSpindle2/LEATHER 3,Root/Autoloom/tinb rod15/BigGearHub4/Tooth109,Root/MechanismLBase/GearLarger26/GearSpindle2/GearSpindle4/Cube72,Root/Autoloom/Linen3/Linen2/Linen7/Linen8/Linen9/Linen30,Root/Autoloom/tinb rod19/Cube216/Cube217/Cube241",
+		"allAngles": true,
+		"entityTextureMode": false,
+		"singleTexture": false,
+		"vsFormatConverted": false
+	},
+	"textureWidth": 64,
+	"textureHeight": 64,
+	"textureSizes": {
+		"heddleties2": [128, 128],
+		"rope": [32, 32],
+		"ebony": [32, 32]
+	},
+	"textures": {
+		"heddleties2": "item/heddleties2",
+		"rope": "block/locustnest/stalagmite/rope",
+		"ebony": "block/wood/bark/ebony"
+	},
+	"elements": [
+		{
+			"name": "Loom",
+			"from": [0, 8, 0.6],
+			"to": [0, 8, 0.6],
+			"rotationOrigin": [0, 8, 0.6],
+			"children": [
+				{
+					"name": "headle1",
+					"from": [-3.5, 3.4, 16.7],
+					"to": [-3.5, 3.4, 16.7],
+					"rotationOrigin": [-3.5, 3.4, 16.7],
+					"children": [
+						{
+							"name": "headle1p1",
+							"from": [-0.7, 7.2, -3.55],
+							"to": [23.7, 7.6, -3.35],
+							"rotationOrigin": [3.9, 6.4, 0.05],
+							"faces": {
+								"north": {"texture": "#ebony", "uv": [0, 0, 32, 1], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#ebony", "uv": [0, 0, 0.2, 0.4], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#ebony", "uv": [0, 0, 32, 1], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#ebony", "uv": [0, 0, 0.2, 0.4], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#ebony", "uv": [0, 0, 32, 1], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#ebony", "uv": [0, 0, 24.4, 0.2], "autoUv": false, "snapUv": false}
+							},
+							"renderPass": 0
+						},
+						{
+							"name": "headle1p2",
+							"from": [-0.7, 0.4, -3.55],
+							"to": [23.7, 0.8, -3.35],
+							"rotationOrigin": [3.9, -0.4, 0.05],
+							"faces": {
+								"north": {"texture": "#ebony", "uv": [0, 0, 32, 1], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#ebony", "uv": [0, 0, 0.2, 0.4], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#ebony", "uv": [0, 0, 32, 1], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#ebony", "uv": [0, 0, 0.2, 0.4], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#ebony", "uv": [0, 0, 24.4, 0.2], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#ebony", "uv": [0, 0, 32, 1], "autoUv": false, "snapUv": false}
+							},
+							"renderPass": 0
+						},
+						{
+							"name": "heddle1L",
+							"from": [11.599, 0.599, -3.451],
+							"to": [23.701, 7.201, -3.449],
+							"rotationOrigin": [11.6, 5.4, 0.25],
+							"faces": {
+								"north": {"texture": "#heddleties2", "uv": [0, 0, 128, 78], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#heddleties2", "uv": [0, 0, 0, 6.6], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#heddleties2", "uv": [128, 0, 0, 78], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#heddleties2", "uv": [0, 0, 0, 6.6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#heddleties2", "uv": [0, 0, 24.4, 0], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#heddleties2", "uv": [0, 0, 24.4, 0], "autoUv": false, "snapUv": false}
+							},
+							"renderPass": 0
+						},
+						{
+							"name": "heddle1R",
+							"from": [-0.131, 0.599, -3.451],
+							"to": [11.971, 7.201, -3.449],
+							"rotationOrigin": [12.2, 5.4, 0.25],
+							"faces": {
+								"north": {"texture": "#heddleties2", "uv": [128, 0, 0, 78], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#heddleties2", "uv": [0, 0, 0, 6.6], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#heddleties2", "uv": [0, 0, 128, 78], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#heddleties2", "uv": [0, 0, 0, 6.6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#heddleties2", "uv": [0, 0, 24.4, 0], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#heddleties2", "uv": [0, 0, 24.4, 0], "autoUv": false, "snapUv": false}
+							},
+							"renderPass": 0
+						},
+						{
+							"name": "heddlessingle",
+							"from": [-0.516, 0.599, -3.451],
+							"to": [-0.114, 7.201, -3.449],
+							"rotationOrigin": [0.1, 5.4, 0.25],
+							"faces": {
+								"north": {"texture": "#heddleties2", "uv": [8, 0, 4, 78], "autoUv": false, "snapUv": false},
+								"east": {"texture": "#heddleties2", "uv": [0, 0, 0, 6.6], "autoUv": false, "snapUv": false},
+								"south": {"texture": "#heddleties2", "uv": [4, 0, 8, 78], "autoUv": false, "snapUv": false},
+								"west": {"texture": "#heddleties2", "uv": [0, 0, 0, 6.6], "autoUv": false, "snapUv": false},
+								"up": {"texture": "#heddleties2", "uv": [0, 0, 24.4, 0], "autoUv": false, "snapUv": false},
+								"down": {"texture": "#heddleties2", "uv": [0, 0, 24.4, 0], "autoUv": false, "snapUv": false}
+							},
+							"renderPass": 0
+						},
+						{
+							"name": "heddle1rope1",
+							"from": [18.8, 10.25623, -3.64194],
+							"to": [18.8, 10.25623, -3.64194],
+							"rotationOrigin": [18.8, 10.25623, -3.64194],
+							"children": []
+						},
+						{
+							"name": "heddle1rope2",
+							"from": [4.2, 10.25623, -3.64194],
+							"to": [4.2, 10.25623, -3.64194],
+							"rotationOrigin": [4.2, 10.25623, -3.64194],
+							"children": []
+						},
+						{
+							"name": "heddle1rope3",
+							"from": [13.4, -2.24377, -3.64194],
+							"to": [13.4, -2.24377, -3.64194],
+							"rotationOrigin": [13.4, -2.24377, -3.64194],
+							"rotationZ": -180,
+							"children": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"animations": []
+}

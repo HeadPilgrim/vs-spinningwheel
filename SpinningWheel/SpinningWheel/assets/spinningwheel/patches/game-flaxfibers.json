@@ -10,5 +10,18 @@
     },
     "file": "game:itemtypes/resource/flaxfibers.json",
     "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "game:itemtypes/resource/flaxfibers.json"
   }
 ]

@@ -11,6 +11,13 @@ namespace SpinningWheel.ModSystem
         
         // Recipe control
         public bool DisableTwineGridRecipes;
+
+        // Drop spindle chat messages
+        public bool ShowDropSpindleProgressMessages;
+        
+        // ===========================================
+        // Spinning Settings
+        // ===========================================
         
         // Vanilla flax settings
         public float FlaxSpinTime;
@@ -41,5 +48,21 @@ namespace SpinningWheel.ModSystem
         public float AlgaeSpinTime;
         public int AlgaeInputQuantity;
         public int AlgaeOutputQuantity;
+
+        // ===========================================
+        // Loom Weaving Settings
+        // ===========================================
+
+        // Vanilla flax twine weaving settings (flax twine -> linen)
+        public int FlaxTwineWeaveInputQuantity;
+        public int FlaxTwineWeaveOutputQuantity;
+
+        // Wool twine weaving settings (Wool & More mod -> wool cloth)
+        public int WoolTwineWeaveInputQuantity;
+        public int WoolTwineWeaveOutputQuantity;
+
+        // Tailor's Delight thread weaving settings (thread -> game cloth)
+        public int TailorsDelightThreadWeaveInputQuantity;
+        public int TailorsDelightThreadWeaveOutputQuantity;
     }
 }

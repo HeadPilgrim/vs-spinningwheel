@@ -1,0 +1,54 @@
+{
+  "code": "hpflyshuttleloomheddle",
+  "variantgroups": [
+    {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    }
+  ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
+  "shape": {
+    "base": "item/flyshuttleloomheddle"
+  },
+  "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpflyshuttleloomheddle-*"
+      ]
+    }
+  },
+  "textures": {
+    "heddleties2": { "base": "block/flyshuttleloom/heddleties2" },
+    "rope": { "base": "game:item/resource/rope" },
+    "ebony": { "base": "game:block/wood/debarked/ebony" }
+  },
+  "texturesByType": {
+    "*-birch": { "ebony": { "base": "game:block/wood/debarked/birch" } },
+    "*-oak": { "ebony": { "base": "game:block/wood/debarked/oak" } },
+    "*-maple": { "ebony": { "base": "game:block/wood/debarked/maple" } },
+    "*-pine": { "ebony": { "base": "game:block/wood/debarked/pine" } },
+    "*-acacia": { "ebony": { "base": "game:block/wood/debarked/acacia" } },
+    "*-kapok": { "ebony": { "base": "game:block/wood/debarked/kapok" } },
+    "*-baldcypress": { "ebony": { "base": "game:block/wood/debarked/baldcypress" } },
+    "*-larch": { "ebony": { "base": "game:block/wood/debarked/larch" } },
+    "*-redwood": { "ebony": { "base": "game:block/wood/debarked/redwood" } },
+    "*-ebony": { "ebony": { "base": "game:block/wood/debarked/ebony" } },
+    "*-walnut": { "ebony": { "base": "game:block/wood/debarked/walnut" } },
+    "*-purpleheart": { "ebony": { "base": "game:block/wood/debarked/purpleheart" } }
+  },
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldRightReadyAnimation": "heldblockready",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "guiTransform": {
+    "translation": { "x": 4.5, "y": -17, "z": 0 },
+    "scale": 2.04
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.5, "y": -0.7, "z": -0.1 },
+    "rotation": { "x": -86, "y": 16, "z": -77 },
+    "scale": 0.6
+  }
+}

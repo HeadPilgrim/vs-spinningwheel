@@ -1,11 +1,41 @@
 ﻿{
   "code": "hpspinningwheelwheelitem",
+  "variantgroups": [
+    {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    }
+  ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
   "shape": {
     "base": "item/spinningwheelwheelitem"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpspinningwheelwheelitem-*"
+      ]
+    }
+  },
   "textures": {
-    "oak": {"base": "game:block/wood/debarked/oak"},
+    "oak": {"base": "game:block/wood/debarked/oak"}
+  },
+  "texturesByType": {
+    "*-birch": { "oak": { "base": "game:block/wood/debarked/birch" } },
+    "*-oak": { "oak": { "base": "game:block/wood/debarked/oak" } },
+    "*-maple": { "oak": { "base": "game:block/wood/debarked/maple" } },
+    "*-pine": { "oak": { "base": "game:block/wood/debarked/pine" } },
+    "*-acacia": { "oak": { "base": "game:block/wood/debarked/acacia" } },
+    "*-kapok": { "oak": { "base": "game:block/wood/debarked/kapok" } },
+    "*-baldcypress": { "oak": { "base": "game:block/wood/debarked/baldcypress" } },
+    "*-larch": { "oak": { "base": "game:block/wood/debarked/larch" } },
+    "*-redwood": { "oak": { "base": "game:block/wood/debarked/redwood" } },
+    "*-ebony": { "oak": { "base": "game:block/wood/debarked/ebony" } },
+    "*-walnut": { "oak": { "base": "game:block/wood/debarked/walnut" } },
+    "*-purpleheart": { "oak": { "base": "game:block/wood/debarked/purpleheart" } }
   },
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",

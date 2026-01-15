@@ -1,12 +1,78 @@
-﻿{
+{
   "code": "hpspinningwheelframe",
+  "variantgroups": [
+    {
+      "code": "wood",
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+    }
+  ],
+  "skipVariants": [
+    "aged", "veryaged"
+  ],
   "shape": {
     "base": "item/spinningwheelframe"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpspinningwheelframe-*"
+      ]
+    }
+  },
   "textures": {
     "oak": {"base": "game:block/wood/debarked/oak"},
     "oak2": {"base": "game:block/wood/crudechair/oak"}
+  },
+  "texturesByType": {
+    "*-birch": {
+      "oak": { "base": "game:block/wood/debarked/birch" },
+      "oak2": { "base": "game:block/wood/crudechair/birch" }
+    },
+    "*-oak": {
+      "oak": { "base": "game:block/wood/debarked/oak" },
+      "oak2": { "base": "game:block/wood/crudechair/oak" }
+    },
+    "*-maple": {
+      "oak": { "base": "game:block/wood/debarked/maple" },
+      "oak2": { "base": "game:block/wood/crudechair/maple" }
+    },
+    "*-pine": {
+      "oak": { "base": "game:block/wood/debarked/pine" },
+      "oak2": { "base": "game:block/wood/crudechair/pine" }
+    },
+    "*-acacia": {
+      "oak": { "base": "game:block/wood/debarked/acacia" },
+      "oak2": { "base": "game:block/wood/crudechair/acacia" }
+    },
+    "*-kapok": {
+      "oak": { "base": "game:block/wood/debarked/kapok" },
+      "oak2": { "base": "game:block/wood/crudechair/kapok" }
+    },
+    "*-baldcypress": {
+      "oak": { "base": "game:block/wood/debarked/baldcypress" },
+      "oak2": { "base": "game:block/wood/crudechair/baldcypress" }
+    },
+    "*-larch": {
+      "oak": { "base": "game:block/wood/debarked/larch" },
+      "oak2": { "base": "game:block/wood/crudechair/larch" }
+    },
+    "*-redwood": {
+      "oak": { "base": "game:block/wood/debarked/redwood" },
+      "oak2": { "base": "game:block/wood/crudechair/redwood" }
+    },
+    "*-ebony": {
+      "oak": { "base": "game:block/wood/debarked/ebony" },
+      "oak2": { "base": "game:block/wood/crudechair/ebony" }
+    },
+    "*-walnut": {
+      "oak": { "base": "game:block/wood/debarked/walnut" },
+      "oak2": { "base": "game:block/wood/crudechair/walnut" }
+    },
+    "*-purpleheart": {
+      "oak": { "base": "game:block/wood/debarked/purpleheart" },
+      "oak2": { "base": "game:block/wood/crudechair/purpleheart" }
+    }
   },
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",
