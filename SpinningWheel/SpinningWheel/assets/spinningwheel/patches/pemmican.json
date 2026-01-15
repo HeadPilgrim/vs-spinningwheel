@@ -10,7 +10,21 @@
     },
     "file": "pemmican:itemtypes/papyrus-fiber.json",
     "side": "Server",
-    "dependsOn":[ { "modid": "longtermfood" } ]
+    "dependsOn": [ { "modid": "longtermfood" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "pemmican:itemtypes/papyrus-fiber.json",
+    "dependsOn": [ { "modid": "longtermfood" } ]
   },
   {
     "op": "add",
@@ -23,6 +37,20 @@
     },
     "file": "pemmican:itemtypes/algae-chem.json",
     "side": "Server",
-    "dependsOn":[ { "modid": "longtermfood" } ]
+    "dependsOn": [ { "modid": "longtermfood" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "pemmican:itemtypes/algae-chem.json",
+    "dependsOn": [ { "modid": "longtermfood" } ]
   }
 ]

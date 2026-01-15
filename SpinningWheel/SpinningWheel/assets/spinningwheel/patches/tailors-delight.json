@@ -449,5 +449,47 @@
     "file": "tailorsdelight:itemtypes/resource/twine.json",
     "side": "Server",
     "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-thread",
+          "text": "spinningwheel:handbook-see-also-thread-text"
+        }
+      ]
+    },
+    "file": "tailorsdelight:itemtypes/resource/twine.json",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-weaving",
+          "text": "spinningwheel:handbook-see-also-weaving-text"
+        }
+      ]
+    },
+    "file": "tailorsdelight:itemtypes/resource/cloth.json",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-checkered",
+          "text": "spinningwheel:handbook-see-also-checkered-text"
+        }
+      ]
+    },
+    "file": "tailorsdelight:itemtypes/resource/checkeredcloth.json",
+    "dependsOn": [ { "modid": "tailorsdelight" } ]
   }
 ]

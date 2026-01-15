@@ -401,5 +401,43 @@
     "file": "wool:itemtypes/resource/twine.json",
     "side": "Server",
     "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "wool:itemtypes/resource/fibers.json",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-twine",
+          "text": "spinningwheel:handbook-see-also-twine-text"
+        }
+      ]
+    },
+    "file": "wool:itemtypes/resource/twine.json",
+    "dependsOn": [ { "modid": "wool" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook/extraSections/-",
+    "value": {
+      "title": "spinningwheel:handbook-see-also-weaving",
+      "text": "spinningwheel:handbook-see-also-weaving-text"
+    },
+    "file": "wool:itemtypes/resource/cloth.json",
+    "dependsOn": [ { "modid": "wool" } ]
   }
 ]

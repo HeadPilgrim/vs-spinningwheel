@@ -8,5 +8,18 @@
       "outputQuantity": 3
     },
     "file": "game:itemtypes/resource/flaxtwine.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-twine",
+          "text": "spinningwheel:handbook-see-also-twine-text"
+        }
+      ]
+    },
+    "file": "game:itemtypes/resource/flaxtwine.json"
   }
 ]
