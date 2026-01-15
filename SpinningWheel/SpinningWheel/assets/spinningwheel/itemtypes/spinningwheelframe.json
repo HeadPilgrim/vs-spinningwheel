@@ -13,6 +13,13 @@
     "base": "item/spinningwheelframe"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpspinningwheelframe-*"
+      ]
+    }
+  },
   "textures": {
     "oak": {"base": "game:block/wood/debarked/oak"},
     "oak2": {"base": "game:block/wood/crudechair/oak"}

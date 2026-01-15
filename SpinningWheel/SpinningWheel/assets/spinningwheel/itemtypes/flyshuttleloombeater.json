@@ -13,6 +13,13 @@
     "base": "item/flyshuttleloombeater"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpflyshuttleloombeater-*"
+      ]
+    }
+  },
   "textures": {
     "plain": { "base": "game:block/cloth/linen/plain" },
     "reeddents": { "base": "block/flyshuttleloom/reeddents" },

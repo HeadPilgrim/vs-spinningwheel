@@ -13,6 +13,13 @@
     "base": "item/flyshuttleloomframe"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpflyshuttleloomframe-*"
+      ]
+    }
+  },
   "textures": {
     "ebony": { "base": "game:block/wood/debarked/ebony" }
   },

@@ -13,6 +13,13 @@
     "base": "item/spinningwheelwheelitem"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpspinningwheelwheelitem-*"
+      ]
+    }
+  },
   "textures": {
     "oak": {"base": "game:block/wood/debarked/oak"}
   },

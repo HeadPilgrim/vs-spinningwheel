@@ -13,6 +13,13 @@
     "base": "item/flyshuttleloomheddle"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpflyshuttleloomheddle-*"
+      ]
+    }
+  },
   "textures": {
     "heddleties2": { "base": "block/flyshuttleloom/heddleties2" },
     "rope": { "base": "game:item/resource/rope" },

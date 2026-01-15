@@ -13,6 +13,13 @@
     "base": "item/moaitem"
   },
   "creativeinventory": { "general":  [ "*" ]},
+  "attributes": {
+    "handbook": {
+      "groupBy": [
+        "hpmoaitem-*"
+      ]
+    }
+  },
   "textures": {
     "linen": {"base": "game:block/linen"},
     "oak": {"base": "game:block/wood/debarked/oak"},
