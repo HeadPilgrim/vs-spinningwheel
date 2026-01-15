@@ -32,6 +32,8 @@ namespace SpinningWheel.BlockEntities
         private float y2 = 0.2f;
         public bool On { get; set; }
 
+        protected ILoadedSound ambientSound;
+
         // Inventory and GUI
         internal InventoryFlyshuttleLoom inventory;
         GuiDialogBlockEntityLoom clientDialog;
@@ -148,7 +150,6 @@ namespace SpinningWheel.BlockEntities
         {
             Code = "sitloomfull",
             Animation = "SitLoomFull",
-            EaseInSpeed = 1000f,
             EaseOutSpeed = 1000f
         }.Init();
         
@@ -289,7 +290,74 @@ namespace SpinningWheel.BlockEntities
                 }
             }
         }
-        
+
+        public void ToggleAmbientSound(bool on)
+        {
+            Api?.Logger.Debug($"[Loom Sound] ToggleAmbientSound called with on={on}, Api.Side={Api?.Side}");
+
+            if (Api?.Side != EnumAppSide.Client)
+            {
+                Api?.Logger.Debug("[Loom Sound] Not client side, returning");
+                return;
+            }
+
+            if (on)
+            {
+                Api.Logger.Debug($"[Loom Sound] Turning ON - ambientSound null? {ambientSound == null}, IsPlaying? {ambientSound?.IsPlaying}");
+
+                // If we already have a playing sound, nothing to do
+                if (ambientSound != null && ambientSound.IsPlaying)
+                {
+                    Api.Logger.Debug("[Loom Sound] Sound already playing");
+                    return;
+                }
+
+                // Dispose any existing sound (might be stopped/fading)
+                if (ambientSound != null)
+                {
+                    Api.Logger.Debug("[Loom Sound] Disposing old sound");
+                    ambientSound.Stop();
+                    ambientSound.Dispose();
+                    ambientSound = null;
+                }
+
+                // Create new sound
+                Api.Logger.Debug("[Loom Sound] Loading new sound...");
+                ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
+                {
+                    Location = new AssetLocation("spinningwheel:sounds/block/flyshuttle-loom-cycle.ogg"),
+                    ShouldLoop = true,
+                    Position = Pos.ToVec3f().Add(0.5f, 0.5f, 0.5f),
+                    DisposeOnFinish = false,
+                    Volume = 0.5f,
+                    Range = 6,
+                    SoundType = EnumSoundType.Ambient
+                });
+
+                Api.Logger.Debug($"[Loom Sound] LoadSound returned: {(ambientSound == null ? "NULL" : "valid sound")}");
+
+                if (ambientSound != null)
+                {
+                    ambientSound.Start();
+                    Api.Logger.Debug($"[Loom Sound] Sound started, IsPlaying={ambientSound.IsPlaying}");
+                }
+                else
+                {
+                    Api.Logger.Error("[Loom Sound] Failed to load sound!");
+                }
+            }
+            else
+            {
+                Api.Logger.Debug($"[Loom Sound] Turning OFF - ambientSound null? {ambientSound == null}");
+                if (ambientSound != null)
+                {
+                    ambientSound.Stop();
+                    ambientSound.Dispose();
+                    ambientSound = null;
+                }
+            }
+        }
+
         #region Controls & Mounting
         
         private void onControls(EnumEntityAction action, bool on, ref EnumHandling handled)
@@ -443,27 +511,41 @@ namespace SpinningWheel.BlockEntities
         private bool clientAnimationRunning = false;
         private void OnClientAnimationTick(float dt)
         {
-            if (animUtil?.animator == null) return;
+            if (animUtil?.animator == null)
+            {
+                Api?.Logger.VerboseDebug("[Loom Sound] OnClientAnimationTick: animUtil or animator is null");
+                return;
+            }
 
             // Start animation if On but not running
             if (On && !clientAnimationRunning)
             {
-                animUtil.StartAnimation(new AnimationMetaData() { 
-                    Animation = "loom_full_cycle", 
-                    Code = "loom_full_cycle", 
+                Api?.Logger.Debug($"[Loom Sound] Starting animation - On={On}, clientAnimationRunning={clientAnimationRunning}");
+                animUtil.StartAnimation(new AnimationMetaData() {
+                    Animation = "loom_full_cycle",
+                    Code = "loom_full_cycle",
                     AnimationSpeed = 1f
                 });
                 clientAnimationRunning = true;
-                
+
+                // Start sound when animation starts
+                Api?.Logger.Debug("[Loom Sound] Calling ToggleAmbientSound(true)");
+                ToggleAmbientSound(true);
+
                 // Update player animation to weaving
                 RefreshSeatAnimation();
             }
             // Stop animation if Off but running
             else if (!On && clientAnimationRunning)
             {
+                Api?.Logger.Debug($"[Loom Sound] Stopping animation - On={On}, clientAnimationRunning={clientAnimationRunning}");
                 animUtil.StopAnimation("loom_full_cycle");
                 clientAnimationRunning = false;
-                
+
+                // Stop sound when animation stops
+                Api?.Logger.Debug("[Loom Sound] Calling ToggleAmbientSound(false)");
+                ToggleAmbientSound(false);
+
                 // Update player animation back to idle
                 RefreshSeatAnimation();
             }
@@ -1095,6 +1177,7 @@ namespace SpinningWheel.BlockEntities
                         // Also ensure block animation state matches
                         if (On && !clientAnimationRunning && animUtil?.animator != null)
                         {
+                            Api?.Logger.Debug("[Loom Sound] FromTreeAttributes starting animation and sound");
                             animUtil.StartAnimation(new AnimationMetaData()
                             {
                                 Animation = "loom_full_cycle",
@@ -1102,6 +1185,7 @@ namespace SpinningWheel.BlockEntities
                                 AnimationSpeed = 1f
                             });
                             clientAnimationRunning = true;
+                            ToggleAmbientSound(true);
                         }
                     }, "refreshloomanimations");
                 }
@@ -1135,6 +1219,8 @@ namespace SpinningWheel.BlockEntities
         
         public override void OnBlockRemoved()
         {
+            ToggleAmbientSound(false);
+
             base.OnBlockRemoved();
             blockBroken = true;
             MountedBy?.TryUnmount();
@@ -1149,11 +1235,14 @@ namespace SpinningWheel.BlockEntities
 
         public override void OnBlockUnloaded()
         {
+            ToggleAmbientSound(false);
             base.OnBlockUnloaded();
         }
 
         public override void OnBlockBroken(IPlayer byPlayer = null)
         {
+            ToggleAmbientSound(false);
+
             base.OnBlockBroken(byPlayer);
             blockBroken = true;
             MountedBy?.TryUnmount();
