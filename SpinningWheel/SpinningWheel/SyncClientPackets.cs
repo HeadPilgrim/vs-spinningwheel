@@ -5,9 +5,10 @@ namespace SpinningWheel.ModSystem
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class SyncClientPacket
     {
-        // Class restrictions
-        public bool RequireTailorClass;
+        // Class/Trait restrictions
+        public bool RequireClassOrTrait;
         public string[] AllowedClasses;
+        public string[] AllowedTraits;
         
         // Recipe control
         public bool DisableTwineGridRecipes;

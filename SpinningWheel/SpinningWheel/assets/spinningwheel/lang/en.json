@@ -27,9 +27,14 @@
     "material-walnut": "Walnut",
     "material-purpleheart": "Purpleheart",
     "spinningwheel:spinning-wheel-requires-class": "The spinning wheel is restricted to these classes: {0}.",
+    "spinningwheel:spinning-wheel-requires-class-or-trait": "The spinning wheel is restricted to: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
     "spinningwheel:loom-requires-class": "The loom is restricted to these classes: {0}.",
+    "spinningwheel:loom-requires-class-or-trait": "The loom is restricted to: {0}.",
     "spinningwheel:loom-occupied": "Someone is already using this loom!",
+    "spinningwheel:classes": "Classes",
+    "spinningwheel:traits": "Traits",
+    "spinningwheel:or": "or",
 
     "item-hpmoaitem-birch": "Mother of All (Birch)",
     "item-hpmoaitem-oak": "Mother of All (Oak)",
@@ -124,7 +129,7 @@
 
     "config-title": "Spinning Wheel Configuration",
     
-    "section-tailor": "Tailor Class Restrictions",
+    "section-tailor": "Class & Trait Restrictions",
     "section-flax-spinning": "Vanilla Flax Spinning Settings",
     "spinningwheel:section-flax-weaving": "Vanilla Flax Weaving Settings",
     "section-cotton": "Floral Zones of the Caribbean",
@@ -132,8 +137,8 @@
     "section-tailorsdelight": "Tailor's Delight Settings",
     "section-pemmican": "Long-term food Settings",
 
-    "RequireTailorClass": "Require Tailor Class",
-    "RequireTailorClass-Comment": "If enabled, only players with allowed classes can use the spinning wheel",
+    "RequireClassOrTrait": "Require Class or Trait",
+    "RequireClassOrTrait-Comment": "If enabled, only players with allowed classes or traits can use the spinning wheel and loom",
 
     "setting-twine-grid-recipe-toggle": "Toggle twine grid recipe",
     "setting-twine-grid-recipe-toggle-comment": "Enable this to disable twine grid recipes",
@@ -142,7 +147,10 @@
     "setting-show-dropspindle-progress-comment": "Display chat messages when using the drop spindle",
 
     "setting-allowed-classes": "Allowed Classes",
-    "setting-allowed-classes-comment": "Comma-separated list of player classes that may use the spinning wheel",
+    "setting-allowed-classes-comment": "List of player classes that may use the spinning wheel and loom",
+
+    "setting-allowed-traits": "Allowed Traits",
+    "setting-allowed-traits-comment": "List of traits that may use the spinning wheel and loom (e.g., clothier)",
 
     "setting-flax-spin-time": "Flax Spin Time",
     "setting-flax-spin-time-comment": "Time in seconds to spin flax fibers into twine",

@@ -307,26 +307,102 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     private bool CanPlayerUseSpinningWheel(IPlayer player)
     {
         // Use server config (or default if not loaded yet)
-        if (ModConfig.ModConfig.Loaded == null || !ModConfig.ModConfig.Loaded.RequireTailorClass)
+        if (ModConfig.ModConfig.Loaded == null || !ModConfig.ModConfig.Loaded.RequireClassOrTrait)
         {
             return true;
         }
 
         // Get player's class
         string playerClass = player.Entity.WatchedAttributes.GetString("characterClass", "").ToLower();
-    
+        Api?.Logger.Debug($"[SpinningWheel] Player class: '{playerClass}'");
+
         // Check if player's class is in the allowed list
-        foreach (string allowedClass in ModConfig.ModConfig.Loaded.AllowedClasses)
+        var allowedClasses = ModConfig.ModConfig.Loaded.AllowedClasses;
+        if (allowedClasses != null)
         {
-            if (playerClass == allowedClass.ToLower())
+            foreach (string allowedClass in allowedClasses)
             {
-                return true;
+                if (playerClass == allowedClass.ToLower())
+                {
+                    Api?.Logger.Debug($"[SpinningWheel] Player has allowed class: {allowedClass}");
+                    return true;
+                }
             }
         }
-        
+
+        // Check if player has any allowed trait
+        var allowedTraits = ModConfig.ModConfig.Loaded.AllowedTraits;
+        if (allowedTraits != null && allowedTraits.Length > 0)
+        {
+            // Use CharacterSystem to get player's traits
+            var characterSystem = Api?.ModLoader.GetModSystem<CharacterSystem>();
+            if (characterSystem != null)
+            {
+                // Get the character class for this player
+                var charClass = characterSystem.characterClasses?.FirstOrDefault(c => c.Code == playerClass);
+                if (charClass?.Traits != null)
+                {
+                    Api?.Logger.Debug($"[SpinningWheel] Class '{playerClass}' has traits: {string.Join(", ", (IEnumerable<string>)charClass.Traits)}");
+                    foreach (string allowedTrait in allowedTraits)
+                    {
+                        foreach (string classTrait in charClass.Traits)
+                        {
+                            if (classTrait.Equals(allowedTrait, System.StringComparison.OrdinalIgnoreCase))
+                            {
+                                Api?.Logger.Debug($"[SpinningWheel] Player has allowed class trait: {allowedTrait}");
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Api?.Logger.Debug($"[SpinningWheel] Could not find character class '{playerClass}' or it has no traits");
+                }
+
+                // Also check extra traits (traits selected during character creation, not from class)
+                var extraTraits = player.Entity.WatchedAttributes.GetTreeAttribute("extraTraits");
+                if (extraTraits != null)
+                {
+                    foreach (string allowedTrait in allowedTraits)
+                    {
+                        if (extraTraits.HasAttribute(allowedTrait) || extraTraits.HasAttribute(allowedTrait.ToLower()))
+                        {
+                            Api?.Logger.Debug($"[SpinningWheel] Player has allowed extra trait: {allowedTrait}");
+                            return true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Api?.Logger.Debug("[SpinningWheel] CharacterSystem not found");
+            }
+        }
+
+        Api?.Logger.Debug("[SpinningWheel] Player does not have required class or trait");
         return false;
     }
-    
+
+    private string GetRequirementsString()
+    {
+        var parts = new System.Collections.Generic.List<string>();
+
+        var allowedClasses = ModConfig.ModConfig.Loaded?.AllowedClasses;
+        if (allowedClasses != null && allowedClasses.Length > 0)
+        {
+            parts.Add(Lang.Get("spinningwheel:classes") + ": " + string.Join(", ", allowedClasses));
+        }
+
+        var allowedTraits = ModConfig.ModConfig.Loaded?.AllowedTraits;
+        if (allowedTraits != null && allowedTraits.Length > 0)
+        {
+            parts.Add(Lang.Get("spinningwheel:traits") + ": " + string.Join(", ", allowedTraits));
+        }
+
+        return string.Join(" " + Lang.Get("spinningwheel:or") + " ", parts);
+    }
+
     public void DidMount(EntityAgent entityAgent)
     {
         if (MountedBy != null && MountedBy != entityAgent)
@@ -682,14 +758,14 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     
     public bool OnPlayerInteract(IPlayer byPlayer)
     {
-        // Check if player has the required class (validated on both sides)
+        // Check if player has the required class or trait (validated on both sides)
         if (!CanPlayerUseSpinningWheel(byPlayer))
         {
             if (Api.Side == EnumAppSide.Client)
             {
-                string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
-                (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass", 
-                    Lang.Get("spinningwheel:spinning-wheel-requires-class", requiredClasses));
+                string requirements = GetRequirementsString();
+                (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass",
+                    Lang.Get("spinningwheel:spinning-wheel-requires-class-or-trait", requirements));
             }
             return false;
         }
@@ -770,12 +846,12 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         if (Api.Side == EnumAppSide.Client)
         {
         
-            // Check if player has the required class first
+            // Check if player has the required class or trait first
             if (!CanPlayerUseSpinningWheel(player))
             {
-                string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
-                (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass", 
-                    Lang.Get("spinningwheel:spinning-wheel-requires-class", requiredClasses));
+                string requirements = GetRequirementsString();
+                (Api as ICoreClientAPI).TriggerIngameError(this, "wrongclass",
+                    Lang.Get("spinningwheel:spinning-wheel-requires-class-or-trait", requirements));
                 return false;
             }
         

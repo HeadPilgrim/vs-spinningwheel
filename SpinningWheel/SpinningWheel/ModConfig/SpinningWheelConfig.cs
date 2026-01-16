@@ -4,9 +4,10 @@
     {
         public static ModConfig Loaded { get; set; } = new ModConfig();
 
-        // Tailor class restriction
-        public bool RequireTailorClass { get; set; } = false;
-        public string[] AllowedClasses { get; set; } = new string[] { "tailor" };
+        // Class/Trait restriction - when enabled, player must have an allowed class OR trait
+        public bool RequireClassOrTrait { get; set; } = false;
+        public string[] AllowedClasses { get; set; } = new string[] { };
+        public string[] AllowedTraits { get; set; } = new string[] { "clothier" };
         
         // Recipe toggle
         public bool DisableTwineGridRecipes { get; set; } = true;

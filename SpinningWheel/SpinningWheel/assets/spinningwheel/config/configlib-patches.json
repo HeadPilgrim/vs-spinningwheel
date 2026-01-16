@@ -3,11 +3,11 @@
   "file": "spinningwheel.json",
   "settings": {
     "boolean": {
-      "REQUIRE_TAILOR_CLASS": {
-        "name": "RequireTailorClass",
-        "ingui": "spinningwheel:RequireTailorClass",
+      "REQUIRE_CLASS_OR_TRAIT": {
+        "name": "RequireClassOrTrait",
+        "ingui": "spinningwheel:RequireClassOrTrait",
         "weight": 0.91,
-        "comment": "spinningwheel:RequireTailorClass-Comment",
+        "comment": "spinningwheel:RequireClassOrTrait-Comment",
         "default": false
       },
       "TWINE_GRID_RECIPE_TOGGLE": {
@@ -301,6 +301,15 @@
         "comment": "spinningwheel:setting-allowed-classes-comment",
         "default": [
           "tailor"
+        ]
+      },
+      "ALLOWED_TRAITS": {
+        "name": "AllowedTraits",
+        "ingui": "spinningwheel:setting-allowed-traits",
+        "weight": 0.93,
+        "comment": "spinningwheel:setting-allowed-traits-comment",
+        "default": [
+          "clothier"
         ]
       }
     }

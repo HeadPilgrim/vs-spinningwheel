@@ -158,11 +158,13 @@
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>(packet =>
                 {
-                    // Class restrictions
-                    ModConfig.Loaded.RequireTailorClass = packet.RequireTailorClass;
-                    this.Mod.Logger.Event($"Received RequireTailorClass of {packet.RequireTailorClass} from server");
+                    // Class/Trait restrictions
+                    ModConfig.Loaded.RequireClassOrTrait = packet.RequireClassOrTrait;
+                    this.Mod.Logger.Event($"Received RequireClassOrTrait of {packet.RequireClassOrTrait} from server");
                     ModConfig.Loaded.AllowedClasses = packet.AllowedClasses;
-                    this.Mod.Logger.Event($"Received AllowedClasses from server: {string.Join(", ", packet.AllowedClasses)}");
+                    this.Mod.Logger.Event($"Received AllowedClasses from server: {string.Join(", ", packet.AllowedClasses ?? new string[0])}");
+                    ModConfig.Loaded.AllowedTraits = packet.AllowedTraits;
+                    this.Mod.Logger.Event($"Received AllowedTraits from server: {string.Join(", ", packet.AllowedTraits ?? new string[0])}");
                     
                     // Recipe control
                     ModConfig.Loaded.DisableTwineGridRecipes = packet.DisableTwineGridRecipes;
@@ -241,9 +243,10 @@
         {
             this.serverChannel.SendPacket(new SyncClientPacket
             {
-                // Class restrictions
-                RequireTailorClass = ModConfig.Loaded.RequireTailorClass,
+                // Class/Trait restrictions
+                RequireClassOrTrait = ModConfig.Loaded.RequireClassOrTrait,
                 AllowedClasses = ModConfig.Loaded.AllowedClasses,
+                AllowedTraits = ModConfig.Loaded.AllowedTraits,
         
                 // Recipe control
                 DisableTwineGridRecipes = ModConfig.Loaded.DisableTwineGridRecipes,

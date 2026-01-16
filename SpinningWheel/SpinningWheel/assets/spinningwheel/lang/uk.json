@@ -11,9 +11,14 @@
     "block-hpspinningwheel-ebony-*": "Самопрядка (Ебонове дерево)",
     "block-hpspinningwheel-walnut-*": "Самопрядка (Горіх)",
     "block-hpspinningwheel-purpleheart-*": "Самопрядка (Пурпурне серце)",
-    "blockhelp-spinningwheel-use": "Сядьте і прядіть волокно ({0} для відкриття інтерфейсу)",
+    "spinningwheel:blockhelp-spinningwheel-use": "Сядьте і прядіть волокно!",
+    "spinningwheel:blockhelp-spinningwheel-opencrafting": "Відкрити меню крафту!",
     "spinningwheel:spinning-wheel-requires-class": "Самопрядка обмежене цими класами {0}.",
+    "spinningwheel:spinning-wheel-requires-class-or-trait": "Самопрядка обмежене: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Хтось вже користується цим!",
+    "spinningwheel:classes": "Класи",
+    "spinningwheel:traits": "Риси",
+    "spinningwheel:or": "або",
 
     "item-hpmoaitem-birch": "Рогулька і котушка (Береза)",
     "item-hpmoaitem-oak": "Рогулька і котушка (Дуб)",
@@ -191,6 +196,7 @@
     "item-hpflyshuttleloomheddle-purpleheart": "Ремізки ткацького верстата (Пурпурне серце)",
 
     "spinningwheel:loom-requires-class": "Ткацький верстат обмежений цими класами: {0}.",
+    "spinningwheel:loom-requires-class-or-trait": "Ткацький верстат обмежений: {0}.",
     "spinningwheel:loom-occupied": "Хтось вже користується цим ткацьким верстатом!",
 
     "blockhelp-loom-sit": "Сядьте і ткіть тканину!",

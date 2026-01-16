@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using SpinningWheel.GUIs;
 using SpinningWheel.Inventories;
 using SpinningWheel.Recipes;
@@ -293,36 +294,30 @@ namespace SpinningWheel.BlockEntities
 
         public void ToggleAmbientSound(bool on)
         {
-            Api?.Logger.Debug($"[Loom Sound] ToggleAmbientSound called with on={on}, Api.Side={Api?.Side}");
 
             if (Api?.Side != EnumAppSide.Client)
             {
-                Api?.Logger.Debug("[Loom Sound] Not client side, returning");
                 return;
             }
 
             if (on)
             {
-                Api.Logger.Debug($"[Loom Sound] Turning ON - ambientSound null? {ambientSound == null}, IsPlaying? {ambientSound?.IsPlaying}");
 
                 // If we already have a playing sound, nothing to do
                 if (ambientSound != null && ambientSound.IsPlaying)
                 {
-                    Api.Logger.Debug("[Loom Sound] Sound already playing");
                     return;
                 }
 
                 // Dispose any existing sound (might be stopped/fading)
                 if (ambientSound != null)
                 {
-                    Api.Logger.Debug("[Loom Sound] Disposing old sound");
                     ambientSound.Stop();
                     ambientSound.Dispose();
                     ambientSound = null;
                 }
 
                 // Create new sound
-                Api.Logger.Debug("[Loom Sound] Loading new sound...");
                 ambientSound = ((IClientWorldAccessor)Api.World).LoadSound(new SoundParams()
                 {
                     Location = new AssetLocation("spinningwheel:sounds/block/flyshuttle-loom-cycle.ogg"),
@@ -333,22 +328,18 @@ namespace SpinningWheel.BlockEntities
                     Range = 6,
                     SoundType = EnumSoundType.Ambient
                 });
-
-                Api.Logger.Debug($"[Loom Sound] LoadSound returned: {(ambientSound == null ? "NULL" : "valid sound")}");
+                
 
                 if (ambientSound != null)
                 {
                     ambientSound.Start();
-                    Api.Logger.Debug($"[Loom Sound] Sound started, IsPlaying={ambientSound.IsPlaying}");
                 }
                 else
                 {
-                    Api.Logger.Error("[Loom Sound] Failed to load sound!");
                 }
             }
             else
             {
-                Api.Logger.Debug($"[Loom Sound] Turning OFF - ambientSound null? {ambientSound == null}");
                 if (ambientSound != null)
                 {
                     ambientSound.Stop();
@@ -484,7 +475,7 @@ namespace SpinningWheel.BlockEntities
         private bool CanPlayerUseLoom(IPlayer player)
         {
             // Use server config (or default if not loaded yet)
-            if (ModConfig.ModConfig.Loaded == null || !ModConfig.ModConfig.Loaded.RequireTailorClass)
+            if (ModConfig.ModConfig.Loaded == null || !ModConfig.ModConfig.Loaded.RequireClassOrTrait)
             {
                 return true;
             }
@@ -493,14 +484,84 @@ namespace SpinningWheel.BlockEntities
             string playerClass = player.Entity.WatchedAttributes.GetString("characterClass", "").ToLower();
 
             // Check if player's class is in the allowed list
-            foreach (string allowedClass in ModConfig.ModConfig.Loaded.AllowedClasses)
+            var allowedClasses = ModConfig.ModConfig.Loaded.AllowedClasses;
+            if (allowedClasses != null)
             {
-                if (playerClass == allowedClass.ToLower())
+                foreach (string allowedClass in allowedClasses)
                 {
-                    return true;
+                    if (playerClass == allowedClass.ToLower())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // Check if player has any allowed trait
+            var allowedTraits = ModConfig.ModConfig.Loaded.AllowedTraits;
+            if (allowedTraits != null && allowedTraits.Length > 0)
+            {
+                // Use CharacterSystem to get player's traits
+                var characterSystem = Api?.ModLoader.GetModSystem<CharacterSystem>();
+                if (characterSystem != null)
+                {
+                    // Get the character class for this player
+                    var charClass = characterSystem.characterClasses?.FirstOrDefault(c => c.Code == playerClass);
+                    if (charClass?.Traits != null)
+                    {
+                        foreach (string allowedTrait in allowedTraits)
+                        {
+                            foreach (string classTrait in charClass.Traits)
+                            {
+                                if (classTrait.Equals(allowedTrait, System.StringComparison.OrdinalIgnoreCase))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Api?.Logger.Debug($"[Loom] Could not find character class '{playerClass}' or it has no traits");
+                    }
+
+                    // Also check extra traits (traits selected during character creation, not from class)
+                    var extraTraits = player.Entity.WatchedAttributes.GetTreeAttribute("extraTraits");
+                    if (extraTraits != null)
+                    {
+                        foreach (string allowedTrait in allowedTraits)
+                        {
+                            if (extraTraits.HasAttribute(allowedTrait) || extraTraits.HasAttribute(allowedTrait.ToLower()))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Api?.Logger.Debug("[Loom] CharacterSystem not found");
                 }
             }
             return false;
+        }
+
+        private string GetRequirementsString()
+        {
+            var parts = new System.Collections.Generic.List<string>();
+
+            var allowedClasses = ModConfig.ModConfig.Loaded?.AllowedClasses;
+            if (allowedClasses != null && allowedClasses.Length > 0)
+            {
+                parts.Add(Lang.Get("spinningwheel:classes") + ": " + string.Join(", ", allowedClasses));
+            }
+
+            var allowedTraits = ModConfig.ModConfig.Loaded?.AllowedTraits;
+            if (allowedTraits != null && allowedTraits.Length > 0)
+            {
+                parts.Add(Lang.Get("spinningwheel:traits") + ": " + string.Join(", ", allowedTraits));
+            }
+
+            return string.Join(" " + Lang.Get("spinningwheel:or") + " ", parts);
         }
 
         #endregion
@@ -513,14 +574,12 @@ namespace SpinningWheel.BlockEntities
         {
             if (animUtil?.animator == null)
             {
-                Api?.Logger.VerboseDebug("[Loom Sound] OnClientAnimationTick: animUtil or animator is null");
                 return;
             }
 
             // Start animation if On but not running
             if (On && !clientAnimationRunning)
             {
-                Api?.Logger.Debug($"[Loom Sound] Starting animation - On={On}, clientAnimationRunning={clientAnimationRunning}");
                 animUtil.StartAnimation(new AnimationMetaData() {
                     Animation = "loom_full_cycle",
                     Code = "loom_full_cycle",
@@ -529,7 +588,6 @@ namespace SpinningWheel.BlockEntities
                 clientAnimationRunning = true;
 
                 // Start sound when animation starts
-                Api?.Logger.Debug("[Loom Sound] Calling ToggleAmbientSound(true)");
                 ToggleAmbientSound(true);
 
                 // Update player animation to weaving
@@ -538,12 +596,10 @@ namespace SpinningWheel.BlockEntities
             // Stop animation if Off but running
             else if (!On && clientAnimationRunning)
             {
-                Api?.Logger.Debug($"[Loom Sound] Stopping animation - On={On}, clientAnimationRunning={clientAnimationRunning}");
                 animUtil.StopAnimation("loom_full_cycle");
                 clientAnimationRunning = false;
 
                 // Stop sound when animation stops
-                Api?.Logger.Debug("[Loom Sound] Calling ToggleAmbientSound(false)");
                 ToggleAmbientSound(false);
 
                 // Update player animation back to idle
@@ -1030,14 +1086,14 @@ namespace SpinningWheel.BlockEntities
 
         public bool OnPlayerInteract(IPlayer byPlayer)
         {
-            // Check if player has the required class (validated on both sides)
+            // Check if player has the required class or trait (validated on both sides)
             if (!CanPlayerUseLoom(byPlayer))
             {
                 if (Api.Side == EnumAppSide.Client)
                 {
-                    string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
+                    string requirements = GetRequirementsString();
                     (Api as ICoreClientAPI)?.TriggerIngameError(this, "wrongclass",
-                        Lang.Get("spinningwheel:loom-requires-class", requiredClasses));
+                        Lang.Get("spinningwheel:loom-requires-class-or-trait", requirements));
                 }
                 return false;
             }
@@ -1074,12 +1130,12 @@ namespace SpinningWheel.BlockEntities
             if (Api.Side == EnumAppSide.Client)
             {
 
-                // Check if player has the required class first
+                // Check if player has the required class or trait first
                 if (!CanPlayerUseLoom(player))
                 {
-                    string requiredClasses = string.Join(", ", ModConfig.ModConfig.Loaded.AllowedClasses);
+                    string requirements = GetRequirementsString();
                     (Api as ICoreClientAPI)?.TriggerIngameError(this, "wrongclass",
-                        Lang.Get("spinningwheel:loom-requires-class", requiredClasses));
+                        Lang.Get("spinningwheel:loom-requires-class-or-trait", requirements));
                     return false;
                 }
 
@@ -1177,7 +1233,6 @@ namespace SpinningWheel.BlockEntities
                         // Also ensure block animation state matches
                         if (On && !clientAnimationRunning && animUtil?.animator != null)
                         {
-                            Api?.Logger.Debug("[Loom Sound] FromTreeAttributes starting animation and sound");
                             animUtil.StartAnimation(new AnimationMetaData()
                             {
                                 Animation = "loom_full_cycle",
