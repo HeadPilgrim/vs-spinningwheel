@@ -40,8 +40,8 @@
 
             api.RegisterItemClass("ItemDropSpindle", typeof(ItemDropSpindle));
 
-            api.Logger.Notification("[SpinningWheel] Registered block, block entity, and mountable classes");
-            api.Logger.Notification("[SpinningWheel] Registered ItemDropSpindle for portable spinning");
+            api.Logger.Notification("[Immersive Fibercraft] Registered block, block entity, and mountable classes");
+            api.Logger.Notification("[Immersive Fibercraft] Registered ItemDropSpindle for portable spinning");
             
             // Load/create common config file in ..\VintageStoryData\ModConfig\thisModID
             var cfgFileName = this.thisModID + ".json";
@@ -51,17 +51,17 @@
                 if ((fromDisk = api.LoadModConfig<ModConfig>(cfgFileName)) == null)
                 { 
                     api.StoreModConfig(ModConfig.Loaded, cfgFileName);
-                    api.Logger.Notification("[SpinningWheel] Created new config file with default values");
+                    api.Logger.Notification("[Immersive Fibercraft] Created new config file with default values spinningwheel.json");
                 }
                 else
                 { 
                     ModConfig.Loaded = fromDisk;
-                    api.Logger.Notification("[SpinningWheel] Loaded config from disk");
+                    api.Logger.Notification("[Immersive Fibercraft] Loaded config from disk");
                 }
             }
             catch (Exception ex)
             {
-                api.Logger.Error("[SpinningWheel] Error loading config, creating new one: " + ex.Message);
+                api.Logger.Error("[Immersive Fibercraft] Error loading config, creating new one: " + ex.Message);
                 api.StoreModConfig(ModConfig.Loaded, cfgFileName);
             }
             
@@ -74,7 +74,7 @@
             this.api = api;
             base.Start(api);
             
-            api.World.Logger.Event("started 'SpinningWheel' mod");
+            api.World.Logger.Event("started 'Immersive Fibercraft' mod");
         }
         
         public override void AssetsLoaded(ICoreAPI api)
@@ -86,11 +86,11 @@
             bool hasWool = api.ModLoader.IsModEnabled("wool");
             hasTailorsDelightAndWool = hasTailorsDelight && hasWool;
 
-            api.Logger.Notification($"[SpinningWheel] Mod detection - tailorsdelight: {hasTailorsDelight}, wool: {hasWool}");
+            api.Logger.Notification($"[Immersive Fibercraft] Mod detection - tailorsdelight: {hasTailorsDelight}, wool: {hasWool}");
 
             if (hasTailorsDelightAndWool)
             {
-                api.Logger.Notification("[SpinningWheel] Detected tailorsdelight and wool mods - enabling pattern weaving");
+                api.Logger.Notification("[Immersive Fibercraft] Detected tailorsdelight and wool mods - enabling pattern weaving");
 
                 // Load pattern recipes
                 patternRecipeLoader = new LoomPatternRecipeLoader(api);
@@ -98,7 +98,7 @@
             }
             else
             {
-                api.Logger.Notification("[SpinningWheel] Pattern weaving disabled (requires both tailorsdelight and wool mods)");
+                api.Logger.Notification("[Immersive Fibercraft] Pattern weaving disabled (requires both tailorsdelight and wool mods)");
             }
 
             // Note: Config-based patches (recipe disabling, spinning/weaving properties) are applied
@@ -138,7 +138,7 @@
                         collectible.StorageFlags = currentFlags | EnumItemStorageFlags.Offhand;
                 
                         api.Logger.Notification(
-                            $"[SpinningWheel] Patched {collectible.Code} storage flags: {currentFlags} -> {collectible.StorageFlags}"
+                            $"[Immersive Fibercraft] Patched {collectible.Code} storage flags: {currentFlags} -> {collectible.StorageFlags}"
                         );
                 
                         patchedCount++;
@@ -148,7 +148,7 @@
     
             if (patchedCount > 0)
             {
-                api.Logger.Notification($"[SpinningWheel] Successfully patched {patchedCount} spinnable items for offhand compatibility");
+                api.Logger.Notification($"[Immersive Fibercraft] Successfully patched {patchedCount} spinnable items for offhand compatibility");
             }
         }
         

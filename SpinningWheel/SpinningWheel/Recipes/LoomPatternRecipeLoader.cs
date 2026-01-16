@@ -27,13 +27,13 @@ namespace SpinningWheel.Recipes
 
             if (assets.Count == 0)
             {
-                api.Logger.Debug("[SpinningWheel] No assets found with 'spinningwheel:recipes/loompatterns/', trying alternative paths");
+                api.Logger.Debug("[Immersive Fibercraft] No assets found with 'spinningwheel:recipes/loompatterns/', trying alternative paths");
                 assets = api.Assets.GetMany("recipes/loompatterns/", "spinningwheel").ToList();
             }
 
             if (assets.Count == 0)
             {
-                api.Logger.Debug("[SpinningWheel] No assets found with alternative path, trying without trailing slash");
+                api.Logger.Debug("[Immersive Fibercraft] No assets found with alternative path, trying without trailing slash");
                 assets = api.Assets.GetMany("spinningwheel:recipes/loompatterns").ToList();
             }
 
@@ -41,11 +41,11 @@ namespace SpinningWheel.Recipes
             {
                 // Only notify if no recipes found after all attempts - this is expected on client side
                 // since pattern recipes are only needed server-side for crafting validation
-                api.Logger.Debug("[SpinningWheel] No pattern recipe assets found (this is normal on client side)");
+                api.Logger.Debug("[Immersive Fibercraft] No pattern recipe assets found (this is normal on client side)");
                 return;
             }
 
-            api.Logger.Notification($"[SpinningWheel] Found {assets.Count} asset files in recipes/loompatterns");
+            api.Logger.Notification($"[Immersive Fibercraft] Found {assets.Count} asset files in recipes/loompatterns");
 
             foreach (var asset in assets)
             {
@@ -56,7 +56,7 @@ namespace SpinningWheel.Recipes
 
                     if (json == null)
                     {
-                        api.Logger.Warning($"[SpinningWheel] Failed to parse pattern recipe: {asset.Name}");
+                        api.Logger.Warning($"[Immersive Fibercraft] Failed to parse pattern recipe: {asset.Name}");
                         continue;
                     }
 
@@ -77,21 +77,21 @@ namespace SpinningWheel.Recipes
                     if (recipe.Enabled)
                     {
                         PatternRecipes.Add(recipe);
-                        api.Logger.VerboseDebug($"[SpinningWheel] Loaded pattern recipe: {recipe.Code}");
+                        api.Logger.VerboseDebug($"[Immersive Fibercraft] Loaded pattern recipe: {recipe.Code}");
                     }
                     else
                     {
-                        api.Logger.VerboseDebug($"[SpinningWheel] Skipped disabled pattern recipe: {recipe.Code}");
+                        api.Logger.VerboseDebug($"[Immersive Fibercraft] Skipped disabled pattern recipe: {recipe.Code}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    api.Logger.Error($"[SpinningWheel] Failed to load pattern recipe from {asset.Name}: {ex.Message}");
+                    api.Logger.Error($"[Immersive Fibercraft] Failed to load pattern recipe from {asset.Name}: {ex.Message}");
                     api.Logger.Error(ex.StackTrace);
                 }
             }
 
-            api.Logger.Notification($"[SpinningWheel] Loaded {PatternRecipes.Count} pattern recipes");
+            api.Logger.Notification($"[Immersive Fibercraft] Loaded {PatternRecipes.Count} pattern recipes");
         }
 
         /// <summary>

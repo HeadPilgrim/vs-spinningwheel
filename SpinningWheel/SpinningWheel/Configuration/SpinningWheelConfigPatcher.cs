@@ -48,11 +48,11 @@ namespace SpinningWheel.Configuration
             // Skip if no recipes available yet - this can happen in early lifecycle stages
             if (recipeCount == 0)
             {
-                api.Logger.Debug("[SpinningWheel] GridRecipes not yet loaded, skipping recipe disabling");
+                api.Logger.Debug("[Immersive Fibercraft] GridRecipes not yet loaded, skipping recipe disabling");
                 return;
             }
 
-            api.Logger.Debug($"[SpinningWheel] Scanning {recipeCount} grid recipes for twine recipes to disable");
+            api.Logger.Debug($"[Immersive Fibercraft] Scanning {recipeCount} grid recipes for twine recipes to disable");
 
             // Iterate through all recipes and check their output
             foreach (var recipe in api.World.GridRecipes)
@@ -69,21 +69,21 @@ namespace SpinningWheel.Configuration
                 if (outputCode == "flaxtwine" && outputDomain == "game" && recipeDomain == "game")
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[SpinningWheel] Found vanilla flax twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found vanilla flax twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
                 }
                 // Check if output is wool twine (from Wool mod) - only from the twine.json file
                 else if (outputCode.StartsWith("twine-") && outputDomain == "wool" && 
                          recipeDomain == "wool" && recipePath.Contains("recipes/grid/twine"))
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[SpinningWheel] Found wool twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found wool twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
                 }
                 // Check if output is flax twine from Floral Zones Caribbean mod (cotton -> twine)
                 else if (outputCode == "flaxtwine" && outputDomain == "game" && 
                          recipeDomain == "floralzonescaribbeanregion" && recipePath.Contains("recipes/grid/twine"))
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[SpinningWheel] Found Floral Zones cotton twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found Floral Zones cotton twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
                 }
                 // Check if output is flax twine from pemmican mod (papyrus -> twine, algae -> twine)
                 else if (outputCode == "flaxtwine" && outputDomain == "game" && 
@@ -91,7 +91,7 @@ namespace SpinningWheel.Configuration
                          (recipePath.Contains("papyrus") || recipePath.Contains("algae")))
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[SpinningWheel] Found pemmican twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found pemmican twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
                 }
                 
                 if (shouldDisable)
@@ -104,12 +104,12 @@ namespace SpinningWheel.Configuration
 
             if (disabledCount > 0)
             {
-                api.Logger.Notification($"[SpinningWheel] Successfully disabled {disabledCount} twine recipes");
+                api.Logger.Notification($"[Immersive Fibercraft] Successfully disabled {disabledCount} twine recipes");
             }
             else
             {
                 // This is not necessarily an error - the mods that provide these recipes may not be installed
-                api.Logger.Debug("[SpinningWheel] No twine recipes found to disable (expected if related mods are not installed)");
+                api.Logger.Debug("[Immersive Fibercraft] No twine recipes found to disable (expected if related mods are not installed)");
             }
         }
 
@@ -124,7 +124,7 @@ namespace SpinningWheel.Configuration
             // Skip if collectibles aren't loaded yet
             if (api.World.Collectibles == null || !api.World.Collectibles.Any())
             {
-                api.Logger.Debug("[SpinningWheel] Collectibles not yet loaded, skipping spinning property patching");
+                api.Logger.Debug("[Immersive Fibercraft] Collectibles not yet loaded, skipping spinning property patching");
                 return;
             }
 
@@ -150,15 +150,15 @@ namespace SpinningWheel.Configuration
                 }
             }
 
-            api.Logger.Notification($"[SpinningWheel] Found {totalSpinnable} total spinnable items");
+            api.Logger.Notification($"[Immersive Fibercraft] Found {totalSpinnable} total spinnable items");
             if (patchedCount > 0)
             {
-                api.Logger.Notification($"[SpinningWheel] Patched spinning properties for {patchedCount} items based on config");
+                api.Logger.Notification($"[Immersive Fibercraft] Patched spinning properties for {patchedCount} items based on config");
             }
             else if (totalSpinnable > 0)
             {
                 // Only warn if there are spinnable items but none were patched (unexpected)
-                api.Logger.Debug("[SpinningWheel] Found spinnable items but none matched config patterns");
+                api.Logger.Debug("[Immersive Fibercraft] Found spinnable items but none matched config patterns");
             }
         }
 
@@ -181,7 +181,7 @@ namespace SpinningWheel.Configuration
             // Log all cotton items we encounter for debugging
             if (code.Contains("cotton"))
             {
-                api.Logger.Debug($"[SpinningWheel] Found cotton-related item: {domain}:{code}");
+                api.Logger.Debug($"[Immersive Fibercraft] Found cotton-related item: {domain}:{code}");
             }
             
             // Match any cotton fiber from floralzonescaribbeanregion
@@ -190,7 +190,7 @@ namespace SpinningWheel.Configuration
                 spinningPropsToken.Token["spinTime"] = config.CottonSpinTime;
                 spinningPropsToken.Token["inputQuantity"] = config.CottonInputQuantity;
                 spinningPropsToken.Token["outputQuantity"] = config.CottonOutputQuantity;
-                api.Logger.Notification($"[SpinningWheel] Patched cotton spinning properties: {domain}:{code}");
+                api.Logger.Notification($"[Immersive Fibercraft] Patched cotton spinning properties: {domain}:{code}");
                 return true;
             }
             return false;
@@ -259,7 +259,7 @@ namespace SpinningWheel.Configuration
             // Skip if collectibles aren't loaded yet
             if (api.World.Collectibles == null || !api.World.Collectibles.Any())
             {
-                api.Logger.Debug("[SpinningWheel] Collectibles not yet loaded, skipping weaving property patching");
+                api.Logger.Debug("[Immersive Fibercraft] Collectibles not yet loaded, skipping weaving property patching");
                 return;
             }
 
@@ -282,10 +282,10 @@ namespace SpinningWheel.Configuration
                 }
             }
 
-            api.Logger.Notification($"[SpinningWheel] Found {totalWeavable} total weavable items");
+            api.Logger.Notification($"[Immersive Fibercraft] Found {totalWeavable} total weavable items");
             if (patchedCount > 0)
             {
-                api.Logger.Notification($"[SpinningWheel] Patched weaving properties for {patchedCount} items based on config");
+                api.Logger.Notification($"[Immersive Fibercraft] Patched weaving properties for {patchedCount} items based on config");
             }
         }
 
