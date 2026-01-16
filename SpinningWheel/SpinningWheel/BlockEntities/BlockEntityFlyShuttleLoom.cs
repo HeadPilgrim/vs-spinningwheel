@@ -324,8 +324,9 @@ namespace SpinningWheel.BlockEntities
                     ShouldLoop = true,
                     Position = Pos.ToVec3f().Add(0.5f, 0.5f, 0.5f),
                     DisposeOnFinish = false,
-                    Volume = 0.5f,
-                    Range = 6,
+                    Volume = 1f,
+                    Range = 5,
+                    ReferenceDistance = 3,
                     SoundType = EnumSoundType.Ambient
                 });
                 
