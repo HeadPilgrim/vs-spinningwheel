@@ -166,24 +166,10 @@
   },
   {
     "op": "add",
-    "path": "/attributesByType/twine-wool-mordant",
-    "value": {
-      "weavingProps": {
-        "outputType": "wool:cloth-wool-mordant",
-        "inputQuantity": 9,
-        "outputQuantity": 3
-      }
-    },
-    "file": "wool:itemtypes/resource/twine.json",
-    "side": "Server",
-    "dependsOn": [ { "modid": "wool" } ]
-  },
-  {
-    "op": "add",
     "path": "/attributesByType/twine-wool-plain",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-plain",
+        "outputType": "wool:wool-plain",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -197,7 +183,7 @@
     "path": "/attributesByType/twine-wool-black",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-black",
+        "outputType": "wool:wool-black",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -211,7 +197,7 @@
     "path": "/attributesByType/twine-wool-blue",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-blue",
+        "outputType": "wool:wool-blue",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -225,7 +211,7 @@
     "path": "/attributesByType/twine-wool-brown",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-brown",
+        "outputType": "wool:wool-brown",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -239,7 +225,7 @@
     "path": "/attributesByType/twine-wool-gray",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-gray",
+        "outputType": "wool:wool-gray",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -253,7 +239,7 @@
     "path": "/attributesByType/twine-wool-green",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-green",
+        "outputType": "wool:wool-green",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -267,7 +253,7 @@
     "path": "/attributesByType/twine-wool-orange",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-orange",
+        "outputType": "wool:wool-orange",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -281,7 +267,7 @@
     "path": "/attributesByType/twine-wool-pink",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-pink",
+        "outputType": "wool:wool-pink",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -295,7 +281,7 @@
     "path": "/attributesByType/twine-wool-purple",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-purple",
+        "outputType": "wool:wool-purple",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -309,7 +295,7 @@
     "path": "/attributesByType/twine-wool-red",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-red",
+        "outputType": "wool:wool-red",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -323,7 +309,7 @@
     "path": "/attributesByType/twine-wool-white",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-white",
+        "outputType": "wool:wool-white",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -337,7 +323,7 @@
     "path": "/attributesByType/twine-wool-yellow",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-yellow",
+        "outputType": "wool:wool-yellow",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -351,7 +337,7 @@
     "path": "/attributesByType/twine-wool-darkblue",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-darkblue",
+        "outputType": "wool:wool-darkblue",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -365,7 +351,7 @@
     "path": "/attributesByType/twine-wool-darkbrown",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-darkbrown",
+        "outputType": "wool:wool-darkbrown",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -379,7 +365,7 @@
     "path": "/attributesByType/twine-wool-darkgreen",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-darkgreen",
+        "outputType": "wool:wool-darkgreen",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -393,7 +379,7 @@
     "path": "/attributesByType/twine-wool-darkred",
     "value": {
       "weavingProps": {
-        "outputType": "wool:cloth-wool-darkred",
+        "outputType": "wool:wool-darkred",
         "inputQuantity": 9,
         "outputQuantity": 3
       }
@@ -437,7 +423,7 @@
       "title": "spinningwheel:handbook-see-also-weaving",
       "text": "spinningwheel:handbook-see-also-weaving-text"
     },
-    "file": "wool:itemtypes/resource/cloth.json",
+    "file": "wool:blocktypes/cloth/wool.json",
     "dependsOn": [ { "modid": "wool" } ]
   }
 ]
