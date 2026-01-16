@@ -108,7 +108,6 @@ namespace SpinningWheel.Blocks
                     // Bench center - SelectionBoxIndex 1 is the seat, others are loom parts
                     if (blockSel.SelectionBoxIndex == 1)
                     {
-                        world.Api.Logger.Debug("[FlyShuttleLoom] Mounting player at bench center");
                         return beLoom.OnPlayerInteract(byPlayer);
                     }
                     // SelectionBoxIndex 0, 2, 3 are other loom parts at this position - open GUI
