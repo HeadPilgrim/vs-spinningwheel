@@ -136,6 +136,7 @@
     "section-wool": "Wool & More Settings",
     "section-tailorsdelight": "Tailor's Delight Settings",
     "section-pemmican": "Long-term food Settings",
+    "section-rustboundmagic": "Rustbound Magic Settings",
 
     "RequireClassOrTrait": "Require Class or Trait",
     "RequireClassOrTrait-Comment": "If enabled, only players with allowed classes or traits can use the spinning wheel and loom",
@@ -229,6 +230,21 @@
 
     "setting-tailorsdelight-thread-weave-output": "Thread Cloth Output",
     "setting-tailorsdelight-thread-weave-output-comment": "Number of cloth produced per weave cycle",
+
+    "setting-shiftingfibers-spin-time": "Shifting Fibers Spin Time",
+    "setting-shiftingfibers-spin-time-comment": "Time in seconds to spin shifting fibers into twine",
+
+    "setting-shiftingfibers-input-quantity": "Shifting Fibers Input Quantity",
+    "setting-shiftingfibers-input-quantity-comment": "Number of shifting fibers required per spin",
+
+    "setting-shiftingfibers-output-quantity": "Shifting Fibers Output Quantity",
+    "setting-shiftingfibers-output-quantity-comment": "Number of twine produced per shifting fibers spin",
+
+    "setting-shiftingfibers-weave-input": "Shifting Fibers Weave Input",
+    "setting-shiftingfibers-weave-input-comment": "Number of shifting fibers required per weave cycle",
+
+    "setting-shiftingfibers-weave-output": "Mageweave Output",
+    "setting-shiftingfibers-weave-output-comment": "Number of mageweave produced per weave cycle",
 
     "gui-loom-tab-normal": "Normal",
     "gui-loom-tab-pattern": "Pattern",

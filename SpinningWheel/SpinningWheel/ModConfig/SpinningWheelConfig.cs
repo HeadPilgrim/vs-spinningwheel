@@ -60,5 +60,14 @@
         // Tailor's Delight thread weaving settings (thread -> game cloth)
         public int TailorsDelightThreadWeaveInputQuantity { get; set; } = 9;
         public int TailorsDelightThreadWeaveOutputQuantity { get; set; } = 3;
+
+        // Shifting Fibers settings (Rustbound Magic mod)
+        public float ShiftingFibersSpinTime { get; set; } = 4.0f;
+        public int ShiftingFibersInputQuantity { get; set; } = 6;
+        public int ShiftingFibersOutputQuantity { get; set; } = 1;
+
+        // Shifting Fibers weaving settings (Rustbound Magic mod -> mageweave)
+        public int ShiftingFibersWeaveInputQuantity { get; set; } = 23;
+        public int ShiftingFibersWeaveOutputQuantity { get; set; } = 3;
     }
 }

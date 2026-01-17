@@ -25,7 +25,7 @@
     "value": {
       "outputType": "game:flaxtwine",
       "outputQuantity": 1,
-      "inputQuantity": 2,
+      "inputQuantity": 6,
       "spinTime": 4
     },
     "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
@@ -50,7 +50,7 @@
     "path": "/attributes/weavingProps",
     "value": {
       "outputType": "rustboundmagic:mageweave-none-normal-down",
-      "inputQuantity": 9,
+      "inputQuantity": 23,
       "outputQuantity": 3
     },
     "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",

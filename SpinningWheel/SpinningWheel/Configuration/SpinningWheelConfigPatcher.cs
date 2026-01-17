@@ -144,7 +144,8 @@ namespace SpinningWheel.Configuration
                     TryPatchWoolFibers(spinningPropsToken, code, domain) ||
                     TryPatchWoolTwine(spinningPropsToken, code, domain) ||
                     TryPatchPapyrus(spinningPropsToken, code, domain) ||
-                    TryPatchAlgae(spinningPropsToken, code, domain))
+                    TryPatchAlgae(spinningPropsToken, code, domain) ||
+                    TryPatchShiftingFibers(spinningPropsToken, code, domain))
                 {
                     patchedCount++;
                 }
@@ -244,6 +245,18 @@ namespace SpinningWheel.Configuration
             return false;
         }
 
+        private bool TryPatchShiftingFibers(JsonObject spinningPropsToken, string code, string domain)
+        {
+            if (code == "shiftingfibers" && domain == "rustboundmagic")
+            {
+                spinningPropsToken.Token["spinTime"] = config.ShiftingFibersSpinTime;
+                spinningPropsToken.Token["inputQuantity"] = config.ShiftingFibersInputQuantity;
+                spinningPropsToken.Token["outputQuantity"] = config.ShiftingFibersOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
         #endregion
 
         #region Weaving Properties Patching
@@ -276,7 +289,8 @@ namespace SpinningWheel.Configuration
                 // Apply patches based on item type
                 if (TryPatchFlaxTwineWeaving(weavingPropsToken, code, domain) ||
                     TryPatchWoolTwineWeaving(weavingPropsToken, code, domain) ||
-                    TryPatchTailorsDelightThreadWeaving(weavingPropsToken, code, domain))
+                    TryPatchTailorsDelightThreadWeaving(weavingPropsToken, code, domain) ||
+                    TryPatchShiftingFibersWeaving(weavingPropsToken, code, domain))
                 {
                     patchedCount++;
                 }
@@ -320,6 +334,18 @@ namespace SpinningWheel.Configuration
             {
                 weavingPropsToken.Token["inputQuantity"] = config.TailorsDelightThreadWeaveInputQuantity;
                 weavingPropsToken.Token["outputQuantity"] = config.TailorsDelightThreadWeaveOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
+        private bool TryPatchShiftingFibersWeaving(JsonObject weavingPropsToken, string code, string domain)
+        {
+            // Match shifting fibers from Rustbound Magic mod
+            if (code == "shiftingfibers" && domain == "rustboundmagic")
+            {
+                weavingPropsToken.Token["inputQuantity"] = config.ShiftingFibersWeaveInputQuantity;
+                weavingPropsToken.Token["outputQuantity"] = config.ShiftingFibersWeaveOutputQuantity;
                 return true;
             }
             return false;

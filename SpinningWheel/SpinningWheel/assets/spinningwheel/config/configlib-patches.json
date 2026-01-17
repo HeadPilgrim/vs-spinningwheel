@@ -91,6 +91,17 @@
           "min": 1.0,
           "max": 30.0
         }
+      },
+      "SHIFTING_FIBERS_SPIN_TIME": {
+        "name": "ShiftingFibersSpinTime",
+        "ingui": "spinningwheel:setting-shiftingfibers-spin-time",
+        "weight": 4.01,
+        "comment": "spinningwheel:setting-shiftingfibers-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
       }
     },
     "integer": {
@@ -291,6 +302,50 @@
           "min": 1,
           "max": 10
         }
+      },
+      "SHIFTING_FIBERS_INPUT_QUANTITY": {
+        "name": "ShiftingFibersInputQuantity",
+        "ingui": "spinningwheel:setting-shiftingfibers-input-quantity",
+        "weight": 4.02,
+        "comment": "spinningwheel:setting-shiftingfibers-input-quantity-comment",
+        "default": 6,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "SHIFTING_FIBERS_OUTPUT_QUANTITY": {
+        "name": "ShiftingFibersOutputQuantity",
+        "ingui": "spinningwheel:setting-shiftingfibers-output-quantity",
+        "weight": 4.03,
+        "comment": "spinningwheel:setting-shiftingfibers-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "SHIFTING_FIBERS_WEAVE_INPUT_QUANTITY": {
+        "name": "ShiftingFibersWeaveInputQuantity",
+        "ingui": "spinningwheel:setting-shiftingfibers-weave-input",
+        "weight": 4.11,
+        "comment": "spinningwheel:setting-shiftingfibers-weave-input-comment",
+        "default": 23,
+        "range": {
+          "min": 1,
+          "max": 64
+        }
+      },
+      "SHIFTING_FIBERS_WEAVE_OUTPUT_QUANTITY": {
+        "name": "ShiftingFibersWeaveOutputQuantity",
+        "ingui": "spinningwheel:setting-shiftingfibers-weave-output",
+        "weight": 4.12,
+        "comment": "spinningwheel:setting-shiftingfibers-weave-output-comment",
+        "default": 3,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
       }
     },
     "stringarray": {
@@ -323,6 +378,7 @@
     { "type": "separator",   "title": "spinningwheel:section-cotton",     "weight": 2.0 },
     { "type": "separator",   "title": "spinningwheel:section-wool",       "weight": 2.5 },
     { "type": "separator",   "title": "spinningwheel:section-tailorsdelight",       "weight": 2.7 },
-    { "type": "separator",   "title": "spinningwheel:section-pemmican",   "weight": 3.0 }
+    { "type": "separator",   "title": "spinningwheel:section-pemmican",   "weight": 3.0 },
+    { "type": "separator",   "title": "spinningwheel:section-rustboundmagic",   "weight": 4.0 }
   ]
 }

@@ -137,6 +137,7 @@
     "section-wool": "Налаштування вовни та іншого",
     "section-tailorsdelight": "Налаштування Tailor's Delight",
     "section-pemmican": "Налаштування довготривалого харчування",
+    "section-rustboundmagic": "Налаштування Rustbound Magic",
 
     "RequireClassOrTrait": "Вимагати клас або рису",
     "RequireClassOrTrait-Comment": "Якщо увімкнено, лише гравці з дозволеними класами або рисами можуть користуватися самопрядкою та верстатом",
@@ -230,6 +231,21 @@
 
     "setting-tailorsdelight-thread-weave-output": "Тканина з нитки на вихід",
     "setting-tailorsdelight-thread-weave-output-comment": "Скільки тканини виробляється за цикл",
+
+    "setting-shiftingfibers-spin-time": "Час прядіння мінливих волокон",
+    "setting-shiftingfibers-spin-time-comment": "Час у секундах для прядіння мінливих волокон у мотузку",
+
+    "setting-shiftingfibers-input-quantity": "Кількість мінливих волокон на вхід",
+    "setting-shiftingfibers-input-quantity-comment": "Скільки мінливих волокон потрібно на цикл прядіння",
+
+    "setting-shiftingfibers-output-quantity": "Кількість мотузки на вихід",
+    "setting-shiftingfibers-output-quantity-comment": "Скільки мотузки виробляється з мінливих волокон за цикл",
+
+    "setting-shiftingfibers-weave-input": "Мінливі волокна на ткання",
+    "setting-shiftingfibers-weave-input-comment": "Скільки мінливих волокон потрібно на цикл ткання",
+
+    "setting-shiftingfibers-weave-output": "Магічна тканина на вихід",
+    "setting-shiftingfibers-weave-output-comment": "Скільки магічної тканини виробляється за цикл",
 
     "gui-loom-tab-normal": "Звичайне",
     "gui-loom-tab-pattern": "Візерунок",
