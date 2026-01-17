@@ -1,0 +1,73 @@
+﻿[
+  {
+    "op": "addmerge",
+    "path": "/attributes",
+    "value": {},
+    "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+        }
+      ]
+    },
+    "file": "rustboundmagic:blocktypes/resources/shiftingfibers.json",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/spinningProps",
+    "value": {
+      "outputType": "game:flaxtwine",
+      "outputQuantity": 1,
+      "inputQuantity": 2,
+      "spinTime": 4
+    },
+    "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "rustboundmagic:blocktypes/resources/shiftingfibers.json",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/weavingProps",
+    "value": {
+      "outputType": "rustboundmagic:mageweave-none-normal-down",
+      "inputQuantity": 9,
+      "outputQuantity": 3
+    },
+    "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-weaving",
+          "text": "spinningwheel:handbook-see-also-weaving-text"
+        }
+      ]
+    },
+    "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  }
+]
