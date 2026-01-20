@@ -248,14 +248,14 @@
 
     "section-ruderalis": "Ruderalis Settings",
 
-    "setting-fanleaf-spin-time": "Fanleaf Spin Time",
-    "setting-fanleaf-spin-time-comment": "Time in seconds to spin fanleaf into hemp fibers",
+    "setting-stalk-spin-time": "Stalk Spin Time",
+    "setting-stalk-spin-time-comment": "Time in seconds to spin stalk into hemp fibers",
 
-    "setting-fanleaf-input-quantity": "Fanleaf Input Quantity",
-    "setting-fanleaf-input-quantity-comment": "Number of fanleaf required per spin",
+    "setting-stalk-input-quantity": "Stalk Input Quantity",
+    "setting-stalk-input-quantity-comment": "Number of stalk required per spin",
 
-    "setting-fanleaf-output-quantity": "Hemp Fibers Output Quantity",
-    "setting-fanleaf-output-quantity-comment": "Number of hemp fibers produced per fanleaf spin",
+    "setting-stalk-output-quantity": "Hemp Fibers Output Quantity",
+    "setting-stalk-output-quantity-comment": "Number of hemp fibers produced per stalk spin",
 
     "setting-hempfibers-weave-input": "Hemp Fibers Weave Input",
     "setting-hempfibers-weave-input-comment": "Number of hemp fibers required per weave cycle",

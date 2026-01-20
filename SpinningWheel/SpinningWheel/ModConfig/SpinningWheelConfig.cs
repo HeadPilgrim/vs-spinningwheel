@@ -70,10 +70,10 @@
         public int ShiftingFibersWeaveInputQuantity { get; set; } = 23;
         public int ShiftingFibersWeaveOutputQuantity { get; set; } = 3;
 
-        // Fanleaf settings (Ruderalis mod - fanleaf -> hempfibers)
-        public float FanleafSpinTime { get; set; } = 4.0f;
-        public int FanleafInputQuantity { get; set; } = 6;
-        public int FanleafOutputQuantity { get; set; } = 1;
+        // Stalk settings (Ruderalis mod - stalk -> hempfibers)
+        public float StalkSpinTime { get; set; } = 4.0f;
+        public int StalkInputQuantity { get; set; } = 1;
+        public int StalkOutputQuantity { get; set; } = 2;
 
         // Hempfibers weaving settings (Ruderalis mod - hempfibers -> hempcanvas)
         public int HempfibersWeaveInputQuantity { get; set; } = 24;

@@ -3,7 +3,7 @@
     "op": "addmerge",
     "path": "/attributes",
     "value": {},
-    "file": "ruderalis:itemtypes/resource/fanleaf.json",
+    "file": "ruderalis:itemtypes/resource/stalk.json",
     "side": "Server",
     "dependsOn": [ { "modid": "ruderalis" } ]
   },
@@ -12,11 +12,11 @@
     "path": "/attributes/spinningProps",
     "value": {
       "outputType": "ruderalis:hempfibers",
-      "outputQuantity": 1,
-      "inputQuantity": 6,
+      "outputQuantity": 2,
+      "inputQuantity": 1,
       "spinTime": 4
     },
-    "file": "ruderalis:itemtypes/resource/fanleaf.json",
+    "file": "ruderalis:itemtypes/resource/stalk.json",
     "dependsOn": [ { "modid": "ruderalis" } ]
   },
   {
@@ -30,7 +30,7 @@
         }
       ]
     },
-    "file": "ruderalis:itemtypes/resource/fanleaf.json",
+    "file": "ruderalis:itemtypes/resource/stalk.json",
     "dependsOn": [ { "modid": "ruderalis" } ]
   },
   {

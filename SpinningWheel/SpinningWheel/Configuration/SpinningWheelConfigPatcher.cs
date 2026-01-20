@@ -146,7 +146,7 @@ namespace SpinningWheel.Configuration
                     TryPatchPapyrus(spinningPropsToken, code, domain) ||
                     TryPatchAlgae(spinningPropsToken, code, domain) ||
                     TryPatchShiftingFibers(spinningPropsToken, code, domain) ||
-                    TryPatchFanleaf(spinningPropsToken, code, domain))
+                    TryPatchStalk(spinningPropsToken, code, domain))
                 {
                     patchedCount++;
                 }
@@ -258,13 +258,13 @@ namespace SpinningWheel.Configuration
             return false;
         }
 
-        private bool TryPatchFanleaf(JsonObject spinningPropsToken, string code, string domain)
+        private bool TryPatchStalk(JsonObject spinningPropsToken, string code, string domain)
         {
-            if (code == "fanleaf" && domain == "ruderalis")
+            if (code == "stalk" && domain == "ruderalis")
             {
-                spinningPropsToken.Token["spinTime"] = config.FanleafSpinTime;
-                spinningPropsToken.Token["inputQuantity"] = config.FanleafInputQuantity;
-                spinningPropsToken.Token["outputQuantity"] = config.FanleafOutputQuantity;
+                spinningPropsToken.Token["spinTime"] = config.StalkSpinTime;
+                spinningPropsToken.Token["inputQuantity"] = config.StalkInputQuantity;
+                spinningPropsToken.Token["outputQuantity"] = config.StalkOutputQuantity;
                 return true;
             }
             return false;

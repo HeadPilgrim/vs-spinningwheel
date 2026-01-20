@@ -249,14 +249,14 @@
 
     "section-ruderalis": "Налаштування Ruderalis",
 
-    "setting-fanleaf-spin-time": "Час прядіння віялового листя",
-    "setting-fanleaf-spin-time-comment": "Час у секундах для прядіння віялового листя в конопляні волокна",
+    "setting-stalk-spin-time": "Час прядіння стебла",
+    "setting-stalk-spin-time-comment": "Час у секундах для прядіння стебла в конопляні волокна",
 
-    "setting-fanleaf-input-quantity": "Кількість віялового листя на вхід",
-    "setting-fanleaf-input-quantity-comment": "Скільки віялового листя потрібно на цикл прядіння",
+    "setting-stalk-input-quantity": "Кількість стебла на вхід",
+    "setting-stalk-input-quantity-comment": "Скільки стебла потрібно на цикл прядіння",
 
-    "setting-fanleaf-output-quantity": "Кількість конопляних волокон на вихід",
-    "setting-fanleaf-output-quantity-comment": "Скільки конопляних волокон виробляється за цикл",
+    "setting-stalk-output-quantity": "Кількість конопляних волокон на вихід",
+    "setting-stalk-output-quantity-comment": "Скільки конопляних волокон виробляється за цикл",
 
     "setting-hempfibers-weave-input": "Конопляні волокна на ткання",
     "setting-hempfibers-weave-input-comment": "Скільки конопляних волокон потрібно на цикл ткання",
