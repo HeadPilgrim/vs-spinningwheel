@@ -102,6 +102,17 @@
           "min": 1.0,
           "max": 30.0
         }
+      },
+      "FANLEAF_SPIN_TIME": {
+        "name": "FanleafSpinTime",
+        "ingui": "spinningwheel:setting-fanleaf-spin-time",
+        "weight": 5.01,
+        "comment": "spinningwheel:setting-fanleaf-spin-time-comment",
+        "default": 4.0,
+        "range": {
+          "min": 1.0,
+          "max": 30.0
+        }
       }
     },
     "integer": {
@@ -346,6 +357,50 @@
           "min": 1,
           "max": 10
         }
+      },
+      "FANLEAF_INPUT_QUANTITY": {
+        "name": "FanleafInputQuantity",
+        "ingui": "spinningwheel:setting-fanleaf-input-quantity",
+        "weight": 5.02,
+        "comment": "spinningwheel:setting-fanleaf-input-quantity-comment",
+        "default": 6,
+        "range": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      "FANLEAF_OUTPUT_QUANTITY": {
+        "name": "FanleafOutputQuantity",
+        "ingui": "spinningwheel:setting-fanleaf-output-quantity",
+        "weight": 5.03,
+        "comment": "spinningwheel:setting-fanleaf-output-quantity-comment",
+        "default": 1,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "HEMPFIBERS_WEAVE_INPUT_QUANTITY": {
+        "name": "HempfibersWeaveInputQuantity",
+        "ingui": "spinningwheel:setting-hempfibers-weave-input",
+        "weight": 5.11,
+        "comment": "spinningwheel:setting-hempfibers-weave-input-comment",
+        "default": 24,
+        "range": {
+          "min": 1,
+          "max": 64
+        }
+      },
+      "HEMPFIBERS_WEAVE_OUTPUT_QUANTITY": {
+        "name": "HempfibersWeaveOutputQuantity",
+        "ingui": "spinningwheel:setting-hempfibers-weave-output",
+        "weight": 5.12,
+        "comment": "spinningwheel:setting-hempfibers-weave-output-comment",
+        "default": 3,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
       }
     },
     "stringarray": {
@@ -379,6 +434,7 @@
     { "type": "separator",   "title": "spinningwheel:section-wool",       "weight": 2.5 },
     { "type": "separator",   "title": "spinningwheel:section-tailorsdelight",       "weight": 2.7 },
     { "type": "separator",   "title": "spinningwheel:section-pemmican",   "weight": 3.0 },
-    { "type": "separator",   "title": "spinningwheel:section-rustboundmagic",   "weight": 4.0 }
+    { "type": "separator",   "title": "spinningwheel:section-rustboundmagic",   "weight": 4.0 },
+    { "type": "separator",   "title": "spinningwheel:section-ruderalis",   "weight": 5.0 }
   ]
 }

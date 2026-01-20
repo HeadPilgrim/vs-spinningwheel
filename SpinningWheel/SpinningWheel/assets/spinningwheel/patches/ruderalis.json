@@ -1,0 +1,76 @@
+﻿[
+  {
+    "op": "addmerge",
+    "path": "/attributes",
+    "value": {},
+    "file": "ruderalis:itemtypes/resource/fanleaf.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "ruderalis" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/spinningProps",
+    "value": {
+      "outputType": "ruderalis:hempfibers",
+      "outputQuantity": 1,
+      "inputQuantity": 6,
+      "spinTime": 4
+    },
+    "file": "ruderalis:itemtypes/resource/fanleaf.json",
+    "dependsOn": [ { "modid": "ruderalis" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-spinning",
+          "text": "spinningwheel:handbook-see-also-spinning-text"
+        }
+      ]
+    },
+    "file": "ruderalis:itemtypes/resource/fanleaf.json",
+    "dependsOn": [ { "modid": "ruderalis" } ]
+  },
+  {
+    "op": "add",
+    "path": "/attributes/weavingProps",
+    "value": {
+      "outputType": "ruderalis:hempcanvas",
+      "inputQuantity": 24,
+      "outputQuantity": 3
+    },
+    "file": "ruderalis:itemtypes/resource/hempfibers.json",
+    "side": "Server",
+    "dependsOn": [ { "modid": "ruderalis" } ]
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-twine",
+          "text": "spinningwheel:handbook-see-also-twine-text"
+        }
+      ]
+    },
+    "file": "ruderalis:itemtypes/resource/hempfibers.json",
+    "dependsOn": [ { "modid": "ruderalis" } ]
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-see-also-weaving",
+          "text": "spinningwheel:handbook-see-also-weaving-text"
+        }
+      ]
+    },
+    "file": "ruderalis:blocktypes/cloth/hempcanvas.json",
+    "dependsOn": [ { "modid": "ruderalis" } ]
+  }
+]

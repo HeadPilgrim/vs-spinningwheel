@@ -145,7 +145,8 @@ namespace SpinningWheel.Configuration
                     TryPatchWoolTwine(spinningPropsToken, code, domain) ||
                     TryPatchPapyrus(spinningPropsToken, code, domain) ||
                     TryPatchAlgae(spinningPropsToken, code, domain) ||
-                    TryPatchShiftingFibers(spinningPropsToken, code, domain))
+                    TryPatchShiftingFibers(spinningPropsToken, code, domain) ||
+                    TryPatchFanleaf(spinningPropsToken, code, domain))
                 {
                     patchedCount++;
                 }
@@ -257,6 +258,18 @@ namespace SpinningWheel.Configuration
             return false;
         }
 
+        private bool TryPatchFanleaf(JsonObject spinningPropsToken, string code, string domain)
+        {
+            if (code == "fanleaf" && domain == "ruderalis")
+            {
+                spinningPropsToken.Token["spinTime"] = config.FanleafSpinTime;
+                spinningPropsToken.Token["inputQuantity"] = config.FanleafInputQuantity;
+                spinningPropsToken.Token["outputQuantity"] = config.FanleafOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
         #endregion
 
         #region Weaving Properties Patching
@@ -290,7 +303,8 @@ namespace SpinningWheel.Configuration
                 if (TryPatchFlaxTwineWeaving(weavingPropsToken, code, domain) ||
                     TryPatchWoolTwineWeaving(weavingPropsToken, code, domain) ||
                     TryPatchTailorsDelightThreadWeaving(weavingPropsToken, code, domain) ||
-                    TryPatchShiftingFibersWeaving(weavingPropsToken, code, domain))
+                    TryPatchShiftingFibersWeaving(weavingPropsToken, code, domain) ||
+                    TryPatchHempfibersWeaving(weavingPropsToken, code, domain))
                 {
                     patchedCount++;
                 }
@@ -346,6 +360,18 @@ namespace SpinningWheel.Configuration
             {
                 weavingPropsToken.Token["inputQuantity"] = config.ShiftingFibersWeaveInputQuantity;
                 weavingPropsToken.Token["outputQuantity"] = config.ShiftingFibersWeaveOutputQuantity;
+                return true;
+            }
+            return false;
+        }
+
+        private bool TryPatchHempfibersWeaving(JsonObject weavingPropsToken, string code, string domain)
+        {
+            // Match hemp fibers from Ruderalis mod
+            if (code == "hempfibers" && domain == "ruderalis")
+            {
+                weavingPropsToken.Token["inputQuantity"] = config.HempfibersWeaveInputQuantity;
+                weavingPropsToken.Token["outputQuantity"] = config.HempfibersWeaveOutputQuantity;
                 return true;
             }
             return false;

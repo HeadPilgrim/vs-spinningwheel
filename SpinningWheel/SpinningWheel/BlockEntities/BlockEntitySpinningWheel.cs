@@ -131,7 +131,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
         get { return inventory; }
     }
 
-    public virtual string DialogTitle => Lang.Get("spinningwheel");
+    public virtual string DialogTitle => Lang.Get("spinningwheel:gui-title-spinningwheel");
     
     // Seconds it requires to complete spinning
     public virtual float maxSpinTime()

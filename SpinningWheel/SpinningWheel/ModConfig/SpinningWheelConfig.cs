@@ -69,5 +69,14 @@
         // Shifting Fibers weaving settings (Rustbound Magic mod -> mageweave)
         public int ShiftingFibersWeaveInputQuantity { get; set; } = 23;
         public int ShiftingFibersWeaveOutputQuantity { get; set; } = 3;
+
+        // Fanleaf settings (Ruderalis mod - fanleaf -> hempfibers)
+        public float FanleafSpinTime { get; set; } = 4.0f;
+        public int FanleafInputQuantity { get; set; } = 6;
+        public int FanleafOutputQuantity { get; set; } = 1;
+
+        // Hempfibers weaving settings (Ruderalis mod - hempfibers -> hempcanvas)
+        public int HempfibersWeaveInputQuantity { get; set; } = 24;
+        public int HempfibersWeaveOutputQuantity { get; set; } = 3;
     }
 }

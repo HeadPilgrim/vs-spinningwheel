@@ -247,6 +247,26 @@
     "setting-shiftingfibers-weave-output": "Магічна тканина на вихід",
     "setting-shiftingfibers-weave-output-comment": "Скільки магічної тканини виробляється за цикл",
 
+    "section-ruderalis": "Налаштування Ruderalis",
+
+    "setting-fanleaf-spin-time": "Час прядіння віялового листя",
+    "setting-fanleaf-spin-time-comment": "Час у секундах для прядіння віялового листя в конопляні волокна",
+
+    "setting-fanleaf-input-quantity": "Кількість віялового листя на вхід",
+    "setting-fanleaf-input-quantity-comment": "Скільки віялового листя потрібно на цикл прядіння",
+
+    "setting-fanleaf-output-quantity": "Кількість конопляних волокон на вихід",
+    "setting-fanleaf-output-quantity-comment": "Скільки конопляних волокон виробляється за цикл",
+
+    "setting-hempfibers-weave-input": "Конопляні волокна на ткання",
+    "setting-hempfibers-weave-input-comment": "Скільки конопляних волокон потрібно на цикл ткання",
+
+    "setting-hempfibers-weave-output": "Конопляне полотно на вихід",
+    "setting-hempfibers-weave-output-comment": "Скільки конопляного полотна виробляється за цикл",
+
+    "spinningwheel:gui-title-spinningwheel": "Самопрядка",
+    "spinningwheel:gui-title-loom": "Човниковий верстат",
+
     "gui-loom-tab-normal": "Звичайне",
     "gui-loom-tab-pattern": "Візерунок",
     "gui-loom-pattern-nomatch": "Візерунок не відповідає жодному рецепту",

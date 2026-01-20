@@ -162,7 +162,7 @@ namespace SpinningWheel.BlockEntities
         // BlockEntityOpenableContainer properties
         public override string InventoryClassName => "flyshuttleloom";
         public override InventoryBase Inventory => inventory;
-        public virtual string DialogTitle => Lang.Get("Fly Shuttle Loom");
+        public virtual string DialogTitle => Lang.Get("spinningwheel:gui-title-loom");
 
         #region IMountable/IMountableSeat Implementation
         
