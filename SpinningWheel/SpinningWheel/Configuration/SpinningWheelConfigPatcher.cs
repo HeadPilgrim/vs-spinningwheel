@@ -57,10 +57,10 @@ namespace SpinningWheel.Configuration
             // Iterate through all recipes and check their output
             foreach (var recipe in api.World.GridRecipes)
             {
-                if (recipe?.Output?.ResolvedItemstack == null) continue;
+                if (recipe?.Output?.ResolvedItemStack == null) continue;
                 
-                string outputCode = recipe.Output.ResolvedItemstack.Collectible.Code.Path;
-                string outputDomain = recipe.Output.ResolvedItemstack.Collectible.Code.Domain;
+                string outputCode = recipe.Output.ResolvedItemStack.Collectible.Code.Path;
+                string outputDomain = recipe.Output.ResolvedItemStack.Collectible.Code.Domain;
                 string recipePath = recipe.Name.Path;
                 string recipeDomain = recipe.Name.Domain;
                 bool shouldDisable = false;
@@ -69,21 +69,21 @@ namespace SpinningWheel.Configuration
                 if (outputCode == "flaxtwine" && outputDomain == "game" && recipeDomain == "game")
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[Immersive Fibercraft] Found vanilla flax twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found vanilla flax twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemStack.GetName()}");
                 }
                 // Check if output is wool twine (from Wool mod) - only from the twine.json file
                 else if (outputCode.StartsWith("twine-") && outputDomain == "wool" && 
                          recipeDomain == "wool" && recipePath.Contains("recipes/grid/twine"))
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[Immersive Fibercraft] Found wool twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found wool twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemStack.GetName()}");
                 }
                 // Check if output is flax twine from Floral Zones Caribbean mod (cotton -> twine)
                 else if (outputCode == "flaxtwine" && outputDomain == "game" && 
                          recipeDomain == "floralzonescaribbeanregion" && recipePath.Contains("recipes/grid/twine"))
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[Immersive Fibercraft] Found Floral Zones cotton twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found Floral Zones cotton twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemStack.GetName()}");
                 }
                 // Check if output is flax twine from pemmican mod (papyrus -> twine, algae -> twine)
                 else if (outputCode == "flaxtwine" && outputDomain == "game" && 
@@ -91,7 +91,7 @@ namespace SpinningWheel.Configuration
                          (recipePath.Contains("papyrus") || recipePath.Contains("algae")))
                 {
                     shouldDisable = true;
-                    api.Logger.Notification($"[Immersive Fibercraft] Found pemmican twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemstack.GetName()}");
+                    api.Logger.Notification($"[Immersive Fibercraft] Found pemmican twine recipe: {recipe.Name} -> {recipe.Output.ResolvedItemStack.GetName()}");
                 }
                 
                 if (shouldDisable)
