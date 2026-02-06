@@ -80,7 +80,7 @@ namespace SpinningWheel.Blocks
 
         #region IMultiBlockInteract Implementation
 
-        public bool MBDoParticalSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
+        public bool MBDoPartialSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
         {
             return true; // Enable partial selection for all parts
         }
@@ -230,7 +230,7 @@ namespace SpinningWheel.Blocks
 
         #region Multi-Block Collision/Selection
 
-        public override bool DoParticalSelection(IWorldAccessor world, BlockPos pos)
+        public override bool DoPartialSelection(IWorldAccessor world, BlockPos pos)
         {
             return true;
         }

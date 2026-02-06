@@ -55,7 +55,7 @@ namespace SpinningWheel.Blocks
         
         // --- IMultiBlockInteract Implementation ---
         #region IMultiBlockInteract Implementation
-        public bool MBDoParticalSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
+        public bool MBDoPartialSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
         {
             return true; // No special particle selection needed
         }
@@ -232,9 +232,9 @@ namespace SpinningWheel.Blocks
         // --- Multi-Block Collision/Selection ---
         #region Multi-Block Collision/Selection
 
-        public override bool DoParticalSelection(IWorldAccessor world, BlockPos pos)
+        public override bool DoPartialSelection(IWorldAccessor world, BlockPos pos)
         {
-            return true;
+            return base.DoPartialSelection(world, pos);
         }
 
         public Cuboidf[] MBGetCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos, Vec3i offset)
