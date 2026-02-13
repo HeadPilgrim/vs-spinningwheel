@@ -37,7 +37,7 @@
     "op": "add",
     "path": "/attributes/weavingProps",
     "value": {
-      "outputType": "ruderalis:hempcanvas",
+      "outputType": "ruderalis:hempcanvas-down",
       "inputQuantity": 24,
       "outputQuantity": 3
     },
