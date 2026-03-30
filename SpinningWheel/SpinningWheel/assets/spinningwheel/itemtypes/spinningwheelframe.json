@@ -78,9 +78,9 @@
   "heldRightReadyAnimation": "heldblockready",
   "heldTpUseAnimation": "twohandplaceblock",
   "guiTransform": {
-    "translation": { "x": -5, "y": 2, "z": 0 },
+    "translation": { "x": -8, "y": 5, "z": 0 },
     "rotation": { "x": 0, "y": -180, "z": -180 },
-    "scale": 1.06
+    "scale": 0.95
   },
   "tpHandTransform": {
     "translation": { "x": -0.7, "y": -0.9, "z": -0.4 },
