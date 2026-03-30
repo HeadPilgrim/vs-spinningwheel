@@ -1,5 +1,5 @@
 {
-  "ingredientPattern": "__W,_M_,_CF",
+  "ingredientPattern": "___,_MW,_CF",
   "ingredients": {
     "W": { "type": "item", "code": "spinningwheel:hpspinningwheelwheelitem-*", "name": "wood" },
     "M": { "type": "item", "code": "spinningwheel:hpmoaitem-*", "name": "wood" },

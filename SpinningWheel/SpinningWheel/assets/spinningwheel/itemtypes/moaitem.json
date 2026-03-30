@@ -76,9 +76,9 @@
     }
   },
   "guiTransform": {
-    "translation": { "x": 48, "y": 38, "z": 0 },
+    "translation": { "x": 13, "y": 48, "z": 0 },
     "rotation": { "x": 0, "y": -51, "z": 180 },
-    "scale": 4.22
+    "scale": 4.09
   },
   "tpHandTransform": {
     "translation": { "x": -0.6, "y": -0.8, "z": -0.4 },
