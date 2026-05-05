@@ -10,9 +10,9 @@
 		"fibers": [16, 16]
 	},
 	"textures": {
-		"linen": "block/linen",
-		"kapok": "block/wood/debarked/kapok",
-		"fibers": "item/resource/fibers"
+		"linen": "game:block/linen",
+		"kapok": "game:block/wood/debarked/kapok",
+		"fibers": "game:item/resource/fibers"
 	},
 	"elements": [
 		{

@@ -15,9 +15,9 @@
 		"ebony": [32, 32]
 	},
 	"textures": {
-		"heddleties2": "item/heddleties2",
-		"rope": "block/locustnest/stalagmite/rope",
-		"ebony": "block/wood/bark/ebony"
+		"heddleties2": "game:block/wood/debarked/ebony",
+		"rope": "game:block/locustnest/stalagmite/rope",
+		"ebony": "game:block/wood/bark/ebony"
 	},
 	"elements": [
 		{

@@ -13,7 +13,7 @@
 		"ebony": [32, 32]
 	},
 	"textures": {
-		"ebony": "block/wood/bark/ebony"
+		"ebony": "game:block/wood/bark/ebony"
 	},
 	"elements": [
 		{

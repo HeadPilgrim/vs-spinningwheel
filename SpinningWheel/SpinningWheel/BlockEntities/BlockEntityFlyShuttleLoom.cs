@@ -820,8 +820,6 @@ namespace SpinningWheel.BlockEntities
                 return null;
             }
 
-            Api?.Logger.Notification($"[Loom] Checking against {patternLoader.PatternRecipes.Count} pattern recipes");
-
             return patternLoader.FindMatchingRecipe(
                 PatternSlotTopLeft?.Itemstack,
                 PatternSlotTopRight?.Itemstack,

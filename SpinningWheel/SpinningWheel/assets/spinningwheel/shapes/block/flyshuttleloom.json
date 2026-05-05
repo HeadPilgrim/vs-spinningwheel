@@ -19,15 +19,15 @@
 		"loomstring32": [32,32]
 	},
 	"textures": {
-		"heddleties2": "C:/Users/Carter/RiderProjects/SpinningWheel/SpinningWheel/SpinningWheel/assets/spinningwheel/textures/block/flyshuttleloom/heddleties2",
-		"loomstring32": "C:/Users/Carter/RiderProjects/SpinningWheel/SpinningWheel/SpinningWheel/assets/spinningwheel/textures/block/flyshuttleloom/loomstring32",
-		"reeddents": "C:/Users/Carter/RiderProjects/SpinningWheel/SpinningWheel/SpinningWheel/assets/spinningwheel/textures/block/flyshuttleloom/reeddents",
-		"warpnewnewbase": "C:/Users/Carter/RiderProjects/SpinningWheel/SpinningWheel/SpinningWheel/assets/spinningwheel/textures/block/flyshuttleloom/warpnewnewbase",
-		"warpstrings": "C:/Users/Carter/RiderProjects/SpinningWheel/SpinningWheel/SpinningWheel/assets/spinningwheel/textures/block/flyshuttleloom/warpstrings",
-		"plain": "block/cloth/linen/plain",
-		"ebony": "block/wood/debarked/ebony",
-		"oak1": "block/wood/planks/oak1",
-		"rope": "item/resource/rope"
+		"heddleties2": "game:block/wood/debarked/ebony",
+		"loomstring32": "game:block/wood/debarked/ebony",
+		"reeddents": "game:block/wood/debarked/ebony",
+		"warpnewnewbase": "game:block/wood/debarked/ebony",
+		"warpstrings": "game:block/wood/debarked/ebony",
+		"plain": "game:block/cloth/linen/plain",
+		"ebony": "game:block/wood/debarked/ebony",
+		"oak1": "game:block/wood/planks/oak1",
+		"rope": "game:item/resource/rope"
 	},
 	"elements": [
 		{

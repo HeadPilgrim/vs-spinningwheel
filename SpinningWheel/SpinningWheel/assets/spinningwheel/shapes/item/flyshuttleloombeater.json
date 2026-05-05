@@ -17,11 +17,11 @@
 		"oak1": [32, 32]
 	},
 	"textures": {
-		"plain": "block/cloth/linen/plain",
-		"reeddents": "item/reeddents",
-		"rope": "block/locustnest/stalagmite/rope",
-		"ebony": "block/wood/bark/ebony",
-		"oak1": "block/plant/leaves/large/oak1"
+		"plain": "game:block/cloth/linen/plain",
+		"reeddents": "game:block/wood/debarked/ebony",
+		"rope": "game:block/locustnest/stalagmite/rope",
+		"ebony": "game:block/wood/bark/ebony",
+		"oak1": "game:block/plant/leaves/large/oak1"
 	},
 	"elements": [
 		{

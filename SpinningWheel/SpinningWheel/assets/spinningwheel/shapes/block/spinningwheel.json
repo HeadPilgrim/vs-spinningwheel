@@ -14,11 +14,11 @@
 		"oak": [16,16]
 	},
 	"textures": {
-		"cover": "block/cloth/linen/normal1",
-		"linen": "block/linen",
-		"1": "block/wood/chair/normal/top",
-		"oak2": "block/wood/crudechair/oak",
-		"oak": "block/wood/debarked/oak"
+		"cover": "game:block/cloth/linen/normal1",
+		"linen": "game:block/linen",
+		"1": "game:block/wood/chair/normal/top",
+		"oak2": "game:block/wood/crudechair/oak",
+		"oak": "game:block/wood/debarked/oak"
 	},
 	"elements": [
 		{
