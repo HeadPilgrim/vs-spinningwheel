@@ -1,0 +1,330 @@
+{
+    "block-hpspinningwheel-birch-*": "Прялка (Берёза)",
+    "block-hpspinningwheel-oak-*": "Прялка (Дуб)",
+    "block-hpspinningwheel-maple-*": "Прялка (Клён)",
+    "block-hpspinningwheel-pine-*": "Прялка (Сосна)",
+    "block-hpspinningwheel-acacia-*": "Прялка (Акация)",
+    "block-hpspinningwheel-kapok-*": "Прялка (Капок)",
+    "block-hpspinningwheel-baldcypress-*": "Прялка (Болотный кипарис)",
+    "block-hpspinningwheel-larch-*": "Прялка (Лиственница)",
+    "block-hpspinningwheel-redwood-*": "Прялка (Секвойя)",
+    "block-hpspinningwheel-ebony-*": "Прялка (Чёрное дерево)",
+    "block-hpspinningwheel-walnut-*": "Прялка (Орешник)",
+    "block-hpspinningwheel-purpleheart-*": "Прялка (Пурпурное дерево)",
+    "spinningwheel:blockhelp-spinningwheel-use": "Сядьте и прядите волокна!",
+    "spinningwheel:blockhelp-spinningwheel-opencrafting": "Открыть меню крафта!",
+
+    "material-birch": "Берёза",
+    "material-oak": "Дуб",
+    "material-maple": "Клён",
+    "material-pine": "Сосна",
+    "material-acacia": "Акация",
+    "material-kapok": "Капок",
+    "material-baldcypress": "Болотный кипарис",
+    "material-larch": "Лиственница",
+    "material-redwood": "Секвойя",
+    "material-ebony": "Чёрное дерево",
+    "material-walnut": "Орешник",
+    "material-purpleheart": "Пурпурное дерево",
+    "spinningwheel:spinning-wheel-requires-class": "Прялка доступна только следующим классам: {0}.",
+    "spinningwheel:spinning-wheel-requires-class-or-trait": "Прялка доступна только: {0}.",
+    "spinningwheel:spinning-wheel-occupied": "Кто-то уже использует это!",
+    "spinningwheel:loom-requires-class": "Ткацкий станок доступен только следующим классам: {0}.",
+    "spinningwheel:loom-requires-class-or-trait": "Ткацкий станок доступен только: {0}.",
+    "spinningwheel:loom-occupied": "Кто-то уже использует этот ткацкий станок!",
+    "spinningwheel:classes": "Классы",
+    "spinningwheel:traits": "Черты",
+    "spinningwheel:or": "или",
+
+    "item-hpmoaitem-birch": "Материнская балка (Берёза)",
+    "item-hpmoaitem-oak": "Материнская балка (Дуб)",
+    "item-hpmoaitem-maple": "Материнская балка (Клён)",
+    "item-hpmoaitem-pine": "Материнская балка (Сосна)",
+    "item-hpmoaitem-acacia": "Материнская балка (Акация)",
+    "item-hpmoaitem-kapok": "Материнская балка (Капок)",
+    "item-hpmoaitem-baldcypress": "Материнская балка (Болотный кипарис)",
+    "item-hpmoaitem-larch": "Материнская балка (Лиственница)",
+    "item-hpmoaitem-redwood": "Материнская балка (Секвойя)",
+    "item-hpmoaitem-ebony": "Материнская балка (Чёрное дерево)",
+    "item-hpmoaitem-walnut": "Материнская балка (Орешник)",
+    "item-hpmoaitem-purpleheart": "Материнская балка (Пурпурное дерево)",
+
+    "item-hpspinningwheelframe-birch": "Рама прялки (Берёза)",
+    "item-hpspinningwheelframe-oak": "Рама прялки (Дуб)",
+    "item-hpspinningwheelframe-maple": "Рама прялки (Клён)",
+    "item-hpspinningwheelframe-pine": "Рама прялки (Сосна)",
+    "item-hpspinningwheelframe-acacia": "Рама прялки (Акация)",
+    "item-hpspinningwheelframe-kapok": "Рама прялки (Капок)",
+    "item-hpspinningwheelframe-baldcypress": "Рама прялки (Болотный кипарис)",
+    "item-hpspinningwheelframe-larch": "Рама прялки (Лиственница)",
+    "item-hpspinningwheelframe-redwood": "Рама прялки (Секвойя)",
+    "item-hpspinningwheelframe-ebony": "Рама прялки (Чёрное дерево)",
+    "item-hpspinningwheelframe-walnut": "Рама прялки (Орешник)",
+    "item-hpspinningwheelframe-purpleheart": "Рама прялки (Пурпурное дерево)",
+
+    "item-hpspinningwheelwheelitem-birch": "Приводное колесо (Берёза)",
+    "item-hpspinningwheelwheelitem-oak": "Приводное колесо (Дуб)",
+    "item-hpspinningwheelwheelitem-maple": "Приводное колесо (Клён)",
+    "item-hpspinningwheelwheelitem-pine": "Приводное колесо (Сосна)",
+    "item-hpspinningwheelwheelitem-acacia": "Приводное колесо (Акация)",
+    "item-hpspinningwheelwheelitem-kapok": "Приводное колесо (Капок)",
+    "item-hpspinningwheelwheelitem-baldcypress": "Приводное колесо (Болотный кипарис)",
+    "item-hpspinningwheelwheelitem-larch": "Приводное колесо (Лиственница)",
+    "item-hpspinningwheelwheelitem-redwood": "Приводное колесо (Секвойя)",
+    "item-hpspinningwheelwheelitem-ebony": "Приводное колесо (Чёрное дерево)",
+    "item-hpspinningwheelwheelitem-walnut": "Приводное колесо (Орешник)",
+    "item-hpspinningwheelwheelitem-purpleheart": "Приводное колесо (Пурпурное дерево)",
+
+    "item-hpflyshuttleloomframe-birch": "Рама ткацкого станка (Берёза)",
+    "item-hpflyshuttleloomframe-oak": "Рама ткацкого станка (Дуб)",
+    "item-hpflyshuttleloomframe-maple": "Рама ткацкого станка (Клён)",
+    "item-hpflyshuttleloomframe-pine": "Рама ткацкого станка (Сосна)",
+    "item-hpflyshuttleloomframe-acacia": "Рама ткацкого станка (Акация)",
+    "item-hpflyshuttleloomframe-kapok": "Рама ткацкого станка (Капок)",
+    "item-hpflyshuttleloomframe-baldcypress": "Рама ткацкого станка (Болотный кипарис)",
+    "item-hpflyshuttleloomframe-larch": "Рама ткацкого станка (Лиственница)",
+    "item-hpflyshuttleloomframe-redwood": "Рама ткацкого станка (Секвойя)",
+    "item-hpflyshuttleloomframe-ebony": "Рама ткацкого станка (Чёрное дерево)",
+    "item-hpflyshuttleloomframe-walnut": "Рама ткацкого станка (Орешник)",
+    "item-hpflyshuttleloomframe-purpleheart": "Рама ткацкого станка (Пурпурное дерево)",
+
+    "item-hpflyshuttleloombeater-birch": "Бёрдо (Берёза)",
+    "item-hpflyshuttleloombeater-oak": "Бёрдо (Дуб)",
+    "item-hpflyshuttleloombeater-maple": "Бёрдо (Клён)",
+    "item-hpflyshuttleloombeater-pine": "Бёрдо (Сосна)",
+    "item-hpflyshuttleloombeater-acacia": "Бёрдо (Акация)",
+    "item-hpflyshuttleloombeater-kapok": "Бёрдо (Капок)",
+    "item-hpflyshuttleloombeater-baldcypress": "Бёрдо (Болотный кипарис)",
+    "item-hpflyshuttleloombeater-larch": "Бёрдо (Лиственница)",
+    "item-hpflyshuttleloombeater-redwood": "Бёрдо (Секвойя)",
+    "item-hpflyshuttleloombeater-ebony": "Бёрдо (Чёрное дерево)",
+    "item-hpflyshuttleloombeater-walnut": "Бёрдо (Орешник)",
+    "item-hpflyshuttleloombeater-purpleheart": "Бёрдо (Пурпурное дерево)",
+
+    "item-hpflyshuttleloomheddle-birch": "Ремизка (Берёза)",
+    "item-hpflyshuttleloomheddle-oak": "Ремизка (Дуб)",
+    "item-hpflyshuttleloomheddle-maple": "Ремизка (Клён)",
+    "item-hpflyshuttleloomheddle-pine": "Ремизка (Сосна)",
+    "item-hpflyshuttleloomheddle-acacia": "Ремизка (Акация)",
+    "item-hpflyshuttleloomheddle-kapok": "Ремизка (Капок)",
+    "item-hpflyshuttleloomheddle-baldcypress": "Ремизка (Болотный кипарис)",
+    "item-hpflyshuttleloomheddle-larch": "Ремизка (Лиственница)",
+    "item-hpflyshuttleloomheddle-redwood": "Ремизка (Секвойя)",
+    "item-hpflyshuttleloomheddle-ebony": "Ремизка (Чёрное дерево)",
+    "item-hpflyshuttleloomheddle-walnut": "Ремизка (Орешник)",
+    "item-hpflyshuttleloomheddle-purpleheart": "Ремизка (Пурпурное дерево)",
+
+    "item-hpdropspindle": "Деревянное веретено",
+
+	"spinningwheel:dropspindle-spin": "Прясть волокна (держите волокна во второй руке)",
+	"spinningwheel:dropspindle-extract": "Извлечь шпагат (Shift + ПКМ)",
+	"spinningwheel:dropspindle-need-fibers": "Держите прядильные волокна во второй руке",
+	"spinningwheel:dropspindle-extract-hint": "Shift + ПКМ чтобы извлечь шпагат",
+	"spinningwheel:dropspindle-complete": "Прядение завершено! Shift + ПКМ чтобы извлечь.",
+	"spinningwheel:dropspindle-progress": "Прогресс прядения: {0}%",
+	"spinningwheel:dropspindle-progress-info": "Прогресс: {0}%",
+	"spinningwheel:dropspindle-ready": "Готово к извлечению: {0}",
+
+	"itemdesc-hpdropspindle": "Простой ручной инструмент для прядения волокон в нить. Держите волокна во второй руке и нажмите ПКМ для прядения.",
+	
+	"config-title": "Настройки прялки",
+    
+	"section-tailor": "Ограничения классов и черт",
+	"section-flax-spinning": "Настройки прядения льна (Vanilla)",
+	"spinningwheel:section-flax-weaving": "Настройки ткачества льна (Vanilla)",
+	"section-cotton": "Настройки Floral Zones of the Caribbean",
+	"section-wool": "Настройки Wool & More",
+	"section-tailorsdelight": "Настройки Tailor's Delight",
+	"section-pemmican": "Настройки Long-term Food",
+	"section-rustboundmagic": "Настройки Rustbound Magic",
+
+	"RequireClassOrTrait": "Требовать класс или черту",
+	"RequireClassOrTrait-Comment": "Если включено, только игроки с разрешёнными классами или чертами смогут использовать прялку и ткацкий станок",
+
+	"setting-twine-grid-recipe-toggle": "Переключить рецепт шпагата в сетке",
+	"setting-twine-grid-recipe-toggle-comment": "Включите, чтобы отключить рецепты шпагата в сетке крафта",
+
+	"setting-show-dropspindle-progress": "Показывать сообщения прогресса веретена",
+	"setting-show-dropspindle-progress-comment": "Отображать сообщения в чате при использовании веретена",
+
+	"setting-allowed-classes": "Разрешённые классы",
+	"setting-allowed-classes-comment": "Список классов игроков, которым разрешено использовать прялку и ткацкий станок",
+
+	"setting-allowed-traits": "Разрешённые черты",
+	"setting-allowed-traits-comment": "Список черт, которые могут использовать прялку и ткацкий станок (например, clothier)",
+
+	"setting-flax-spin-time": "Время прядения льна",
+	"setting-flax-spin-time-comment": "Время в секундах для превращения льняных волокон в шпагат",
+
+	"setting-flax-input-quantity": "Количество льняных волокон",
+	"setting-flax-input-quantity-comment": "Количество льняных волокон, необходимых за один цикл",
+
+	"setting-flax-output-quantity": "Выход льняного шпагата",
+	"setting-flax-output-quantity-comment": "Количество льняного шпагата, получаемой за один цикл",
+
+	"spinningwheel:setting-flax-weaving-input-quantity": "Количество льняного шпагата",
+	"spinningwheel:setting-flax-weaving-input-quantity-comment": "Количество льняного шпагата, необходимое за один цикл ткачества",
+
+	"spinningwheel:setting-flax-weaving-output-quantity": "Выход ткани",
+	"spinningwheel:setting-flax-weaving-output-quantity-comment": "Количество ткани, производимой за один цикл",
+
+	"setting-cotton-spin-time": "Время прядения хлопка",
+	"setting-cotton-spin-time-comment": "Время в секундах для превращения хлопка в шпагат",
+
+	"setting-cotton-input-quantity": "Количество хлопка",
+	"setting-cotton-input-quantity-comment": "Количество хлопка, необходимое за один цикл",
+
+	"setting-cotton-output-quantity": "Выход хлопкового шпагата",
+	"setting-cotton-output-quantity-comment": "Количество шпагата, получаемой за один цикл прядения хлопка",
+
+	"setting-wool-fiber-spin-time": "Время прядения шерстяных волокон",
+	"setting-wool-fiber-spin-time-comment": "Время в секундах для превращения шерстяных волокон в шпагат",
+
+	"setting-wool-fiber-input-quantity": "Количество шерстяных волокон",
+	"setting-wool-fiber-input-quantity-comment": "Количество шерстяных волокон, необходимое за один цикл",
+
+	"setting-wool-fiber-output-quantity": "Выход шерстяного шпагата",
+	"setting-wool-fiber-output-quantity-comment": "Количество шерстяного шпагата, получаемой за один цикл",
+
+	"setting-wool-twine-spin-time": "Время прядения шерстяного шпагата",
+	"setting-wool-twine-spin-time-comment": "Время в секундах для превращения шпагата в нить",
+
+	"setting-wool-twine-input-quantity": "Количество шерстяного шпагата",
+	"setting-wool-twine-input-quantity-comment": "Количество шпагата, необходимое за один цикл",
+
+	"setting-wool-twine-output-quantity": "Выход нити",
+	"setting-wool-twine-output-quantity-comment": "Количество нити, получаемой за один цикл",
+
+	"setting-papyrus-input-quantity": "Количество папируса",
+	"setting-papyrus-input-quantity-comment": "Количество волокон папируса, необходимое за один цикл",
+
+	"setting-papyrus-output-quantity": "Выход шпагата из папируса",
+	"setting-papyrus-output-quantity-comment": "Количество шпагата, получаемой за один цикл",
+
+	"setting-papyrus-spin-time": "Время прядения папируса",
+	"setting-papyrus-spin-time-comment": "Время в секундах для превращения папируса в шпагат",
+
+	"setting-algae-input-quantity": "Количество водорослей",
+	"setting-algae-input-quantity-comment": "Количество водорослей, необходимое за один цикл",
+
+	"setting-algae-output-quantity": "Выход шпагата из водорослей",
+	"setting-algae-output-quantity-comment": "Количество шпагата, получаемой за один цикл",
+
+	"setting-algae-spin-time": "Время прядения водорослей",
+	"setting-algae-spin-time-comment": "Время в секундах для превращения водорослей в шпагат",
+
+	"setting-flax-twine-weave-input": "Количество льняного шпагата для ткачества",
+	"setting-flax-twine-weave-input-comment": "Количество льняного шпагата, необходимое за один цикл ткачества",
+
+	"setting-flax-twine-weave-output": "Выход льняной ткани",
+	"setting-flax-twine-weave-output-comment": "Количество льняной ткани, производимой за один цикл",
+
+	"setting-wool-twine-weave-input": "Количество шерстяного шпагата для ткачества",
+	"setting-wool-twine-weave-input-comment": "Количество шерстяного шпагата, необходимое за один цикл ткачества",
+
+	"setting-wool-twine-weave-output": "Выход шерстяной ткани",
+	"setting-wool-twine-weave-output-comment": "Количество шерстяной ткани, производимой за один цикл",
+
+	"setting-tailorsdelight-thread-weave-input": "Количество нити для ткачества",
+	"setting-tailorsdelight-thread-weave-input-comment": "Количество нити, необходимое за один цикл",
+
+	"setting-tailorsdelight-thread-weave-output": "Выход ткани из нити",
+	"setting-tailorsdelight-thread-weave-output-comment": "Количество ткани, производимой за один цикл",
+
+	"setting-shiftingfibers-spin-time": "Время прядения изменчивых волокон",
+	"setting-shiftingfibers-spin-time-comment": "Время в секундах для превращения изменчивых волокон в шпагат",
+
+	"setting-shiftingfibers-input-quantity": "Количество изменчивых волокон",
+	"setting-shiftingfibers-input-quantity-comment": "Количество волокон, необходимое за один цикл",
+
+	"setting-shiftingfibers-output-quantity": "Выход шпагата из изменчивых волокон",
+	"setting-shiftingfibers-output-quantity-comment": "Количество шпагата, получаемой за один цикл",
+
+	"setting-shiftingfibers-weave-input": "Количество изменчивых волокон для ткачества",
+	"setting-shiftingfibers-weave-input-comment": "Количество волокон, необходимое за один цикл ткачества",
+
+	"setting-shiftingfibers-weave-output": "Выход магической ткани",
+	"setting-shiftingfibers-weave-output-comment": "Количество магической ткани, производимой за один цикл",
+
+	"section-ruderalis": "Настройки Ruderalis",
+
+	"setting-stalk-spin-time": "Время прядения стеблей",
+	"setting-stalk-spin-time-comment": "Время в секундах для превращения стеблей в конопляные волокна",
+
+	"setting-stalk-input-quantity": "Количество стеблей",
+	"setting-stalk-input-quantity-comment": "Количество стеблей, необходимое за один цикл",
+
+	"setting-stalk-output-quantity": "Выход конопляных волокон",
+	"setting-stalk-output-quantity-comment": "Количество конопляных волокон, получаемых за один цикл",
+
+	"setting-hempfibers-weave-input": "Конопляные волокна для ткачества",
+	"setting-hempfibers-weave-input-comment": "Количество конопляных волокон, необходимое за один цикл ткачества",
+
+	"setting-hempfibers-weave-output": "Выход конопляного полотна",
+	"setting-hempfibers-weave-output-comment": "Количество конопляного полотна, получаемого за один цикл",
+
+	"spinningwheel:gui-title-spinningwheel": "Прялка",
+	"spinningwheel:gui-title-loom": "Челночный ткацкий станок",
+
+	"gui-loom-tab-normal": "Обычный",
+	"gui-loom-tab-pattern": "Узор",
+	"gui-loom-pattern-nomatch": "Узор не соответствует ни одному рецепту",
+	"gui-loom-requires-mods": "Узорное ткачество требует установленных модов tailorsdelight и wool",
+
+	"spinningwheel:blockhelp-loom-sit": "Сядьте и тките ткань!",
+	"spinningwheel:blockhelp-loom-opencrafting": "Открыть меню ткачества!",
+
+    "block-hpflyshuttleloom-birch-*": "Челночный ткацкий станок (Берёза)",
+    "block-hpflyshuttleloom-oak-*": "Челночный ткацкий станок (Дуб)",
+    "block-hpflyshuttleloom-maple-*": "Челночный ткацкий станок (Клён)",
+    "block-hpflyshuttleloom-pine-*": "Челночный ткацкий станок (Сосна)",
+    "block-hpflyshuttleloom-acacia-*": "Челночный ткацкий станок (Акация)",
+    "block-hpflyshuttleloom-kapok-*": "Челночный ткацкий станок (Капок)",
+    "block-hpflyshuttleloom-baldcypress-*": "Челночный ткацкий станок (Болотный кипарис)",
+    "block-hpflyshuttleloom-larch-*": "Челночный ткацкий станок (Лиственница)",
+    "block-hpflyshuttleloom-redwood-*": "Челночный ткацкий станок (Секвойя)",
+    "block-hpflyshuttleloom-ebony-*": "Челночный ткацкий станок (Чёрное дерево)",
+    "block-hpflyshuttleloom-walnut-*": "Челночный ткацкий станок (Орешник)",
+    "block-hpflyshuttleloom-purpleheart-*": "Челночный ткацкий станок (Пурпурное дерево)",
+    "spinningwheel:blockhelp-flyshuttleloom-use": "Sit and Weave Cloth!",
+    "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Open Weaving Menu!",
+
+    "block-hpflyshuttleloomtest-birch-*": "Челночный ткацкий станок - Test (Берёза)",
+    "block-hpflyshuttleloomtest-oak-*": "Челночный ткацкий станок - Test (Дуб)",
+    "block-hpflyshuttleloomtest-maple-*": "Челночный ткацкий станок - Test (Клён)",
+    "block-hpflyshuttleloomtest-pine-*": "Челночный ткацкий станок - Test (Сосна)",
+    "block-hpflyshuttleloomtest-acacia-*": "Челночный ткацкий станок - Test (Акация)",
+    "block-hpflyshuttleloomtest-kapok-*": "Челночный ткацкий станок - Test (Капок)",
+    "block-hpflyshuttleloomtest-baldcypress-*": "Челночный ткацкий станок - Test (Болотный кипарис)",
+    "block-hpflyshuttleloomtest-larch-*": "Челночный ткацкий станок - Test (Лиственница)",
+    "block-hpflyshuttleloomtest-redwood-*": "Челночный ткацкий станок - Test (Секвойя)",
+    "block-hpflyshuttleloomtest-ebony-*": "Челночный ткацкий станок - Test (Чёрное дерево)",
+    "block-hpflyshuttleloomtest-walnut-*": "Челночный ткацкий станок - Test (Орешник)",
+    "block-hpflyshuttleloomtest-purpleheart-*": "Челночный ткацкий станок - Test (Пурпурное дерево)",
+	"spinningwheel:blockhelp-flyshuttleloomtest-use": "Сядьте и тките ткань!",
+	"spinningwheel:blockhelp-flyshuttleloomtest-opencrafting": "Открыть меню ткачества!",
+
+	"spinningwheel:handbook-spinningwheel-title": "Механика крафта: Прялка",
+	"spinningwheel:handbook-spinningwheel-text": "<font size=\"18\" weight=\"bold\">Обзор</font><br><br><a href=\"handbooksearch://Прялка\">Прялка</a> — это приводимая в действие ногами станция крафта, используемая для прядения сырых волокон в шпагат и нить. Она является более иммерсивной альтернативой ручному крафту шпагата в сетке.<br><br><font size=\"18\" weight=\"bold\">Как использовать</font><br><br><strong>1. Установите прялку</strong><br>Прялка — это многоблочная структура 2×2×2. Установите её на ровной поверхности с достаточным пространством.<br><br><strong>2. Сядьте</strong><br>Нажмите ПКМ по прялке, чтобы сесть за неё. Ваш персонаж займёт место у колеса.<br><br><strong>3. Откройте меню крафта</strong><br>Находясь в сидячем положении, нажмите ПКМ по любой части, чтобы открыть интерфейс прялки.<br><br><strong>4. Добавьте волокна</strong><br>Поместите пригодные для прядения волокна (например, <a href=\"handbooksearch://льняные волокна\">льняные волокна</a>) в слот ввода.<br><br><strong>5. Прядение</strong><br>После загрузки волокон процесс запускается автоматически. Колесо вращается, превращая волокна в шпагат.<br><br><strong>6. Заберите результат</strong><br>Извлеките готовый шпагат из выходного слота после завершения.<br><br><font size=\"18\" weight=\"bold\">Материалы</font><br><br><strong>Ваниль:</strong><br>Льняные волокна → льняной шпагат<br><br><strong>С модом Wool and More:</strong><br>Шерстяные волокна → шерстяной шпагат<br><br><strong>С модом Floral Zones Caribbean:</strong><br>Хлопковые волокна → льняной шпагат<br><br><strong>С модом Pemmican:</strong><br>Папирус и водоросли → льняной шпагат<br><br><font size=\"18\" weight=\"bold\">Портативная альтернатива</font><br><br>Для прядения в путешествиях используйте <a href=\"handbooksearch://веретено\">веретено</a>. Оно медленнее, но не требует станции.<br><br><font size=\"18\" weight=\"bold\">Советы</font><br><br>- Прялка работает быстрее ручного крафта<br>- Скорость и выход можно настроить в конфигурации мода<br>- Администраторы могут ограничивать доступ по классам",
+
+	"spinningwheel:handbook-loom-title": "Механика крафта: Челночный ткацкий станок",
+	"spinningwheel:handbook-loom-text": "<font size=\"18\" weight=\"bold\">Обзор</font><br><br><a href=\"handbooksearch://Челночный ткацкий станок\">Челночный ткацкий станок</a> — это продвинутая станция ткачества, превращающая шпагат в ткань. Назван в честь челнока, который движется туда и обратно через нити основы.<br><br><font size=\"18\" weight=\"bold\">Как использовать</font><br><br><strong>1. Установите станок</strong><br>Станок — это многоблочная структура 3×2×2. Убедитесь, что достаточно места.<br><br><strong>2. Сядьте</strong><br>Нажмите ПКМ, чтобы сесть за станок.<br><br><strong>3. Откройте меню ткачества</strong><br>Находясь сидя, нажмите ПКМ по любой части для открытия интерфейса.<br><br><strong>4. Загрузите шпагат</strong><br>Поместите шпагат (например, льняной шпагат) в слот ввода.<br><br><strong>5. Ткачество</strong><br>Процесс запускается автоматически, отображая движение челнока.<br><br><strong>6. Заберите ткань</strong><br>Извлеките готовую ткань.<br><br><font size=\"18\" weight=\"bold\">Материалы</font><br><br><strong>Ваниль:</strong><br>Льняной шпагат → льняная ткань<br><br><strong>Wool and More:</strong><br>Шерстяной шпагат → шерстяная ткань<br><br><font size=\"18\" weight=\"bold\">Узорное ткачество</font><br><br>С модами Tailor's Delight и Wool and More доступно узорное ткачество для создания декоративных тканей.<br><br><font size=\"18\" weight=\"bold\">Процесс</font><br><br>1. Соберите волокна<br>2. Спрядите в шпагат<br>3. Тките ткань на станке<br><br><font size=\"18\" weight=\"bold\">Советы</font><br><br>- По умолчанию используется 9 шпагата за цикл<br>- Можно настроить параметры в конфиге<br>- Анимация показывает прогресс",
+
+	"spinningwheel:handbook-see-also-spinning": "Прядение",
+	"spinningwheel:handbook-see-also-spinning-text": "Этот материал можно спрясть в шпагат с помощью прялки или веретена.",
+
+	"spinningwheel:handbook-see-also-twine": "Крафт",
+	"spinningwheel:handbook-see-also-twine-text": "Шпагат создаётся на прялке и используется для ткачества на станке.",
+
+	"spinningwheel:handbook-see-also-weaving": "Ткачество",
+	"spinningwheel:handbook-see-also-weaving-text": "Ткань производится из шпагата на челночном ткацком станке.",
+
+	"spinningwheel:handbook-see-also-thread": "Крафт",
+	"spinningwheel:handbook-see-also-thread-text": "Нить прядётся из шерстяного шпагата и используется для ткачества на станке.",
+
+	"spinningwheel:handbook-see-also-checkered": "Узорное ткачество",
+	"spinningwheel:handbook-see-also-checkered-text": "Клетчатая ткань создаётся с помощью узорного ткачества на челночном станке.",
+
+	"spinningwheel:handbook-patternweaving-title": "Механика крафта: Узорное ткачество",
+	"spinningwheel:handbook-patternweaving-text": "<font size=\"18\" weight=\"bold\">Обзор</font><br><br>Узорное ткачество — это продвинутая техника на челночном ткацком станке, позволяющая создавать декоративные клетчатые ткани.<br><br><font size=\"18\" weight=\"bold\">Требования</font><br><br>Требуются моды Tailor's Delight и Wool and More.<br><br><font size=\"18\" weight=\"bold\">Как работает</font><br><br>Используется сетка 2×2, где расположение нитей определяет узор.<br><br><strong>[ Акцент ] [ Основа ]</strong><br><strong>[ Основа ] [ Акцент ]</strong><br><br><font size=\"18\" weight=\"bold\">Шаги</font><br><br>1. Сядьте за станок<br>2. Откройте интерфейс<br>3. Перейдите во вкладку «Узор»<br>4. Разместите нити по диагонали<br>5. Запустите ткачество<br><br><font size=\"18\" weight=\"bold\">Советы</font><br><br>- Акцент определяет цвет ткани"
+}
