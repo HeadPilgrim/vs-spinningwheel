@@ -16,7 +16,7 @@
         }
       ]
     },
-    "file": "rustboundmagic:blocktypes/resources/shiftingfibers.json",
+    "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
     "dependsOn": [ { "modid": "rustboundmagic" } ]
   },
   {
@@ -37,12 +37,12 @@
     "value": {
       "extraSections": [
         {
-          "title": "spinningwheel:handbook-see-also-spinning",
-          "text": "spinningwheel:handbook-see-also-spinning-text"
+          "title": "spinningwheel:handbook-rustbound-shiftingfibers-spinning",
+          "text": "spinningwheel:handbook-rustbound-shiftingfibers-spinning-text"
         }
       ]
     },
-    "file": "rustboundmagic:blocktypes/resources/shiftingfibers.json",
+    "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
     "dependsOn": [ { "modid": "rustboundmagic" } ]
   },
   {
@@ -62,12 +62,26 @@
     "value": {
       "extraSections": [
         {
-          "title": "spinningwheel:handbook-see-also-weaving",
-          "text": "spinningwheel:handbook-see-also-weaving-text"
+          "title": "spinningwheel:handbook-rustbound-shiftingfibers-weaving",
+          "text": "spinningwheel:handbook-rustbound-shiftingfibers-weaving-text"
         }
       ]
     },
     "file": "rustboundmagic:itemtypes/resources/shiftingfibers.json",
+    "dependsOn": [ { "modid": "rustboundmagic" } ]
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/handbook",
+    "value": {
+      "extraSections": [
+        {
+          "title": "spinningwheel:handbook-rustbound-mageweave-weaving",
+          "text": "spinningwheel:handbook-rustbound-mageweave-weaving-text"
+        }
+      ]
+    },
+    "file": "rustboundmagic:blocktypes/mageweave.json",
     "dependsOn": [ { "modid": "rustboundmagic" } ]
   }
 ]

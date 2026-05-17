@@ -224,6 +224,14 @@
     "spinningwheel:handbook-see-also-thread-text": "Nić jest przędzona z <a href=\"handbooksearch://wełniany sznurek\">wełnianego sznurka</a> na <a href=\"handbook://spinningwheel:spinning-wheel-guide\">kołowrotku</a> i może zostać utkana w tkaninę na <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">krośnie z latającym czółenkiem</a>.",
     "spinningwheel:handbook-see-also-checkered": "Tkanie wzorów",
     "spinningwheel:handbook-see-also-checkered-text": "Tkanina w kratę powstaje dzięki <a href=\"handbook://spinningwheel:pattern-weaving-guide\">tkaniu wzorów</a> na <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">krośnie z latającym czółenkiem</a>.",
+
+    "spinningwheel:handbook-rustbound-shiftingfibers-spinning": "Przędzenie",
+    "spinningwheel:handbook-rustbound-shiftingfibers-spinning-text": "Przesuwające się włókna można uprząść w <a href=\"handbooksearch://flax twine\">sznurek lniany</a> za pomocą <a href=\"handbook://spinningwheel:spinning-wheel-guide\">kołowrotka</a> lub <a href=\"handbooksearch://drop spindle\">wrzeciona ręcznego</a>.",
+    "spinningwheel:handbook-rustbound-shiftingfibers-weaving": "Tkanie",
+    "spinningwheel:handbook-rustbound-shiftingfibers-weaving-text": "Przesuwające się włókna można tkać bezpośrednio w <a href=\"handbooksearch://mageweave\">Mageweave</a> za pomocą <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">krosna z latającym czółenkiem</a>.",
+    "spinningwheel:handbook-rustbound-mageweave-weaving": "Wytwarzanie",
+    "spinningwheel:handbook-rustbound-mageweave-weaving-text": "Mageweave jest tkany z <a href=\"handbooksearch://shifting fibers\">przesuwających się włókien</a> za pomocą <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">krosna z latającym czółenkiem</a>."
+
     
     "spinningwheel:gui-title-spinningwheel": "Kołowrotek",
     "spinningwheel:gui-title-loom": "Krosno z latającym czółenkiem",
