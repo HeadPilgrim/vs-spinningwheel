@@ -427,20 +427,25 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
     public void DidUnmount(EntityAgent entityAgent)
     {
         MountedBy = null;
-        
+
         // Close the GUI when player dismounts
         if (Api.Side == EnumAppSide.Client && clientDialog != null)
         {
             clientDialog.TryClose();
         }
-        
+
+        // Instantly reset spin progress and deactivate
+        inputSpinTime = 0;
+        if (On)
+        {
+            Deactivate();
+        }
+
         if (!blockBroken)
         {
-            // Try to place the player in a safe position around the spinning wheel
             foreach (BlockFacing checkFacing in BlockFacing.HORIZONTALS)
             {
                 Vec3d placePos = Pos.ToVec3d().AddCopy(checkFacing).Add(0.5, 0.001, 0.5);
-                // Check if this position is safe (not colliding with blocks)
                 if (!Api.World.CollisionTester.IsColliding(Api.World.BlockAccessor, entityAgent.SelectionBox, placePos, false))
                 {
                     entityAgent.TeleportTo(placePos);
@@ -451,6 +456,7 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 
         mountedByEntityId = 0;
         mountedByPlayerUid = null;
+        MarkDirty(false);
     }
     
     public bool IsMountedBy(Entity entity) => this.MountedBy == entity;
