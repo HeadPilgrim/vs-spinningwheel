@@ -6,7 +6,7 @@
       "code": "game:debarkedlog-*-ud",
       "name": "wood",
       "quantity": 2,
-      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart", "aged"]
     },
     "C": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 10},
     "A": { "type": "item", "code": "game:axe-*", "isTool": true, "toolDurabilityCost": 15}

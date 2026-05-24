@@ -6,7 +6,7 @@
       "type": "item",
       "code": "game:plank-*",
       "name": "wood",
-      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart", "aged"]
     },
     "I": { "type": "item", "code": "game:metalnailsandstrips-*" },
     "B": { "type": "item", "code": "game:gear-rusty" },

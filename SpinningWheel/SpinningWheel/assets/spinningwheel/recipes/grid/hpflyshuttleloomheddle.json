@@ -5,7 +5,7 @@
       "type": "item",
       "code": "game:plank-*",
       "name": "wood",
-      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart", "aged"]
     },
     "T": { "type": "item", "code": "game:flaxtwine", "quantity": 4 }
   },

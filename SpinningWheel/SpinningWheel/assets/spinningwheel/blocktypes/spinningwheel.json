@@ -103,6 +103,11 @@
       "oak": { "base": "game:block/wood/debarked/purpleheart" },
       "oak2": { "base": "game:block/wood/debarked/purpleheart" },
       "1": { "base": "game:block/wood/debarked/purpleheart" }
+    },
+    "*-aged-*": {
+      "oak": { "base": "game:block/wood/debarked/aged" },
+      "oak2": { "base": "game:block/wood/debarked/aged" },
+      "1": { "base": "game:block/wood/debarked/aged"}
     }
   },
   "entityBehaviors": [

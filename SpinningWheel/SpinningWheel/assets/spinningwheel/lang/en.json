@@ -11,6 +11,7 @@
     "block-hpspinningwheel-ebony-*": "Spinning Wheel (Ebony)",
     "block-hpspinningwheel-walnut-*": "Spinning Wheel (Walnut)",
     "block-hpspinningwheel-purpleheart-*": "Spinning Wheel (Purpleheart)",
+    "block-hpspinningwheel-aged-*": "Spinning Wheel (Aged)",
     "spinningwheel:blockhelp-spinningwheel-use": "Sit and Spin Fibers!",
     "spinningwheel:blockhelp-spinningwheel-opencrafting": "Open Crafting Menu!",
 
@@ -26,6 +27,7 @@
     "material-ebony": "Ebony",
     "material-walnut": "Walnut",
     "material-purpleheart": "Purpleheart",
+    "material-aged": "Aged",
     "spinningwheel:spinning-wheel-requires-class": "The spinning wheel is restricted to these classes: {0}.",
     "spinningwheel:spinning-wheel-requires-class-or-trait": "The spinning wheel is restricted to: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Someone is already using that!",
@@ -48,6 +50,7 @@
     "item-hpmoaitem-ebony": "Mother of All (Ebony)",
     "item-hpmoaitem-walnut": "Mother of All (Walnut)",
     "item-hpmoaitem-purpleheart": "Mother of All (Purpleheart)",
+    "item-hpmoaitem-aged": "Mother of All (Aged)",
 
     "item-hpspinningwheelframe-birch": "Spinning Wheel Frame (Birch)",
     "item-hpspinningwheelframe-oak": "Spinning Wheel Frame (Oak)",
@@ -61,6 +64,7 @@
     "item-hpspinningwheelframe-ebony": "Spinning Wheel Frame (Ebony)",
     "item-hpspinningwheelframe-walnut": "Spinning Wheel Frame (Walnut)",
     "item-hpspinningwheelframe-purpleheart": "Spinning Wheel Frame (Purpleheart)",
+    "item-hpspinningwheelframe-aged": "Spinning Wheel Frame (Aged)",
 
     "item-hpspinningwheelwheelitem-birch": "Drive Wheel (Birch)",
     "item-hpspinningwheelwheelitem-oak": "Drive Wheel (Oak)",
@@ -74,6 +78,7 @@
     "item-hpspinningwheelwheelitem-ebony": "Drive Wheel (Ebony)",
     "item-hpspinningwheelwheelitem-walnut": "Drive Wheel (Walnut)",
     "item-hpspinningwheelwheelitem-purpleheart": "Drive Wheel (Purpleheart)",
+    "item-hpspinningwheelwheelitem-aged": "Drive Wheel (Aged)",
 
     "item-hpflyshuttleloomframe-birch": "Loom Frame (Birch)",
     "item-hpflyshuttleloomframe-oak": "Loom Frame (Oak)",
@@ -87,6 +92,7 @@
     "item-hpflyshuttleloomframe-ebony": "Loom Frame (Ebony)",
     "item-hpflyshuttleloomframe-walnut": "Loom Frame (Walnut)",
     "item-hpflyshuttleloomframe-purpleheart": "Loom Frame (Purpleheart)",
+    "item-hpflyshuttleloomframe-aged": "Loom Frame (Aged)",
 
     "item-hpflyshuttleloombeater-birch": "Loom Beater (Birch)",
     "item-hpflyshuttleloombeater-oak": "Loom Beater (Oak)",
@@ -100,6 +106,7 @@
     "item-hpflyshuttleloombeater-ebony": "Loom Beater (Ebony)",
     "item-hpflyshuttleloombeater-walnut": "Loom Beater (Walnut)",
     "item-hpflyshuttleloombeater-purpleheart": "Loom Beater (Purpleheart)",
+    "item-hpflyshuttleloombeater-aged": "Loom Beater (Aged)",
 
     "item-hpflyshuttleloomheddle-birch": "Loom Heddle (Birch)",
     "item-hpflyshuttleloomheddle-oak": "Loom Heddle (Oak)",
@@ -113,6 +120,7 @@
     "item-hpflyshuttleloomheddle-ebony": "Loom Heddle (Ebony)",
     "item-hpflyshuttleloomheddle-walnut": "Loom Heddle (Walnut)",
     "item-hpflyshuttleloomheddle-purpleheart": "Loom Heddle (Purpleheart)",
+    "item-hpflyshuttleloomheddle-aged": "Loom Heddle (Aged)",
 
     "item-hpdropspindle": "Wooden Drop Spindle",
 
@@ -128,7 +136,7 @@
     "itemdesc-hpdropspindle": "A simple handheld tool for spinning fibers into thread. Hold fibers in your offhand and right-click to spin.",
 
     "config-title": "Spinning Wheel Configuration",
-    
+
     "section-tailor": "Class & Trait Restrictions",
     "section-flax-spinning": "Vanilla Flax Spinning Settings",
     "spinningwheel:section-flax-weaving": "Vanilla Flax Weaving Settings",
@@ -286,21 +294,11 @@
     "block-hpflyshuttleloom-ebony-*": "Flying Shuttle Loom (Ebony)",
     "block-hpflyshuttleloom-walnut-*": "Flying Shuttle Loom (Walnut)",
     "block-hpflyshuttleloom-purpleheart-*": "Flying Shuttle Loom (Purpleheart)",
+    "block-hpflyshuttleloom-aged-*": "Flying Shuttle Loom (Aged)",
+
     "spinningwheel:blockhelp-flyshuttleloom-use": "Sit and Weave Cloth!",
     "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Open Weaving Menu!",
 
-    "block-hpflyshuttleloomtest-birch-*": "Flying Shuttle Loom - Test (Birch)",
-    "block-hpflyshuttleloomtest-oak-*": "Flying Shuttle Loom - Test (Oak)",
-    "block-hpflyshuttleloomtest-maple-*": "Flying Shuttle Loom - Test (Maple)",
-    "block-hpflyshuttleloomtest-pine-*": "Flying Shuttle Loom - Test (Pine)",
-    "block-hpflyshuttleloomtest-acacia-*": "Flying Shuttle Loom - Test (Acacia)",
-    "block-hpflyshuttleloomtest-kapok-*": "Flying Shuttle Loom - Test (Kapok)",
-    "block-hpflyshuttleloomtest-baldcypress-*": "Flying Shuttle Loom - Test (Bald Cypress)",
-    "block-hpflyshuttleloomtest-larch-*": "Flying Shuttle Loom - Test (Larch)",
-    "block-hpflyshuttleloomtest-redwood-*": "Flying Shuttle Loom - Test (Redwood)",
-    "block-hpflyshuttleloomtest-ebony-*": "Flying Shuttle Loom - Test (Ebony)",
-    "block-hpflyshuttleloomtest-walnut-*": "Flying Shuttle Loom - Test (Walnut)",
-    "block-hpflyshuttleloomtest-purpleheart-*": "Flying Shuttle Loom - Test (Purpleheart)",
     "spinningwheel:blockhelp-flyshuttleloomtest-use": "Sit and Weave Cloth!",
     "spinningwheel:blockhelp-flyshuttleloomtest-opencrafting": "Open Weaving Menu!",
 
@@ -327,7 +325,7 @@
 
     "spinningwheel:handbook-patternweaving-title": "Crafting Mechanic: Pattern Weaving",
     "spinningwheel:handbook-patternweaving-text": "<font size=\"18\" weight=\"bold\">Overview</font><br><br>Pattern Weaving is an advanced technique available on the <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">Flying Shuttle Loom</a> that allows you to create decorative checkered fabrics by combining different colored threads.<br><br><font size=\"18\" weight=\"bold\">Requirements</font><br><br>Pattern Weaving requires both the <strong>Tailor's Delight</strong> and <strong>Wool and More</strong> mods to be installed. <font color=\"#c44\"><strong>Without both mods, the Pattern tab will not be visible.</strong></font><br><br><font size=\"18\" weight=\"bold\">How It Works</font><br><br>Unlike normal weaving which uses a single input slot, pattern weaving uses a <strong>2x2 grid</strong> where the placement of threads determines the checkered pattern. Threads are arranged diagonally:<br><br><strong>[ Accent  ] [ Base    ]</strong><br><strong>[ Base    ] [ Accent  ]</strong><br><br><font size=\"18\" weight=\"bold\">Standard Colors</font><br><br>For standard checkered cloth (red, blue, green, etc.):<br>- <strong>Accent (diagonal):</strong> Colored Thread (e.g., Red Thread)<br>- <strong>Base (diagonal):</strong> Flax Twine <em>or</em> Plain Wool Twine<br><br><font size=\"18\" weight=\"bold\">Dark Colors</font><br><br>For dark checkered cloth (dark red, dark blue, dark green, dark brown):<br>- <strong>Accent (diagonal):</strong> Dark Thread (e.g., Dark Red Thread)<br>- <strong>Base (diagonal):</strong> Lighter counterpart (e.g., Red Thread)<br><br>Dark patterns pair the dark thread with its non-dark variant instead of flax twine or plain wool twine.<br><br><font size=\"18\" weight=\"bold\">Step by Step</font><br><br><strong>1.</strong> Sit at the Flying Shuttle Loom<br><strong>2.</strong> Open the loom interface<br><strong>3.</strong> Switch to the <strong>Pattern</strong> tab<br><strong>4.</strong> Place accent thread in top-left and bottom-right slots<br><strong>5.</strong> Place base thread in top-right and bottom-left slots<br><strong>6.</strong> Begin weaving to produce checkered cloth<br><br><font size=\"18\" weight=\"bold\">Tips</font><br><br>- The accent thread determines the output cloth color<br>- Ensure threads are placed in the correct diagonal positions<br>- Either Flax Twine or Plain Wool Twine can be used as the base for standard colors",
-    
+
     "spinningwheel:handbook-rustbound-shiftingfibers-spinning": "Spinning",
     "spinningwheel:handbook-rustbound-shiftingfibers-spinning-text": "Shifting Fibers can be spun into <a href=\"handbooksearch://flax twine\">Flax Twine</a> using the <a href=\"handbook://spinningwheel:spinning-wheel-guide\">Spinning Wheel</a> or <a href=\"handbooksearch://drop spindle\">Drop Spindle</a>.",
 

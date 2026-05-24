@@ -7,7 +7,7 @@
   "variantgroups": [
     {
       "code": "wood",
-      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart", "aged"]
     },
     {
       "code": "side",
@@ -63,7 +63,8 @@
     "*-redwood-*": { "ebony": { "base": "game:block/wood/debarked/redwood" } },
     "*-ebony-*": { "ebony": { "base": "game:block/wood/debarked/ebony" } },
     "*-walnut-*": { "ebony": { "base": "game:block/wood/debarked/walnut" } },
-    "*-purpleheart-*": { "ebony": { "base": "game:block/wood/debarked/purpleheart" } }
+    "*-purpleheart-*": { "ebony": { "base": "game:block/wood/debarked/purpleheart" } },
+    "*-aged-*": { "ebony": { "base": "game:block/wood/debarked/aged" } }
   },
   "attributesByType": {
     "*-north": {

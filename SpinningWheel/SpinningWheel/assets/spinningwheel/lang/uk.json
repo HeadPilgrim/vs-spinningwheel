@@ -11,6 +11,7 @@
     "block-hpspinningwheel-ebony-*": "Самопрядка (Ебенове дерево)",
     "block-hpspinningwheel-walnut-*": "Самопрядка (Горіх)",
     "block-hpspinningwheel-purpleheart-*": "Самопрядка (Пурпурове серце)",
+    "block-hpspinningwheel-aged-*": "Самопрядка (Зістарений)",
     "spinningwheel:blockhelp-spinningwheel-use": "Сідай та пряди волокна!",
     "spinningwheel:blockhelp-spinningwheel-opencrafting": "Відкрити меню створення!",
 
@@ -26,6 +27,7 @@
     "material-ebony": "Ебенове дерево",
     "material-walnut": "Горіх",
     "material-purpleheart": "Пурпурове серце",
+    "material-aged": "Зістарений",
     "spinningwheel:spinning-wheel-requires-class": "Самопрядка доступна лише для цих класів: {0}.",
     "spinningwheel:spinning-wheel-requires-class-or-trait": "Самопрядка доступна для: {0}.",
     "spinningwheel:spinning-wheel-occupied": "Хтось уже використовує цю самопрядку!",
@@ -49,6 +51,7 @@
     "item-hpmoaitem-ebony": "Рогулька і котушка (Ебенове дерево)",
     "item-hpmoaitem-walnut": "Рогулька і котушка (Горіх)",
     "item-hpmoaitem-purpleheart": "Рогулька і котушка (Пурпурове серце)",
+    "item-hpmoaitem-aged": "Рогулька і котушка (Зістарений)",
 
     "item-hpspinningwheelframe-birch": "Каркас самопрядки (Береза)",
     "item-hpspinningwheelframe-oak": "Каркас самопрядки (Дуб)",
@@ -62,6 +65,7 @@
     "item-hpspinningwheelframe-ebony": "Каркас самопрядки (Ебенове дерево)",
     "item-hpspinningwheelframe-walnut": "Каркас самопрядки (Горіх)",
     "item-hpspinningwheelframe-purpleheart": "Каркас самопрядки (Пурпурове серце)",
+    "item-hpspinningwheelframe-aged": "Каркас самопрядки (Зістарений)",
 
     "item-hpspinningwheelwheelitem-birch": "Махове колесо (Береза)",
     "item-hpspinningwheelwheelitem-oak": "Махове колесо (Дуб)",
@@ -75,6 +79,7 @@
     "item-hpspinningwheelwheelitem-ebony": "Махове колесо (Ебенове дерево)",
     "item-hpspinningwheelwheelitem-walnut": "Махове колесо (Горіх)",
     "item-hpspinningwheelwheelitem-purpleheart": "Махове колесо (Пурпурове серце)",
+    "item-hpspinningwheelwheelitem-aged": "Махове колесо (Зістарений)",
 
     "item-hpflyshuttleloomframe-birch": "Каркас човникового верстата (Береза)",
     "item-hpflyshuttleloomframe-oak": "Каркас човникового верстата (Дуб)",
@@ -88,6 +93,7 @@
     "item-hpflyshuttleloomframe-ebony": "Каркас човникового верстата (Ебенове дерево)",
     "item-hpflyshuttleloomframe-walnut": "Каркас човникового верстата (Горіх)",
     "item-hpflyshuttleloomframe-purpleheart": "Каркас човникового верстата (Пурпурове серце)",
+    "item-hpflyshuttleloomframe-aged": "Каркас човникового верстата (Зістарений)",
 
     "item-hpflyshuttleloombeater-birch": "Било верстата (Береза)",
     "item-hpflyshuttleloombeater-oak": "Било верстата (Дуб)",
@@ -101,6 +107,7 @@
     "item-hpflyshuttleloombeater-ebony": "Било верстата (Ебенове дерево)",
     "item-hpflyshuttleloombeater-walnut": "Било верстата (Горіх)",
     "item-hpflyshuttleloombeater-purpleheart": "Било верстата (Пурпурове серце)",
+    "item-hpflyshuttleloombeater-aged": "Било верстата (Зістарений)",
 
     "item-hpflyshuttleloomheddle-birch": "Нитченосець верстата (Береза)",
     "item-hpflyshuttleloomheddle-oak": "Нитченосець верстата (Дуб)",
@@ -114,6 +121,7 @@
     "item-hpflyshuttleloomheddle-ebony": "Нитченосець верстата (Ебенове дерево)",
     "item-hpflyshuttleloomheddle-walnut": "Нитченосець верстата (Горіх)",
     "item-hpflyshuttleloomheddle-purpleheart": "Нитченосець верстата (Пурпурове серце)",
+    "item-hpflyshuttleloomheddle-aged": "Нитченосець верстата (Зістарений)",
 
     "item-hpdropspindle": "Дерев'яне ручне веретено",
 
@@ -287,6 +295,7 @@
     "block-hpflyshuttleloom-ebony-*": "Човниковий верстат (Ебенове дерево)",
     "block-hpflyshuttleloom-walnut-*": "Човниковий верстат (Горіх)",
     "block-hpflyshuttleloom-purpleheart-*": "Човниковий верстат (Пурпурове серце)",
+    "block-hpflyshuttleloom-aged-*": "Човниковий верстат (Зістарений)",
     "spinningwheel:blockhelp-flyshuttleloom-use": "Сідай та тчи полотно!",
     "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Відкрити меню ткання!",
 
@@ -328,7 +337,7 @@
 
     "spinningwheel:handbook-patternweaving-title": "Механіка створення: Візерункове ткання",
     "spinningwheel:handbook-patternweaving-text": "<font size=\"18\" weight=\"bold\">Огляд</font><br><br>Візерункове ткання — це вдосконалена техніка на <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">човниковому верстаті</a>, що дозволяє створювати декоративну картату тканину з ниток різних кольорів.<br><br><font size=\"18\" weight=\"bold\">Вимоги</font><br><br>Потрібні одночасно моди <strong>Tailor's Delight</strong> та <strong>Wool and More</strong>. <font color=\"#c44\"><strong>Без обох модів вкладка Візерунок не з’явиться.</strong></font><br><br><font size=\"18\" weight=\"bold\">Як працює</font><br><br>На відміну від звичайного ткання тут використовується <strong>сітка 2×2</strong>. Розташування ниток визначає картату візерунок. Нитки кладуться по діагоналі:<br><br><strong>[ Акцент  ] [ Основа   ]</strong><br><strong>[ Основа   ] [ Акцент  ]</strong><br><br><font size=\"18\" weight=\"bold\">Стандартні кольори</font><br><br>Для звичайної картатої тканини (червона, синя, зелена тощо):<br>- <strong>Акцент (по діагоналі):</strong> Кольорова нитка (наприклад, червона нитка)<br>- <strong>Основа (по діагоналі):</strong> Лляна мотузка<br><br><font size=\"18\" weight=\"bold\">Темні кольори</font><br><br>Для темної картатої тканини (темно-червона, темно-синя тощо):<br>- <strong>Акцент (по діагоналі):</strong> Темна нитка (наприклад, темно-червона)<br>- <strong>Основа (по діагоналі):</strong> Світліший варіант (наприклад, червона нитка)<br><br><font size=\"18\" weight=\"bold\">Покроково</font><br><br><strong>1.</strong> Сядь за човниковий верстат<br><strong>2.</strong> Відкрий інтерфейс<br><strong>3.</strong> Перейди на вкладку <strong>Візерунок</strong><br><strong>4.</strong> Поклади акцентну нитку вгорі ліворуч та внизу праворуч<br><strong>5.</strong> Поклади базову нитку вгорі праворуч та внизу ліворуч<br><strong>6.</strong> Починай ткати — отримаєш картату тканину<br><br><font size=\"18\" weight=\"bold\">Поради</font><br><br>- Колір акцентної нитки визначає колір готової тканини<br>- Дотримуйся діагонального розташування",
-    
+
     "spinningwheel:handbook-rustbound-shiftingfibers-spinning": "Прядіння",
     "spinningwheel:handbook-rustbound-shiftingfibers-spinning-text": "Мінливі волокна можна спрясти в <a href=\"handbooksearch://flax twine\">лляний шпагат</a> за допомогою <a href=\"handbook://spinningwheel:spinning-wheel-guide\">прядильного колеса</a> або <a href=\"handbooksearch://drop spindle\">веретена</a>.",
 

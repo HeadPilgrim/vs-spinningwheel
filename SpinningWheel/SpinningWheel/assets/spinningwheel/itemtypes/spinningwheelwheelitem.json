@@ -3,7 +3,7 @@
   "variantgroups": [
     {
       "code": "wood",
-      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      "states": ["birch", "oak", "maple", "pine", "acacia", "kapok", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart", "aged"]
     }
   ],
   "skipVariants": [
@@ -35,7 +35,8 @@
     "*-redwood": { "oak": { "base": "game:block/wood/debarked/redwood" } },
     "*-ebony": { "oak": { "base": "game:block/wood/debarked/ebony" } },
     "*-walnut": { "oak": { "base": "game:block/wood/debarked/walnut" } },
-    "*-purpleheart": { "oak": { "base": "game:block/wood/debarked/purpleheart" } }
+    "*-purpleheart": { "oak": { "base": "game:block/wood/debarked/purpleheart" } },
+    "*-aged-*": { "oak": { "base": "game:block/wood/debarked/aged" } }
   },
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldRightReadyAnimation": "heldblockready",
