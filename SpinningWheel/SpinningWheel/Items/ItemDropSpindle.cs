@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -15,23 +16,45 @@ namespace SpinningWheel.Items
     {
         // Animation times in seconds
         private const float SPIN_ANIMATION_TIME = 2.0f;
-        private const int MAX_SPIN_VARIANTS = 12;
-        private ILoadedSound spindleSound;
-        
+        private const int   MAX_SPIN_VARIANTS   = 12;
+
+        // Particle tuning — grouped here so BURST_INTERVAL is visible at the top of class
+        private const float SPIN_SPEED      = 9.84f;  // 3 rev/sec → tight coils
+        private const float MAX_RADIUS      = 0.12f;
+        private const float MAX_Y_OFFSET    = -0.55f;
+        private const float PARTICLE_LIFE   = 0.08f;
+        private const float PARTICLE_GRAV   = 0.02f;
+        private const float PARTICLE_MIN_SZ = 0.08f;
+        private const float PARTICLE_MAX_SZ = 0.18f;
+        private const float BURST_INTERVAL  = 0.03f;  // More bursts = denser helix
+        private const int   MIN_PER_BURST   = 1;
+        private const int   MAX_PER_BURST   = 2;
+
+        // FIX: Sound keyed by player UID — Item is a singleton shared across all players.
+        // A single ILoadedSound field would be overwritten/disposed by concurrent users.
+        private readonly Dictionary<string, ILoadedSound> spindleSounds = new Dictionary<string, ILoadedSound>();
+
+        // Cache for GetHeldInteractionHelp — built once, never changes at runtime.
+        private ItemStack[] _spinnableStacksCache;
+
+        private readonly Random rand = new Random();
+
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
         }
 
+        // ------------------------------------------------------------------
+        #region Held Interact
+
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling)
         {
-            
             if (!firstEvent) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
             if (player == null) return;
 
-            // Check if sneaking and spindle is complete - extract twine
+            // Check if sneaking and spindle is complete — extract twine
             if (byEntity.Controls.Sneak && IsSpindleComplete(slot))
             {
                 if (api.Side == EnumAppSide.Server)
@@ -43,69 +66,70 @@ namespace SpinningWheel.Items
             }
 
             ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
-            
-            // Check if spindle is complete (ready to extract twine) - give hint
+
+            // Check if spindle is complete (ready to extract twine) — give hint
             if (IsSpindleComplete(slot))
             {
                 if (api.Side == EnumAppSide.Client)
                 {
-                    (api as ICoreClientAPI).TriggerIngameError(this, "complete", 
+                    (api as ICoreClientAPI).TriggerIngameError(this, "complete",
                         Lang.Get("spinningwheel:dropspindle-extract-hint"));
                 }
-                handHandling = EnumHandHandling.NotHandled; // Changed from PreventDefaultAction
+                handHandling = EnumHandHandling.NotHandled;
                 return;
             }
 
-            // Check for spinnable item in offhand
-            if (offhandSlot?.Empty != false || !CanSpin(offhandSlot.Itemstack))
+            // FIX: Replaced confusing nullable-boolean idiom with explicit null/empty checks.
+            if (offhandSlot == null || offhandSlot.Empty || !CanSpin(offhandSlot.Itemstack))
             {
                 if (api.Side == EnumAppSide.Client)
                 {
-                    (api as ICoreClientAPI).TriggerIngameError(this, "nospinnable", 
+                    (api as ICoreClientAPI).TriggerIngameError(this, "nospinnable",
                         Lang.Get("spinningwheel:dropspindle-need-fibers"));
                 }
                 handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-            
+
             // Client-side only: visual and audio feedback
             if (api.Side == EnumAppSide.Client)
             {
                 slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
-                
-                // Stop any existing sound first
-                spindleSound?.Stop();
-                spindleSound?.Dispose();
-                
-                // Load and play the spinning sound
-                spindleSound = (api as ICoreClientAPI).World.LoadSound(new SoundParams()
+
+                // FIX: Use per-player sound dictionary so concurrent users don't clobber each other.
+                string uid = player.PlayerUID;
+                if (spindleSounds.TryGetValue(uid, out var existing))
                 {
-                    Location = new AssetLocation("spinningwheel:sounds/item/dropspindle"),
-                    ShouldLoop = false,
-                    Position = byEntity.Pos.XYZ.ToVec3f(),
+                    existing?.Stop();
+                    existing?.Dispose();
+                    spindleSounds.Remove(uid);
+                }
+
+                var sound = (api as ICoreClientAPI).World.LoadSound(new SoundParams()
+                {
+                    Location      = new AssetLocation("spinningwheel:sounds/item/dropspindle"),
+                    ShouldLoop    = false,
+                    Position      = byEntity.Pos.XYZ.ToVec3f(),
                     DisposeOnFinish = true,
-                    Volume = 0.5f,
-                    Range = 8
+                    Volume        = 0.5f,
+                    Range         = 8
                 });
-                spindleSound?.Start();
+                sound?.Start();
+                if (sound != null) spindleSounds[uid] = sound;
             }
 
-            // Start spinning
             handHandling = EnumHandHandling.PreventDefaultAction;
         }
-
 
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot,
             EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
-            // Calculate render variant based on animation progress
             int renderVariant = GameMath.Clamp(
-                (int)Math.Ceiling(secondsUsed / SPIN_ANIMATION_TIME * MAX_SPIN_VARIANTS), 
-                1, 
+                (int)Math.Ceiling(secondsUsed / SPIN_ANIMATION_TIME * MAX_SPIN_VARIANTS),
+                1,
                 MAX_SPIN_VARIANTS
             );
 
-            // Client-side only: Update visual representation
             if (api.Side == EnumAppSide.Client)
             {
                 int prevRenderVariant = slot.Itemstack.TempAttributes.GetInt("renderVariant", 0);
@@ -129,16 +153,10 @@ namespace SpinningWheel.Items
             // Client-side cleanup
             if (api.Side == EnumAppSide.Client)
             {
-                // Stop and dispose the sound
-                spindleSound?.Stop();
-                spindleSound?.Dispose();
-                spindleSound = null;
-                
-                // Reset render variant
+                StopSound((byEntity as EntityPlayer)?.Player?.PlayerUID);
                 slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
 
-            // Early exit if interaction was too short
             if (secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
 
             IPlayer player = (byEntity as EntityPlayer)?.Player;
@@ -146,49 +164,49 @@ namespace SpinningWheel.Items
 
             ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
 
-            // Validate again
-            if (IsSpindleComplete(slot) || offhandSlot?.Empty != false || !CanSpin(offhandSlot.Itemstack))
+            // FIX: Replaced confusing nullable-boolean idiom with explicit null/empty checks.
+            if (IsSpindleComplete(slot) || offhandSlot == null || offhandSlot.Empty || !CanSpin(offhandSlot.Itemstack))
             {
                 return;
             }
 
-            // CRITICAL: Only process on server side to prevent double-processing
             if (api.Side == EnumAppSide.Server)
             {
-                // CRITICAL: Use absolute time instead of world elapsed time to persist across server restarts
-                // Prevents drop spindle breaking if half complete and server restarts or player leaves world. 
+                // Guard against double-processing within the same tick / rapid re-trigger.
+                // Uses wall-clock milliseconds — simple and sufficient for a per-interaction guard.
                 long lastProcessTime = slot.Itemstack.Attributes.GetLong("lastSpinTime", 0);
-                long currentTime = DateTime.UtcNow.Ticks / 10000;  // Absolute time in milliseconds
-                
-                // Prevent processing if less than 100ms since last spin (adjust as needed)
-                if (currentTime - lastProcessTime < 100)
+                long currentTime     = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+                if (currentTime - lastProcessTime < 500)
                 {
-                    api.Logger.Debug("Prevented double-spin (too soon): {0}ms since last", currentTime - lastProcessTime);
+                    api.Logger.Debug("[DropSpindle] Prevented double-spin ({0}ms since last) for player {1}",
+                        currentTime - lastProcessTime, player.PlayerName);
                     return;
                 }
-                
-                slot.Itemstack.Attributes.SetLong("lastSpinTime", currentTime);
-                ProcessSpin(slot, offhandSlot, byEntity);
+
+                // Pass currentTime into ProcessSpin so lastSpinTime is written in the same
+                // contiguous attribute pass as spins/outputType/outputQuantity, directly before
+                // MarkDirty(). This keeps all writes to the spindle slot in one batch, reducing
+                // the window in which a delta-sync optimiser (e.g. Synergy) could capture a
+                // partial attribute state.
+                ProcessSpin(slot, offhandSlot, byEntity, currentTime);
             }
         }
 
         public override bool OnHeldInteractCancel(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, EnumItemUseCancelReason cancelReason)
         {
-            // Client-side cleanup
             if (api.Side == EnumAppSide.Client)
             {
-                // Stop and dispose the sound
-                spindleSound?.Stop();
-                spindleSound?.Dispose();
-                spindleSound = null;
-                
-                // Reset render variant on cancel
+                StopSound((byEntity as EntityPlayer)?.Player?.PlayerUID);
                 slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
 
             return true;
         }
+
+        #endregion
         
+        #region Interaction Help / Attack Overrides
 
         public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
         {
@@ -199,8 +217,8 @@ namespace SpinningWheel.Items
                     new WorldInteraction()
                     {
                         ActionLangCode = "spinningwheel:dropspindle-extract",
-                        MouseButton = EnumMouseButton.Right,
-                        HotKeyCode = "sneak"
+                        MouseButton    = EnumMouseButton.Right,
+                        HotKeyCode     = "sneak"
                     }
                 };
             }
@@ -210,15 +228,14 @@ namespace SpinningWheel.Items
                 new WorldInteraction()
                 {
                     ActionLangCode = "spinningwheel:dropspindle-spin",
-                    MouseButton = EnumMouseButton.Right,
-                    Itemstacks = GetSpinnableStacks()
+                    MouseButton    = EnumMouseButton.Right,
+                    Itemstacks     = GetSpinnableStacks()
                 }
             };
         }
 
         public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
         {
-            // Prevent normal attack when holding spindle
             handling = EnumHandHandling.PreventDefault;
         }
 
@@ -232,6 +249,8 @@ namespace SpinningWheel.Items
             return false;
         }
 
+        #endregion
+        
         #region Spinning Logic
 
         private bool CanSpin(ItemStack itemstack)
@@ -240,46 +259,58 @@ namespace SpinningWheel.Items
             return itemstack.ItemAttributes.KeyExists("spinningProps");
         }
 
-        private void ProcessSpin(ItemSlot spindleSlot, ItemSlot fiberSlot, EntityAgent byEntity)
+        private void ProcessSpin(ItemSlot spindleSlot, ItemSlot fiberSlot, EntityAgent byEntity, long currentTime)
         {
-            var spinningProps = fiberSlot.Itemstack.ItemAttributes["spinningProps"];
-            int inputQuantity = spinningProps["inputQuantity"]?.AsInt(2) ?? 2;
-            
-            // Check if enough fibers
-            if (fiberSlot.Itemstack.StackSize < inputQuantity)
-            {
-                return;
-            }
+            var spinningProps  = fiberSlot.Itemstack.ItemAttributes["spinningProps"];
+            int inputQuantity  = spinningProps["inputQuantity"]?.AsInt(2) ?? 2;
 
-            // Get current progress
+            if (fiberSlot.Itemstack.StackSize < inputQuantity) return;
+
             int currentSpins = spindleSlot.Itemstack.Attributes.GetInt("spins", 0);
-            int spinsNeeded = Attributes["spinsPerCompletion"].AsInt(2);
-            
-            // Store what we're spinning
+            int spinsNeeded  = Attributes["spinsPerCompletion"].AsInt(2);
+
+            string newOutputType = spinningProps["outputType"].AsString();
+
             if (currentSpins == 0)
             {
-                string outputType = spinningProps["outputType"].AsString();
-                spindleSlot.Itemstack.Attributes.SetString("outputType", outputType);
-                
+                // First spin — lock in the output type and quantity.
+                spindleSlot.Itemstack.Attributes.SetString("outputType", newOutputType);
+
                 int outputQuantity = spinningProps["outputQuantity"]?.AsInt(1) ?? 1;
                 spindleSlot.Itemstack.Attributes.SetInt("outputQuantity", outputQuantity);
             }
+            else
+            {
+                // FIX: Validate that subsequent spins use the same fiber type.
+                // Switching fibers mid-spin would silently produce the wrong output.
+                string lockedOutputType = spindleSlot.Itemstack.Attributes.GetString("outputType");
+                if (lockedOutputType != newOutputType)
+                {
+                    IServerPlayer serverPlayer = (byEntity as EntityPlayer)?.Player as IServerPlayer;
+                    serverPlayer?.SendMessage(GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("spinningwheel:dropspindle-wrong-fiber"), EnumChatType.Notification);
+                    return;
+                }
+            }
 
-            // Increment spin count
             currentSpins++;
-            spindleSlot.Itemstack.Attributes.SetInt("spins", currentSpins);
 
-            // Consume fibers
+            // SYNERGY: All spindleSlot attribute writes are intentionally batched here in one
+            // contiguous block, with MarkDirty() called once at the very end. This ensures any
+            // delta-sync optimiser (e.g. Synergy's Attribute Sync Delta Updates patch) always
+            // captures a fully consistent snapshot rather than a partial write state.
+            spindleSlot.Itemstack.Attributes.SetInt("spins", currentSpins);
+            spindleSlot.Itemstack.Attributes.SetLong("lastSpinTime", currentTime);
+
             fiberSlot.TakeOut(inputQuantity);
             fiberSlot.MarkDirty();
 
-            // Damage spindle
             int durabilityCost = Attributes["spinDurabilityCost"]?.AsInt(1) ?? 1;
             DamageItem(api.World, byEntity, spindleSlot, durabilityCost);
 
             spindleSlot.MarkDirty();
 
-            // Show progress message (if enabled in config)
+            // Progress messages
             if (ModConfig.ModConfig.Loaded.ShowDropSpindleProgressMessages)
             {
                 IServerPlayer serverPlayer = (byEntity as EntityPlayer)?.Player as IServerPlayer;
@@ -304,127 +335,103 @@ namespace SpinningWheel.Items
         private bool IsSpindleComplete(ItemSlot slot)
         {
             int currentSpins = slot.Itemstack.Attributes.GetInt("spins", 0);
-            int spinsNeeded = Attributes["spinsPerCompletion"].AsInt(2);
+            int spinsNeeded  = Attributes["spinsPerCompletion"].AsInt(2);
             return currentSpins >= spinsNeeded;
         }
 
         private void ExtractTwine(ItemSlot spindleSlot, IPlayer player)
         {
-            string outputType = spindleSlot.Itemstack.Attributes.GetString("outputType");
-            int outputQuantity = spindleSlot.Itemstack.Attributes.GetInt("outputQuantity", 1);
+            string outputType    = spindleSlot.Itemstack.Attributes.GetString("outputType");
+            int    outputQuantity = spindleSlot.Itemstack.Attributes.GetInt("outputQuantity", 1);
 
             if (string.IsNullOrEmpty(outputType)) return;
 
-            // Create output item
             Item outputItem = api.World.GetItem(new AssetLocation(outputType));
             if (outputItem == null) return;
 
             ItemStack outputStack = new ItemStack(outputItem, outputQuantity);
 
-            // Try to give to player
             if (!player.InventoryManager.TryGiveItemstack(outputStack))
             {
-                // Drop if inventory full
                 api.World.SpawnItemEntity(outputStack, player.Entity.Pos.XYZ);
             }
 
-            // Reset spindle
             spindleSlot.Itemstack.Attributes.RemoveAttribute("spins");
             spindleSlot.Itemstack.Attributes.RemoveAttribute("outputType");
             spindleSlot.Itemstack.Attributes.RemoveAttribute("outputQuantity");
             spindleSlot.MarkDirty();
 
-            // Play sound
             api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), player.Entity, null, false, 8);
         }
 
+        // FIX: Cached — no need to walk all world collectibles on every tooltip render.
         private ItemStack[] GetSpinnableStacks()
         {
-            // Return example spinnable items for the interaction help
-            var items = api.World.Collectibles;
-            var spinnableStacks = new System.Collections.Generic.List<ItemStack>();
+            if (_spinnableStacksCache != null) return _spinnableStacksCache;
+
+            var items          = api.World.Collectibles;
+            var spinnableStacks = new List<ItemStack>();
 
             foreach (var collectible in items)
             {
                 if (collectible.Attributes?.KeyExists("spinningProps") == true)
                 {
                     spinnableStacks.Add(new ItemStack(collectible));
-                    if (spinnableStacks.Count >= 3) break; // Limit to 3 examples
+                    if (spinnableStacks.Count >= 3) break;
                 }
             }
 
-            return spinnableStacks.ToArray();
+            _spinnableStacksCache = spinnableStacks.ToArray();
+            return _spinnableStacksCache;
         }
 
         #endregion
-
         
         #region Particles
-        
-        // ------------------------------------------------------------
-        private readonly Random rand = new Random();
 
-        // ------------------------------------------------------------
-        //  STEEP SPIRAL TUNING
-        private const float SPIN_SPEED      = 9.84f;  // 3 rev/sec → tight coils
-        private const float MAX_RADIUS      = 0.12f;   // Narrow width
-        private const float MAX_Y_OFFSET    = -0.55f;   // Deep drop (from +0.2 to -0.6)
-        private const float PARTICLE_LIFE   = 0.08f;    // Long enough to trace path
-        private const float PARTICLE_GRAV   = 0.02f;   // Very low = follows spiral
-        private const float PARTICLE_MIN_SZ = 0.08f;
-        private const float PARTICLE_MAX_SZ = 0.18f;
-        private const float BURST_INTERVAL  = 0.03f;   // More bursts = denser helix
-        private const int   MIN_PER_BURST   = 1;
-        private const int   MAX_PER_BURST   = 2;
-        // ------------------------------------------------------------
-        
         private void SpawnSpiralBurst(EntityAgent byEntity, float secondsUsed)
         {
             Vec3d center = byEntity.Pos.XYZ
                 .Add(0, byEntity.LocalEyePos.Y - 1.08, 0)
                 .Ahead(0.5f, byEntity.Pos.Pitch, byEntity.Pos.Yaw);
 
-            float t = secondsUsed / SPIN_ANIMATION_TIME;  // [0 → 1]
-            float angle = secondsUsed * SPIN_SPEED;
-
-            // STEEP: wide at top → point at bottom, big Y drop
-            float radius = GameMath.Lerp(MAX_RADIUS, 0.08f, t);           // 0.12 → 0
-            float yOff   = GameMath.Lerp(0, MAX_Y_OFFSET, t);       // +0.2 → -0.6
+            float t      = secondsUsed / SPIN_ANIMATION_TIME;
+            float angle  = secondsUsed * SPIN_SPEED;
+            float radius = GameMath.Lerp(MAX_RADIUS, 0.08f, t);
+            float yOff   = GameMath.Lerp(0, MAX_Y_OFFSET, t);
 
             int count = MIN_PER_BURST + rand.Next(MAX_PER_BURST - MIN_PER_BURST + 1);
 
             for (int i = 0; i < count; i++)
             {
-                float localAngle = angle + i * (GameMath.PI * 2f / count);
-                double dx = radius * Math.Cos(localAngle);
-                double dz = radius * Math.Sin(localAngle);
-                Vec3d pos = center.AddCopy(dx, yOff, dz);
+                float  localAngle = angle + i * (GameMath.PI * 2f / count);
+                double dx  = radius * Math.Cos(localAngle);
+                double dz  = radius * Math.Sin(localAngle);
+                Vec3d  pos = center.AddCopy(dx, yOff, dz);
 
-                // Strong tangential + vertical pull
                 float tang = 0.15f + (float)rand.NextDouble() * 0.1f;
-                float velY = GameMath.Lerp(0.06f, -0.08f, t);  // rise → strong pull down
-                Vec3f vel = new Vec3f(
+                float velY = GameMath.Lerp(0.06f, -0.08f, t);
+                Vec3f vel  = new Vec3f(
                     (float)-Math.Sin(localAngle) * tang,
                     velY + (float)rand.NextDouble() * 0.03f,
-                    (float)Math.Cos(localAngle) * tang
+                    (float) Math.Cos(localAngle) * tang
                 );
 
-                // Size tapers with radius
                 float sizeFactor = 1f - t;
-                float sizeBase = PARTICLE_MIN_SZ + (PARTICLE_MAX_SZ - PARTICLE_MIN_SZ) * sizeFactor;
-                float sizeMax  = sizeBase + 0.08f;
+                float sizeBase   = PARTICLE_MIN_SZ + (PARTICLE_MAX_SZ - PARTICLE_MIN_SZ) * sizeFactor;
+                float sizeMax    = sizeBase + 0.08f;
 
                 var p = new SimpleParticleProperties(
                     minQuantity: 1, maxQuantity: 1,
-                    color: ColorUtil.ColorFromRgba(245, 245, 255, 200),
-                    minPos: pos.AddCopy(-0.015, -0.015, -0.015),
-                    maxPos: pos.AddCopy( 0.015,  0.015,  0.015),
-                    minVelocity: vel,
-                    maxVelocity: vel.AddCopy(0.02f, 0.02f, 0.02f),
-                    lifeLength: PARTICLE_LIFE,
+                    color:        ColorUtil.ColorFromRgba(245, 245, 255, 200),
+                    minPos:       pos.AddCopy(-0.015, -0.015, -0.015),
+                    maxPos:       pos.AddCopy( 0.015,  0.015,  0.015),
+                    minVelocity:  vel,
+                    maxVelocity:  vel.AddCopy(0.02f, 0.02f, 0.02f),
+                    lifeLength:   PARTICLE_LIFE,
                     gravityEffect: PARTICLE_GRAV,
-                    minSize: sizeBase,
-                    maxSize: sizeMax
+                    minSize:      sizeBase,
+                    maxSize:      sizeMax
                 )
                 {
                     ParticleModel = EnumParticleModel.Quad,
@@ -435,7 +442,7 @@ namespace SpinningWheel.Items
                 byEntity.World.SpawnParticles(p);
             }
         }
-        
+
         #endregion
         
         #region Rendering
@@ -445,13 +452,13 @@ namespace SpinningWheel.Items
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
 
             int currentSpins = inSlot.Itemstack.Attributes.GetInt("spins", 0);
-            int spinsNeeded = Attributes["spinsPerCompletion"].AsInt(2);
+            int spinsNeeded  = Attributes["spinsPerCompletion"].AsInt(2);
 
             if (currentSpins > 0)
             {
                 float progress = (float)currentSpins / spinsNeeded * 100f;
                 dsc.AppendLine(Lang.Get("spinningwheel:dropspindle-progress-info", progress.ToString("F0")));
-                
+
                 if (currentSpins >= spinsNeeded)
                 {
                     string outputType = inSlot.Itemstack.Attributes.GetString("outputType");
@@ -460,10 +467,30 @@ namespace SpinningWheel.Items
                         Item outputItem = world.GetItem(new AssetLocation(outputType));
                         if (outputItem != null)
                         {
-                            dsc.AppendLine(Lang.Get("spinningwheel:dropspindle-ready", outputItem.GetHeldItemName(new ItemStack(outputItem))));
+                            dsc.AppendLine(Lang.Get("spinningwheel:dropspindle-ready",
+                                outputItem.GetHeldItemName(new ItemStack(outputItem))));
                         }
                     }
                 }
+            }
+        }
+
+        #endregion
+        
+        #region Helpers
+
+        /// <summary>
+        /// Stops and disposes the sound for the given player UID, then removes it from the dictionary.
+        /// Safe to call with a null uid.
+        /// </summary>
+        private void StopSound(string uid)
+        {
+            if (uid == null) return;
+            if (spindleSounds.TryGetValue(uid, out var sound))
+            {
+                sound?.Stop();
+                sound?.Dispose();
+                spindleSounds.Remove(uid);
             }
         }
 
