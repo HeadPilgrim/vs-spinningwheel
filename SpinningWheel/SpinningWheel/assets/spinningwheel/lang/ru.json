@@ -274,5 +274,6 @@
   "spinningwheel:handbook-rustbound-shiftingfibers-weaving": "Ткачество",
   "spinningwheel:handbook-rustbound-shiftingfibers-weaving-text": "Изменчивые волокна можно напрямую соткать в <a href=\"handbooksearch://mageweave\">Магическую ткань</a> с помощью <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">челночного ткацкого станка</a>.",
   "spinningwheel:handbook-rustbound-mageweave-weaving": "Создание",
-  "spinningwheel:handbook-rustbound-mageweave-weaving-text": "Магическая ткань ткётся из <a href=\"handbooksearch://shifting fibers\">изменчивых волокон</a> с помощью <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">челночного ткацкого станка</a>."
+  "spinningwheel:handbook-rustbound-mageweave-weaving-text": "Магическая ткань ткётся из <a href=\"handbooksearch://shifting fibers\">изменчивых волокон</a> с помощью <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">челночного ткацкого станка</a>.",
+  "spinningwheel:dropspindle-wrong-fiber": "Вы должны продолжать прясть {0} — начните новое веретено, чтобы использовать другое волокно."
 }

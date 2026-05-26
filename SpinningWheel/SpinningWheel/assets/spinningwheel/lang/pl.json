@@ -278,5 +278,6 @@
     "block-hpflyshuttleloomtest-walnut-*": "Krosno z latającym czółenkiem - test (orzech włoski)",
     "block-hpflyshuttleloomtest-purpleheart-*": "Krosno z latającym czółenkiem - test (amarant)",
     "spinningwheel:blockhelp-flyshuttleloomtest-use": "Usiądź i tkaj tkaninę!",
-    "spinningwheel:blockhelp-flyshuttleloomtest-opencrafting": "Otwórz menu tkania!"
+    "spinningwheel:blockhelp-flyshuttleloomtest-opencrafting": "Otwórz menu tkania!",
+    "spinningwheel:dropspindle-wrong-fiber": "Musisz kontynuować przędzenie {0} — zacznij od nowego wrzeciona, aby użyć innego włókna."
 }

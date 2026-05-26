@@ -30,7 +30,7 @@ namespace SpinningWheel.Items
         private const int   MIN_PER_BURST   = 1;
         private const int   MAX_PER_BURST   = 2;
 
-        // FIX: Sound keyed by player UID — Item is a singleton shared across all players.
+        // Sound keyed by player UID — Item is a singleton shared across all players.
         // A single ILoadedSound field would be overwritten/disposed by concurrent users.
         private readonly Dictionary<string, ILoadedSound> spindleSounds = new Dictionary<string, ILoadedSound>();
 
@@ -79,7 +79,7 @@ namespace SpinningWheel.Items
                 return;
             }
 
-            // FIX: Replaced confusing nullable-boolean idiom with explicit null/empty checks.
+            // Replaced confusing nullable-boolean idiom with explicit null/empty checks.
             if (offhandSlot == null || offhandSlot.Empty || !CanSpin(offhandSlot.Itemstack))
             {
                 if (api.Side == EnumAppSide.Client)
@@ -96,7 +96,7 @@ namespace SpinningWheel.Items
             {
                 slot.Itemstack.TempAttributes.SetInt("renderVariant", 1);
 
-                // FIX: Use per-player sound dictionary so concurrent users don't clobber each other.
+                // Use per-player sound dictionary so concurrent users don't clobber each other.
                 string uid = player.PlayerUID;
                 if (spindleSounds.TryGetValue(uid, out var existing))
                 {
@@ -164,7 +164,7 @@ namespace SpinningWheel.Items
 
             ItemSlot offhandSlot = byEntity.LeftHandItemSlot;
 
-            // FIX: Replaced confusing nullable-boolean idiom with explicit null/empty checks.
+            // Replaced confusing nullable-boolean idiom with explicit null/empty checks.
             if (IsSpindleComplete(slot) || offhandSlot == null || offhandSlot.Empty || !CanSpin(offhandSlot.Itemstack))
             {
                 return;
@@ -281,14 +281,19 @@ namespace SpinningWheel.Items
             }
             else
             {
-                // FIX: Validate that subsequent spins use the same fiber type.
+                // Validate that subsequent spins use the same fiber type.
                 // Switching fibers mid-spin would silently produce the wrong output.
                 string lockedOutputType = spindleSlot.Itemstack.Attributes.GetString("outputType");
                 if (lockedOutputType != newOutputType)
                 {
                     IServerPlayer serverPlayer = (byEntity as EntityPlayer)?.Player as IServerPlayer;
+                    Item lockedItem = api.World.GetItem(new AssetLocation(lockedOutputType));
+                    string lockedItemName = lockedItem != null
+                        ? lockedItem.GetHeldItemName(new ItemStack(lockedItem))
+                        : lockedOutputType;
+
                     serverPlayer?.SendMessage(GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("spinningwheel:dropspindle-wrong-fiber"), EnumChatType.Notification);
+                        Lang.Get("spinningwheel:dropspindle-wrong-fiber", lockedItemName), EnumChatType.Notification);
                     return;
                 }
             }
@@ -364,7 +369,7 @@ namespace SpinningWheel.Items
             api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), player.Entity, null, false, 8);
         }
 
-        // FIX: Cached — no need to walk all world collectibles on every tooltip render.
+        // Cached — no need to walk all world collectibles on every tooltip render.
         private ItemStack[] GetSpinnableStacks()
         {
             if (_spinnableStacksCache != null) return _spinnableStacksCache;

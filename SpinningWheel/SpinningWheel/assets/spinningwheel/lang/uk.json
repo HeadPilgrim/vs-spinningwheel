@@ -345,5 +345,7 @@
     "spinningwheel:handbook-rustbound-shiftingfibers-weaving-text": "Мінливі волокна можна безпосередньо зткати в <a href=\"handbooksearch://mageweave\">Mageweave</a> за допомогою <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">ткацького верстата з літаючим човником</a>.",
 
     "spinningwheel:handbook-rustbound-mageweave-weaving": "Виготовлення",
-    "spinningwheel:handbook-rustbound-mageweave-weaving-text": "Mageweave тчеться з <a href=\"handbooksearch://shifting fibers\">мінливих волокон</a> за допомогою <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">ткацького верстата з літаючим човником</a>."
+    "spinningwheel:handbook-rustbound-mageweave-weaving-text": "Mageweave тчеться з <a href=\"handbooksearch://shifting fibers\">мінливих волокон</a> за допомогою <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">ткацького верстата з літаючим човником</a>.",
+    
+    "spinningwheel:dropspindle-wrong-fiber": "Ви повинні продовжувати прясти {0} — почніть нове веретено, щоб використати інше волокно."
 }
