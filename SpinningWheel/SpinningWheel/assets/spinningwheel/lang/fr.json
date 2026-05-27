@@ -1,0 +1,339 @@
+﻿{
+  "block-hpspinningwheel-birch-*": "Rouet à filer (Bouleau)",
+  "block-hpspinningwheel-oak-*": "Rouet à filer (Chêne)",
+  "block-hpspinningwheel-maple-*": "Rouet à filer (Érable)",
+  "block-hpspinningwheel-pine-*": "Rouet à filer (Pin)",
+  "block-hpspinningwheel-acacia-*": "Rouet à filer (Acacia)",
+  "block-hpspinningwheel-kapok-*": "Rouet à filer (Fromager)",
+  "block-hpspinningwheel-baldcypress-*": "Rouet à filer (Cyprès chauve)",
+  "block-hpspinningwheel-larch-*": "Rouet à filer (Mélèze)",
+  "block-hpspinningwheel-redwood-*": "Rouet à filer (Séquoia)",
+  "block-hpspinningwheel-ebony-*": "Rouet à filer (Ébène)",
+  "block-hpspinningwheel-walnut-*": "Rouet à filer (Noyer)",
+  "block-hpspinningwheel-purpleheart-*": "Rouet à filer (Peltogyne)",
+  "block-hpspinningwheel-aged-*": "Rouet à filer (Vieilli)",
+  "spinningwheel:blockhelp-spinningwheel-use": "Assieds-toi et fais tourner les fibres !",
+  "spinningwheel:blockhelp-spinningwheel-opencrafting": "Ouvrir le menu de fabrication !",
+
+  "material-birch": "Bouleau",
+  "material-oak": "Chêne",
+  "material-maple": "Érable",
+  "material-pine": "Pin",
+  "material-acacia": "Acacia",
+  "material-kapok": "Fromager",
+  "material-baldcypress": "Cyprès chauve",
+  "material-larch": "Mélèze",
+  "material-redwood": "Séquoia",
+  "material-ebony": "Ébène",
+  "material-walnut": "Noyer",
+  "material-purpleheart": "Peltogyne",
+  "material-aged": "Vieilli",
+  "spinningwheel:spinning-wheel-requires-class": "Le rouet à filer est réservé à ces classes : {0}.",
+  "spinningwheel:spinning-wheel-requires-class-or-trait": "Le rouet à filer est réservé à : {0}.",
+  "spinningwheel:spinning-wheel-occupied": "Quelqu'un utilise déjà le rouet à filer !",
+  "spinningwheel:loom-requires-class": "Le métier à tisser est réservé à ces classes : {0}.",
+  "spinningwheel:loom-requires-class-or-trait": "Le métier à tisser est réservé à : {0}.",
+  "spinningwheel:loom-occupied": "Quelqu'un utilise déjà le métier à tisser !",
+  "spinningwheel:classes": "Classes",
+  "spinningwheel:traits": "Traits",
+  "spinningwheel:or": "ou",
+
+  "item-hpmoaitem-birch": "Support de filage (Bouleau)",
+  "item-hpmoaitem-oak": "Support de filage (Chêne)",
+  "item-hpmoaitem-maple": "Support de filage (Érable)",
+  "item-hpmoaitem-pine": "Support de filage (Pin)",
+  "item-hpmoaitem-acacia": "Support de filage (Acacia)",
+  "item-hpmoaitem-kapok": "Support de filage (Fromager)",
+  "item-hpmoaitem-baldcypress": "Support de filage (Cyprès chauve)",
+  "item-hpmoaitem-larch": "Support de filage (Mélèze)",
+  "item-hpmoaitem-redwood": "Support de filage (Séquoia)",
+  "item-hpmoaitem-ebony": "Support de filage (Ébène)",
+  "item-hpmoaitem-walnut": "Support de filage (Noyer)",
+  "item-hpmoaitem-purpleheart": "Support de filage (Peltogyne)",
+  "item-hpmoaitem-aged": "Support de filage (Vieilli)",
+
+  "item-hpspinningwheelframe-birch": "Structure de rouet à filer (Bouleau)",
+  "item-hpspinningwheelframe-oak": "Structure de rouet à filer (Chêne)",
+  "item-hpspinningwheelframe-maple": "Structure de rouet à filer (Érable)",
+  "item-hpspinningwheelframe-pine": "Structure de rouet à filer (Pin)",
+  "item-hpspinningwheelframe-acacia": "Structure de rouet à filer (Acacia)",
+  "item-hpspinningwheelframe-kapok": "Structure de rouet à filer (Fromager)",
+  "item-hpspinningwheelframe-baldcypress": "Structure de rouet à filer (Cyprès chauve)",
+  "item-hpspinningwheelframe-larch": "Structure de rouet à filer (Mélèze)",
+  "item-hpspinningwheelframe-redwood": "Structure de rouet à filer (Séquoia)",
+  "item-hpspinningwheelframe-ebony": "Structure de rouet à filer (Ébène)",
+  "item-hpspinningwheelframe-walnut": "Structure de rouet à filer (Noyer)",
+  "item-hpspinningwheelframe-purpleheart": "Structure de rouet à filer (Peltogyne)",
+  "item-hpspinningwheelframe-aged": "Structure de rouet à filer (Vieilli)",
+
+  "item-hpspinningwheelwheelitem-birch": "Roue motrice (Bouleau)",
+  "item-hpspinningwheelwheelitem-oak": "Roue motrice (Chêne)",
+  "item-hpspinningwheelwheelitem-maple": "Roue motrice (Érable)",
+  "item-hpspinningwheelwheelitem-pine": "Roue motrice (Pin)",
+  "item-hpspinningwheelwheelitem-acacia": "Roue motrice (Acacia)",
+  "item-hpspinningwheelwheelitem-kapok": "Roue motrice (Fromager)",
+  "item-hpspinningwheelwheelitem-baldcypress": "Roue motrice (Cyprès chauve)",
+  "item-hpspinningwheelwheelitem-larch": "Roue motrice (Mélèze)",
+  "item-hpspinningwheelwheelitem-redwood": "Roue motrice (Séquoia)",
+  "item-hpspinningwheelwheelitem-ebony": "Roue motrice (Ébène)",
+  "item-hpspinningwheelwheelitem-walnut": "Roue motrice (Noyer)",
+  "item-hpspinningwheelwheelitem-purpleheart": "Roue motrice (Peltogyne)",
+  "item-hpspinningwheelwheelitem-aged": "Roue motrice (Vieilli)",
+
+  "item-hpflyshuttleloomframe-birch": "Structure du métier à tisser (Bouleau)",
+  "item-hpflyshuttleloomframe-oak": "Structure du métier à tisser (Chêne)",
+  "item-hpflyshuttleloomframe-maple": "Structure du métier à tisser (Érable)",
+  "item-hpflyshuttleloomframe-pine": "Structure du métier à tisser (Pin)",
+  "item-hpflyshuttleloomframe-acacia": "Structure du métier à tisser (Acacia)",
+  "item-hpflyshuttleloomframe-kapok": "Structure du métier à tisser (Fromager)",
+  "item-hpflyshuttleloomframe-baldcypress": "Structure du métier à tisser (Cyprès chauve)",
+  "item-hpflyshuttleloomframe-larch": "Structure du métier à tisser (Mélèze)",
+  "item-hpflyshuttleloomframe-redwood": "Structure du métier à tisser (Séquoia)",
+  "item-hpflyshuttleloomframe-ebony": "Structure du métier à tisser (Ébène)",
+  "item-hpflyshuttleloomframe-walnut": "Structure du métier à tisser (Noyer)",
+  "item-hpflyshuttleloomframe-purpleheart": "Structure du métier à tisser (Peltogyne)",
+  "item-hpflyshuttleloomframe-aged": "Structure du métier à tisser (Vieilli)",
+
+  "item-hpflyshuttleloombeater-birch": "Batteur (Bouleau)",
+  "item-hpflyshuttleloombeater-oak": "Batteur (Chêne)",
+  "item-hpflyshuttleloombeater-maple": "Batteur (Érable)",
+  "item-hpflyshuttleloombeater-pine": "Batteur (Pin)",
+  "item-hpflyshuttleloombeater-acacia": "Batteur (Acacia)",
+  "item-hpflyshuttleloombeater-kapok": "Batteur (Fromager)",
+  "item-hpflyshuttleloombeater-baldcypress": "Batteur (Cyprès chauve)",
+  "item-hpflyshuttleloombeater-larch": "Batteur (Mélèze)",
+  "item-hpflyshuttleloombeater-redwood": "Batteur (Séquoia)",
+  "item-hpflyshuttleloombeater-ebony": "Batteur (Ébène)",
+  "item-hpflyshuttleloombeater-walnut": "Batteur (Noyer)",
+  "item-hpflyshuttleloombeater-purpleheart": "Batteur (Peltogyne)",
+  "item-hpflyshuttleloombeater-aged": "Batteur (Vieilli)",
+
+  "item-hpflyshuttleloomheddle-birch": "Lisse (Bouleau)",
+  "item-hpflyshuttleloomheddle-oak": "Lisse (Chêne)",
+  "item-hpflyshuttleloomheddle-maple": "Lisse (Érable)",
+  "item-hpflyshuttleloomheddle-pine": "Lisse (Pin)",
+  "item-hpflyshuttleloomheddle-acacia": "Lisse (Acacia)",
+  "item-hpflyshuttleloomheddle-kapok": "Lisse (Fromager)",
+  "item-hpflyshuttleloomheddle-baldcypress": "Lisse (Cyprès chauve)",
+  "item-hpflyshuttleloomheddle-larch": "Lisse (Mélèze)",
+  "item-hpflyshuttleloomheddle-redwood": "Lisse (Séquoia)",
+  "item-hpflyshuttleloomheddle-ebony": "Lisse (Ébène)",
+  "item-hpflyshuttleloomheddle-walnut": "Lisse (Noyer)",
+  "item-hpflyshuttleloomheddle-purpleheart": "Lisse (Peltogyne)",
+  "item-hpflyshuttleloomheddle-aged": "Lisse (Vieilli)",
+
+  "item-hpdropspindle": "Fuseau à filer en bois",
+
+  "spinningwheel:dropspindle-spin": "Filer les fibres (Tenir les fibres dans la main secondaire)",
+  "spinningwheel:dropspindle-extract": "Extraire la ficelle (S'accroupir + Clic droit)",
+  "spinningwheel:dropspindle-need-fibers": "Tenez les fibres filables dans votre main secondaire.",
+  "spinningwheel:dropspindle-extract-hint": "S'accroupir + Clic droit pour extraire la ficelle",
+  "spinningwheel:dropspindle-complete": "Filage terminé ! S'accroupir + Clic droit pour extraire.",
+  "spinningwheel:dropspindle-progress": "Progression du filage : {0}%",
+  "spinningwheel:dropspindle-progress-info": "Progression : {0}%",
+  "spinningwheel:dropspindle-ready": "Prêt à extraire : {0}",
+
+  "itemdesc-hpdropspindle": "Un outil simple tenu à la main pour filer des fibres en fil. Tenez les fibres dans votre main secondaire et faites un clic droit pour filer.",
+
+  "config-title": "Configuration du rouet à filer",
+
+  "section-tailor": "Restrictions de classe et trait",
+  "section-flax-spinning": "Paramètres de filage du lin (vanilla)",
+  "spinningwheel:section-flax-weaving": "Paramètres de tissage du lin (vanilla)",
+  "section-cotton": "Zones florales des Caraïbes",
+  "section-wool": "Paramètres de laine et plus",
+  "section-tailorsdelight": "Paramètres Tailor's Delight",
+  "section-pemmican": "Paramètres de conservation des aliments",
+  "section-rustboundmagic": "Paramètres Rustbound Magic",
+
+  "RequireClassOrTrait": "Requiert une classe ou un trait",
+  "RequireClassOrTrait-Comment": "Si activé, seuls les joueurs disposant des classes ou traits autorisés peuvent utiliser le rouet à filer et le métier à tisser.",
+
+  "setting-twine-grid-recipe-toggle": "Activer/désactiver la recette de la grille de ficelle",
+  "setting-twine-grid-recipe-toggle-comment": "Activez cette option pour désactiver les recettes de grille de ficelle",
+
+  "setting-show-dropspindle-progress": "Afficher les messages de progression du fuseau à filer",
+  "setting-show-dropspindle-progress-comment": "Afficher les messages de chat lors de l’utilisation du fuseau à filer",
+
+  "setting-allowed-classes": "Classes autorisées",
+  "setting-allowed-classes-comment": "Liste des classes pouvant utiliser le rouet à filer et le métier à tisser",
+
+  "setting-allowed-traits": "Traits autorisés",
+  "setting-allowed-traits-comment": "Liste des traits pouvant utiliser le rouet à filer et le métier à tisser (par ex. tailleur)",
+
+  "setting-flax-spin-time": "Temps de filage du lin",
+  "setting-flax-spin-time-comment": "Temps en secondes nécessaire pour filer les fibres de lin en ficelle",
+
+  "setting-flax-input-quantity": "Quantité de fibres de lin en entrée",
+  "setting-flax-input-quantity-comment": "Nombre de fibres de lin requises par filage",
+
+  "setting-flax-output-quantity": "Quantité de ficelle de lin produite",
+  "setting-flax-output-quantity-comment": "Nombre de ficelles de lin produites par filage",
+
+  "spinningwheel:setting-flax-weaving-input-quantity": "Quantité de ficelle de lin en entrée",
+  "spinningwheel:setting-flax-weaving-input-quantity-comment": "Nombre de ficelles de lin requises par tissage",
+
+  "spinningwheel:setting-flax-weaving-output-quantity": "Quantité de tissu produite",
+  "spinningwheel:setting-flax-weaving-output-quantity-comment": "Nombre de pièces de tissu produites par cycle",
+
+  "setting-cotton-spin-time": "Temps de filage des fibres de coton",
+  "setting-cotton-spin-time-comment": "Temps en secondes nécessaire pour filer le coton en ficelle",
+
+  "setting-cotton-input-quantity": "Quantité de fibres de coton en entrée",
+  "setting-cotton-input-quantity-comment": "Nombre de fibres de coton requises par filage",
+
+  "setting-cotton-output-quantity": "Quantité de coton produite",
+  "setting-cotton-output-quantity-comment": "Nombre de ficelles produites par filage de coton",
+
+  "setting-wool-fiber-spin-time": "Temps de filage des fibres de laine",
+  "setting-wool-fiber-spin-time-comment": "Temps en secondes nécessaire pour filer les fibres de laine en ficelle",
+
+  "setting-wool-fiber-input-quantity": "Quantité de fibres de laine en entrée",
+  "setting-wool-fiber-input-quantity-comment": "Nombre de fibres de laine requises par filage",
+
+  "setting-wool-fiber-output-quantity": "Quantité de ficelle produite à partir des fibres de laine",
+  "setting-wool-fiber-output-quantity-comment": "Nombre de ficelles de laine produites par filage",
+
+  "setting-wool-twine-spin-time": "Temps de filage de la ficelle de laine",
+  "setting-wool-twine-spin-time-comment": "Temps en secondes nécessaire pour filer la ficelle de laine en fil",
+
+  "setting-wool-twine-input-quantity": "Quantité de ficelle de laine en entrée pour le filage",
+  "setting-wool-twine-input-quantity-comment": "Quantité de ficelle de laine requise par filage",
+
+  "setting-wool-twine-output-quantity": "Quantité de ficelle de laine produite par filage",
+  "setting-wool-twine-output-quantity-comment": "Quantité de fil produite par filage de ficelle de laine",
+
+  "setting-papyrus-input-quantity": "Quantité de papyrus en entrée",
+  "setting-papyrus-input-quantity-comment": "Quantité de fibres de papyrus requises par filage",
+
+  "setting-papyrus-output-quantity": "Quantité de ficelle de papyrus produite par filage",
+  "setting-papyrus-output-quantity-comment": "Quantité de ficelle produite par filage de papyrus",
+
+  "setting-papyrus-spin-time": "Temps de filage du papyrus",
+  "setting-papyrus-spin-time-comment": "Temps en secondes nécessaire pour filer le papyrus en ficelle",
+
+  "setting-algae-input-quantity": "Quantité d’algues en entrée",
+  "setting-algae-input-quantity-comment": "Quantité de fibres d’algues requises par filage",
+
+  "setting-algae-output-quantity": "Quantité de ficelle d’algues produite",
+  "setting-algae-output-quantity-comment": "Quantité de ficelle produite par filage d’algues",
+
+  "setting-algae-spin-time": "Temps de filage des algues",
+  "setting-algae-spin-time-comment": "Temps en secondes nécessaire pour filer les algues en ficelle",
+
+  "setting-flax-twine-weave-input": "Quantité de ficelle de lin requise pour le tissage",
+  "setting-flax-twine-weave-input-comment": "Quantité de ficelle de lin requise par cycle de tissage",
+
+  "setting-flax-twine-weave-output": "Quantité de tissu produite à partir de la ficelle de lin",
+  "setting-flax-twine-weave-output-comment": "Quantité de lin produite par cycle de tissage",
+
+  "setting-wool-twine-weave-input": "Quantité de ficelle de laine en entrée pour le tissage",
+  "setting-wool-twine-weave-input-comment": "Quantité de ficelle de laine requise par cycle de tissage",
+
+  "setting-wool-twine-weave-output": "Quantité de tissu de laine produite",
+  "setting-wool-twine-weave-output-comment": "Quantité de tissu de laine produite par cycle de tissage",
+
+  "setting-tailorsdelight-thread-weave-input": "Quantité de fil en entrée pour le tissage",
+  "setting-tailorsdelight-thread-weave-input-comment": "Quantité de fil requise par cycle de tissage",
+
+  "setting-tailorsdelight-thread-weave-output": "Quantité de tissu produite à partir du fil",
+  "setting-tailorsdelight-thread-weave-output-comment": "Quantité de tissu produite par cycle de tissage",
+
+  "setting-shiftingfibers-spin-time": "Temps de filage des Fibres changeantes",
+  "setting-shiftingfibers-spin-time-comment": "Temps en secondes nécessaire pour filer les fibres changeantes en ficelle",
+
+  "setting-shiftingfibers-input-quantity": "Quantité de Fibres changeantes en entrée",
+  "setting-shiftingfibers-input-quantity-comment": "Nombre de fibres changeantes requises par filage",
+
+  "setting-shiftingfibers-output-quantity": "Quantité de ficelle de fibres changeantes produite",
+  "setting-shiftingfibers-output-quantity-comment": "Nombre de ficelles produites par filage de fibres changeantes",
+
+  "setting-shiftingfibers-weave-input": "Fibres changeantes requises pour le tissage",
+  "setting-shiftingfibers-weave-input-comment": "Nombre de fibres changeantes requises par cycle de tissage",
+
+  "setting-shiftingfibers-weave-output": "Production de Mageweave",
+  "setting-shiftingfibers-weave-output-comment": "Quantité de Mageweave produite par cycle de tissage",
+
+  "section-ruderalis": "Paramètres Ruderalis",
+
+  "setting-stalk-spin-time": "Temps de filage de la tige",
+  "setting-stalk-spin-time-comment": "Temps en secondes nécessaire pour filer la tige en fibres de chanvre",
+
+  "setting-stalk-input-quantity": "Quantité de tiges en entrée",
+  "setting-stalk-input-quantity-comment": "Nombre de tiges requises par filage",
+
+  "setting-stalk-output-quantity": "Quantité de fibres de chanvre produites",
+  "setting-stalk-output-quantity-comment": "Nombre de fibres de chanvre produites par filage de tige",
+
+  "setting-hempfibers-weave-input": "Fibres de chanvre requises pour le tissage",
+  "setting-hempfibers-weave-input-comment": "Nombre de fibres de chanvre requises par cycle de tissage",
+
+  "setting-hempfibers-weave-output": "Production de toile de chanvre",
+  "setting-hempfibers-weave-output-comment": "Quantité de toile de chanvre produite par cycle de tissage",
+
+  "spinningwheel:gui-title-spinningwheel": "Rouet à filer",
+  "spinningwheel:gui-title-loom": "Métier à tisser à navette volante",
+
+  "gui-loom-tab-normal": "Normal",
+  "gui-loom-tab-pattern": "Motif",
+  "gui-loom-pattern-nomatch": "Aucun motif ne correspond à la recette",
+  "gui-loom-requires-mods": "Le tissage de motifs nécessite les mods Tailor's Delight et Wool and More",
+
+  "spinningwheel:blockhelp-loom-sit": "Assieds-toi et tisse le tissu !",
+  "spinningwheel:blockhelp-loom-opencrafting": "Ouvrir le menu de tissage !",
+
+  "block-hpflyshuttleloom-birch-*": "Métier à tisser à navette volante (Bouleau)",
+  "block-hpflyshuttleloom-oak-*": "Métier à tisser à navette volante (Chêne)",
+  "block-hpflyshuttleloom-maple-*": "Métier à tisser à navette volante (Érable)",
+  "block-hpflyshuttleloom-pine-*": "Métier à tisser à navette volante (Pin)",
+  "block-hpflyshuttleloom-acacia-*": "Métier à tisser à navette volante (Acacia)",
+  "block-hpflyshuttleloom-kapok-*": "Métier à tisser à navette volante (Fromager)",
+  "block-hpflyshuttleloom-baldcypress-*": "Métier à tisser à navette volante (Cyprès chauve)",
+  "block-hpflyshuttleloom-larch-*": "Métier à tisser à navette volante (Mélèze)",
+  "block-hpflyshuttleloom-redwood-*": "Métier à tisser à navette volante (Séquoia)",
+  "block-hpflyshuttleloom-ebony-*": "Métier à tisser à navette volante (Ébène)",
+  "block-hpflyshuttleloom-walnut-*": "Métier à tisser à navette volante (Noyer)",
+  "block-hpflyshuttleloom-purpleheart-*": "Métier à tisser à navette volante (Peltogyne)",
+  "block-hpflyshuttleloom-aged-*": "Métier à tisser à navette volante (Vieilli)",
+
+  "spinningwheel:blockhelp-flyshuttleloom-use": "Assieds-toi et tisse le tissu !",
+  "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Ouvrir le menu de tissage !",
+
+  "spinningwheel:blockhelp-flyshuttleloomtest-use": "Assieds-toi et tisse le tissu !",
+  "spinningwheel:blockhelp-flyshuttleloomtest-opencrafting": "Ouvrir le menu de tissage !",
+
+  "spinningwheel:handbook-spinningwheel-title": "Mécanique de fabrication : Rouet à filer",
+  "spinningwheel:handbook-spinningwheel-text": "<font size=\"18\" weight=\"bold\">Aperçu</font><br><br>Le <a href=\"handbooksearch://Rouet à filer\">rouet à filer</a> est une station de fabrication actionnée au pied utilisée pour transformer les fibres brutes en ficelle et en fil. Il offre une alternative plus immersive à la fabrication de ficelle directement dans la grille d’artisanat.<br><br><font size=\"18\" weight=\"bold\">Comment l’utiliser</font><br><br><strong>1. Placer le rouet à filer</strong><br>Le rouet à filer est une structure multibloc 2x2x2. Placez-le sur une surface plane avec suffisamment d’espace.<br><br><strong>2. S’asseoir</strong><br>Faites un clic droit sur le rouet pour vous asseoir. Votre personnage prendra place et sera prêt à filer.<br><br><strong>3. Ouvrir le menu de fabrication</strong><br>Une fois assis, faites un clic droit sur n’importe quelle partie pour ouvrir l’interface du rouet. Cela permet de charger les fibres et de récupérer les produits finis.<br><br><strong>4. Ajouter des fibres</strong><br>Placez des fibres filables (comme les <a href=\"handbooksearch://Fibre de lin\">fibres de lin</a>) dans l’emplacement d’entrée.<br><br><strong>5. Filer</strong><br>Une fois assis avec des fibres, votre personnage commencera automatiquement à filer. La roue tournera et les fibres seront transformées en ficelle au fil du temps.<br><br><strong>6. Récupérer le produit</strong><br>Retirez la ficelle terminée de l’emplacement de sortie une fois le filage terminé.<br><br><font size=\"18\" weight=\"bold\">Matériaux filables</font><br><br><strong>Vanilla :</strong><br>Les fibres de lin produisent de la ficelle de lin<br><br><strong>Avec le mod Wool and More :</strong><br>Les fibres de laine produisent de la ficelle de laine<br><br><strong>Avec le mod Floral Zones Caribbean :</strong><br>Les fibres de coton produisent de la ficelle de lin<br><br><strong>Avec le mod Pemmican :</strong><br>Les fibres de papyrus et les algues produisent de la ficelle de lin<br><br><font size=\"18\" weight=\"bold\">Alternative portable</font><br><br>Si vous devez filer des fibres en voyage, utilisez le <a href=\"handbooksearch://Fuseau à filer\">fuseau à filer</a>. Il est plus lent mais utilisable n’importe où sans station.<br><br><font size=\"18\" weight=\"bold\">Conseils</font><br><br>- Le rouet à filer est plus rapide que la fabrication manuelle dans la grille<br>- Vous pouvez modifier les temps et quantités dans les paramètres du mod<br>- Les administrateurs peuvent limiter son usage à certaines classes de joueurs",
+
+  "spinningwheel:handbook-loom-title": "Mécanique de fabrication : Métier à tisser à navette volante",
+  "spinningwheel:handbook-loom-text": "<font size=\"18\" weight=\"bold\">Aperçu</font><br><br>Le <a href=\"handbooksearch://Métier à tisser à navette volante\">métier à tisser à navette volante</a> est une station de tissage avancée qui transforme la ficelle en tissu. Nommé d’après son mécanisme de navette qui traverse les fils de chaîne, ce métier à tisser offre une manière immersive de fabriquer des textiles.<br><br><font size=\"18\" weight=\"bold\">Comment l’utiliser</font><br><br><strong>1. Placer le métier à tisser</strong><br>Le métier à tisser est une structure multibloc de 3x2x2. Assurez-vous d’avoir suffisamment d’espace avant de le placer.<br><br><strong>2. S’asseoir</strong><br>Faites un clic droit sur le métier à tisser pour vous asseoir. Votre personnage prendra place sur le banc de tissage.<br><br><strong>3. Ouvrir le menu de tissage</strong><br>Une fois assis, faites un clic droit sur n’importe quelle partie pour ouvrir l’interface du métier à tisser.<br><br><strong>4. Charger la ficelle</strong><br>Placez de la ficelle tissable (comme la <a href=\"handbooksearch://Ficelle de lin\">ficelle de lin</a>) dans l’emplacement d’entrée. Les différents types de ficelle produisent différents types de tissu.<br><br><strong>5. Tisser</strong><br>Une fois assis avec de la ficelle chargée, votre personnage commencera à tisser. Vous verrez le mouvement animé de la navette pendant la fabrication du tissu.<br><br><strong>6. Récupérer le tissu</strong><br>Retirez le tissu terminé de l’emplacement de sortie.<br><br><font size=\"18\" weight=\"bold\">Matériaux tissables</font><br><br><strong>Vanilla :</strong><br>La ficelle de lin produit du tissu de lin<br><br><strong>Avec le mod Wool and More :</strong><br>La ficelle de laine produit du tissu de laine<br><br>La ficelle de laine existe en plusieurs couleurs, et le tissu obtenu conserve la couleur de la ficelle utilisée.<br><br><font size=\"18\" weight=\"bold\">Tissage de motifs</font><br><br>Avec les mods Tailor's Delight et Wool and More installés, le métier à tisser débloque le <a href=\"handbook://spinningwheel:pattern-weaving-guide\">tissage de motifs</a> permettant de créer des tissus décoratifs à carreaux. Consultez le <a href=\"handbook://spinningwheel:pattern-weaving-guide\">guide du tissage de motifs</a> pour plus de détails.<br><br><font size=\"18\" weight=\"bold\">Flux de production</font><br><br>Le flux textile typique est le suivant :<br><br>1. Récolter des fibres (lin, laine, coton, etc.)<br>2. <a href=\"handbook://spinningwheel:spinning-wheel-guide\">Transformer les fibres en ficelle</a> avec le rouet à filer<br>3. Tisser la ficelle en tissu avec le métier à tisser<br>4. Utiliser le tissu pour fabriquer des vêtements, sacs et autres objets<br><br><font size=\"18\" weight=\"bold\">Conseils</font><br><br>- Chaque cycle de tissage consomme 9 ficelles par défaut<br>- Vous pouvez modifier les quantités dans les paramètres du mod<br>- L’animation de la navette indique la progression du tissage<br>- Les administrateurs peuvent restreindre l’usage du métier à tisser à certaines classes de joueurs",
+
+  "spinningwheel:handbook-see-also-spinning": "Filage",
+  "spinningwheel:handbook-see-also-spinning-text": "Ce matériau peut être filé en ficelle à l’aide du <a href=\"handbook://spinningwheel:spinning-wheel-guide\">rouet à filer</a> ou du <a href=\"handbooksearch://Fuseau à filer\">fuseau à filer</a>.",
+
+  "spinningwheel:handbook-see-also-twine": "Fabrication",
+  "spinningwheel:handbook-see-also-twine-text": "La ficelle est créée en filant des fibres sur le <a href=\"handbook://spinningwheel:spinning-wheel-guide\">rouet à filer</a> et peut être tissée en tissu à l’aide du <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
+
+  "spinningwheel:handbook-see-also-weaving": "Tissage",
+  "spinningwheel:handbook-see-also-weaving-text": "Ce tissu est tissé à partir de ficelle à l’aide du <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
+
+  "spinningwheel:handbook-see-also-thread": "Fabrication",
+  "spinningwheel:handbook-see-also-thread-text": "Le fil est obtenu à partir de la <a href=\"handbooksearch://Ficelle de laine\">ficelle de laine</a> à l’aide du <a href=\"handbook://spinningwheel:spinning-wheel-guide\">rouet à filer</a> et peut être tissé en tissu avec le <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
+
+  "spinningwheel:handbook-see-also-checkered": "Tissage de motifs",
+  "spinningwheel:handbook-see-also-checkered-text": "Les motifs sont créés sur le métier à tisser.",
+
+  "spinningwheel:handbook-patternweaving-title": "Mécanique de fabrication : Tissage de motifs",
+  "spinningwheel:handbook-patternweaving-text": "<font size=\"18\" weight=\"bold\">Aperçu</font><br><br>Le tissage de motifs est une technique avancée disponible sur le <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a> qui permet de créer des tissus décoratifs à carreaux en combinant différents fils colorés.<br><br><font size=\"18\" weight=\"bold\">Conditions requises</font><br><br>Le tissage de motifs nécessite l’installation des mods <strong>Tailor's Delight</strong> et <strong>Wool and More</strong>. <font color=\"#c44\"><strong>Sans ces deux mods, l’onglet Motif ne sera pas visible.</strong></font><br><br><font size=\"18\" weight=\"bold\">Fonctionnement</font><br><br>Contrairement au tissage classique qui utilise un seul emplacement, le tissage de motifs utilise une <strong>grille 2x2</strong> où la disposition des fils détermine le motif à carreaux. Les fils sont placés en diagonale :<br><br><strong>[ Accent ] [ Base ]</strong><br><strong>[ Base ] [ Accent ]</strong><br><br><font size=\"18\" weight=\"bold\">Couleurs standards</font><br><br>Pour les tissus à carreaux standards (rouge, bleu, vert, etc.) :<br>- <strong>Accent (diagonale) :</strong> Fil coloré (ex : fil rouge)<br>- <strong>Base (diagonale) :</strong> Ficelle de lin <em>ou</em> ficelle de laine simple<br><br><font size=\"18\" weight=\"bold\">Couleurs sombres</font><br><br>Pour les tissus à carreaux sombres (rouge foncé, bleu foncé, vert foncé, brun foncé) :<br>- <strong>Accent (diagonale) :</strong> Fil sombre (ex : fil rouge foncé)<br>- <strong>Base (diagonale) :</strong> Variante plus claire correspondante (ex : fil rouge)<br><br>Les motifs sombres associent le fil foncé à sa version non foncée au lieu de ficelle de lin ou de laine simple.<br><br><font size=\"18\" weight=\"bold\">Étapes</font><br><br><strong>1.</strong> S’asseoir au métier à tisser à navette volante<br><strong>2.</strong> Ouvrir l’interface du métier à tisser<br><strong>3.</strong> Passer à l’onglet <strong>Motif</strong><br><strong>4.</strong> Placer le fil accent en haut à gauche et en bas à droite<br><strong>5.</strong> Placer le fil de base en haut à droite et en bas à gauche<br><strong>6.</strong> Commencer le tissage pour produire un tissu à carreaux<br><br><font size=\"18\" weight=\"bold\">Conseils</font><br><br>- Le fil accent détermine la couleur du tissu obtenu<br>- Vérifiez que les fils sont placés sur les bonnes diagonales<br>- De la ficelle de lin ou de laine simple peut être utilisée comme base pour les couleurs standards",
+
+  "spinningwheel:handbook-rustbound-shiftingfibers-spinning": "Filage",
+  "spinningwheel:handbook-rustbound-shiftingfibers-spinning-text": "Les fibres instables peuvent être filées en <a href=\"handbooksearch://Ficelle de lin\">ficelle de lin</a> à l’aide du <a href=\"handbook://spinningwheel:spinning-wheel-guide\">rouet à filer</a> ou du <a href=\"handbooksearch://Fuseau à filer\">fuseau à filer</a>.",
+
+  "spinningwheel:handbook-rustbound-shiftingfibers-weaving": "Tissage",
+  "spinningwheel:handbook-rustbound-shiftingfibers-weaving-text": "Les fibres instables peuvent être directement tissées en <a href=\"handbooksearch://mageweave\">mageweave</a> à l’aide du <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
+
+  "spinningwheel:handbook-rustbound-mageweave-weaving": "Fabrication",
+  "spinningwheel:handbook-rustbound-mageweave-weaving-text": "Le mageweave est tissé à partir de <a href=\"handbooksearch://shifting fibers\">fibres instables</a> à l’aide du <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
+
+  "spinningwheel:dropspindle-wrong-fiber": "Vous devez continuer à filer {0} — commencez un nouveau fuseau pour utiliser une fibre différente."
+}
