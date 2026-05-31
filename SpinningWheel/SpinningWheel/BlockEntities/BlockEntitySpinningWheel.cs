@@ -443,9 +443,27 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
 
         if (!blockBroken)
         {
-            foreach (BlockFacing checkFacing in BlockFacing.HORIZONTALS)
+            // Resolve facing - same fallback used by Position getter.
+            BlockFacing dismountFacing = facing ?? BlockFacing.FromCode(Block?.LastCodePart()) ?? BlockFacing.NORTH;
+
+            // Using the seat EntityPos directly - it already encodes the correct XZ centre
+            EntityPos seatPos = Position;
+            BlockFacing exitDir = dismountFacing.Opposite;
+            
+            // Can land back inside the wheel's own collision box. Step 1.5 blocks to clear it.
+            const double step = 1.5;
+            Vec3d[] candidates = new Vec3d[]
             {
-                Vec3d placePos = Pos.ToVec3d().AddCopy(checkFacing).Add(0.5, 0.001, 0.5);
+                // Preferred: directly behind the player
+                new Vec3d(seatPos.X + exitDir.Normalf.X * step, Pos.Y + 0.001, seatPos.Z + exitDir.Normalf.Z * step),
+                // Fallbacks: perpendicular sides, then in front
+                new Vec3d(seatPos.X + exitDir.GetCW().Normalf.X  * step, Pos.Y + 0.001, seatPos.Z + exitDir.GetCW().Normalf.Z  * step),
+                new Vec3d(seatPos.X + exitDir.GetCCW().Normalf.X * step, Pos.Y + 0.001, seatPos.Z + exitDir.GetCCW().Normalf.Z * step),
+                new Vec3d(seatPos.X + dismountFacing.Normalf.X   * step, Pos.Y + 0.001, seatPos.Z + dismountFacing.Normalf.Z   * step),
+            };
+
+            foreach (Vec3d placePos in candidates)
+            {
                 if (!Api.World.CollisionTester.IsColliding(Api.World.BlockAccessor, entityAgent.SelectionBox, placePos, false))
                 {
                     entityAgent.TeleportTo(placePos);
@@ -453,7 +471,6 @@ public class BlockEntitySpinningWheel : BlockEntityOpenableContainer, IMountable
                 }
             }
         }
-
         mountedByEntityId = 0;
         mountedByPlayerUid = null;
         MarkDirty(false);
