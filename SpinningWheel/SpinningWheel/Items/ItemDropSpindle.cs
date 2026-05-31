@@ -129,18 +129,17 @@ namespace SpinningWheel.Items
                 1,
                 MAX_SPIN_VARIANTS
             );
+            
+            int prevRenderVariant = slot.Itemstack.TempAttributes.GetInt("renderVariant", 0);
+            slot.Itemstack.TempAttributes.SetInt("renderVariant", renderVariant);
 
-            if (api.Side == EnumAppSide.Client)
+            if (prevRenderVariant != renderVariant)
             {
-                int prevRenderVariant = slot.Itemstack.TempAttributes.GetInt("renderVariant", 0);
-                slot.Itemstack.TempAttributes.SetInt("renderVariant", renderVariant);
-
-                if (prevRenderVariant != renderVariant)
-                {
-                    (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
-                }
-
-                // Particle effects
+                (byEntity as EntityPlayer)?.Player?.InventoryManager.BroadcastHotbarSlot();
+            }
+            
+            if (api.Side == EnumAppSide.Server)
+            {
                 if (secondsUsed % BURST_INTERVAL > 0.03f) return secondsUsed < SPIN_ANIMATION_TIME;
                 SpawnSpiralBurst(byEntity, secondsUsed);
             }
@@ -150,12 +149,13 @@ namespace SpinningWheel.Items
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
-            // Client-side cleanup
+            // Sound is client-only; variant cleanup must run on both sides so other clients
+            // don't get stuck on the last animation frame after the interaction ends.
             if (api.Side == EnumAppSide.Client)
             {
                 StopSound((byEntity as EntityPlayer)?.Player?.PlayerUID);
-                slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
+            slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
 
             if (secondsUsed < SPIN_ANIMATION_TIME - 0.1f) return;
 
@@ -198,8 +198,8 @@ namespace SpinningWheel.Items
             if (api.Side == EnumAppSide.Client)
             {
                 StopSound((byEntity as EntityPlayer)?.Player?.PlayerUID);
-                slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
             }
+            slot.Itemstack?.TempAttributes.RemoveAttribute("renderVariant");
 
             return true;
         }
