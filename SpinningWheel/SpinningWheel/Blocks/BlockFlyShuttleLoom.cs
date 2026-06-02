@@ -33,7 +33,6 @@ namespace SpinningWheel.Blocks
         {
             base.OnLoaded(api);
         
-            // Store per block code variant
             string codeKey = Code.ToString();
             if (!valuesByCode.ContainsKey(codeKey))
             {
@@ -52,38 +51,20 @@ namespace SpinningWheel.Blocks
             BlockEntityFlyShuttleLoom beLoom = world.BlockAccessor.GetBlockEntity(pos) as BlockEntityFlyShuttleLoom;
             return beLoom;
         }
-        
-        // --- IMultiBlockInteract Implementation ---
+
         #region IMultiBlockInteract Implementation
+
         public bool MBDoPartialSelection(IWorldAccessor world, BlockPos pos, Vec3i offset)
         {
-            return true; // No special particle selection needed
+            return true;
         }
 
-        public BlockSounds MBGetSounds(IBlockAccessor blockAccessor, BlockSelection blockSel, ItemStack byItemStack, Vec3i offset)
-        {
-            return Sounds; // Use block's default sounds
-        }
-
-        public bool MBOnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason, Vec3i offset)
-        {
-            return true; // Allow cancellation to proceed normally
-        }
         public bool MBOnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            // Debug: Logs position of right clicks
-            //world.Api.Logger.Debug($"[FlyShuttleLoom] MBOnBlockInteractStart - offset: {offset.X},{offset.Y},{offset.Z}, SelectionBoxIndex: {blockSel.SelectionBoxIndex}");
-            
-            // Check if player has permission
             if (!world.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
-            {
                 return false;
-            }
 
-            // Calculate control block position
             BlockPos controlBlockPos = blockSel.Position.AddCopy(offset);
-            
-            // Get the block entity
             BlockEntityFlyShuttleLoom beLoom = world.BlockAccessor.GetBlockEntity(controlBlockPos) as BlockEntityFlyShuttleLoom;
             
             if (beLoom == null)
@@ -92,146 +73,99 @@ namespace SpinningWheel.Blocks
                 return false;
             }
 
-            // Get the block's facing direction
             BlockFacing facing = BlockFacing.FromCode(LastCodePart());
-            
-            // Normalize the offset to north-facing coordinates
-            Vec3i normalizedOffset = NormalizeOffset(offset, facing);
-            string offsetKey = $"{normalizedOffset.X},{normalizedOffset.Y},{normalizedOffset.Z}";
-            
-            //world.Api.Logger.Debug($"[FlyShuttleLoom] Facing: {facing.Code}, Raw offset: {offset.X},{offset.Y},{offset.Z}, Normalized: {offsetKey}");
+            bool isSeat = IsSeatOffset(offset, facing, blockSel.SelectionBoxIndex);
 
-            // Route based on which part was clicked (using north-facing coordinates)
-            switch (offsetKey)
-            {
-                case "0,0,-1":
-                    // Bench center - SelectionBoxIndex 1 is the seat, others are loom parts
-                    if (blockSel.SelectionBoxIndex == 1)
-                    {
-                        return beLoom.OnPlayerInteract(byPlayer);
-                    }
-                    // SelectionBoxIndex 0, 2, 3 are other loom parts at this position - open GUI
-                    return beLoom.OpenGui(byPlayer);
+            // world.Api.Logger.Debug($"[FlyShuttleLoom] Interact - Facing: {facing.Code}, Offset: {offset}, SelBox: {blockSel.SelectionBoxIndex}, IsSeat: {isSeat}");
 
-                case "-1,0,-1":
-                    // Bench left (when facing north) - SelectionBoxIndex 1 is the seat
-                    if (blockSel.SelectionBoxIndex == 1)
-                    {
-                        return beLoom.OnPlayerInteract(byPlayer);
-                    }
-                    // Other selection box indexes - open GUI
-                    return beLoom.OpenGui(byPlayer);
-
-                case "1,0,-1":
-                    // Bench right (when facing north) - SelectionBoxIndex 1 is the seat
-                    if (blockSel.SelectionBoxIndex == 1)
-                    {
-                        return beLoom.OnPlayerInteract(byPlayer);
-                    }
-                    // Other selection box indexes - open GUI
-                    return beLoom.OpenGui(byPlayer);
-
-                default:
-                    // All other parts of the loom - open GUI
-                    return beLoom.OpenGui(byPlayer);
-            }
-        }
-
-        private Vec3i NormalizeOffset(Vec3i offset, BlockFacing facing)
-        {
-            // Rotate the offset back to north-facing coordinates
-            int x = offset.X;
-            int y = offset.Y;
-            int z = offset.Z;
-
-            switch (facing.Code)
-            {
-                case "north":
-                    // Already in north orientation
-                    return new Vec3i(x, y, z);
-            
-                case "east":
-                    // Block rotated 270° from north (or -90°)
-                    // To reverse: rotate 90° counter-clockwise
-                    // X_north = Z_east, Z_north = -X_east
-                    return new Vec3i(z, y, -x);
-            
-                case "south":
-                    // Block rotated 180° from north
-                    // To reverse: rotate 180°
-                    // X_north = -X_south, Z_north = -Z_south
-                    return new Vec3i(-x, y, -z);
-            
-                case "west":
-                    // Block rotated 90° from north (or -270°)
-                    // To reverse: rotate 270° counter-clockwise (or 90° clockwise)
-                    // X_north = -Z_west, Z_north = X_west
-                    return new Vec3i(-z, y, x);
-            
-                default:
-                    return offset;
-            }
-        }
-
-        public WorldInteraction[] MBGetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection blockSel, IPlayer forPlayer, Vec3i offset)
-        {
-            // Get the block's facing direction
-            BlockFacing facing = BlockFacing.FromCode(this.LastCodePart());
-            
-            // Normalize the offset to north-facing coordinates
-            Vec3i normalizedOffset = NormalizeOffset(offset, facing);
-            string offsetKey = $"{normalizedOffset.X},{normalizedOffset.Y},{normalizedOffset.Z}";
-            
-            // Check if hovering over bench (SelectionBoxIndex 1)
-            bool isBenchPosition = 
-                (offsetKey == "0,0,-1" || offsetKey == "-1,0,-1" || offsetKey == "1,0,-1") && 
-                blockSel.SelectionBoxIndex == 1;
-            
-            if (isBenchPosition)
-            {
-                return new WorldInteraction[]
-                {
-                    new WorldInteraction()
-                    {
-                        ActionLangCode = "spinningwheel:blockhelp-loom-sit",
-                        MouseButton = EnumMouseButton.Right
-                    }
-                };
-            }
+            if (isSeat)
+                return beLoom.OnPlayerInteract(byPlayer);
             else
-            {
-                // Show "Open Crafting Menu" for other parts
-                return new WorldInteraction[]
-                {
-                    new WorldInteraction()
-                    {
-                        ActionLangCode = "spinningwheel:blockhelp-loom-opencrafting",
-                        MouseButton = EnumMouseButton.Right
-                    }
-                };
-            }
+                return beLoom.OpenGui(byPlayer);
         }
 
         public bool MBOnBlockInteractStep(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            return true; // Allow interaction to complete normally
+            return true;
         }
 
         public void MBOnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            // No action needed on stop
+        }
+
+        public bool MBOnBlockInteractCancel(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason, Vec3i offset)
+        {
+            return true;
         }
 
         public ItemStack MBOnPickBlock(IWorldAccessor world, BlockPos pos, Vec3i offset)
         {
             return new ItemStack(this);
         }
-        
-        #endregion
-        
-        // --- Multi-Block Collision/Selection ---
-        #region Multi-Block Collision/Selection
 
+        public WorldInteraction[] MBGetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection blockSel, IPlayer forPlayer, Vec3i offset)
+        {
+            BlockFacing facing = BlockFacing.FromCode(this.LastCodePart());
+            bool isSeat = IsSeatOffset(offset, facing, blockSel.SelectionBoxIndex);
+
+            // world.Api.Logger.Debug($"[FlyShuttleLoom] Help - Facing: {facing.Code}, Offset: {offset}, SelBox: {blockSel.SelectionBoxIndex}, IsSeat: {isSeat}");
+
+            if (isSeat)
+            {
+                return new WorldInteraction[]
+                {
+                    new WorldInteraction() { ActionLangCode = "spinningwheel:blockhelp-loom-sit", MouseButton = EnumMouseButton.Right }
+                };
+            }
+            else
+            {
+                return new WorldInteraction[]
+                {
+                    new WorldInteraction() { ActionLangCode = "spinningwheel:blockhelp-loom-opencrafting", MouseButton = EnumMouseButton.Right }
+                };
+            }
+        }
+
+        public BlockSounds MBGetSounds(IBlockAccessor blockAccessor, BlockSelection blockSel, ItemStack byItemStack, Vec3i offset)
+        {
+            return Sounds;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Precise seat detection: Only counts as seat if both the offset is a bench piece AND SelectionBoxIndex == 1 (the actual seat hitbox).
+        /// </summary>
+        private bool IsSeatOffset(Vec3i offset, BlockFacing facing, int selectionBoxIndex)
+        {
+            if (offset.Y != 0) return false;
+            if (selectionBoxIndex != 1) return false; // Critical: Only the seat hitbox allows sitting
+
+            int x = offset.X;
+            int z = offset.Z;
+
+            switch (facing.Code)
+            {
+                case "north":
+                    return (x == 0 && z == -1) || (x == -1 && z == -1) || (x == 1 && z == -1);
+
+                case "east":
+                    return (x == 1 && z == 0) || (x == 1 && z == -1) || (x == 1 && z == 1) ||
+                           (x == 0 && z == -1);
+
+                case "south":
+                    return (x == 0 && z == 1) || (x == 1 && z == 1) || (x == -1 && z == 1);
+
+                case "west":
+                    return (x == -1 && z == 0) || (x == -1 && z == 1) || (x == -1 && z == -1) ||
+                           (x == 0 && z == 1);
+
+                default:
+                    return false;
+            }
+        }
+
+        #region Multi-Block Collision/Selection
         public override bool DoPartialSelection(IWorldAccessor world, BlockPos pos)
         {
             return base.DoPartialSelection(world, pos);
@@ -240,9 +174,8 @@ namespace SpinningWheel.Blocks
         public Cuboidf[] MBGetCollisionBoxes(IBlockAccessor blockAccessor, BlockPos pos, Vec3i offset)
         {
             if (ValuesByMultiblockOffset.CollisionBoxesByOffset.TryGetValue(offset, out Cuboidf[] collisionBoxes))
-            {
                 return collisionBoxes;
-            }
+
             Block originalBlock = blockAccessor.GetBlock(pos.AddCopy(offset.X, offset.Y, offset.Z));
             return originalBlock.GetCollisionBoxes(blockAccessor, pos);
         }
@@ -250,31 +183,23 @@ namespace SpinningWheel.Blocks
         public Cuboidf[] MBGetSelectionBoxes(IBlockAccessor blockAccessor, BlockPos pos, Vec3i offset)
         {
             if (ValuesByMultiblockOffset.SelectionBoxesByOffset.TryGetValue(offset, out Cuboidf[] selectionBoxes))
-            {
                 return selectionBoxes;
-            }
+
             Block originalBlock = blockAccessor.GetBlock(pos.AddCopy(offset.X, offset.Y, offset.Z));
             return GetSelectionBoxes(blockAccessor, pos);
         }
         
         public override Cuboidf[] GetSelectionBoxes(IBlockAccessor blockAccessor, BlockPos pos)
         {
-            // Only return the control block's own selection boxes (offset 0,0,0)
-            // Other offsets are handled by BlockMultiblock pieces calling MBGetSelectionBoxes
-    
             if (ValuesByMultiblockOffset?.SelectionBoxesByOffset == null)
-            {
                 return base.GetSelectionBoxes(blockAccessor, pos);
-            }
-    
+
             Vec3i controlOffset = new Vec3i(0, 0, 0);
             if (ValuesByMultiblockOffset.SelectionBoxesByOffset.TryGetValue(controlOffset, out Cuboidf[] controlBoxes))
-            {
                 return controlBoxes;
-            }
+
             return base.GetSelectionBoxes(blockAccessor, pos);
         }
-
         #endregion
     }
 }

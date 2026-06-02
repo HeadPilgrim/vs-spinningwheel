@@ -87,8 +87,6 @@ namespace SpinningWheel.Blocks
 
         public bool MBOnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, Vec3i offset)
         {
-            //world.Api.Logger.Debug($"[SpinningWheel] MBOnBlockInteractStart - offset: {offset.X},{offset.Y},{offset.Z}");
-            
             // Check if player has permission
             if (!world.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
             {
@@ -107,64 +105,41 @@ namespace SpinningWheel.Blocks
                 return false;
             }
 
-            // Get the block's facing direction
+            // The offset passed in from BlockMultiblock is already in world-space (OffsetInv),
+            // so we compare directly using the facing to disambiguate seat vs non-seat pieces.
             BlockFacing facing = BlockFacing.FromCode(this.LastCodePart());
-            
-            // Normalize the offset to north-facing coordinates
-            Vec3i normalizedOffset = NormalizeOffset(offset, facing);
-            string offsetKey = $"{normalizedOffset.X},{normalizedOffset.Y},{normalizedOffset.Z}";
-            
-            //world.Api.Logger.Debug($"[SpinningWheel] Facing: {facing.Code}, Raw offset: {offset.X},{offset.Y},{offset.Z}, Normalized: {offsetKey}");
-
-            // Route based on which part was clicked (using north-facing coordinates)
-            switch (offsetKey)
-            {
-                case "0,0,-1":
-                    return beSpinningWheel.OnPlayerInteract(byPlayer);
-
-                case "-1,0,-1":
-                    return beSpinningWheel.OnPlayerInteract(byPlayer);
-
-                default:
-                    return beSpinningWheel.OpenGui(byPlayer);
-            }
+            bool isSeat = IsSeatOffset(offset, facing);
+            //world.Api.Logger.Debug($"[SpinningWheel] Interact - Facing: {facing.Code}, Offset: {offset.X},{offset.Y},{offset.Z}, IsSeat: {isSeat}");
+            if (isSeat)
+                return beSpinningWheel.OnPlayerInteract(byPlayer);
+            else
+                return beSpinningWheel.OpenGui(byPlayer);
         }
 
-        private Vec3i NormalizeOffset(Vec3i offset, BlockFacing facing)
+        /// <summary>
+        /// Returns true if the given world-space offset (from clicked piece back to control block)
+        /// corresponds to one of the two seat pieces for the given facing.
+        /// Offsets derived from the collisionSelectionBoxesByType JSON seat entries.
+        /// </summary>
+        private bool IsSeatOffset(Vec3i offset, BlockFacing facing)
         {
-            // Rotate the offset back to north-facing coordinates
-            // We need to reverse the rotation that was applied
-    
+            if (offset.Y != 0) return false;
+
             int x = offset.X;
-            int y = offset.Y;
             int z = offset.Z;
-    
+
             switch (facing.Code)
             {
                 case "north":
-                    // Already in north orientation
-                    return new Vec3i(x, y, z);
-            
+                    return (x ==  0 && z == -1) || (x == -1 && z == -1);
                 case "east":
-                    // Block rotated 270° from north (or -90°)
-                    // To reverse: rotate 90° counter-clockwise
-                    // X_north = Z_east, Z_north = -X_east
-                    return new Vec3i(z, y, -x);
-            
+                    return (x ==  1 && z ==  0) || (x ==  1 && z == -1);
                 case "south":
-                    // Block rotated 180° from north
-                    // To reverse: rotate 180°
-                    // X_north = -X_south, Z_north = -Z_south
-                    return new Vec3i(-x, y, -z);
-            
+                    return (x ==  0 && z ==  1) || (x ==  1 && z ==  1);
                 case "west":
-                    // Block rotated 90° from north (or -270°)
-                    // To reverse: rotate 270° counter-clockwise (or 90° clockwise)
-                    // X_north = -Z_west, Z_north = X_west
-                    return new Vec3i(-z, y, x);
-            
+                    return (x == -1 && z ==  0) || (x == -1 && z ==  1);
                 default:
-                    return offset;
+                    return false;
             }
         }
 
@@ -190,19 +165,13 @@ namespace SpinningWheel.Blocks
 
         public WorldInteraction[] MBGetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection blockSel, IPlayer forPlayer, Vec3i offset)
         {
-            // Get the block's facing direction
             BlockFacing facing = BlockFacing.FromCode(this.LastCodePart());
-    
-            // Normalize the offset to north-facing coordinates
-            Vec3i normalizedOffset = NormalizeOffset(offset, facing);
-            string offsetKey = $"{normalizedOffset.X},{normalizedOffset.Y},{normalizedOffset.Z}";
-    
+            bool isSeat = IsSeatOffset(offset, facing);
+            //world.Api.Logger.Debug($"[SpinningWheel] InteractionHelp - Facing: {facing.Code}, Offset: {offset.X},{offset.Y},{offset.Z}, IsSeat: {isSeat}");
             var interactions = new List<WorldInteraction>();
-    
-            // Check if looking at a seat
-            if (offsetKey == "0,0,-1" || offsetKey == "-1,0,-1")
+
+            if (IsSeatOffset(offset, facing))
             {
-                // Show "Sit and Spin Fibers!" for seats
                 interactions.Add(new WorldInteraction()
                 {
                     ActionLangCode = "spinningwheel:blockhelp-spinningwheel-use",
@@ -211,7 +180,6 @@ namespace SpinningWheel.Blocks
             }
             else
             {
-                // Show "Open Crafting Menu!" for other parts
                 interactions.Add(new WorldInteraction()
                 {
                     ActionLangCode = "spinningwheel:blockhelp-spinningwheel-opencrafting",
@@ -228,6 +196,7 @@ namespace SpinningWheel.Blocks
 
         #endregion
 
+        // --- Multi-Block Collision/Selection ---
         #region Multi-Block Collision/Selection
 
         public override bool DoPartialSelection(IWorldAccessor world, BlockPos pos)
