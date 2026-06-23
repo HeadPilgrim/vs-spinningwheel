@@ -221,7 +221,6 @@ public class ItemSlotWeavingInput : ItemSlotSurvival
         bool result = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true
             ? base.CanHold(sourceSlot)
             : false;
-        inventory.Api?.Logger.Notification($"[WeavingInput] CanHold called - item: {sourceSlot?.Itemstack?.Collectible?.Code}, result: {result}");
         return result;
     }
 
@@ -230,7 +229,6 @@ public class ItemSlotWeavingInput : ItemSlotSurvival
         bool result = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true
             ? base.CanTakeFrom(sourceSlot, priority)
             : false;
-        inventory.Api?.Logger.Notification($"[WeavingInput] CanTakeFrom called - item: {sourceSlot?.Itemstack?.Collectible?.Code}, result: {result}");
         return result;
     }
 

@@ -1018,13 +1018,11 @@ namespace SpinningWheel.BlockEntities
 
         private void OnSlotModified(int slotid)
         {
-            Api?.Logger.Notification($"[Loom] OnSlotModified ENTRY - slot: {slotid}, item: {inventory[slotid]?.Itemstack?.Collectible?.Code ?? "empty"}, stack: {new System.Diagnostics.StackTrace()}");
             if (isHandlingSlotModified) return;
             isHandlingSlotModified = true;
 
             try
             {
-                Api?.Logger.Notification($"[Loom] OnSlotModified - slot: {slotid}, item: {inventory[slotid]?.Itemstack?.Collectible?.Code ?? "empty"}");
 
                 if (Api is ICoreClientAPI)
                 {
