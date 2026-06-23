@@ -296,6 +296,9 @@
   "block-hpflyshuttleloom-purpleheart-*": "Métier à tisser à navette volante (Peltogyne)",
   "block-hpflyshuttleloom-aged-*": "Métier à tisser à navette volante (Vieilli)",
 
+  "spinningwheel:handbook-dropspindle-title": "Mécanique de Fabrication : Fuseau à Main",
+  "spinningwheel:handbook-dropspindle-text": "<font size=\"18\" weight=\"bold\">Aperçu</font><br><br>Le <a href=\"handbooksearch://drop spindle\">Fuseau à Main</a> est un outil portable simple pour filer des fibres en ficelle en déplacement. Il est plus lent que le Rouet mais ne nécessite ni station ni position assise.<br><br><font size=\"18\" weight=\"bold\">Comment l'utiliser</font><br><br><strong>1. Préparez vos outils</strong><br>Placez les fibres à filer dans votre **main secondaire**.<br>Tenez le <a href=\"handbooksearch://drop spindle\">Fuseau à Main</a> dans votre **main principale**.<br><br><strong>2. Filer</strong><br>Maintenez **Clic Droit** pour filer les fibres. Vous devrez le faire **deux fois** par lot.<br><br><strong>3. Extraire la ficelle</strong><br>Une fois le filage terminé, **Accroupi + Clic Droit** pour retirer la ficelle finie.<br><br><font size=\"18\" weight=\"bold\">Astuces</font><br><br>- Le fuseau à main fonctionne avec les mêmes fibres que le Rouet (lin, coton, laine, etc.)<br>- Surveillez votre progression dans le chat (si activé dans la config) ou via l'animation<br>- Vous pouvez configurer l'affichage des messages de progression dans les paramètres du mod<br>- Idéal pour les voyages ou quand vous n'avez pas accès à un rouet complet",
+
   "spinningwheel:blockhelp-flyshuttleloom-use": "Assieds-toi et tisse le tissu !",
   "spinningwheel:blockhelp-flyshuttleloom-opencrafting": "Ouvrir le menu de tissage !",
 
@@ -312,8 +315,8 @@
   "spinningwheel:handbook-see-also-spinning-text": "Ce matériau peut être filé en ficelle à l’aide du <a href=\"handbook://spinningwheel:spinning-wheel-guide\">rouet à filer</a> ou du <a href=\"handbooksearch://Fuseau à filer\">fuseau à filer</a>.",
 
   "spinningwheel:handbook-see-also-twine": "Fabrication",
-  "spinningwheel:handbook-see-also-twine-text": "La ficelle est créée en filant des fibres sur le <a href=\"handbook://spinningwheel:spinning-wheel-guide\">rouet à filer</a> et peut être tissée en tissu à l’aide du <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
-
+  "spinningwheel:handbook-see-also-twine-text": "La ficelle est créée en filant des fibres sur le <a href=\"handbook://spinningwheel:spinning-wheel-guide\">Rouet</a> ou avec le portable <a href=\"handbook://spinningwheel:handbook-dropspindle-title\">Fuseau à Main</a> et peut être tissée en tissu avec le <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">Métier à Tisser Navette Volante</a>.",
+  
   "spinningwheel:handbook-see-also-weaving": "Tissage",
   "spinningwheel:handbook-see-also-weaving-text": "Ce tissu est tissé à partir de ficelle à l’aide du <a href=\"handbook://spinningwheel:fly-shuttle-loom-guide\">métier à tisser à navette volante</a>.",
 
