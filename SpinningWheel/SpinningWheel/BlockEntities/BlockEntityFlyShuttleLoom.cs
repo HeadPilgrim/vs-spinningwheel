@@ -960,18 +960,21 @@ namespace SpinningWheel.BlockEntities
             if (currentWeavingMode != mode)
             {
                 currentWeavingMode = mode;
+                inventory.CurrentMode = mode;
 
-                // Reset progress when switching modes
                 inputWeaveTime = 0;
-
-                // Update max weave time - always use standard animation duration
                 currentMaxWeaveTime = ANIMATION_DURATION;
+                On = false;
 
-                // Stop animation if running
-                if (On)
-                {
-                    Deactivate();
-                }
+                // Force inventory resync to all clients after mode change
+                // This ensures slot contents aren't lost during the transition
+                inventory.MarkSlotDirty(0);
+                inventory.MarkSlotDirty(1);
+                inventory.MarkSlotDirty(2);
+                inventory.MarkSlotDirty(4);
+                inventory.MarkSlotDirty(5);
+                inventory.MarkSlotDirty(6);
+                inventory.MarkSlotDirty(7);
 
                 MarkDirty(true);
             }
@@ -982,78 +985,96 @@ namespace SpinningWheel.BlockEntities
 
         public override void OnReceivedClientPacket(IPlayer player, int packetid, byte[] data)
         {
-            base.OnReceivedClientPacket(player, packetid, data);
-
-            if (packetid == PACKET_ID_SET_WEAVING_MODE && data != null)
+            if (packetid == PACKET_ID_SET_WEAVING_MODE)
             {
-                using (MemoryStream ms = new MemoryStream(data))
+                if (data != null)
                 {
-                    var packet = Serializer.Deserialize<SetWeavingModePacket>(ms);
-                    WeavingMode newMode = (WeavingMode)packet.WeavingMode;
-                    
-                    SetWeavingMode(newMode);
+                    try
+                    {
+                        using (MemoryStream ms = new MemoryStream(data))
+                        {
+                            var packet = Serializer.Deserialize<SetWeavingModePacket>(ms);
+                            SetWeavingMode((WeavingMode)packet.WeavingMode);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Api?.Logger.Error($"[Loom] Failed to deserialize weaving mode packet: {ex}");
+                    }
                 }
+                return;
             }
+
+            base.OnReceivedClientPacket(player, packetid, data);
         }
 
         #endregion
 
         #region Slot Management
+        
+        
+
+        private bool isHandlingSlotModified = false;
 
         private void OnSlotModified(int slotid)
         {
-            if (Api is ICoreClientAPI)
-            {
-                clientDialog?.Update(inputWeaveTime, currentMaxWeaveTime);
-            }
+            Api?.Logger.Notification($"[Loom] OnSlotModified ENTRY - slot: {slotid}, item: {inventory[slotid]?.Itemstack?.Collectible?.Code ?? "empty"}, stack: {new System.Diagnostics.StackTrace()}");
+            if (isHandlingSlotModified) return;
+            isHandlingSlotModified = true;
 
-            // Check animation state when slots change (server-side)
-            if (Api is ICoreServerAPI)
+            try
             {
-                bool canWeave = CanWeave();
-                bool isPlayerMounted = MountedBy != null;
-                bool shouldBeWeaving = canWeave && isPlayerMounted;
+                Api?.Logger.Notification($"[Loom] OnSlotModified - slot: {slotid}, item: {inventory[slotid]?.Itemstack?.Collectible?.Code ?? "empty"}");
 
-                if (shouldBeWeaving && !On)
+                if (Api is ICoreClientAPI)
                 {
-                    Activate();
+                    clientDialog?.Update(inputWeaveTime, currentMaxWeaveTime);
                 }
-                else if (!shouldBeWeaving && On)
-                {
-                    Deactivate();
-                }
-            }
 
-            // Handle changes to any input slot (0, 1, or 2) for normal mode
-            if (slotid >= 0 && slotid <= 2)
-            {
-                // If all input slots are empty, reset progress
-                if (!HasInputItems())
+                if (Api is ICoreServerAPI)
                 {
-                    inputWeaveTime = 0.0f;
+                    bool canWeave = CanWeave();
+                    bool isPlayerMounted = MountedBy != null;
+                    bool shouldBeWeaving = canWeave && isPlayerMounted;
+
+                    if (shouldBeWeaving && !On)
+                        Activate();
+                    else if (!shouldBeWeaving && On)
+                        Deactivate();
+                }
+
+                if (slotid >= 0 && slotid <= 2)
+                {
+                    if (!HasInputItems())
+                    {
+                        inputWeaveTime = 0.0f;
+                        currentMaxWeaveTime = ANIMATION_DURATION;
+                    }
+                    MarkDirty();
+
+                    // Only recompose on client, and only after marking dirty
+                    if (Api is ICoreClientAPI && clientDialog != null && clientDialog.IsOpened())
+                    {
+                        clientDialog.SingleComposer.ReCompose();
+                    }
+                }
+
+                if (slotid >= 4 && slotid <= 7)
+                {
+                    inputWeaveTime = 0;
                     currentMaxWeaveTime = ANIMATION_DURATION;
-                }
-                MarkDirty();
 
-                if (clientDialog != null && clientDialog.IsOpened())
-                {
-                    clientDialog.SingleComposer.ReCompose();
+                    MarkDirty();
+
+                    if (Api is ICoreClientAPI && clientDialog != null && clientDialog.IsOpened())
+                    {
+                        clientDialog.SingleComposer.ReCompose();
+                    }
                 }
             }
-
-            // Handle changes to any pattern slot (4, 5, 6, or 7) for pattern mode
-            if (slotid >= 4 && slotid <= 7)
+            finally
             {
-                // Reset progress when pattern changes
-                inputWeaveTime = 0;
-                currentMaxWeaveTime = ANIMATION_DURATION;
-
-                MarkDirty();
-
-                if (clientDialog != null && clientDialog.IsOpened())
-                {
-                    clientDialog.SingleComposer.ReCompose();
-                }
+                isHandlingSlotModified = false;
             }
         }
 
@@ -1209,6 +1230,7 @@ namespace SpinningWheel.BlockEntities
 
             // Restore weaving mode
             currentWeavingMode = (WeavingMode)tree.GetInt("weavingMode", 0);
+            inventory.CurrentMode = currentWeavingMode;
 
             if (Api != null)
             {

@@ -1,14 +1,22 @@
 using System;
+using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using SpinningWheel.BlockEntities;
 
 namespace SpinningWheel.Inventories;
 
 #nullable disable
 
+
+
 public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
 {
+    
+    public WeavingMode CurrentMode { get; set; } = WeavingMode.Normal;
+    public bool IgnoreSuitability { get; set; } = false;
+    
     ItemSlot[] slots;
     public ItemSlot[] Slots { get { return slots; } }
 
@@ -74,30 +82,129 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
         }
         return new ItemSlot(this);
     }
+    
+    public override WeightedSlot GetBestSuitedSlot(ItemSlot sourceSlot, ItemStackMoveOperation op = null, List<ItemSlot> skipSlots = null)
+    {
+        if (sourceSlot?.Inventory == this)
+            return base.GetBestSuitedSlot(sourceSlot, op, skipSlots);
 
+        string domain = sourceSlot?.Itemstack?.Collectible?.Code?.Domain;
+        string path = sourceSlot?.Itemstack?.Collectible?.Code?.Path;
+
+        bool isTwine = sourceSlot?.Itemstack != null && (
+            (domain == "game" && path == "flaxtwine") ||
+            (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
+            (domain == "wool" && path?.StartsWith("twine-wool-") == true));
+
+        bool isWeavable = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true;
+
+        WeightedSlot best = new WeightedSlot();
+
+        if (CurrentMode == WeavingMode.Normal && isWeavable)
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                if (skipSlots != null && skipSlots.Contains(slots[i])) continue;
+                float suitability = GetSuitability(sourceSlot, slots[i], op?.CurrentPriority == EnumMergePriority.AutoMerge);
+                if (suitability > best.weight)
+                {
+                    best.slot = slots[i];
+                    best.weight = suitability;
+                }
+            }
+        }
+        else if (CurrentMode == WeavingMode.Pattern && isTwine)
+        {
+            for (int i = 4; i <= 7; i++)
+            {
+                if (skipSlots != null && skipSlots.Contains(slots[i])) continue;
+                float suitability = GetSuitability(sourceSlot, slots[i], op?.CurrentPriority == EnumMergePriority.AutoMerge);
+                if (suitability > best.weight)
+                {
+                    best.slot = slots[i];
+                    best.weight = suitability;
+                }
+            }
+        }
+
+        return best;
+    }
     public override float GetSuitability(ItemSlot sourceSlot, ItemSlot targetSlot, bool isMerge)
     {
-        // Accept weavable items in any of the 3 input slots
-        if ((targetSlot == slots[0] || targetSlot == slots[1] || targetSlot == slots[2]) &&
-            sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true)
+        // Never gate items already in this inventory
+        if (sourceSlot?.Inventory == this)
+            return base.GetSuitability(sourceSlot, targetSlot, isMerge);
+
+        // Never gate if target slot already has an item
+        if (targetSlot?.Itemstack != null)
+            return base.GetSuitability(sourceSlot, targetSlot, isMerge);
+
+        string domain = sourceSlot?.Itemstack?.Collectible?.Code?.Domain;
+        string path = sourceSlot?.Itemstack?.Collectible?.Code?.Path;
+
+        bool isTwine = sourceSlot?.Itemstack != null && (
+            (domain == "game" && path == "flaxtwine") ||
+            (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
+            (domain == "wool" && path?.StartsWith("twine-wool-") == true));
+
+        bool isWeavable = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true;
+
+        if (targetSlot == slots[0] || targetSlot == slots[1] || targetSlot == slots[2])
         {
-            return 4f;
+            if (CurrentMode == WeavingMode.Normal && isWeavable)
+                return 4f;
+            return 0f;
         }
+
+        if (targetSlot == slots[4] || targetSlot == slots[5] ||
+            targetSlot == slots[6] || targetSlot == slots[7])
+        {
+            if (CurrentMode == WeavingMode.Pattern && isTwine)
+                return 4f;
+            return 0f;
+        }
+
+        if (targetSlot == slots[3])
+            return 0f;
 
         return base.GetSuitability(sourceSlot, targetSlot, isMerge);
     }
 
     public override ItemSlot GetAutoPushIntoSlot(BlockFacing atBlockFace, ItemSlot fromSlot)
     {
-        // Try to push into input slots in order (0, 1, 2)
-        // Return the first slot that can accept the item
-        for (int i = 0; i <= 2; i++)
+        if (CurrentMode == WeavingMode.Normal)
         {
-            if (slots[i].Empty || slots[i].CanTakeFrom(fromSlot))
+            // Push into input slots 0-2 for weavable items
+            if (fromSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true)
             {
-                return slots[i];
+                for (int i = 0; i <= 2; i++)
+                {
+                    if (slots[i].Empty || slots[i].CanTakeFrom(fromSlot))
+                        return slots[i];
+                }
             }
         }
+        else if (CurrentMode == WeavingMode.Pattern)
+        {
+            // Push into pattern slots 4-7 for twine
+            string domain = fromSlot?.Itemstack?.Collectible?.Code?.Domain;
+            string path = fromSlot?.Itemstack?.Collectible?.Code?.Path;
+
+            bool isTwine = fromSlot?.Itemstack != null && (
+                (domain == "game" && path == "flaxtwine") ||
+                (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
+                (domain == "wool" && path?.StartsWith("twine-wool-") == true));
+
+            if (isTwine)
+            {
+                for (int i = 4; i <= 7; i++)
+                {
+                    if (slots[i].Empty || slots[i].CanTakeFrom(fromSlot))
+                        return slots[i];
+                }
+            }
+        }
+
         return null;
     }
 }
@@ -111,20 +218,20 @@ public class ItemSlotWeavingInput : ItemSlotSurvival
 
     public override bool CanHold(ItemSlot sourceSlot)
     {
-        if (sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true)
-        {
-            return base.CanHold(sourceSlot);
-        }
-        return false;
+        bool result = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true
+            ? base.CanHold(sourceSlot)
+            : false;
+        inventory.Api?.Logger.Notification($"[WeavingInput] CanHold called - item: {sourceSlot?.Itemstack?.Collectible?.Code}, result: {result}");
+        return result;
     }
 
     public override bool CanTakeFrom(ItemSlot sourceSlot, EnumMergePriority priority = EnumMergePriority.AutoMerge)
     {
-        if (sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true)
-        {
-            return base.CanTakeFrom(sourceSlot, priority);
-        }
-        return false;
+        bool result = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true
+            ? base.CanTakeFrom(sourceSlot, priority)
+            : false;
+        inventory.Api?.Logger.Notification($"[WeavingInput] CanTakeFrom called - item: {sourceSlot?.Itemstack?.Collectible?.Code}, result: {result}");
+        return result;
     }
 
     public override int GetRemainingSlotSpace(ItemStack forItemstack)
