@@ -16,7 +16,15 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
     
     public WeavingMode CurrentMode { get; set; } = WeavingMode.Normal;
     public bool IgnoreSuitability { get; set; } = false;
-    
+
+    public static bool IsTwine(string domain, string path)
+    {
+        return (domain == "game" && path == "flaxtwine") ||
+               (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
+               (domain == "wool" && path?.StartsWith("twine-wool-") == true) ||
+               (domain == "grassroots" && path == "gr-hemp-twine");
+    }
+
     ItemSlot[] slots;
     public ItemSlot[] Slots { get { return slots; } }
 
@@ -91,11 +99,7 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
         string domain = sourceSlot?.Itemstack?.Collectible?.Code?.Domain;
         string path = sourceSlot?.Itemstack?.Collectible?.Code?.Path;
 
-        bool isTwine = sourceSlot?.Itemstack != null && (
-            (domain == "game" && path == "flaxtwine") ||
-            (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
-            (domain == "wool" && path?.StartsWith("twine-wool-") == true));
-
+        bool isTwine = sourceSlot?.Itemstack != null && IsTwine(domain, path);
         bool isWeavable = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true;
 
         WeightedSlot best = new WeightedSlot();
@@ -142,11 +146,7 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
         string domain = sourceSlot?.Itemstack?.Collectible?.Code?.Domain;
         string path = sourceSlot?.Itemstack?.Collectible?.Code?.Path;
 
-        bool isTwine = sourceSlot?.Itemstack != null && (
-            (domain == "game" && path == "flaxtwine") ||
-            (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
-            (domain == "wool" && path?.StartsWith("twine-wool-") == true));
-
+        bool isTwine = sourceSlot?.Itemstack != null && IsTwine(domain, path);
         bool isWeavable = sourceSlot?.Itemstack?.ItemAttributes?.KeyExists("weavingProps") == true;
 
         if (targetSlot == slots[0] || targetSlot == slots[1] || targetSlot == slots[2])
@@ -190,10 +190,7 @@ public class InventoryFlyshuttleLoom: InventoryBase, ISlotProvider
             string domain = fromSlot?.Itemstack?.Collectible?.Code?.Domain;
             string path = fromSlot?.Itemstack?.Collectible?.Code?.Path;
 
-            bool isTwine = fromSlot?.Itemstack != null && (
-                (domain == "game" && path == "flaxtwine") ||
-                (domain == "tailorsdelight" && path?.StartsWith("twine-") == true) ||
-                (domain == "wool" && path?.StartsWith("twine-wool-") == true));
+            bool isTwine = fromSlot?.Itemstack != null && IsTwine(domain, path);
 
             if (isTwine)
             {
@@ -244,7 +241,7 @@ public class ItemSlotWeavingInput : ItemSlotSurvival
     }
 }
 
-// Custom slot for pattern inputs - accepts vanilla flaxtwine and colored twine from tailorsdelight or wool mods
+// Custom slot for pattern inputs - accepts vanilla flaxtwine and colored twine from tailorsdelight, wool, and grassroots mods
 public class ItemSlotPatternInput : ItemSlotSurvival
 {
     public ItemSlotPatternInput(InventoryBase inventory) : base(inventory)
@@ -257,14 +254,8 @@ public class ItemSlotPatternInput : ItemSlotSurvival
         {
             string domain = sourceSlot.Itemstack.Collectible.Code.Domain;
             string path = sourceSlot.Itemstack.Collectible.Code.Path;
-
-            // Accept vanilla flaxtwine, tailorsdelight:twine-{color}, or wool:twine-wool-{color}
-            if ((domain == "game" && path == "flaxtwine") ||
-                (domain == "tailorsdelight" && path.StartsWith("twine-")) ||
-                (domain == "wool" && path.StartsWith("twine-wool-")))
-            {
+            if (InventoryFlyshuttleLoom.IsTwine(domain, path))
                 return base.CanHold(sourceSlot);
-            }
         }
         return false;
     }
@@ -275,33 +266,22 @@ public class ItemSlotPatternInput : ItemSlotSurvival
         {
             string domain = sourceSlot.Itemstack.Collectible.Code.Domain;
             string path = sourceSlot.Itemstack.Collectible.Code.Path;
-
-            if ((domain == "game" && path == "flaxtwine") ||
-                (domain == "tailorsdelight" && path.StartsWith("twine-")) ||
-                (domain == "wool" && path.StartsWith("twine-wool-")))
-            {
+            if (InventoryFlyshuttleLoom.IsTwine(domain, path))
                 return base.CanTakeFrom(sourceSlot, priority);
-            }
         }
         return false;
     }
 
     public override int GetRemainingSlotSpace(ItemStack forItemstack)
     {
-        // Reject items that aren't twine (vanilla or colored)
         if (forItemstack != null)
         {
             string domain = forItemstack.Collectible.Code.Domain;
             string path = forItemstack.Collectible.Code.Path;
-
-            if ((domain == "game" && path == "flaxtwine") ||
-                (domain == "tailorsdelight" && path.StartsWith("twine-")) ||
-                (domain == "wool" && path.StartsWith("twine-wool-")))
-            {
+            if (InventoryFlyshuttleLoom.IsTwine(domain, path))
                 return base.GetRemainingSlotSpace(forItemstack);
-            }
         }
-        return 0; // No space for non-twine items
+        return 0;
     }
 }
 

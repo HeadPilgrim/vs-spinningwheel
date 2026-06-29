@@ -8,45 +8,76 @@
     "quantity": 2
   },
   "variants": [
+    
+    { "name": "plain",          "primary": "wool:twine-wool-plain",             "secondary": "game:flaxtwine" },
+    { "name": "plain",          "primary": "wool:twine-wool-plain",             "secondary": "wool:twine-wool-plain" },
+    { "name": "plain",          "primary": "wool:twine-wool-plain",             "secondary": "grassroots:gr-hemp-twine" },
+    
+    { "name": "white",          "primary": "tailorsdelight:twine-white",        "secondary": "game:flaxtwine" },
+    { "name": "white",          "primary": "wool:twine-wool-white",             "secondary": "game:flaxtwine" },
+    { "name": "white",          "primary": "wool:twine-wool-white",             "secondary": "wool:twine-wool-plain" },
+    { "name": "white",          "primary": "wool:twine-wool-white",             "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "white",          "primary": "tailorsdelight:twine-white",        "secondary": "grassroots:gr-hemp-twine" },
+    
     { "name": "red",            "primary": "tailorsdelight:twine-red",          "secondary": "game:flaxtwine" },
     { "name": "red",            "primary": "wool:twine-wool-red",               "secondary": "game:flaxtwine" },
     { "name": "red",            "primary": "wool:twine-wool-red",               "secondary": "wool:twine-wool-plain" },
+    { "name": "red",            "primary": "wool:twine-wool-red",               "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "red",            "primary": "tailorsdelight:twine-red",          "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "pink",           "primary": "tailorsdelight:twine-pink",         "secondary": "game:flaxtwine" },
     { "name": "pink",           "primary": "wool:twine-wool-pink",              "secondary": "game:flaxtwine" },
     { "name": "pink",           "primary": "wool:twine-wool-pink",              "secondary": "wool:twine-wool-plain" },
+    { "name": "pink",           "primary": "wool:twine-wool-pink",              "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "pink",           "primary": "tailorsdelight:twine-pink",         "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "gray",           "primary": "tailorsdelight:twine-gray",         "secondary": "game:flaxtwine" },
     { "name": "gray",           "primary": "wool:twine-wool-gray",              "secondary": "game:flaxtwine" },
     { "name": "gray",           "primary": "wool:twine-wool-gray",              "secondary": "wool:twine-wool-plain" },
+    { "name": "gray",           "primary": "wool:twine-wool-gray",              "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "gray",           "primary": "tailorsdelight:twine-gray",         "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "blue",           "primary": "tailorsdelight:twine-blue",         "secondary": "game:flaxtwine" },
     { "name": "blue",           "primary": "wool:twine-wool-blue",              "secondary": "game:flaxtwine" },
     { "name": "blue",           "primary": "wool:twine-wool-blue",              "secondary": "wool:twine-wool-plain" },
+    { "name": "blue",           "primary": "wool:twine-wool-blue",              "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "blue",           "primary": "tailorsdelight:twine-blue",         "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "black",          "primary": "tailorsdelight:twine-black",        "secondary": "game:flaxtwine" },
     { "name": "black",          "primary": "wool:twine-wool-black",             "secondary": "game:flaxtwine" },
     { "name": "black",          "primary": "wool:twine-wool-black",             "secondary": "wool:twine-wool-plain" },
+    { "name": "black",          "primary": "wool:twine-wool-black",             "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "black",          "primary": "tailorsdelight:twine-black",        "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "brown",          "primary": "tailorsdelight:twine-brown",        "secondary": "game:flaxtwine" },
     { "name": "brown",          "primary": "wool:twine-wool-brown",             "secondary": "game:flaxtwine" },
     { "name": "brown",          "primary": "wool:twine-wool-brown",             "secondary": "wool:twine-wool-plain" },
+    { "name": "brown",          "primary": "wool:twine-wool-brown",             "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "brown",          "primary": "tailorsdelight:twine-brown",        "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "green",          "primary": "tailorsdelight:twine-green",        "secondary": "game:flaxtwine" },
     { "name": "green",          "primary": "wool:twine-wool-green",             "secondary": "game:flaxtwine" },
     { "name": "green",          "primary": "wool:twine-wool-green",             "secondary": "wool:twine-wool-plain" },
+    { "name": "green",          "primary": "wool:twine-wool-green",             "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "green",          "primary": "tailorsdelight:twine-green",        "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "yellow",         "primary": "tailorsdelight:twine-yellow",       "secondary": "game:flaxtwine" },
     { "name": "yellow",         "primary": "wool:twine-wool-yellow",            "secondary": "game:flaxtwine" },
     { "name": "yellow",         "primary": "wool:twine-wool-yellow",            "secondary": "wool:twine-wool-plain" },
+    { "name": "yellow",         "primary": "wool:twine-wool-yellow",            "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "yellow",         "primary": "tailorsdelight:twine-yellow",       "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "orange",         "primary": "tailorsdelight:twine-orange",       "secondary": "game:flaxtwine" },
     { "name": "orange",         "primary": "wool:twine-wool-orange",            "secondary": "game:flaxtwine" },
     { "name": "orange",         "primary": "wool:twine-wool-orange",            "secondary": "wool:twine-wool-plain" },
+    { "name": "orange",         "primary": "wool:twine-wool-orange",            "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "orange",         "primary": "tailorsdelight:twine-orange",       "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "purple",         "primary": "tailorsdelight:twine-purple",       "secondary": "game:flaxtwine" },
     { "name": "purple",         "primary": "wool:twine-wool-purple",            "secondary": "game:flaxtwine" },
     { "name": "purple",         "primary": "wool:twine-wool-purple",            "secondary": "wool:twine-wool-plain" },
+    { "name": "purple",         "primary": "wool:twine-wool-purple",            "secondary": "grassroots:gr-hemp-twine" },
+    { "name": "purple",         "primary": "tailorsdelight:twine-purple",       "secondary": "grassroots:gr-hemp-twine" },
 
     { "name": "darkred",        "primary": "tailorsdelight:twine-darkred",      "secondary": "tailorsdelight:twine-red" },
     { "name": "darkred",        "primary": "wool:twine-wool-darkred",           "secondary": "wool:twine-wool-red" },
